@@ -17,8 +17,9 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
         gameTicks += Time.deltaTime;
 
-        if (Input.GetButton("D"))
+        if (Input.GetButton(KeyCode.D.ToString()) == true)
         {
+            Debug.Log("D key pressed.");
             rb.velocity = new Vector2(speed, 0);
         }
 	}
