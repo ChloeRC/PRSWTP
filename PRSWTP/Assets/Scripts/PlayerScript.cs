@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour {
 	void Start () {
         rb = GetComponent<Rigidbody>();
         gameTicks = 0.0F;
+        speed = .5f;
 	}
 	
 	// Update is called once per frame
@@ -20,7 +21,9 @@ public class PlayerScript : MonoBehaviour {
         if (Input.GetButton(KeyCode.D.ToString()) == true)
         {
             Debug.Log("D key pressed.");
-            rb.velocity = new Vector2(speed, 0);
+            //Vector2 velocity = new Vector3(speed, 0);
+            transform.Translate(Vector2.right * Time.deltaTime);
+
         }
 	}
 }
