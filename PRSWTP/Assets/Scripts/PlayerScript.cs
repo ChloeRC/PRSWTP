@@ -11,7 +11,6 @@ public class PlayerScript : MonoBehaviour {
 	void Start () {
         rb = GetComponent<Rigidbody>();
         gameTicks = 0.0F;
-        speed = .5f;
 	}
 	
 	// Update is called once per frame
