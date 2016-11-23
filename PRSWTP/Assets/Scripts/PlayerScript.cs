@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour {
 
     private Rigidbody rb;
+    private Transform gc;
     private float gameTicks;
     public float horizSpeed;
     public float jumpSpeed;
@@ -13,14 +14,12 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string LEFT = "left";
     private static readonly string JUMP = "jump";
 
-    private bool isJumping;
-
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
+        gc = transform.FindChild("GroundCheck");
         gameTicks = 0.0F;
         rb.freezeRotation = true;
-        isJumping = false;
 	}
 	
 	// Update is called once per frame
@@ -38,23 +37,12 @@ public class PlayerScript : MonoBehaviour {
             transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
         }
 
-        if (Input.GetButtonDown(JUMP) == true && !isJumping)
+        if (Input.GetButtonDown(JUMP) == true && )
         {
             //Debug.Log("W key pressed.");
-            isJumping = true;
             rb.velocity = Vector2.up * jumpSpeed * Time.deltaTime;
-        }
-        if (Input.GetButtonUp(JUMP) == true)
-        {
-            isJumping = false;
         }
 
         rb.AddForce(Vector2.down * gravity * rb.mass);
-
-        if (isJumping)
-        {
-
-        }
-        
 	}
 }
