@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour {
     public float horizSpeed;
     public float jumpSpeed;
     public float gravity;
+    public LayerMask groundLayers;
 
     public float boxCollisionSize;
 
@@ -39,9 +40,11 @@ public class PlayerScript : MonoBehaviour {
             transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
         }
 
-        isGrounded = Physics.BoxCast(rb.position, new Vector3(boxCollisionSize, boxCollisionSize, boxCollisionSize), Vector3.down);
+        isGrounded = Physics.BoxCast(GetComponent<Rigidbody>().position, new Vector3(boxCollisionSize, boxCollisionSize, boxCollisionSize), Vector3.down);
 
-        if (Input.GetButtonDown(JUMP) == true && )
+        Debug.Log(isGrounded);
+
+        if (Input.GetButtonDown(JUMP) == true && isGrounded)
         {
             //Debug.Log("W key pressed.");
             rb.velocity = Vector2.up * jumpSpeed * Time.deltaTime;
