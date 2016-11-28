@@ -41,7 +41,7 @@ public class PlayerScript : MonoBehaviour {
         }
 
         isGrounded = Physics.BoxCast(GetComponent<Rigidbody>().position, new Vector3(boxCollisionSize, boxCollisionSize, boxCollisionSize), Vector3.down);
-
+        
         Debug.Log(isGrounded);
 
         if (Input.GetButtonDown(JUMP) == true && isGrounded)
