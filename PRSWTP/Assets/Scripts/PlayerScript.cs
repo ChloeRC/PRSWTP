@@ -25,7 +25,7 @@ public class PlayerScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+    void Update () {
         gameTicks += Time.deltaTime;
 
         if (Input.GetButton(RIGHT) == true)
@@ -39,14 +39,7 @@ public class PlayerScript : MonoBehaviour {
             transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
         }
 
-        if ()
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
+        isGrounded = Physics.BoxCast(rb.position, new Vector3(boxCollisionSize, boxCollisionSize, boxCollisionSize), Vector3.down);
 
         if (Input.GetButtonDown(JUMP) == true && )
         {
