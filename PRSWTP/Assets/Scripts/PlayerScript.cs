@@ -4,11 +4,12 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour {
 
     private Rigidbody rb;
-    private Transform gc;
     private float gameTicks;
     public float horizSpeed;
     public float jumpSpeed;
     public float gravity;
+
+    public float boxCollisionSize;
 
     private static readonly string RIGHT = "right";
     private static readonly string LEFT = "left";
@@ -17,7 +18,6 @@ public class PlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
-        gc = transform.FindChild("GroundCheck");
         gameTicks = 0.0F;
         rb.freezeRotation = true;
 	}
@@ -36,6 +36,8 @@ public class PlayerScript : MonoBehaviour {
             //Debug.Log("A key pressed.");
             transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
         }
+
+        if (Physics.BoxCast(rb., new Vector3(boxCollisionSize, boxCollisionSize, boxCollisionSize), );
 
         if (Input.GetButtonDown(JUMP) == true && )
         {
