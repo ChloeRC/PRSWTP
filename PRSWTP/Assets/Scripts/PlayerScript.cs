@@ -15,6 +15,8 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string LEFT = "left";
     private static readonly string JUMP = "jump";
 
+    private bool isGrounded = false;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
@@ -37,7 +39,14 @@ public class PlayerScript : MonoBehaviour {
             transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
         }
 
-        if (Physics.BoxCast(rb., new Vector3(boxCollisionSize, boxCollisionSize, boxCollisionSize), );
+        if ()
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
 
         if (Input.GetButtonDown(JUMP) == true && )
         {
