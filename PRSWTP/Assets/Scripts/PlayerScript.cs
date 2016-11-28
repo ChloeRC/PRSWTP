@@ -41,7 +41,7 @@ public class PlayerScript : MonoBehaviour {
 
         isGrounded = Physics.BoxCast(rb.position, new Vector3(boxCollisionSize, boxCollisionSize, boxCollisionSize), Vector3.down);
 
-        if (Input.GetButtonDown(JUMP) == true && )
+        if (Input.GetButtonDown(JUMP) == true && isGrounded)
         {
             //Debug.Log("W key pressed.");
             rb.velocity = Vector2.up * jumpSpeed * Time.deltaTime;
