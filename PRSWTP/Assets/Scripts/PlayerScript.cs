@@ -23,7 +23,7 @@ public class PlayerScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+    void Update () {
         gameTicks += Time.deltaTime;
 
         if (Input.GetButton(RIGHT) == true)
@@ -37,11 +37,11 @@ public class PlayerScript : MonoBehaviour {
             transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
         }
 
-        if (Input.GetButtonDown(JUMP) == true && )
-        {
+        //if (Input.GetButtonDown(JUMP) == true && )
+        //{
             //Debug.Log("W key pressed.");
-            rb.velocity = Vector2.up * jumpSpeed * Time.deltaTime;
-        }
+            //rb.velocity = Vector2.up * jumpSpeed * Time.deltaTime;
+        //}
 
         rb.AddForce(Vector2.down * gravity * rb.mass);
 	}
