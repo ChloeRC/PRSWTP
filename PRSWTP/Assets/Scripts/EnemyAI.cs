@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyAI : MonoBehaviour {
 
     private Rigidbody rb;
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
