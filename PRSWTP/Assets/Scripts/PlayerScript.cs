@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour {
     public float jumpSpeed;
     public float gravity;
     public LayerMask groundLayers;
+    public float groundDetect;
 
     public float boxCollisionSize;
 
@@ -18,11 +19,14 @@ public class PlayerScript : MonoBehaviour {
 
     private bool isGrounded = false;
 
+    private int charges;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
         gameTicks = 0.0F;
         rb.freezeRotation = true;
+        charges = 0;
 	}
 	
 	// Update is called once per frame
@@ -40,9 +44,8 @@ public class PlayerScript : MonoBehaviour {
             transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
         }
 
-        isGrounded = Physics.BoxCast(GetComponent<Rigidbody>().position, new Vector3(boxCollisionSize, boxCollisionSize, boxCollisionSize), Vector3.down);
-        
-        Debug.Log(isGrounded);
+        RaycastHit hitInfo;
+        isGrounded = Physics.SphereCast(rb.position, 0.1f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y/2, groundLayers);
 
         if (Input.GetButtonDown(JUMP) == true && isGrounded)
         {
@@ -52,4 +55,13 @@ public class PlayerScript : MonoBehaviour {
 
         rb.AddForce(Vector2.down * gravity * rb.mass);
 	}
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Charge")
+        {
+            Destroy(col.gameObject);
+            charges++;
+        }
+    }
 }
