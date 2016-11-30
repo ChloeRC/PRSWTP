@@ -11,6 +11,8 @@ public class PlayerScript : MonoBehaviour {
     public LayerMask groundLayers;
     public float groundDetect;
 
+    public int health;
+
     public float boxCollisionSize;
 
     private static readonly string RIGHT = "right";
@@ -54,14 +56,28 @@ public class PlayerScript : MonoBehaviour {
         }
 
         rb.AddForce(Vector2.down * gravity * rb.mass);
-	}
+
+        if (health <= 0 || GetComponent<Transform>().position.y <= -20)
+        {
+            kill();
+        }
+    }
 
     void OnTriggerEnter(Collider col)
     {
+        if (col.gameObject.tag == "Enemy")
+        {
+            health--;
+        }
         if (col.gameObject.tag == "Charge")
         {
             Destroy(col.gameObject);
             charges++;
         }
+    }
+
+    void kill()
+    {
+        Destroy(this.gameObject);
     }
 }
