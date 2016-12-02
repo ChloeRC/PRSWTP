@@ -11,11 +11,14 @@ public class PlayerScript : MonoBehaviour {
     public LayerMask groundLayers;
     public float groundDetect;
 
+    public int health;
+
     public float boxCollisionSize;
 
     private static readonly string RIGHT = "right";
     private static readonly string LEFT = "left";
     private static readonly string JUMP = "jump";
+    private static readonly string SUICIDE = "suicide";
 
     private bool isGrounded = false;
 
@@ -33,35 +36,66 @@ public class PlayerScript : MonoBehaviour {
     void Update () {
         gameTicks += Time.deltaTime;
 
+        //If you push the button which is mapped to RIGHT (d), you go right
         if (Input.GetButton(RIGHT) == true)
         {
             //Debug.Log("D key pressed.");
             transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
         }
+        //If you push the button which is mapped to LEFT (a), you go left
         if (Input.GetButton(LEFT) == true)
         {
             //Debug.Log("A key pressed.");
             transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
         }
 
+        if (Input.GetButton(SUICIDE) == true)
+        {
+            kill();
+        }
+
+        //Tell if there is anything in a sphere shape below the player
         RaycastHit hitInfo;
         isGrounded = Physics.SphereCast(rb.position, 0.1f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y/2, groundLayers);
 
+        //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
         if (Input.GetButtonDown(JUMP) == true && isGrounded)
         {
             //Debug.Log("W key pressed.");
             rb.velocity = Vector2.up * jumpSpeed * Time.deltaTime;
         }
 
+        //Apply gravity relative to the player's mass
         rb.AddForce(Vector2.down * gravity * rb.mass);
-	}
+
+        //If you've fallen below -20 or your health is 0, you die
+        if (health <= 0 || GetComponent<Transform>().position.y <= -20)
+        {
+            kill();
+        }
+    }
 
     void OnTriggerEnter(Collider col)
     {
+        if (col.gameObject.tag == "Enemy")
+        {
+            health--;
+        }
         if (col.gameObject.tag == "Charge")
         {
             Destroy(col.gameObject);
             charges++;
         }
+    }
+
+    //Literally the most satisfying function in this entire project.
+    void kill()
+    {
+        Destroy(this.gameObject);
+    }
+
+    int getCharges()
+    {
+        return charges;
     }
 }
