@@ -13,12 +13,15 @@ public class PlayerScript : MonoBehaviour {
 
     public int health;
 
+    public GameObject bullet;
+
     public float boxCollisionSize;
 
     private static readonly string RIGHT = "right";
     private static readonly string LEFT = "left";
     private static readonly string JUMP = "jump";
     private static readonly string SUICIDE = "suicide";
+    private static readonly string SHOOT = "shoot";
 
     private bool isGrounded = false;
 
@@ -50,9 +53,16 @@ public class PlayerScript : MonoBehaviour {
             transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
         }
 
+        //SUICIDE (x)
         if (Input.GetButton(SUICIDE) == true)
         {
             kill();
+        }
+
+        //SHOOT (L shift)
+        if (Input.GetButton(SHOOT) == true)
+        {
+            Instantiate(bullet, transform.position, transform.rotation);
         }
 
         //Tell if there is anything in a sphere shape below the player
@@ -78,15 +88,18 @@ public class PlayerScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Enemy")
-        {
-            health--;
-            //Debug.Log("Health: " + health);
-        }
         if (col.gameObject.tag == "Charge")
         {
             Destroy(col.gameObject);
             charges++;
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            health--;
         }
     }
 
@@ -96,7 +109,7 @@ public class PlayerScript : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
-    int getCharges()
+    public int getCharges()
     {
         return charges;
     }
