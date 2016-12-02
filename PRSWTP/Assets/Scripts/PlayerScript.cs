@@ -60,7 +60,7 @@ public class PlayerScript : MonoBehaviour {
         }
 
         //SHOOT (L shift)
-        if (Input.GetButton(SHOOT) == true)
+        if (Input.GetButton(SHOOT) == true && gameTicks % 5 == 0)
         {
             Instantiate(bullet, transform.position, transform.rotation);
         }
