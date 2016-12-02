@@ -26,5 +26,7 @@ public class TrackMovement : MonoBehaviour {
             key++;
         }
         test++;
+        PlayerScript PlayerScript = GetComponent<PlayerScript>();
+        int charge = PlayerScript.getCharges();
 	}
 }
