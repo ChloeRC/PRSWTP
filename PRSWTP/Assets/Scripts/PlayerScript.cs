@@ -26,6 +26,7 @@ public class PlayerScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        Debug.Log("Health: " + health);
         rb = GetComponent<Rigidbody>();
         gameTicks = 0.0F;
         rb.freezeRotation = true;
@@ -80,6 +81,7 @@ public class PlayerScript : MonoBehaviour {
         if (col.gameObject.tag == "Enemy")
         {
             health--;
+            //Debug.Log("Health: " + health);
         }
         if (col.gameObject.tag == "Charge")
         {
