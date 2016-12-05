@@ -109,10 +109,13 @@ public class PlayerScript : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
-    public int resetCharges()
+    public int getCharges()
     {
-        int chargesReturn = charges;
+        return charges;
+    }
+
+    public void resetCharges()
+    {
         charges = 0;
-        return chargesReturn;
     }
 }
