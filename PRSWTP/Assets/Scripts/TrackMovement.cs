@@ -33,7 +33,8 @@ public class TrackMovement : MonoBehaviour {
         if (charge == 2)
         {
             Instantiate(player);
-            resetCharges();
+            PlayerScript.resetCharges();
+            player.GetComponent<PlayerScript>().toggleControllable();
         }
 	}
 }
