@@ -10,12 +10,12 @@ public class PlayerScript : MonoBehaviour {
     public float gravity;
     public LayerMask groundLayers;
 
+
     private int health;
 
     public GameObject bullet;
 
     private float boxCollisionSize;
-
 
     private bool controllable;
 
@@ -133,6 +133,11 @@ public class PlayerScript : MonoBehaviour {
 
     public void setPosition(Vector3 vector)
     {
+        var marker = GetComponent<TrackMovement>().MARKER;
+        if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
+        {
+            this.kill();
+        }
         transform.position = vector;
     }
 }
