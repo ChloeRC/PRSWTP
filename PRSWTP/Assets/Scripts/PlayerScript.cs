@@ -133,7 +133,7 @@ public class PlayerScript : MonoBehaviour {
 
     public void setPosition(Vector3 vector)
     {
-        var marker = GetComponent<TrackMovement>().MARKER;
+        var marker = TrackMovement.MARKER;
         if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
         {
             this.kill();
