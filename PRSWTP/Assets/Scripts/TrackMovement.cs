@@ -29,11 +29,10 @@ public class TrackMovement : MonoBehaviour {
         }
         test++;
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
-        int charge = PlayerScript.getCharges();
+        int charge = PlayerScript.resetCharges();
         if (charge == 2)
         {
             Instantiate(player);
-            charge = 0;
         }
 	}
 }
