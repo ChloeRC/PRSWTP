@@ -9,13 +9,12 @@ public class PlayerScript : MonoBehaviour {
     public float jumpSpeed;
     public float gravity;
     public LayerMask groundLayers;
-    public float groundDetect;
 
-    public int health;
+    private int health;
 
     public GameObject bullet;
 
-    public float boxCollisionSize;
+    private float boxCollisionSize;
 
 
     private bool controllable;
@@ -32,11 +31,12 @@ public class PlayerScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Debug.Log("Health: " + health);
         rb = GetComponent<Rigidbody>();
         gameTicks = 0.0F;
         rb.freezeRotation = true;
         charges = 0;
+        health = 3;
+        boxCollisionSize = .5f;
         controllable = true;
 	}
 	
@@ -129,5 +129,10 @@ public class PlayerScript : MonoBehaviour {
     public void toggleControllable()
     {
         controllable = !controllable;
+    }
+
+    public void setPosition(Vector3 vector)
+    {
+        transform.position = vector;
     }
 }
