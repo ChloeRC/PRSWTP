@@ -8,6 +8,8 @@ public class TrackMovement : MonoBehaviour {
     private int test = 0;
     private int key = 0;
 
+    public GameObject player;
+
 	// Use this for initialization
 	void Start () {
         locations = new Hashtable();	
@@ -30,7 +32,8 @@ public class TrackMovement : MonoBehaviour {
         int charge = PlayerScript.getCharges();
         if (charge == 2)
         {
-            Instantiate(PlayerScript);
+            Instantiate(player);
+            charge = 0;
         }
 	}
 }
