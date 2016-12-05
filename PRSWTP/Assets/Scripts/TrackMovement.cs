@@ -7,12 +7,13 @@ public class TrackMovement : MonoBehaviour {
     public int framerate;
     private int test = 0;
     private int key = 0;
+    public static readonly Vector3 MARKER = new Vector3(0f, -21f, 0f);
 
     public GameObject player;
 
 	// Use this for initialization
 	void Start () {
-        locations = new Hashtable();	
+        locations = new Hashtable();
 	}
 	
 	// Update is called once per frame
@@ -35,6 +36,15 @@ public class TrackMovement : MonoBehaviour {
             Instantiate(player);
             PlayerScript.resetCharges();
             player.GetComponent<PlayerScript>().toggleControllable();
+            player.transform.position = new Vector3(0, 3, 0);
+            locations.Add(key, MARKER);
+            key++;
+        }
+        if (test % framerate == 0)
+        {
+            int spot = 0;
+            player.setPosition(locations[spot]);
+            spot++;
         }
 	}
 }
