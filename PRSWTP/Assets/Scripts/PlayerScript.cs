@@ -17,6 +17,9 @@ public class PlayerScript : MonoBehaviour {
 
     public float boxCollisionSize;
 
+
+    private bool controllable;
+
     private static readonly string RIGHT = "right";
     private static readonly string LEFT = "left";
     private static readonly string JUMP = "jump";
@@ -34,46 +37,50 @@ public class PlayerScript : MonoBehaviour {
         gameTicks = 0.0F;
         rb.freezeRotation = true;
         charges = 0;
+        controllable = true;
 	}
 	
 	// Update is called once per frame
     void Update () {
         gameTicks += Time.deltaTime;
 
-        //If you push the button which is mapped to RIGHT (d), you go right
-        if (Input.GetButton(RIGHT) == true)
+        if (controllable)
         {
-            //Debug.Log("D key pressed.");
-            transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
-        }
-        //If you push the button which is mapped to LEFT (a), you go left
-        if (Input.GetButton(LEFT) == true)
-        {
-            //Debug.Log("A key pressed.");
-            transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
-        }
+            //If you push the button which is mapped to RIGHT (d), you go right
+            if (Input.GetButton(RIGHT) == true)
+            {
+                //Debug.Log("D key pressed.");
+                transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
+            }
+            //If you push the button which is mapped to LEFT (a), you go left
+            if (Input.GetButton(LEFT) == true)
+            {
+                //Debug.Log("A key pressed.");
+                transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
+            }
 
-        //SUICIDE (x)
-        if (Input.GetButton(SUICIDE) == true)
-        {
-            kill();
-        }
+            //SUICIDE (x)
+            if (Input.GetButton(SUICIDE) == true)
+            {
+                kill();
+            }
 
-        //SHOOT (L shift)
-        if (Input.GetButton(SHOOT) == true && gameTicks % 5 == 0)
-        {
-            Instantiate(bullet, transform.position, transform.rotation);
-        }
+            //SHOOT (L shift)
+            if (Input.GetButton(SHOOT) == true && gameTicks % 5 == 0)
+            {
+                Instantiate(bullet, transform.position, transform.rotation);
+            }
 
-        //Tell if there is anything in a sphere shape below the player
-        RaycastHit hitInfo;
-        isGrounded = Physics.SphereCast(rb.position, 0.1f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y/2, groundLayers);
+            //Tell if there is anything in a sphere shape below the player
+            RaycastHit hitInfo;
+            isGrounded = Physics.SphereCast(rb.position, 0.1f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
 
-        //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
-        if (Input.GetButtonDown(JUMP) == true && isGrounded)
-        {
-            //Debug.Log("W key pressed.");
-            rb.velocity = Vector2.up * jumpSpeed * Time.deltaTime;
+            //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
+            if (Input.GetButtonDown(JUMP) == true && isGrounded)
+            {
+                //Debug.Log("W key pressed.");
+                rb.velocity = Vector2.up * jumpSpeed * Time.deltaTime;
+            }
         }
 
         //Apply gravity relative to the player's mass
@@ -117,5 +124,10 @@ public class PlayerScript : MonoBehaviour {
     public void resetCharges()
     {
         charges = 0;
+    }
+
+    public void toggleControllable()
+    {
+        controllable = !controllable;
     }
 }
