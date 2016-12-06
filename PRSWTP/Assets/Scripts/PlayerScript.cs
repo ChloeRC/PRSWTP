@@ -9,13 +9,15 @@ public class PlayerScript : MonoBehaviour {
     public float jumpSpeed;
     public float gravity;
     public LayerMask groundLayers;
-    public float groundDetect;
 
-    public int health;
+
+    private int health;
 
     public GameObject bullet;
 
-    public float boxCollisionSize;
+    private float boxCollisionSize;
+
+    private bool controllable;
 
     private static readonly string RIGHT = "right";
     private static readonly string LEFT = "left";
@@ -29,51 +31,56 @@ public class PlayerScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Debug.Log("Health: " + health);
         rb = GetComponent<Rigidbody>();
         gameTicks = 0.0F;
         rb.freezeRotation = true;
         charges = 0;
+        health = 3;
+        boxCollisionSize = .5f;
+        controllable = true;
 	}
 	
 	// Update is called once per frame
     void Update () {
         gameTicks += Time.deltaTime;
 
-        //If you push the button which is mapped to RIGHT (d), you go right
-        if (Input.GetButton(RIGHT) == true)
+        if (controllable)
         {
-            //Debug.Log("D key pressed.");
-            transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
-        }
-        //If you push the button which is mapped to LEFT (a), you go left
-        if (Input.GetButton(LEFT) == true)
-        {
-            //Debug.Log("A key pressed.");
-            transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
-        }
+            //If you push the button which is mapped to RIGHT (d), you go right
+            if (Input.GetButton(RIGHT) == true)
+            {
+                //Debug.Log("D key pressed.");
+                transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
+            }
+            //If you push the button which is mapped to LEFT (a), you go left
+            if (Input.GetButton(LEFT) == true)
+            {
+                //Debug.Log("A key pressed.");
+                transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
+            }
 
-        //SUICIDE (x)
-        if (Input.GetButton(SUICIDE) == true)
-        {
-            kill();
-        }
+            //SUICIDE (x)
+            if (Input.GetButton(SUICIDE) == true)
+            {
+                kill();
+            }
 
-        //SHOOT (L shift)
-        if (Input.GetButton(SHOOT) == true)
-        {
-            Instantiate(bullet, transform.position, transform.rotation);
-        }
+            //SHOOT (L shift)
+            if (Input.GetButton(SHOOT) == true)
+            {
+                Instantiate(bullet, transform.position, transform.rotation);
+            }
 
-        //Tell if there is anything in a sphere shape below the player
-        RaycastHit hitInfo;
-        isGrounded = Physics.SphereCast(rb.position, 0.1f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y/2, groundLayers);
+            //Tell if there is anything in a sphere shape below the player
+            RaycastHit hitInfo;
+            isGrounded = Physics.SphereCast(rb.position, 0.1f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
 
-        //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
-        if (Input.GetButtonDown(JUMP) == true && isGrounded)
-        {
-            //Debug.Log("W key pressed.");
-            rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+            //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
+            if (Input.GetButtonDown(JUMP) == true && isGrounded)
+            {
+                //Debug.Log("W key pressed.");
+                rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+            }
         }
 
         //Apply gravity relative to the player's mass
@@ -112,5 +119,25 @@ public class PlayerScript : MonoBehaviour {
     public int getCharges()
     {
         return charges;
+    }
+
+    public void resetCharges()
+    {
+        charges = 0;
+    }
+
+    public void toggleControllable()
+    {
+        controllable = !controllable;
+    }
+
+    public void setPosition(Vector3 vector)
+    {
+        var marker = TrackMovement.MARKER;
+        if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
+        {
+            this.kill();
+        }
+        transform.position = vector;
     }
 }
