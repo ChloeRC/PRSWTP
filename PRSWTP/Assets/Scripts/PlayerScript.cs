@@ -73,7 +73,7 @@ public class PlayerScript : MonoBehaviour {
         if (Input.GetButtonDown(JUMP) == true && isGrounded)
         {
             //Debug.Log("W key pressed.");
-            rb.velocity = Vector2.up * jumpSpeed * Time.deltaTime;
+            rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
         }
 
         //Apply gravity relative to the player's mass
