@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class TrackMovement : MonoBehaviour {
 
@@ -24,10 +26,10 @@ public class TrackMovement : MonoBehaviour {
         if (test % framerate == 0)
         {
             locations.Add(key, transform.position);
-            foreach (DictionaryEntry spot in locations)
-            {
-                Debug.Log(spot.Key + " " + spot.Value);
-            }
+            //foreach (DictionaryEntry spot in locations)
+            //{
+              //  Debug.Log(spot.Key + " " + spot.Value);
+            //}
             key++;
         }
         test++;
@@ -39,6 +41,10 @@ public class TrackMovement : MonoBehaviour {
             PlayerScript.resetCharges();
             player.GetComponent<PlayerScript>().toggleControllable();
             player.transform.position = new Vector3(0, 3, 0);
+
+            for (var i = 0; i < transform.childCount; i++)
+                Destroy(transform.GetChild(i).gameObject);
+
             locations.Add(key, MARKER);
             key++;
             player2Exists = true;
