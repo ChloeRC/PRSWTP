@@ -41,7 +41,7 @@ public class TrackMovement : MonoBehaviour {
             PlayerScript.resetCharges();
             player.GetComponent<PlayerScript>().toggleControllable();
             player.transform.position = new Vector3(0, 3, 0);
-
+            //gets the children attached to the player copy and destroys them
             for (var i = 0; i < transform.childCount; i++)
                 Destroy(transform.GetChild(i).gameObject);
 
