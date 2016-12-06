@@ -106,8 +106,11 @@ public class PlayerScript : MonoBehaviour {
             }
         }
 
-        //Apply gravity relative to the player's mass
-        rb.AddForce(Vector2.down * gravity * rb.mass);
+        if (controllable)
+        {
+            //Apply gravity relative to the player's mass
+            rb.AddForce(Vector2.down * gravity * rb.mass);
+        }
 
         //If you've fallen below -20 or your health is 0, you die
         if (health <= 0 || GetComponent<Transform>().position.y <= -20)
