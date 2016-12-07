@@ -7,6 +7,7 @@ public class TrackMovement : MonoBehaviour {
 
     private Hashtable locations;
     public int framerate;
+    public int full;
     private int test = 0;
     private int key = 0;
     private bool player2Exists = false;
@@ -26,16 +27,12 @@ public class TrackMovement : MonoBehaviour {
         if (test % framerate == 0)
         {
             locations.Add(key, transform.position);
-            //foreach (DictionaryEntry spot in locations)
-            //{
-              //  Debug.Log(spot.Key + " " + spot.Value);
-            //}
             key++;
         }
         test++;
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
         int charge = PlayerScript.getCharges();
-        if (charge == 2)
+        if (charge == full)
         {
             Instantiate(player);
             PlayerScript.resetCharges();
