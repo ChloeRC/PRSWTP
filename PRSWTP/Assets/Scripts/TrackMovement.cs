@@ -42,7 +42,9 @@ public class TrackMovement : MonoBehaviour {
             for (var i = 0; i < transform.childCount; i++)
                 Destroy(transform.GetChild(i).gameObject);
 
-            
+            Resetter Resetter = GetComponent<Resetter>();
+            Resetter.reset = true;
+
             locations.Add(key, MARKER);
             key++;
             player2Exists = true;
