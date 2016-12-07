@@ -18,7 +18,8 @@ public class PlayerScript : MonoBehaviour {
 
     private int health;
 
-    private float boxCollisionSize;
+    //If hasShot is 0, you can shoot. Otherwise, you can't.
+    private int hasShot;
 
     private bool controllable;
 
@@ -41,8 +42,8 @@ public class PlayerScript : MonoBehaviour {
         direction = DIR_RIGHT;
         charges = 0;
         health = 3;
-        boxCollisionSize = .5f;
         controllable = true;
+        hasShot = 0;
 	}
 	
 	// Update is called once per frame
@@ -72,9 +73,17 @@ public class PlayerScript : MonoBehaviour {
                 kill();
             }
 
-            //SHOOT (L shift)
-            if (Input.GetButton(SHOOT) == true)
+            if (hasShot != 0)
             {
+                hasShot++;
+                hasShot %= 50;
+            }
+
+            //SHOOT (L shift)
+            if (Input.GetButton(SHOOT) == true && hasShot == 0)
+            {
+                hasShot = 1;
+
                 //This value will be added to the position on the Y axis so the bullet starts to the side of the player
                 float toAdd = 0;
 
@@ -90,7 +99,7 @@ public class PlayerScript : MonoBehaviour {
                     toAdd = .5f;
                     rotation = -90;
                 }
-                Vector3 pos = new Vector3(transform.position.x, transform.position.y + toAdd, transform.position.z);
+                Vector3 pos = new Vector3(transform.position.x + toAdd, transform.position.y, transform.position.z);
                 Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
             }
 
