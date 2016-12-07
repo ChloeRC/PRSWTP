@@ -41,7 +41,7 @@ public class TrackMovement : MonoBehaviour {
             //gets the children attached to the player copy and destroys them
             for (var i = 0; i < transform.childCount; i++)
                 Destroy(transform.GetChild(i).gameObject);
-
+            //resets all objects in the scene except the player
             Resetter Resetter = GetComponent<Resetter>();
             Resetter.reset = true;
 
