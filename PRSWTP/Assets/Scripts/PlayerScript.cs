@@ -101,6 +101,8 @@ public class PlayerScript : MonoBehaviour {
                 }
                 Vector3 pos = new Vector3(transform.position.x + toAdd, transform.position.y, transform.position.z);
                 Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
+                //FIX THIS
+                bullet.GetComponent<Rigidbody>().AddForce(Vector3.right * bullet.GetComponent<BulletScript>().speed);
             }
 
             //Tell if there is anything in a sphere shape below the player
