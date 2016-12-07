@@ -3,6 +3,8 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
 
+    public int health;
+
     private Rigidbody rb;
     private Transform ts;
     private float gameTicks;
@@ -43,5 +45,23 @@ public class EnemyAI : MonoBehaviour {
                 direction = true;
             }
         }
+
+        if (health == 0)
+        {
+            kill();
+        }
 	}
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Bullet")
+        {
+            health--;
+        }
+    }
+
+    void kill()
+    {
+        Destroy(this.gameObject);
+    }
 }
