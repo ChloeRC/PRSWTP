@@ -89,20 +89,26 @@ public class PlayerScript : MonoBehaviour {
 
                 //The amount that the bullet will be rotated on the Z axis (so it's facing the correct direction)
                 float rotation = 0;
+
+                Vector3 force;
+
                 if (direction == DIR_LEFT)
                 {
                     toAdd = -.5f;
                     rotation = 90;
+                    force = Vector3.left;
                 }
                 else //direction is right
                 {
                     toAdd = .5f;
                     rotation = -90;
+                    force = Vector3.right;
                 }
                 Vector3 pos = new Vector3(transform.position.x + toAdd, transform.position.y, transform.position.z);
-                Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
+                var newBullet = (GameObject) Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
                 //FIX THIS
-                bullet.GetComponent<Rigidbody>().AddForce(Vector3.right * bullet.GetComponent<BulletScript>().speed);
+                var rbBullet = newBullet.GetComponent<Rigidbody>();
+                rbBullet.velocity = newBullet.GetComponent<BulletScript>().speed * force;
             }
 
             //Tell if there is anything in a sphere shape below the player
