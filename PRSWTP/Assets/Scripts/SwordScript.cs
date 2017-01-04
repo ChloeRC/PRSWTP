@@ -22,7 +22,7 @@ public class SwordScript : MonoBehaviour {
 	    
 	}
 
-    void toggleSword()
+    public void toggleSword()
     {
         drawn = !drawn;
 
