@@ -23,7 +23,6 @@ public class TrackMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    
         if (test % framerate == 0)
         {
             locations.Add(key, transform.position);
@@ -55,4 +54,12 @@ public class TrackMovement : MonoBehaviour {
             spot2++;
         }
 	}
+
+    void OnTriggerEnter (Collider col)
+    {
+        if (col.gameObject.tag == "Checkpoint")
+        {
+            locations.Clear();
+        }
+    }
 }
