@@ -16,10 +16,12 @@ public class BulletScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         time += Time.deltaTime;
+        /*Despawn timer
         if (time > .2)
         {
             kill();
         }
+        */
     }
 
     void OnCollisionEnter(Collision col)
