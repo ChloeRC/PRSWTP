@@ -22,6 +22,23 @@ public class BulletScript : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            kill();
+        }
+        if (col.gameObject.tag == "Ground")
+        {
+            kill();
+        }
+        if (col.gameObject.tag == "SecretWall")
+        {
+            Destroy(col.gameObject);
+            kill();
+        }
+    }
+
     void kill()
     {
         Destroy(this.gameObject);
