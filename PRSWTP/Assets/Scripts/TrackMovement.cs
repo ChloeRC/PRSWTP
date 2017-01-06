@@ -53,13 +53,22 @@ public class TrackMovement : MonoBehaviour {
             player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
             spot2++;
         }
-	}
 
-    void OnTriggerEnter (Collider col)
+        
+    }
+
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Checkpoint")
         {
-            locations.Clear();
+
+            int i = 0;
+            while (locations.Count > 0)
+            {
+                locations.Remove(i);
+                i++;
+                Debug.Log(locations.Count);
+            }
         }
     }
 }
