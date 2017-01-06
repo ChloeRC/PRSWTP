@@ -32,17 +32,17 @@ public class SwordScript : MonoBehaviour {
 
     void swordUp ()
     {
-        ts.position.Set(1.8f, 0.15f, 0);
+        ts.localPosition = new Vector3(1.8f, 0.15f, 0);
         Quaternion newRot = Quaternion.Euler(0, 0, -85);
-        ts.rotation.Set(newRot.x, newRot.y, newRot.z, newRot.w);
-        ts.localScale.Set(0.15f, 0.6f, 0.3f);
+        ts.localRotation = new Quaternion(newRot.x, newRot.y, newRot.z, newRot.w);
+        ts.localScale = new Vector3(0.15f, 0.6f, 0.3f);
     }
 
     void swordDown()
     {
-        ts.position.Set(0.2f, -0.175f, -0.7f);
+        ts.localPosition = new Vector3(0.2f, -0.175f, -0.7f);
         Quaternion newRot = Quaternion.Euler(0, 0, 5);
-        ts.rotation.Set(newRot.x, newRot.y, newRot.z, newRot.w);
-        ts.localScale.Set(0.3f, 0.3f, 0.3f);
+        ts.localRotation = new Quaternion(newRot.x, newRot.y, newRot.z, newRot.w);
+        ts.localScale = new Vector3(0.3f, 0.3f, 0.3f);
     }
 }

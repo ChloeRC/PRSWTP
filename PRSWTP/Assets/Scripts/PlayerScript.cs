@@ -19,7 +19,12 @@ public class PlayerScript : MonoBehaviour {
     private int health;
 
     //If hasShot is 0, you can shoot. Otherwise, you can't.
-    private int hasShot;
+    private float hasShot;
+    public float shotCooldown;
+
+    //If hasSword is 0, you can toggle the sword. Otherwise, you can't.
+    private float hasSword;
+    public float swordCooldown;
 
     private bool controllable;
 
@@ -28,6 +33,7 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string JUMP = "jump";
     private static readonly string SUICIDE = "suicide";
     private static readonly string SHOOT = "shoot";
+    private static readonly string SWORD = "sword";
 
     private bool isGrounded = false;
 
@@ -43,7 +49,9 @@ public class PlayerScript : MonoBehaviour {
         charges = 0;
         health = 3;
         controllable = true;
+
         hasShot = 0;
+        hasSword = 0;
 	}
 	
 	// Update is called once per frame
@@ -73,10 +81,31 @@ public class PlayerScript : MonoBehaviour {
                 kill();
             }
 
+            //Cooldowns
+            if (hasSword != 0)
+            {
+                hasSword += Time.deltaTime;
+                if (hasSword > swordCooldown)
+                {
+                    hasSword = 0;
+                }
+            }
             if (hasShot != 0)
             {
-                hasShot++;
-                hasShot %= 50;
+                hasShot += Time.deltaTime;
+                if (hasShot > shotCooldown)
+                {
+                    hasShot = 0;
+                }
+            }
+
+            //SWORD (Space)
+            if (Input.GetButton(SWORD) == true && hasSword == 0)
+            {
+                hasSword = 1;
+
+                SwordScript sword = GetComponentInChildren<SwordScript>();
+                sword.toggleSword();
             }
 
             //SHOOT (L shift)
@@ -90,6 +119,7 @@ public class PlayerScript : MonoBehaviour {
                 //The amount that the bullet will be rotated on the Z axis (so it's facing the correct direction)
                 float rotation = 0;
 
+                //The direction the bullet will go in
                 Vector3 force;
 
                 if (direction == DIR_LEFT)
