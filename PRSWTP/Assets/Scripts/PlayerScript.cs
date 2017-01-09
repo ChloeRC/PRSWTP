@@ -177,7 +177,7 @@ public class PlayerScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Enemy" && this.gameObject.tag != "Sword")
         {
             health--;
         }
