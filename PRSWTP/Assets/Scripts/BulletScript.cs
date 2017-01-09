@@ -30,7 +30,7 @@ public class BulletScript : MonoBehaviour {
         {
             kill();
         }
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.layer == 8) //ground layer
         {
             kill();
         }
