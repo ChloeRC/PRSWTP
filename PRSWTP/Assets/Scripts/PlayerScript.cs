@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour {
     public float gravity;
     public LayerMask groundLayers;
     public GameObject bullet;
+    public GameObject bucket;
 
     //False is right, true is left
     private bool direction;
@@ -172,6 +173,14 @@ public class PlayerScript : MonoBehaviour {
         {
             Destroy(col.gameObject);
             charges++;
+        }
+
+        if (col.gameObject.tag == "Bucket Trigger")
+        {
+            Rigidbody bucketRb = bucket.GetComponent<Rigidbody>();
+            bucketRb.constraints = RigidbodyConstraints.None;
+            bucketRb.AddForce(transform.forward * 3);
+            
         }
     }
 
