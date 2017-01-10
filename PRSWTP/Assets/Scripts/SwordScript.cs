@@ -30,15 +30,6 @@ public class SwordScript : MonoBehaviour {
         else { swordDown(); }
     }
 
-    void onCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Enemy")
-        {
-            Debug.Log("Enemy");
-            col.gameObject.GetComponent<EnemyAI>().health--;
-        }
-    }
-
     void swordUp ()
     {
         ts.localPosition = new Vector3(1, 0.15f, 0);
