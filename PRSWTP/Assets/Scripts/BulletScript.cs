@@ -16,12 +16,11 @@ public class BulletScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         time += Time.deltaTime;
-        /*Despawn timer
-        if (time > .2)
+        //despawn timer
+        if (time > .4)
         {
             kill();
         }
-        */
     }
 
     void OnCollisionEnter(Collision col)
@@ -30,7 +29,7 @@ public class BulletScript : MonoBehaviour {
         {
             kill();
         }
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.layer == 8) //ground layer
         {
             kill();
         }
