@@ -102,17 +102,31 @@ public class PlayerScript : MonoBehaviour {
                 }
             }
 
+			if (direction == DIR_LEFT) {
+				SwordScript sword = GetComponentInChildren<SwordScript> ();
+				bool drawn = sword.drawn;
+				if (drawn) {
+					sword.swordUp (direction);
+				} else {
+					sword.swordDown (direction);
+				}
+			} else {
+				SwordScript sword = GetComponentInChildren<SwordScript> ();
+				bool drawn = sword.drawn;
+				if (drawn) {
+					sword.swordUp (direction);
+				} else {
+					sword.swordDown (direction);
+				}
+			}
+
             //SWORD (Space)
             if (Input.GetButton(SWORD) == true && hasSword == 0)
             {
                 hasSword = 1;
 
                 SwordScript sword = GetComponentInChildren<SwordScript>();
-                sword.toggleSword();
-				if (direction == DIR_LEFT) 
-				{
-
-				}
+                sword.toggleSword(direction);
             }
 
             //SHOOT (L shift)
