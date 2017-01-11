@@ -66,6 +66,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 //Debug.Log("D key pressed.");
                 transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
+                //transform.rotation = Quaternion.Euler(0, 0, 0);
                 direction = DIR_RIGHT;
             }
             //If you push the button which is mapped to LEFT (a), you go left
@@ -73,6 +74,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 //Debug.Log("A key pressed.");
                 transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
+                //transform.rotation = Quaternion.Euler(0, 180, 0);
                 direction = DIR_LEFT;
             }
 
