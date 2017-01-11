@@ -1,0 +1,29 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class BucketScript : MonoBehaviour {
+
+    public GameObject charge;
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.name == "Cube (13)")
+        {
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            Vector3 thisPos = this.gameObject.GetComponent<Transform>().position;
+            Vector3 pos = new Vector3(thisPos.x + 3.23f, thisPos.y - 1, thisPos.z);
+            Quaternion rot = Quaternion.Euler(0, 0, 0);
+            Instantiate(charge, pos, rot);
+        }
+    }
+}
