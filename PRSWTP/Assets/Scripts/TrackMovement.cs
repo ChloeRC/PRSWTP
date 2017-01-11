@@ -61,6 +61,7 @@ public class TrackMovement : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
+        bool controllable = player.GetComponent<PlayerScript>().
         if (col.gameObject.tag == "Checkpoint")
         {
 
