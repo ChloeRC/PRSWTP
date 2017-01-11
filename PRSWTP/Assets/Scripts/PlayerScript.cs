@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour {
     public float gravity;
     public LayerMask groundLayers;
     public GameObject bullet;
+    public GameObject bucket;
 
     //False is right, true is left
     private bool direction;
@@ -65,6 +66,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 //Debug.Log("D key pressed.");
                 transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
+                //transform.rotation = Quaternion.Euler(0, 0, 0);
                 direction = DIR_RIGHT;
             }
             //If you push the button which is mapped to LEFT (a), you go left
@@ -72,6 +74,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 //Debug.Log("A key pressed.");
                 transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
+                //transform.rotation = Quaternion.Euler(0, 180, 0);
                 direction = DIR_LEFT;
             }
 
@@ -173,6 +176,13 @@ public class PlayerScript : MonoBehaviour {
             Destroy(col.gameObject);
             charges++;
         }
+
+        if (col.gameObject.tag == "Bucket Trigger")
+        {
+            Rigidbody bucketRb = bucket.GetComponent<Rigidbody>();
+            bucketRb.constraints = RigidbodyConstraints.None;
+            bucketRb.AddForce(-transform.right * 3);
+        }
     }
 
     void OnCollisionEnter(Collision col)
@@ -202,6 +212,11 @@ public class PlayerScript : MonoBehaviour {
     public void toggleControllable()
     {
         controllable = !controllable;
+    }
+
+    public bool getControllable()
+    {
+        return controllable;
     }
 
     public void setPosition(Vector3 vector)
