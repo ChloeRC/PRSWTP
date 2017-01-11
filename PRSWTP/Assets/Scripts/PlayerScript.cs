@@ -109,6 +109,10 @@ public class PlayerScript : MonoBehaviour {
 
                 SwordScript sword = GetComponentInChildren<SwordScript>();
                 sword.toggleSword();
+				if (direction == DIR_LEFT) 
+				{
+
+				}
             }
 
             //SHOOT (L shift)
