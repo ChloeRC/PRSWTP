@@ -177,11 +177,15 @@ public class PlayerScript : MonoBehaviour {
             charges++;
         }
 
-        if (col.gameObject.tag == "Bucket Trigger")
+        /*if (col.gameObject.tag == "Bucket Trigger")
         {
-            Rigidbody bucketRb = bucket.GetComponent<Rigidbody>();
-            bucketRb.constraints = RigidbodyConstraints.None;
-            bucketRb.AddForce(-transform.right * 3);
+            bucket.GetComponent<BucketScript>().activate();
+        }*/
+
+        if (col.gameObject.tag == "Portal")
+        {
+            PortalScript portal = col.gameObject.GetComponent<PortalScript>();
+            gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
     }
 
@@ -190,6 +194,11 @@ public class PlayerScript : MonoBehaviour {
         if (col.gameObject.tag == "Enemy")
         {
             health--;
+        }
+        
+        if (controllable && col.gameObject.tag == "Player")
+        {
+            kill();
         }
     }
 

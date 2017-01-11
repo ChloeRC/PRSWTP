@@ -5,6 +5,13 @@ public class BucketScript : MonoBehaviour {
 
     public GameObject charge;
 
+    public void activate()
+    {
+        Rigidbody bucketRb = GetComponent<Rigidbody>();
+        bucketRb.constraints = RigidbodyConstraints.None;
+        bucketRb.AddForce(-transform.right * 3);
+    }
+
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.name == "Cube (13)")
