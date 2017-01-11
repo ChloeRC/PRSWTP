@@ -61,8 +61,8 @@ public class TrackMovement : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        bool controllable = player.GetComponent<PlayerScript>().
-        if (col.gameObject.tag == "Checkpoint")
+        bool controllable = player.GetComponent<PlayerScript>().getControllable();
+        if (controllable && col.gameObject.tag == "Checkpoint")
         {
 
             int i = 0;
@@ -72,6 +72,7 @@ public class TrackMovement : MonoBehaviour {
                 i++;
                 Debug.Log("Count when removing: " + locations.Count);
             }
+            key = 0;
         }
     }
 }
