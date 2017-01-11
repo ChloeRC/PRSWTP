@@ -179,8 +179,7 @@ public class PlayerScript : MonoBehaviour {
         {
             Rigidbody bucketRb = bucket.GetComponent<Rigidbody>();
             bucketRb.constraints = RigidbodyConstraints.None;
-            bucketRb.AddForce(transform.forward * 3);
-            
+            bucketRb.AddForce(-transform.right * 3);
         }
     }
 
