@@ -213,6 +213,11 @@ public class PlayerScript : MonoBehaviour {
         controllable = !controllable;
     }
 
+    public bool getControllable()
+    {
+        return controllable;
+    }
+
     public void setPosition(Vector3 vector)
     {
         var marker = TrackMovement.MARKER;
