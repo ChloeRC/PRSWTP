@@ -32,12 +32,14 @@ public class SwordScript : MonoBehaviour {
 
 	public void swordUp (bool direction)
     {
+		//sword out facing left
 		if (direction) {
 			ts.localPosition = new Vector3 (-1, 0.15f, 0);
-			Quaternion newRot = Quaternion.Euler (-10, 270, 270);
+			Quaternion newRot = Quaternion.Euler (-10, 270, 90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
 			ts.localScale = new Vector3 (0.055f, 0.1f, 0.1f);
 		} else {
+			//sword out facing right
 			ts.localPosition = new Vector3 (1, 0.15f, 0);
 			Quaternion newRot = Quaternion.Euler (-10, 90, 90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
