@@ -9,7 +9,7 @@ public class ConeScript : MonoBehaviour {
     }
 
 	IEnumerator Drop() {
-		yield return new WaitForSeconds (5);
-		GetComponent<Rigidbody>().AddForce(-transform.up * 10000);
+		yield return new WaitForSeconds (.25f);
+		GetComponent<Rigidbody>().AddForce(-transform.up * 1000);
 	}
 }
