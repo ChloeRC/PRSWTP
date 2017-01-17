@@ -61,4 +61,10 @@ public class SwordScript : MonoBehaviour {
 			ts.localScale = new Vector3 (0.09f, 0.1f, 0.04f);
 		}
     }
+
+	void onCollisionEnter(Collision col) {
+		if (col.gameObject.tag == "Enemy") {
+
+		}
+	}
 }
