@@ -221,7 +221,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     //Literally the most satisfying function in this entire project.
-    void kill()
+    public void kill()
     {
         Destroy(this.gameObject);
     }
