@@ -59,10 +59,18 @@ public class EnemyAI : MonoBehaviour {
             health--;
         }
 
-        if (col.tag == "Sword")
+        //if (col.tag == "Sword")
+        //{
+            //Debug.Log("Enemy");
+            //health--;
+        //}
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.tag == "Sword")
         {
-            Debug.Log("Enemy");
-            health--;
+            kill();
         }
     }
 
