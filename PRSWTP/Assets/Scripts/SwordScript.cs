@@ -53,12 +53,12 @@ public class SwordScript : MonoBehaviour {
 			ts.localPosition = new Vector3 (0, 0.15f, 0.55f);
 			Quaternion newRot = Quaternion.Euler (78, 90, -90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
-			ts.localScale = new Vector3 (0.09f, 0.1f, 0.04f);
+			ts.localScale = new Vector3 (0.09f, 0.1f, 0.08f);
 		} else {
 			ts.localPosition = new Vector3 (0, 0.15f, -0.55f);
 			Quaternion newRot = Quaternion.Euler (78, 90, -90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
-			ts.localScale = new Vector3 (0.09f, 0.1f, 0.04f);
+			ts.localScale = new Vector3 (0.09f, 0.1f, 0.08f);
 		}
     }
 
