@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour {
     private static readonly bool DIR_RIGHT = false;
     private static readonly bool DIR_LEFT = true;
 
-    private int health;
+    public int health;
 
     //If hasShot is 0, you can shoot. Otherwise, you can't.
     private float hasShot;
@@ -164,7 +164,7 @@ public class PlayerScript : MonoBehaviour {
 
             //Tell if there is anything in a sphere shape below the player
             RaycastHit hitInfo;
-            isGrounded = Physics.SphereCast(rb.position, 0.1f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
+            isGrounded = Physics.SphereCast(rb.position, 0.2f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
 
             //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
             if (Input.GetButtonDown(JUMP) == true && isGrounded)
@@ -204,19 +204,6 @@ public class PlayerScript : MonoBehaviour {
         {
             PortalScript portal = col.gameObject.GetComponent<PortalScript>();
             gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
-        }
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Enemy")
-        {
-            health--;
-        }
-        
-        if (controllable && col.gameObject.tag == "Player")
-        {
-            kill();
         }
     }
 

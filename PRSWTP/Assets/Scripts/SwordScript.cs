@@ -62,9 +62,13 @@ public class SwordScript : MonoBehaviour {
 		}
     }
 
-	void onCollisionEnter(Collision col) {
-		if (col.gameObject.tag == "Enemy") {
+    void OnTriggerEnter(Collider col)
+    {
+        Debug.Log(col.gameObject.tag);
+        if (col.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Stab");
             col.gameObject.GetComponent<EnemyAI>().kill();
-		}
-	}
+        }
+    }
 }
