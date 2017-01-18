@@ -61,4 +61,14 @@ public class SwordScript : MonoBehaviour {
 			ts.localScale = new Vector3 (0.09f, 0.1f, 0.08f);
 		}
     }
+
+    void OnTriggerEnter(Collider col)
+    {
+        Debug.Log(col.gameObject.tag);
+        if (col.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Stab");
+            col.gameObject.GetComponent<EnemyAI>().kill();
+        }
+    }
 }
