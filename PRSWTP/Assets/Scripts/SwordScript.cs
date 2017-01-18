@@ -64,7 +64,7 @@ public class SwordScript : MonoBehaviour {
 
 	void onCollisionEnter(Collision col) {
 		if (col.gameObject.tag == "Enemy") {
-
+            col.gameObject.GetComponent<EnemyAI>().kill();
 		}
 	}
 }

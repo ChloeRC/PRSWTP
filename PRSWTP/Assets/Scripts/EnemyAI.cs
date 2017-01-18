@@ -66,7 +66,7 @@ public class EnemyAI : MonoBehaviour {
         }
     }
 
-    void kill()
+    public void kill()
     {
         Destroy(this.gameObject);
     }
