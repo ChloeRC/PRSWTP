@@ -25,6 +25,12 @@ public class ConeScript : MonoBehaviour {
         if (col.gameObject.layer == 8 && falling) //ground
         {
             falling = false;
+            freeze();
         }
+    }
+
+    void freeze()
+    {
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 }
