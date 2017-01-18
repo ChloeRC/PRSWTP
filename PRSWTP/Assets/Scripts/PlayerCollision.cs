@@ -13,4 +13,25 @@ public class PlayerCollision : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            gameObject.GetComponent<PlayerScript>().health--;
+        }
+
+        bool controllable = gameObject.GetComponent<PlayerScript>().getControllable();
+
+        if (controllable && col.gameObject.tag == "Player")
+        {
+            kill();
+        }
+    }
+
+    //Literally the most satisfying function in this entire project.
+    public void kill()
+    {
+        Destroy(this.gameObject);
+    }
 }
