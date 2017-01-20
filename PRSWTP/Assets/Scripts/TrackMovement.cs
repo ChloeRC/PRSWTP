@@ -31,6 +31,7 @@ public class TrackMovement : MonoBehaviour {
         test++;
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
         int charge = PlayerScript.getCharges();
+        //GameObject player2;
         if (charge == full)
         {
             Instantiate(player);
@@ -43,13 +44,14 @@ public class TrackMovement : MonoBehaviour {
 
             //Resetter Resetter = GetComponent<Resetter>();
             //Resetter.reset = true;
-
+            //Debug.Log("Count before marker: " + locations.Count);
             locations.Add(key, MARKER);
             key++;
             player2Exists = true;
         }
         if (player2Exists && test % framerate == 0)
         {
+            //Debug.Log("Spot2:" + spot2);
             player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
             spot2++;
         }
@@ -59,7 +61,8 @@ public class TrackMovement : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Checkpoint")
+        bool controllable = player.transform.parent.gameObject.GetComponent<PlayerScript>().getControllable();
+        if (controllable && col.gameObject.tag == "Checkpoint")
         {
 
             int i = 0;
@@ -67,8 +70,9 @@ public class TrackMovement : MonoBehaviour {
             {
                 locations.Remove(i);
                 i++;
-                Debug.Log(locations.Count);
+                //Debug.Log("Count when removing: " + locations.Count);
             }
+            key = 0;
         }
     }
 }

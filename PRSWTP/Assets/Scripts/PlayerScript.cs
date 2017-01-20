@@ -10,13 +10,14 @@ public class PlayerScript : MonoBehaviour {
     public float gravity;
     public LayerMask groundLayers;
     public GameObject bullet;
+    public GameObject bucket;
 
     //False is right, true is left
     private bool direction;
     private static readonly bool DIR_RIGHT = false;
     private static readonly bool DIR_LEFT = true;
 
-    private int health;
+    public int health;
 
     //If hasShot is 0, you can shoot. Otherwise, you can't.
     private float hasShot;
@@ -65,6 +66,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 //Debug.Log("D key pressed.");
                 transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
+                //transform.rotation = Quaternion.Euler(0, 0, 0);
                 direction = DIR_RIGHT;
             }
             //If you push the button which is mapped to LEFT (a), you go left
@@ -72,6 +74,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 //Debug.Log("A key pressed.");
                 transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
+                //transform.rotation = Quaternion.Euler(0, 180, 0);
                 direction = DIR_LEFT;
             }
 
@@ -99,13 +102,31 @@ public class PlayerScript : MonoBehaviour {
                 }
             }
 
+			if (direction == DIR_LEFT) {
+				SwordScript sword = GetComponentInChildren<SwordScript> ();
+				bool drawn = sword.drawn;
+				if (drawn) {
+					sword.swordUp (direction);
+				} else {
+					sword.swordDown (direction);
+				}
+			} else {
+				SwordScript sword = GetComponentInChildren<SwordScript> ();
+				bool drawn = sword.drawn;
+				if (drawn) {
+					sword.swordUp (direction);
+				} else {
+					sword.swordDown (direction);
+				}
+			}
+
             //SWORD (Space)
             if (Input.GetButton(SWORD) == true && hasSword == 0)
             {
                 hasSword = 1;
 
                 SwordScript sword = GetComponentInChildren<SwordScript>();
-                sword.toggleSword();
+                sword.toggleSword(direction);
             }
 
             //SHOOT (L shift)
@@ -143,7 +164,7 @@ public class PlayerScript : MonoBehaviour {
 
             //Tell if there is anything in a sphere shape below the player
             RaycastHit hitInfo;
-            isGrounded = Physics.SphereCast(rb.position, 0.1f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
+            isGrounded = Physics.SphereCast(rb.position, 0.2f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
 
             //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
             if (Input.GetButtonDown(JUMP) == true && isGrounded)
@@ -173,18 +194,21 @@ public class PlayerScript : MonoBehaviour {
             Destroy(col.gameObject);
             charges++;
         }
-    }
 
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Enemy")
+        /*if (col.gameObject.tag == "Bucket Trigger")
         {
-            health--;
+            bucket.GetComponent<BucketScript>().activate();
+        }*/
+
+        if (col.gameObject.tag == "Portal")
+        {
+            PortalScript portal = col.gameObject.GetComponent<PortalScript>();
+            gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
     }
 
     //Literally the most satisfying function in this entire project.
-    void kill()
+    public void kill()
     {
         Destroy(this.gameObject);
     }
@@ -202,6 +226,11 @@ public class PlayerScript : MonoBehaviour {
     public void toggleControllable()
     {
         controllable = !controllable;
+    }
+
+    public bool getControllable()
+    {
+        return controllable;
     }
 
     public void setPosition(Vector3 vector)

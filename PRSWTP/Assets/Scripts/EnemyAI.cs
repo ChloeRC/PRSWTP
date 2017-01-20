@@ -59,14 +59,10 @@ public class EnemyAI : MonoBehaviour {
             health--;
         }
 
-        if (col.tag == "Sword")
-        {
-            Debug.Log("Enemy");
-            health--;
-        }
     }
 
-    void kill()
+
+    public void kill()
     {
         Destroy(this.gameObject);
     }
