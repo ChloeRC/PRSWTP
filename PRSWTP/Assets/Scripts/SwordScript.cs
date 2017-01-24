@@ -64,7 +64,6 @@ public class SwordScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log(col.gameObject.tag);
         if (col.gameObject.tag == "Enemy")
         {
             Debug.Log("Stab");

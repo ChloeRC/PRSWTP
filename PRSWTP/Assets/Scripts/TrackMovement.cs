@@ -35,13 +35,18 @@ public class TrackMovement : MonoBehaviour {
         if (charge == full)
         {
             Instantiate(player);
+            Debug.Log(player);
             PlayerScript.resetCharges();
             player.GetComponent<PlayerScript>().toggleControllable();
             player.transform.position = new Vector3(0, 3, 0);
             //gets the children that are attached to the player copy and destroys them
-            for (var i = 0; i < transform.childCount; i++)
-                Destroy(transform.GetChild(i).gameObject);
+            //for (var i = 0; i < transform.childCount; i++)
+                //Destroy(transform.GetChild(i).gameObject);
 
+            Transform camera = transform.Find("Camera");
+            Destroy(camera.gameObject);
+            Transform mapCamera = transform.Find("Map Camera");
+            Destroy(mapCamera.gameObject);
             //Resetter Resetter = GetComponent<Resetter>();
             //Resetter.reset = true;
             //Debug.Log("Count before marker: " + locations.Count);

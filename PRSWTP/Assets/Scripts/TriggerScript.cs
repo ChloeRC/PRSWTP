@@ -12,9 +12,11 @@ public class TriggerScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player" && col.gameObject.GetComponent<PlayerScript>().getControllable() && !hasBeenTriggered)
         {
+            Debug.Log("augh");
             hasBeenTriggered = true;
             if (type == "Bucket")
             {
+                Debug.Log("auuuugh");
                 toBeTriggered.GetComponent<BucketScript>().activate();
             }
             if (type == "Cone")
