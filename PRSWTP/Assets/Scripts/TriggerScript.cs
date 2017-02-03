@@ -12,7 +12,7 @@ public class TriggerScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player" && col.gameObject.GetComponent<PlayerScript>().getControllable() && !hasBeenTriggered)
         {
-            Debug.Log("augh");
+            //Debug.Log("augh");
             hasBeenTriggered = true;
             if (type == "Bucket")
             {
