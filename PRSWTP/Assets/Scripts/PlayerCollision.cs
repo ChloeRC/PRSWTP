@@ -19,6 +19,7 @@ public class PlayerCollision : MonoBehaviour {
         if (col.gameObject.tag == "Enemy")
         {
             gameObject.GetComponent<PlayerScript>().health--;
+            Debug.Log("hello");
         }
 
         bool controllable = gameObject.GetComponent<PlayerScript>().getControllable();
@@ -32,6 +33,7 @@ public class PlayerCollision : MonoBehaviour {
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
+        Debug.Log("Killed: " + gameObject.tag);
         Destroy(this.gameObject);
     }
 }

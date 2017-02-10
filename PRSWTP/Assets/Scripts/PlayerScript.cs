@@ -172,6 +172,7 @@ public class PlayerScript : MonoBehaviour {
                 //Debug.Log("W key pressed.");
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
+
         }
 
         if (controllable)
@@ -180,6 +181,7 @@ public class PlayerScript : MonoBehaviour {
             rb.AddForce(Vector2.down * gravity * rb.mass);
         }
 
+        Debug.Log("Health: " + health); //prints out health to console
         //If you've fallen below -20 or your health is 0, you die
         if (health <= 0 || GetComponent<Transform>().position.y <= -20)
         {
