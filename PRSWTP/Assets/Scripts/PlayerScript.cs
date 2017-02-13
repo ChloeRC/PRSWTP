@@ -48,7 +48,7 @@ public class PlayerScript : MonoBehaviour {
 
         direction = DIR_RIGHT;
         charges = 0;
-        health = 3;
+        health = 1;
         controllable = true;
 
         hasShot = 0;
@@ -182,6 +182,7 @@ public class PlayerScript : MonoBehaviour {
         }
 
         Debug.Log("Health: " + health); //prints out health to console
+        
         //If you've fallen below -20 or your health is 0, you die
         if (health <= 0 || GetComponent<Transform>().position.y <= -20)
         {
