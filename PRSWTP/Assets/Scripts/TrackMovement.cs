@@ -15,6 +15,7 @@ public class TrackMovement : MonoBehaviour {
     public static readonly Vector3 MARKER = new Vector3(0f, -21f, 0f);
 
     public GameObject player;
+    public GameObject nonPlayerObjects;
 
 	// Use this for initialization
 	void Start () {
@@ -47,8 +48,8 @@ public class TrackMovement : MonoBehaviour {
             Destroy(camera.gameObject);
             Transform mapCamera = transform.Find("Map Camera");
             Destroy(mapCamera.gameObject);
-            //Resetter Resetter = GetComponent<Resetter>();
-            //Resetter.reset = true;
+            Resetter resetter = nonPlayerObjects.GetComponent<Resetter>();
+            resetter.reset = true;
             //Debug.Log("Count before marker: " + locations.Count);
             locations.Add(key, MARKER);
             key++;

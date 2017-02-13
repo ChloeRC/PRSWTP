@@ -21,9 +21,11 @@ public class Resetter : MonoBehaviour {
 	void Update () {
 	    if (reset)
         {
+            Debug.Log("reset");
             reset = false;
             foreach (Transform child in transform)
             {
+                Debug.Log(child.name + " " + child.position);
                 child.position = (Vector3) objects[child.name];
             }
         }
