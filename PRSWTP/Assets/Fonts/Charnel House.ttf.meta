@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 587609f8cbe5b6b4b9937c5e4769fcef
+timeCreated: 1486748243
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Charnel House
+  fontNames:
+  - Charnel House
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
