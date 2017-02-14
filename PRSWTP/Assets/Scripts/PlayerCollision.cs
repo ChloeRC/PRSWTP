@@ -16,6 +16,7 @@ public class PlayerCollision : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
+        Debug.Log("HELLO!");
         if (col.gameObject.tag == "Enemy")
         {
             gameObject.GetComponent<PlayerScript>().health--;

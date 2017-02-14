@@ -67,7 +67,7 @@ public class TrackMovement : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        bool controllable = player.transform.parent.gameObject.GetComponent<PlayerScript>().getControllable();
+        bool controllable = player.transform.gameObject.GetComponent<PlayerScript>().getControllable();
         if (controllable && col.gameObject.tag == "Checkpoint")
         {
 

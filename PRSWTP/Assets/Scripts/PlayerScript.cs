@@ -245,4 +245,11 @@ public class PlayerScript : MonoBehaviour {
         }
         transform.position = vector;
     }
+
+    //supposed to print out health on a rectangle
+    public void OnGUI()
+    {
+        GUI.Label(Rect(0, 0, 100, 100), health);
+    }
+
 }
