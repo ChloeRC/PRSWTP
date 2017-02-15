@@ -57,6 +57,7 @@ public class EnemyAI : MonoBehaviour {
         if (col.gameObject.tag == "Bullet")
         {
             health--;
+            Debug.Log("Enemy lost health");
         }
 
     }
