@@ -181,7 +181,7 @@ public class PlayerScript : MonoBehaviour {
             rb.AddForce(Vector2.down * gravity * rb.mass);
         }
 
-        Debug.Log("Health: " + health); //prints out health to console
+        //Debug.log("Health: " + health); //prints out health to console
         
         //If you've fallen below -20 or your health is 0, you die
         if (health <= 0 || GetComponent<Transform>().position.y <= -20)
@@ -244,12 +244,6 @@ public class PlayerScript : MonoBehaviour {
             this.kill();
         }
         transform.position = vector;
-    }
-
-    //supposed to print out health on a rectangle
-    public void OnGUI()
-    {
-        GUI.Label(Rect(0, 0, 100, 100), health);
     }
 
 }
