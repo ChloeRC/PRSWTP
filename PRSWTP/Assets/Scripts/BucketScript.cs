@@ -22,9 +22,10 @@ public class BucketScript : MonoBehaviour {
             Quaternion rot = Quaternion.Euler(0, 0, 0);
             Instantiate(charge, pos, rot);
         }
+    }
 
-        if (col.gameObject.name == "L1 P4") {
-            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        }
+    public void reset()
+    {
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
 }

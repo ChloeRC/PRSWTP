@@ -3,17 +3,21 @@ using System.Collections;
 
 public class Resetter : MonoBehaviour {
 
-    private Hashtable objects;
+    private Hashtable positions;
+    private Hashtable rotations;
 
     public bool reset;
 
 	// Use this for initialization
 	void Start () {
-        objects = new Hashtable();
+        positions = new Hashtable();
+        rotations = new Hashtable();
+
         reset = false;
         foreach (Transform child in transform)
         {
-            objects.Add(child.name, child.position);
+            positions.Add(child.name, child.position);
+            rotations.Add(child.name, child.rotation);
         }
     }
 	
@@ -25,8 +29,9 @@ public class Resetter : MonoBehaviour {
             reset = false;
             foreach (Transform child in transform)
             {
-                Debug.Log(objects[child.name]);
-                child.position = (Vector3) objects[child.name];
+                //Debug.Log(positions[child.name]);
+                child.position = (Vector3) positions[child.name];
+                child.rotation = (Quaternion) rotations[child.name];
             }
         }
 	}

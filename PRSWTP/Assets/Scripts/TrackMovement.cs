@@ -16,6 +16,7 @@ public class TrackMovement : MonoBehaviour {
 
     public GameObject player;
     public GameObject nonPlayerObjects;
+    public GameObject bucket;
 
 	// Use this for initialization
 	void Start () {
@@ -48,8 +49,11 @@ public class TrackMovement : MonoBehaviour {
             Destroy(camera.gameObject);
             Transform mapCamera = transform.Find("Map Camera");
             Destroy(mapCamera.gameObject);
+
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>();
             resetter.reset = true;
+            bucket.GetComponent<BucketScript>().reset();
+
             //Debug.Log("Count before marker: " + locations.Count);
             locations.Add(key, MARKER);
             key++;
