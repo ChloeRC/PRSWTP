@@ -49,7 +49,7 @@ public class PlayerScript : MonoBehaviour {
 
         direction = DIR_RIGHT;
         charges = 0;
-        health = 1;
+        health = 3;
         controllable = true;
 
         hasShot = 0;
@@ -181,8 +181,6 @@ public class PlayerScript : MonoBehaviour {
             //Apply gravity relative to the player's mass
             rb.AddForce(Vector2.down * gravity * rb.mass);
         }
-
-        //Debug.log("Health: " + health); //prints out health to console
         
         //If you've fallen below -20 or your health is 0, you die
         if (health <= 0 || GetComponent<Transform>().position.y <= -20)
@@ -209,6 +207,13 @@ public class PlayerScript : MonoBehaviour {
             PortalScript portal = col.gameObject.GetComponent<PortalScript>();
             gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
+    }
+
+    //Prints out player stuff to screen - might want to make nicer if there's extra time
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 100, 20), "Health: " + health);
+        GUI.Label(new Rect(200, 10, 100, 20), "Charges: " + charges);
     }
 
     //Literally the most satisfying function in this entire project.
@@ -246,5 +251,4 @@ public class PlayerScript : MonoBehaviour {
         }
         transform.position = vector;
     }
-
 }
