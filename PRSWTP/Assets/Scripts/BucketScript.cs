@@ -9,7 +9,7 @@ public class BucketScript : MonoBehaviour {
     {
         Rigidbody bucketRb = GetComponent<Rigidbody>();
         bucketRb.constraints = RigidbodyConstraints.None;
-        bucketRb.AddForce(-transform.right * 3);
+        bucketRb.AddForce(-transform.right * 4);
     }
 
     void OnCollisionEnter(Collision col)
