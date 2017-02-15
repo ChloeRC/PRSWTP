@@ -9,8 +9,8 @@ public class SwordScript : MonoBehaviour {
 
     private Transform ts;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         ts = GetComponent<Transform>();
 
         if (drawn) { swordUp(false); }
@@ -19,7 +19,7 @@ public class SwordScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    
+
 	}
 
 	public void toggleSword(bool direction)
@@ -53,21 +53,26 @@ public class SwordScript : MonoBehaviour {
 			ts.localPosition = new Vector3 (0, 0.15f, 0.55f);
 			Quaternion newRot = Quaternion.Euler (78, 90, -90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
-			ts.localScale = new Vector3 (0.09f, 0.1f, 0.08f);
+            ts.localScale = new Vector3 (0.09f, 0.1f, 0.08f);
 		} else {
 			ts.localPosition = new Vector3 (0, 0.15f, -0.55f);
 			Quaternion newRot = Quaternion.Euler (78, 90, -90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
-			ts.localScale = new Vector3 (0.09f, 0.1f, 0.08f);
-		}
+            ts.localScale = new Vector3(0.04f, 0.1f, 0.08f);
+        }
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Enemy" && drawn)
         {
             Debug.Log("Stab");
             col.gameObject.GetComponent<EnemyAI>().kill();
+        } else if (col.gameObject.tag == "Enemy" && !drawn)
+        {
+            //so the enemy still inflicts damage if your sword isn't drawn
+            gameObject.GetComponentInParent<PlayerScript>().health--;
         }
+
     }
 }
