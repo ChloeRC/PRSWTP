@@ -5,11 +5,13 @@ public class BucketScript : MonoBehaviour {
 
     public GameObject charge;
 
+    private bool newCharge = true;
+
     public void activate()
     {
         Rigidbody bucketRb = GetComponent<Rigidbody>();
         bucketRb.constraints = RigidbodyConstraints.None;
-        bucketRb.AddForce(-transform.right * 4);
+        bucketRb.AddForce(-transform.right * 8);
     }
 
     void OnCollisionEnter(Collision col)
@@ -20,7 +22,11 @@ public class BucketScript : MonoBehaviour {
             Vector3 thisPos = this.gameObject.GetComponent<Transform>().position;
             Vector3 pos = new Vector3(thisPos.x + 3.23f, thisPos.y - 1, thisPos.z);
             Quaternion rot = Quaternion.Euler(0, 0, 0);
-            Instantiate(charge, pos, rot);
+            if (newCharge)
+            {
+                Instantiate(charge, pos, rot);
+                newCharge = false;
+            }
         }
     }
 

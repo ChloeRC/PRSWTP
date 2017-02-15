@@ -11,11 +11,12 @@ public class PlayerScript : MonoBehaviour {
     public LayerMask groundLayers;
     public GameObject bullet;
     public GameObject bucket;
+    public GameObject player;
 
     //False is right, true is left
     private bool direction;
-    private static readonly bool DIR_RIGHT = false;
-    private static readonly bool DIR_LEFT = true;
+    public static readonly bool DIR_RIGHT = false;
+    public static readonly bool DIR_LEFT = true;
 
     public int health;
 
@@ -66,7 +67,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 //Debug.Log("D key pressed.");
                 transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
-                //transform.rotation = Quaternion.Euler(0, 0, 0);
+                player.GetComponent<PlayerRotate>().Rotate(DIR_RIGHT);
                 direction = DIR_RIGHT;
             }
             //If you push the button which is mapped to LEFT (a), you go left
@@ -74,7 +75,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 //Debug.Log("A key pressed.");
                 transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
-                //transform.rotation = Quaternion.Euler(0, 180, 0);
+                player.GetComponent<PlayerRotate>().Rotate(DIR_LEFT);
                 direction = DIR_LEFT;
             }
 
