@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour {
     bool newGame = false;
     public GameObject NewGame;
     public GameObject LoadGame;
-    public
+    //public
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour {
 	}
     void GameSelection()
     {
-        if (Ke)
+        //if (Ke)
     }
 
     }

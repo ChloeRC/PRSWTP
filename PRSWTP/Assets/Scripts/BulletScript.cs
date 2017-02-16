@@ -44,4 +44,10 @@ public class BulletScript : MonoBehaviour {
     {
         Destroy(this.gameObject);
     }
+
+	public int getTime() 
+	{
+		int time2 = (int)(time * 10);
+		return time2;
+	}
 }
