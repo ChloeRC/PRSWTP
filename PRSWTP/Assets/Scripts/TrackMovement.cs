@@ -34,7 +34,7 @@ public class TrackMovement : MonoBehaviour {
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
         int charge = PlayerScript.getCharges();
         //GameObject player2;
-        if (charge == full)
+        if (charge == full) //go back in time
         {
             Instantiate(player);
             Debug.Log(player);
