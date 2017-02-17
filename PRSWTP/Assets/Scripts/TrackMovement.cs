@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class TrackMovement : MonoBehaviour {
 
     private Hashtable locations;
     public int framerate;
-    public int full;
+    public string full;
+    private ArrayList chargesPerLevel = new ArrayList();
+    private int currLevel = 0;
     private int test = 0;
     private int key = 0;
     private bool player2Exists = false;
@@ -21,6 +24,7 @@ public class TrackMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         locations = new Hashtable();
+        parseFull();
 	}
 	
 	// Update is called once per frame
@@ -34,7 +38,7 @@ public class TrackMovement : MonoBehaviour {
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
         int charge = PlayerScript.getCharges();
         //GameObject player2;
-        if (charge == full) //go back in time
+        if (charge == (int)chargesPerLevel[currLevel]) //go back in time
         {
             Instantiate(player);
             Debug.Log(player);
@@ -83,6 +87,16 @@ public class TrackMovement : MonoBehaviour {
                 //Debug.Log("Count when removing: " + locations.Count);
             }
             key = 0;
+        }
+    }
+
+    void parseFull()
+    {
+        string[] chargesPerLevelStr = full.Split(' ');
+
+        foreach (string num in chargesPerLevelStr)
+        {
+            chargesPerLevel.Add(Convert.ToInt32(num));
         }
     }
 }
