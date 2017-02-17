@@ -5,7 +5,7 @@ using UnityEngine;
 //Used to indicate when you've gone back in time
 //Will draw a full-screen rectangle which will fade as time goes by
 public class TimeTravelIndicator : MonoBehaviour {
-
+    int i;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,10 +16,17 @@ public class TimeTravelIndicator : MonoBehaviour {
 		
 	}
 
+    void getI(int i)
+    {
+        this.i = i;
+    }
+
     void OnGUI()
     {
 
-        //while (int i != 0)
+        while (int i > 0) {
+
+        }
 
     /* Tinkering
         Color colPreviousGUIColor = GUI.color;
