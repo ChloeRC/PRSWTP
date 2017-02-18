@@ -24,9 +24,9 @@ public class TimeTravelIndicator : MonoBehaviour {
     void OnGUI()
     {
 
-        while (int i > 0) {
+//        while (int i > 0) {
 
-        }
+//        }
 
     /* Tinkering
         Color colPreviousGUIColor = GUI.color;
