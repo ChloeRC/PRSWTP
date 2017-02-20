@@ -231,6 +231,7 @@ public class PlayerScript : MonoBehaviour {
     public void resetCharges()
     {
         charges = 0;
+		gameObject.GetComponent<TimeTravelIndicator> ().setFlash();	//move somewhere else... sketchy
     }
 
     public void toggleControllable()
@@ -246,6 +247,7 @@ public class PlayerScript : MonoBehaviour {
     public void setPosition(Vector3 vector)
     {
         var marker = TrackMovement.MARKER;
+		//this is always true?
         if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
         {
             this.kill();
