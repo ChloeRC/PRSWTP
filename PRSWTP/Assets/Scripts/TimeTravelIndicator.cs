@@ -32,7 +32,10 @@ public class TimeTravelIndicator : MonoBehaviour {
 	public void setFlash ()
 	{
 		flash = true;
-		myCG.alpha = 1;
+        Debug.Log("blah blah");
+        myCG.alpha = 1;
+        Debug.Log("la la");
+        
 	}
 		
 }
