@@ -36,6 +36,7 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string SUICIDE = "suicide";
     private static readonly string SHOOT = "shoot";
     private static readonly string SWORD = "sword";
+    private static readonly string FILL_CHARGES = "fill charges";
 
     private bool isGrounded = false;
 
@@ -174,10 +175,12 @@ public class PlayerScript : MonoBehaviour {
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
 
-        }
+            //FILL_CHARGES (t)
+            if (Input.GetButton(FILL_CHARGES) == true && charges > 0)
+            {
+                charges = GetComponent<TrackMovement>().currLevelCharges();
+            }
 
-        if (controllable)
-        {
             //Apply gravity relative to the player's mass
             rb.AddForce(Vector2.down * gravity * rb.mass);
         }
@@ -231,7 +234,7 @@ public class PlayerScript : MonoBehaviour {
     public void resetCharges()
     {
         charges = 0;
-		gameObject.GetComponent<TimeTravelIndicator> ().setFlash();	//move somewhere else... sketchy
+		//gameObject.GetComponent<TimeTravelIndicator> ().setFlash();	//move somewhere else... sketchy
     }
 
     public void toggleControllable()

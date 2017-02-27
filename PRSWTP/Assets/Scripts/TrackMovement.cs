@@ -38,13 +38,14 @@ public class TrackMovement : MonoBehaviour {
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
         int charge = PlayerScript.getCharges();
         //GameObject player2;
-        if (charge == (int)chargesPerLevel[currLevel]) //go back in time
+        if (charge == currLevelCharges()) //go back in time
         {
             Instantiate(player);
             Debug.Log(player);
             PlayerScript.resetCharges();
             player.GetComponent<PlayerScript>().toggleControllable();
             player.transform.position = new Vector3(0, 3, 0);
+            player.transform.rotation = Quaternion.Euler(0, 0, 0);
             //gets the children that are attached to the player copy and destroys them
             //for (var i = 0; i < transform.childCount; i++)
                 //Destroy(transform.GetChild(i).gameObject);
@@ -98,5 +99,14 @@ public class TrackMovement : MonoBehaviour {
         {
             chargesPerLevel.Add(Convert.ToInt32(num));
         }
+    }
+
+    /**
+     * Returns the number of charges for the current level.
+     * @return charges The number of charges in the given level.
+     */
+    public int currLevelCharges()
+    {
+        return (int)chargesPerLevel[currLevel];
     }
 }
