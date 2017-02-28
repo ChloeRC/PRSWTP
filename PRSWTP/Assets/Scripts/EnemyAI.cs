@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
 
-    public int health;
+    public int health = 3;
 
     private Rigidbody rb;
     private Transform ts;
@@ -14,6 +14,8 @@ public class EnemyAI : MonoBehaviour {
 
     public float rightEdge;
     public float leftEdge;
+
+    public Camera cam;
 
     // Use this for initialization
     void Start () {
@@ -56,7 +58,7 @@ public class EnemyAI : MonoBehaviour {
     {
         if (col.gameObject.tag == "Bullet")
         {
-            health--;
+            healthMinusOne();
         }
     }
 
@@ -64,5 +66,16 @@ public class EnemyAI : MonoBehaviour {
     public void kill()
     {
         Destroy(this.gameObject);
+    }
+
+    public void healthMinusOne()
+    {
+        health--;
+    }
+
+    private void onGUI()
+    {
+        Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
+        GUI.Label(new Rect(screenPos.x, screenPos.y, 100, 20), "Health: " + health);
     }
 }
