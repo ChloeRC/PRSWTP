@@ -4,6 +4,8 @@ using UnityEngine;
 
 //Used to indicate when you've gone back in time
 //Will draw a full-screen rectangle which will fade as time goes by
+//Unity UI fade
+
 public class TimeTravelIndicator : MonoBehaviour {
 
     public CanvasGroup myCG;
@@ -19,6 +21,7 @@ public class TimeTravelIndicator : MonoBehaviour {
 
         if (flash)
         {
+            Debug.Log(myCG.alpha);
             myCG.alpha = myCG.alpha - Time.deltaTime;
             if (myCG.alpha <= 0)
             {
@@ -32,9 +35,7 @@ public class TimeTravelIndicator : MonoBehaviour {
     public void setFlash()
     {
         flash = true;
-        Debug.Log("blah blah");
         myCG.alpha = 1;
-        Debug.Log("la la");
 
     }
 
