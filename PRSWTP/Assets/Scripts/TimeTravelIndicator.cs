@@ -6,36 +6,41 @@ using UnityEngine;
 //Will draw a full-screen rectangle which will fade as time goes by
 public class TimeTravelIndicator : MonoBehaviour {
 
-	public CanvasGroup myCG;
-	private bool flash = false;
+    public CanvasGroup myCG;
+    private bool flash = false;
 
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		if (flash)
-		{
-			myCG.alpha = myCG.alpha - Time.deltaTime;
-			if (myCG.alpha <= 0)
-			{
-				//This stuff is not running
-				myCG.alpha = 1;
-				flash = false;
-				Debug.Log ("Flash: " + flash);
-			}
-		}
-	}
+    void Start() {
 
-	public void setFlash ()
-	{
-		flash = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (flash)
+        {
+            myCG.alpha = myCG.alpha - Time.deltaTime;
+            if (myCG.alpha <= 0)
+            {
+                myCG.alpha -= 0;
+                flash = false;
+                Debug.Log("Flash 2: " + flash);
+            }
+        }
+    }
+
+    public void setFlash()
+    {
+        flash = true;
         Debug.Log("blah blah");
         myCG.alpha = 1;
         Debug.Log("la la");
-        
-	}
+
+    }
+
+    public void test()
+    {
+        Debug.Log("ok");
+    }
 		
 }
