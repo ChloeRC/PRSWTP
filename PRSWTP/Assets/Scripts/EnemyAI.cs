@@ -73,9 +73,9 @@ public class EnemyAI : MonoBehaviour {
         health--;
     }
 
-    private void onGUI()
+    void OnGUI()
     {
         Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
-        GUI.Label(new Rect(screenPos.x, screenPos.y, 100, 20), "Health: " + health);
+        GUI.Label(new Rect(screenPos.x - 50, 360 - (screenPos.y), 100, 20), "Health: " + health);
     }
 }
