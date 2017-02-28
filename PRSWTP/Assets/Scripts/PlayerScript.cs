@@ -234,7 +234,8 @@ public class PlayerScript : MonoBehaviour {
     public void resetCharges()
     {
         charges = 0;
-		//gameObject.GetComponent<TimeTravelIndicator> ().setFlash();	//move somewhere else... sketchy
+        //gameObject.GetComponent<TimeTravelIndicator>().setFlash();	//move somewhere else... sketchy
+        //gameObject.GetComponent<TimeTravelIndicator>().test();
     }
 
     public void toggleControllable()
