@@ -108,6 +108,7 @@ public class TrackMovement : MonoBehaviour {
      */
     public int currLevelCharges()
     {
+        Debug.Log("currLevelCharges");
         return (int)chargesPerLevel[currLevel];
     }
 }
