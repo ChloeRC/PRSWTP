@@ -100,6 +100,8 @@ public class TrackMovement : MonoBehaviour {
         {
             chargesPerLevel.Add(Convert.ToInt32(num));
         }
+
+        Debug.Log("Ch: " + chargesPerLevel[0]);
     }
 
     /**
@@ -108,7 +110,6 @@ public class TrackMovement : MonoBehaviour {
      */
     public int currLevelCharges()
     {
-        Debug.Log("currLevelCharges");
         return (int)chargesPerLevel[currLevel];
     }
 }
