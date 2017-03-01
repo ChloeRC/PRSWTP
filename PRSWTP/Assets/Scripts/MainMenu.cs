@@ -11,20 +11,22 @@ public class MainMenu : MonoBehaviour
     public GameObject LoadGame;
 
     void Start()
-    {
-        //  Application.LoadLevel("IntroScene");	
+    {	
     }
 
     // Update is called once per frame
     //Starts the first level after new game starts
     void Update()
     {
+    }
+
+    void StartGame()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene("FirstLevel");
-
-          //  Application.LoadLevel("FirstLevel");
+            SceneManager.LoadScene("FirstLevel"); // LoadSceneMode.Additive);        
         }
+
     }
 }
 
