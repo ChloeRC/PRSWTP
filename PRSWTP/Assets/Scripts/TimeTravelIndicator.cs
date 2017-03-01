@@ -10,12 +10,14 @@ public class TimeTravelIndicator : MonoBehaviour {
 
     public CanvasGroup myCG;
     private bool flash = false;
+    private Texture texture;
 
     void Start() {
 
     }
 
     // Update is called once per frame
+    // For fading??
     void Update()
     {
 
@@ -43,5 +45,15 @@ public class TimeTravelIndicator : MonoBehaviour {
     {
         Debug.Log("ok");
     }
+
+    //ugly - temporary
+    void onGui()
+    {
+       if (flash) {
+            //GUI.DrawTexture(Rect(0, 0, Screen.width, Screen.height), texture, ScaleMode.ScaleToFit, false);
+            flash = false;
+        }
+    }
+
 		
 }
