@@ -23,7 +23,9 @@ public class EnemyAI : MonoBehaviour {
         ts = GetComponent<Transform>();
         gameTicks = 0.0f;
         rb.freezeRotation = true;
-	}
+
+        transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
+    }
 	
     void Update () {
         gameTicks += Time.deltaTime;
@@ -71,11 +73,12 @@ public class EnemyAI : MonoBehaviour {
     public void healthMinusOne()
     {
         health--;
+        transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
     }
 
-    void OnGUI()
+    /*void OnGUI()
     {
         Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
         GUI.Label(new Rect(screenPos.x - 50, 360 - (screenPos.y), 100, 20), "Health: " + health);
-    }
+    }*/
 }
