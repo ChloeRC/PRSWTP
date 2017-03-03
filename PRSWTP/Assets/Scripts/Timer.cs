@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour {
     public GameObject player;
+    public GameObject timer;
+    private 
 
 	// Use this for initialization
 	void Start () {
