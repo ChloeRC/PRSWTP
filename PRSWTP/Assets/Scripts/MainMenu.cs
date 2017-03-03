@@ -7,12 +7,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-    public GameObject NewGame;
-    public GameObject LoadGame;
+    public Scene FirstLevel;
 
     void Start()
     {
-        //  Application.LoadLevel("IntroScene");	
     }
 
     // Update is called once per frame
@@ -21,10 +19,19 @@ public class MainMenu : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene("FirstLevel");
-
-          //  Application.LoadLevel("FirstLevel");
+            SceneManager.LoadScene("FirstLevel");         
         }
     }
 }
+ /*
+    void StartGame()
+    {
+       /* if (Input.GetMouseButtonDown(0))
+        {
+            SceneManager.LoadScene("FirstLevel"); // LoadSceneMode.Additive);        
+            Debug.Log("First")
+        }
 
+    }
+}
+*/

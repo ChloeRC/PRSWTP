@@ -216,14 +216,6 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
-    //Prints out player stuff to screen - might want to make nicer if there's extra time
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 100, 20), "Health: " + health);
-        GUI.Label(new Rect(110, 10, 100, 20), "Charges: " + charges);
-		//GUI.Label (new Rect (220, 10, 100, 20), "Bullet reload: " + gameObject.GetComponent<BulletScript>().getTime()); //ehhh working on it
-    }
-
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
