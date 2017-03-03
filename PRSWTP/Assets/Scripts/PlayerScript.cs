@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour {
     public static readonly bool DIR_LEFT = true;
 
     public int health;
-
+    public int timer;
     //If hasShot is 0, you can shoot. Otherwise, you can't.
     private float hasShot;
     public float shotCooldown;
@@ -52,6 +52,7 @@ public class PlayerScript : MonoBehaviour {
         direction = DIR_RIGHT;
         charges = 0;
         health = 3;
+        timer = 200;
         controllable = true;
 
         hasShot = 0;
