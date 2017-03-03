@@ -13,8 +13,9 @@ public class ChargeBarDisplay : MonoBehaviour {
     void Start()
     {
         currCharges = 0;
-        fullCharges = player.GetComponent<TrackMovement>().currLevelCharges();
-        Debug.Log(fullCharges);
+
+        TrackMovement tm = player.GetComponent<TrackMovement>();
+        fullCharges = tm.currLevelCharges();
 
         UpdateCharges();
     }
@@ -27,7 +28,6 @@ public class ChargeBarDisplay : MonoBehaviour {
 
     public void UpdateCharges()
     {
-        Debug.Log("update");
         currCharges = player.GetComponent<PlayerScript>().getCharges();
         text.GetComponent<TextMesh>().text = "Charges: " + currCharges + " / " + fullCharges;
     }

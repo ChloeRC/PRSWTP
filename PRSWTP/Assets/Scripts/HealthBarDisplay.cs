@@ -14,7 +14,11 @@ public class HealthBarDisplay : MonoBehaviour {
 	void Start () {
         fullHealth = player.GetComponent<PlayerScript>().health;
         currHealth = fullHealth;
-        fullCharges = player.GetComponent<TrackMovement>().currLevelCharges();
+
+        TrackMovement tm = player.GetComponent<TrackMovement>();
+        fullCharges = tm.currLevelCharges();
+
+        Debug.Log(fullCharges);
 
         UpdateHealth();
     }

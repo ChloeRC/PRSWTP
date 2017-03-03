@@ -9,8 +9,8 @@ public class TrackMovement : MonoBehaviour {
     private Hashtable locations;
     public int framerate;
     public string full;
-    private ArrayList chargesPerLevel = new ArrayList();
-    private int currLevel = 0;
+    public List<Int32> chargesPerLevel = new List<Int32>();
+    public int currLevel = 0;
     private int test = 0;
     private int key = 0;
     private bool player2Exists = false;
@@ -108,8 +108,7 @@ public class TrackMovement : MonoBehaviour {
      */
     public int currLevelCharges()
     {
-        Debug.Log("Ch: " + (int)chargesPerLevel[currLevel]);
-        Debug.Log("Level: " + currLevel);
-        return (int)chargesPerLevel[currLevel];
+        parseFull();
+        return chargesPerLevel[currLevel];
     }
 }
