@@ -6,15 +6,17 @@ public class HealthBarDisplay : MonoBehaviour {
 
     public GameObject text;
     public GameObject player;
-    private int health;
-    private int full;
+    private int currHealth;
+    private int fullHealth;
+    private int fullCharges;
     
 	// Use this for initialization
 	void Start () {
-        health = player.GetComponent<PlayerScript>().health;
-        full = player.GetComponent<TrackMovement>().currLevelCharges();
+        fullHealth = player.GetComponent<PlayerScript>().health;
+        currHealth = fullHealth;
+        fullCharges = player.GetComponent<TrackMovement>().currLevelCharges();
 
-        text.GetComponent<TextMesh>().text = "Health: " + health + " / " + full;
+        UpdateHealth();
     }
 	
 	// Update is called once per frame
@@ -24,6 +26,7 @@ public class HealthBarDisplay : MonoBehaviour {
 
     public void UpdateHealth()
     {
-        text.GetComponent<TextMesh>().text = "Health: " + health + " / " + full;
+        currHealth = player.GetComponent<PlayerScript>().health;
+        text.GetComponent<TextMesh>().text = "Health: " + currHealth + " / " + fullHealth;
     }
 }
