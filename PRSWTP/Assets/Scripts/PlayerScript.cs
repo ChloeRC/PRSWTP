@@ -12,6 +12,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject bullet;
     public GameObject bucket;
     public GameObject player;
+    public GameObject chargeBarDisplay;
 
     //False is right, true is left
     private bool direction;
@@ -198,6 +199,7 @@ public class PlayerScript : MonoBehaviour {
         {
             Destroy(col.gameObject);
             charges++;
+            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateCharges();
         }
 
         /*if (col.gameObject.tag == "Bucket Trigger")
@@ -234,6 +236,7 @@ public class PlayerScript : MonoBehaviour {
     public void resetCharges()
     {
         charges = 0;
+        chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateCharges();
         //gameObject.GetComponent<TimeTravelIndicator>().setFlash();	//move somewhere else... sketchy
         //gameObject.GetComponent<TimeTravelIndicator>().test();
     }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour {
 
-    public GameObject healthDisplayer;
-
 	// Use this for initialization
 	void Start () {
 		
@@ -18,15 +16,6 @@ public class PlayerCollision : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-		if (col.gameObject.tag == "Enemy")
-        {
-            gameObject.GetComponent<PlayerScript>().health--;
-            healthDisplayer.GetComponent<HealthBarDisplay>().UpdateHealth();
-			Debug.Log ("ouch");
-			//for some reason, this is not the function that modifies player health
-			//oh it's just because it's colliding with the sword
-        }
-
         bool controllable = gameObject.GetComponent<PlayerScript>().getControllable();
 
         if (controllable && col.gameObject.tag == "Player")
