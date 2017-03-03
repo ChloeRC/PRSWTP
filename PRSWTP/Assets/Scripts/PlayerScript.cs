@@ -169,7 +169,7 @@ public class PlayerScript : MonoBehaviour {
             RaycastHit hitInfo;
             isGrounded = Physics.SphereCast(rb.position, 0.75f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
             //ORIGINAL: isGrounded = Physics.SphereCast(rb.position, 0.2f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
-            Debug.Log("isGrounded: " + isGrounded);
+            //Debug.Log("isGrounded: " + isGrounded);
 
             //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
             if (Input.GetButtonDown(JUMP) == true && isGrounded)

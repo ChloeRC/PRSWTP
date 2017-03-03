@@ -13,7 +13,7 @@ public class TimeTravelIndicator : MonoBehaviour {
     private Texture texture;
 
     void Start() {
-
+        texture = (Texture2D)Resources.Load("WhiteTexture.png");
     }
 
     // Update is called once per frame
