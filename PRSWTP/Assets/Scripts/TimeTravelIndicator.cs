@@ -50,7 +50,7 @@ public class TimeTravelIndicator : MonoBehaviour {
     void onGui()
     {
        if (flash) {
-            GUI.DrawTexture(Rect(0, 0, Screen.width, Screen.height), texture, ScaleMode.ScaleToFit);
+            //GUI.DrawTexture(Rect(0, 0, Screen.width, Screen.height), texture, ScaleMode.ScaleToFit);
             flash = false;
         }
     }
