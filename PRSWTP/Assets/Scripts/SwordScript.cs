@@ -68,8 +68,7 @@ public class SwordScript : MonoBehaviour {
         {
             Debug.Log("Stab");
             col.gameObject.GetComponent<EnemyAI>().kill();
-        } else if (col.gameObject.tag == "Enemy" && !drawn)
-        {
+        } else if (col.gameObject.tag == "Enemy" && !drawn) {
             //so the enemy still inflicts damage if your sword isn't drawn
 			//also the only method where health is being subtracted
             gameObject.GetComponentInParent<PlayerScript>().health--;

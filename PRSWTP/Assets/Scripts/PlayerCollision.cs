@@ -31,6 +31,7 @@ public class PlayerCollision : MonoBehaviour {
 
         if (controllable && col.gameObject.tag == "Player")
         {
+            Debug.Log("boop");
             kill();
         }
     }
