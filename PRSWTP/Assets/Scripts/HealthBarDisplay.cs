@@ -8,9 +8,9 @@ public class HealthBarDisplay : MonoBehaviour {
     public GameObject player;
     private int currHealth;
     private int fullHealth;
-    
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
         fullHealth = player.GetComponent<PlayerScript>().health;
         currHealth = fullHealth;
 
