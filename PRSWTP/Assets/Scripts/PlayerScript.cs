@@ -174,7 +174,7 @@ public class PlayerScript : MonoBehaviour {
             //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
             if (Input.GetButtonDown(JUMP) == true && isGrounded)
             {
-                Debug.Log("W key pressed.");
+                //Debug.Log("W key pressed.");
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
 
