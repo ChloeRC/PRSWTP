@@ -12,6 +12,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject bullet;
     public GameObject bucket;
     public GameObject player;
+    public GameObject chargeBarDisplay;
 
     //False is right, true is left
     private bool direction;
@@ -19,7 +20,7 @@ public class PlayerScript : MonoBehaviour {
     public static readonly bool DIR_LEFT = true;
 
     public int health;
-
+    public int timer;
     //If hasShot is 0, you can shoot. Otherwise, you can't.
     private float hasShot;
     public float shotCooldown;
@@ -36,6 +37,7 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string SUICIDE = "suicide";
     private static readonly string SHOOT = "shoot";
     private static readonly string SWORD = "sword";
+    private static readonly string FILL_CHARGES = "fill charges";
 
     private bool isGrounded = false;
 
@@ -50,6 +52,7 @@ public class PlayerScript : MonoBehaviour {
         direction = DIR_RIGHT;
         charges = 0;
         health = 3;
+        timer = 200;
         controllable = true;
 
         hasShot = 0;
@@ -165,7 +168,9 @@ public class PlayerScript : MonoBehaviour {
 
             //Tell if there is anything in a sphere shape below the player
             RaycastHit hitInfo;
-            isGrounded = Physics.SphereCast(rb.position, 0.2f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
+            isGrounded = Physics.SphereCast(rb.position, 0.75f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
+            //ORIGINAL: isGrounded = Physics.SphereCast(rb.position, 0.2f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
+            //Debug.Log("isGrounded: " + isGrounded);
 
             //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
             if (Input.GetButtonDown(JUMP) == true && isGrounded)
@@ -174,10 +179,12 @@ public class PlayerScript : MonoBehaviour {
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
 
-        }
+            //FILL_CHARGES (t)
+            if (Input.GetButton(FILL_CHARGES) == true && charges > 0)
+            {
+                charges = GetComponent<TrackMovement>().currLevelCharges();
+            }
 
-        if (controllable)
-        {
             //Apply gravity relative to the player's mass
             rb.AddForce(Vector2.down * gravity * rb.mass);
         }
@@ -195,6 +202,7 @@ public class PlayerScript : MonoBehaviour {
         {
             Destroy(col.gameObject);
             charges++;
+            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateCharges();
         }
 
         /*if (col.gameObject.tag == "Bucket Trigger")
@@ -207,14 +215,6 @@ public class PlayerScript : MonoBehaviour {
             PortalScript portal = col.gameObject.GetComponent<PortalScript>();
             gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
-    }
-
-    //Prints out player stuff to screen - might want to make nicer if there's extra time
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 100, 20), "Health: " + health);
-        GUI.Label(new Rect(110, 10, 100, 20), "Charges: " + charges);
-		//GUI.Label (new Rect (220, 10, 100, 20), "Bullet reload: " + gameObject.GetComponent<BulletScript>().getTime()); //ehhh working on it
     }
 
     //Literally the most satisfying function in this entire project.
@@ -231,6 +231,12 @@ public class PlayerScript : MonoBehaviour {
     public void resetCharges()
     {
         charges = 0;
+<<<<<<< HEAD
+=======
+        chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateCharges();
+        //gameObject.GetComponent<TimeTravelIndicator>().setFlash();	//move somewhere else... sketchy
+        //gameObject.GetComponent<TimeTravelIndicator>().test();
+>>>>>>> 839b20ad4d4289d3260d06a9cc0662ad01541d79
     }
 
     public void toggleControllable()

@@ -9,6 +9,8 @@ public class SwordScript : MonoBehaviour {
 
     private Transform ts;
 
+    public GameObject healthDisplayer;
+
     // Use this for initialization
     void Start () {
         ts = GetComponent<Transform>();
@@ -68,13 +70,11 @@ public class SwordScript : MonoBehaviour {
         {
             Debug.Log("Stab");
             col.gameObject.GetComponent<EnemyAI>().kill();
-        } else if (col.gameObject.tag == "Enemy" && !drawn)
-        {
+        } else if (col.gameObject.tag == "Enemy" && !drawn) {
             //so the enemy still inflicts damage if your sword isn't drawn
 			//also the only method where health is being subtracted
             gameObject.GetComponentInParent<PlayerScript>().health--;
-			Debug.Log ("hello. my name is elder price. i would like to share with you this book of jesus christ.");
+            healthDisplayer.GetComponent<HealthBarDisplay>().UpdateHealth();
         }
-
     }
 }

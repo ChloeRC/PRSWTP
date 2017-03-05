@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
 
-    public int health;
+    public int health = 3;
 
     private Rigidbody rb;
     private Transform ts;
@@ -15,13 +15,17 @@ public class EnemyAI : MonoBehaviour {
     public float rightEdge;
     public float leftEdge;
 
+    public Camera cam;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
         ts = GetComponent<Transform>();
         gameTicks = 0.0f;
         rb.freezeRotation = true;
-	}
+
+        transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
+    }
 	
     void Update () {
         gameTicks += Time.deltaTime;
@@ -56,7 +60,7 @@ public class EnemyAI : MonoBehaviour {
     {
         if (col.gameObject.tag == "Bullet")
         {
-            health--;
+            healthMinusOne();
         }
     }
 
@@ -65,4 +69,16 @@ public class EnemyAI : MonoBehaviour {
     {
         Destroy(this.gameObject);
     }
+
+    public void healthMinusOne()
+    {
+        health--;
+        transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
+    }
+
+    /*void OnGUI()
+    {
+        Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
+        GUI.Label(new Rect(screenPos.x - 50, 360 - (screenPos.y), 100, 20), "Health: " + health);
+    }*/
 }
