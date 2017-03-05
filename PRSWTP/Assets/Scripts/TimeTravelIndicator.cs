@@ -16,9 +16,22 @@ public class TimeTravelIndicator : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (flash)
+		
+	}
+
+	public void setFlash () {
+		flash = true;
+		if (flash) {
+			GUI.color = Color.white;
+			GUI.Box(new Rect(0,0,Screen.width,Screen.height),"");
+			flash = false;
+		}
+	}
+		/* if (flash)
 		{
-			myCG.alpha = myCG.alpha - Time.deltaTime;
+			myCG.alpha = myCG.alpha - 1;
+			//flash = false;
+			Debug.Log ("ok");
 			if (myCG.alpha <= 0)
 			{
 				//This stuff is not running
@@ -32,7 +45,6 @@ public class TimeTravelIndicator : MonoBehaviour {
 	public void setFlash ()
 	{
 		flash = true;
-		myCG.alpha = 1;
-	}
+	} */
 		
 }
