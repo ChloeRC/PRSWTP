@@ -44,11 +44,8 @@ public class TrackMovement : MonoBehaviour {
             Instantiate(player);
             Debug.Log(player);
             PlayerScript.resetCharges();
-<<<<<<< HEAD
 			TimeTravelIndicator.setFlash();
-=======
             player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
->>>>>>> 839b20ad4d4289d3260d06a9cc0662ad01541d79
             player.GetComponent<PlayerScript>().toggleControllable();
             player.transform.position = new Vector3(0, 3, 0);
             player.transform.rotation = Quaternion.Euler(0, 0, 0);

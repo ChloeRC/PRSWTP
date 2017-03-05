@@ -231,12 +231,8 @@ public class PlayerScript : MonoBehaviour {
     public void resetCharges()
     {
         charges = 0;
-<<<<<<< HEAD
-=======
+
         chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateCharges();
-        //gameObject.GetComponent<TimeTravelIndicator>().setFlash();	//move somewhere else... sketchy
-        //gameObject.GetComponent<TimeTravelIndicator>().test();
->>>>>>> 839b20ad4d4289d3260d06a9cc0662ad01541d79
     }
 
     public void toggleControllable()

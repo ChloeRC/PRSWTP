@@ -43,7 +43,7 @@ public class TimeTravelIndicator : MonoBehaviour {
         }
 
     }
-
+/*
     public void setFlash()
     {
         flash = true;
@@ -63,17 +63,7 @@ public class TimeTravelIndicator : MonoBehaviour {
             flash = false;
         }
     }
-
-<<<<<<< HEAD
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
-	}
+*/		
 
 	public void setFlash () {
 		flash = true;
@@ -102,7 +92,5 @@ public class TimeTravelIndicator : MonoBehaviour {
 	{
 		flash = true;
 	} */
-=======
->>>>>>> 839b20ad4d4289d3260d06a9cc0662ad01541d79
-		
+
 }
