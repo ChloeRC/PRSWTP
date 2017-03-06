@@ -13,7 +13,10 @@ public class TimeTravelIndicator : MonoBehaviour {
     public Texture texture;
 
     void Start() {
-        texture = (Texture2D)Resources.Load("Assets/Textures/WhiteTexture.png");
+
+        string texture2 = "Assets/Resources/Textures/WhiteTexture.png";
+        Texture2D texture = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(texture2, typeof(Texture2D));
+        //texture = (Texture2D)Resources.Load("Assets/Textures/WhiteTexture");
     }
 
     // Update is called once per frame
@@ -23,7 +26,7 @@ public class TimeTravelIndicator : MonoBehaviour {
 
         if (flash)
         {
-
+            Graphics.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), texture);
             Debug.Log(myCG.alpha);
             myCG.alpha = myCG.alpha - Time.deltaTime;
             if (myCG.alpha <= 0)
@@ -37,58 +40,19 @@ public class TimeTravelIndicator : MonoBehaviour {
 
     void OnGUI()
     {
+        //broken :(
         if (flash)
         {
-            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), texture, ScaleMode.ScaleToFit);
+            //GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), texture, ScaleMode.ScaleToFit);
             //GUI.color = Color.white;
             //GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+
+            GUI.Label(new Rect(50, 50, 50, 50), "bam bam time travel");
         }
 
     }
-/*
-    public void setFlash()
-    {
-        flash = true;
-        myCG.alpha = 1;
-
-    }
-
-    public void test()
-    {
-        Debug.Log("ok");
-    }
-
-    //ugly - temporary
-    void onGui()
-    {
-       if (flash) {
-            flash = false;
-        }
-    }
-*/		
 
 	public void setFlash () {
-		flash = true;
-		
+		flash = true;		
 	}
-		/* if (flash)
-		{
-			myCG.alpha = myCG.alpha - 1;
-			//flash = false;
-			Debug.Log ("ok");
-			if (myCG.alpha <= 0)
-			{
-				//This stuff is not running
-				myCG.alpha = 1;
-				flash = false;
-				Debug.Log ("Flash: " + flash);
-			}
-		}
-	}
-
-	public void setFlash ()
-	{
-		flash = true;
-	} */
-
 }
