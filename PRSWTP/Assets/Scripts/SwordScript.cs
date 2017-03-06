@@ -74,7 +74,7 @@ public class SwordScript : MonoBehaviour {
             //so the enemy still inflicts damage if your sword isn't drawn
 			//also the only method where health is being subtracted
             gameObject.GetComponentInParent<PlayerScript>().health--;
-            healthDisplayer.GetComponent<HealthBarDisplay>().UpdateHealth();
+            healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
         }
     }
 }
