@@ -13,7 +13,7 @@ public class TimeTravelIndicator : MonoBehaviour {
     private Texture texture;
 
     void Start() {
-
+        texture = (Texture2D)Resources.Load("Assets/Textures/WhiteTexture.png");
     }
 
     // Update is called once per frame
@@ -23,6 +23,7 @@ public class TimeTravelIndicator : MonoBehaviour {
 
         if (flash)
         {
+
             Debug.Log(myCG.alpha);
             myCG.alpha = myCG.alpha - Time.deltaTime;
             if (myCG.alpha <= 0)
@@ -32,6 +33,15 @@ public class TimeTravelIndicator : MonoBehaviour {
                 Debug.Log("Flash 2: " + flash);
             }
         }
+    }
+
+    private void OnGUI()
+    {
+        if (flash)
+        {
+            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), texture, ScaleMode.ScaleToFit);
+        }
+
     }
 
     public void setFlash()
@@ -50,7 +60,6 @@ public class TimeTravelIndicator : MonoBehaviour {
     void onGui()
     {
        if (flash) {
-            //GUI.DrawTexture(Rect(0, 0, Screen.width, Screen.height), texture, ScaleMode.ScaleToFit, false);
             flash = false;
         }
     }

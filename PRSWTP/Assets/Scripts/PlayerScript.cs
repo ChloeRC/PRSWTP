@@ -168,12 +168,13 @@ public class PlayerScript : MonoBehaviour {
             //Tell if there is anything in a sphere shape below the player
             RaycastHit hitInfo;
             isGrounded = Physics.SphereCast(rb.position, 0.75f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
-            Debug.Log("isGrounded: " + isGrounded);
+            //ORIGINAL: isGrounded = Physics.SphereCast(rb.position, 0.2f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
+            //Debug.Log("isGrounded: " + isGrounded)
 
             //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
             if (Input.GetButtonDown(JUMP) == true && isGrounded)
             {
-                Debug.Log("W key pressed.");
+                //Debug.Log("W key pressed.");
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
 
