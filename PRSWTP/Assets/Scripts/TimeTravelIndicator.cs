@@ -10,7 +10,7 @@ public class TimeTravelIndicator : MonoBehaviour {
 
     public CanvasGroup myCG;
     private bool flash = false;
-    private Texture texture;
+    public Texture texture;
 
     void Start() {
         texture = (Texture2D)Resources.Load("Assets/Textures/WhiteTexture.png");
@@ -35,11 +35,13 @@ public class TimeTravelIndicator : MonoBehaviour {
         }
     }
 
-    private void OnGUI()
+    void OnGUI()
     {
         if (flash)
         {
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), texture, ScaleMode.ScaleToFit);
+            //GUI.color = Color.white;
+            //GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
         }
 
     }
@@ -67,11 +69,7 @@ public class TimeTravelIndicator : MonoBehaviour {
 
 	public void setFlash () {
 		flash = true;
-		if (flash) {
-			GUI.color = Color.white;
-			GUI.Box(new Rect(0,0,Screen.width,Screen.height),"");
-			flash = false;
-		}
+		
 	}
 		/* if (flash)
 		{
