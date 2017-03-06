@@ -43,7 +43,7 @@ public class TimeTravelIndicator : MonoBehaviour {
         }
 
     }
-
+/*
     public void setFlash()
     {
         flash = true;
@@ -63,6 +63,34 @@ public class TimeTravelIndicator : MonoBehaviour {
             flash = false;
         }
     }
+*/		
 
-		
+	public void setFlash () {
+		flash = true;
+		if (flash) {
+			GUI.color = Color.white;
+			GUI.Box(new Rect(0,0,Screen.width,Screen.height),"");
+			flash = false;
+		}
+	}
+		/* if (flash)
+		{
+			myCG.alpha = myCG.alpha - 1;
+			//flash = false;
+			Debug.Log ("ok");
+			if (myCG.alpha <= 0)
+			{
+				//This stuff is not running
+				myCG.alpha = 1;
+				flash = false;
+				Debug.Log ("Flash: " + flash);
+			}
+		}
+	}
+
+	public void setFlash ()
+	{
+		flash = true;
+	} */
+
 }

@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour {
     public static readonly bool DIR_LEFT = true;
 
     public int health;
-
+    public int timer;
     //If hasShot is 0, you can shoot. Otherwise, you can't.
     private float hasShot;
     public float shotCooldown;
@@ -52,6 +52,7 @@ public class PlayerScript : MonoBehaviour {
         direction = DIR_RIGHT;
         charges = 0;
         health = 3;
+        timer = 200;
         controllable = true;
 
         hasShot = 0;
@@ -230,9 +231,8 @@ public class PlayerScript : MonoBehaviour {
     public void resetCharges()
     {
         charges = 0;
+
         chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateCharges();
-        //gameObject.GetComponent<TimeTravelIndicator>().setFlash();	//move somewhere else... sketchy
-        //gameObject.GetComponent<TimeTravelIndicator>().test();
     }
 
     public void toggleControllable()

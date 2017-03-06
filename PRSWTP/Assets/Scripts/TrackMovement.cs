@@ -36,6 +36,7 @@ public class TrackMovement : MonoBehaviour {
         }
         test++;
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
+		TimeTravelIndicator TimeTravelIndicator = GetComponent <TimeTravelIndicator>();
         int charge = PlayerScript.getCharges();
         //GameObject player2;
         if (charge == currLevelCharges()) //go back in time
@@ -43,6 +44,7 @@ public class TrackMovement : MonoBehaviour {
             Instantiate(player);
             Debug.Log(player);
             PlayerScript.resetCharges();
+			TimeTravelIndicator.setFlash();
             player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
             player.GetComponent<PlayerScript>().toggleControllable();
             player.transform.position = new Vector3(0, 3, 0);
