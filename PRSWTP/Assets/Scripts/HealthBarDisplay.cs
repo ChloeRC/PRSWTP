@@ -2,29 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBarDisplay : MonoBehaviour {
+public class HealthBarDisplay : FillBar {
 
-    public GameObject text;
     public GameObject player;
-    private int currHealth;
-    private int fullHealth;
 
     // Use this for initialization
     void Start () {
-        fullHealth = player.GetComponent<PlayerScript>().health;
-        currHealth = fullHealth;
-
-        UpdateHealth();
+        base.originalText = "Health: ";
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public void UpdateHealth()
+    
+    new void UpdateValue()
     {
-        currHealth = player.GetComponent<PlayerScript>().health;
-        text.GetComponent<TextMesh>().text = "Health: " + currHealth + " / " + fullHealth;
+        curr = player.GetComponent<PlayerScript>().health;
     }
 }
