@@ -10,23 +10,18 @@ public class TimeTravelIndicator : MonoBehaviour {
 
     public CanvasGroup myCG;
     private bool flash = false;
-    public Texture texture;
+    private GUIStyle currentStyle = null;
 
     void Start() {
 
-        string texture2 = "Assets/Resources/Textures/WhiteTexture.png";
-        Texture2D texture = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(texture2, typeof(Texture2D));
-        //texture = (Texture2D)Resources.Load("Assets/Textures/WhiteTexture");
     }
 
     // Update is called once per frame
-    // For fading??
     void Update()
     {
-
+        //changes alpha (transparency) level
         if (flash)
         {
-            Graphics.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), texture);
             Debug.Log(myCG.alpha);
             myCG.alpha = myCG.alpha - Time.deltaTime;
             if (myCG.alpha <= 0)
@@ -40,19 +35,36 @@ public class TimeTravelIndicator : MonoBehaviour {
 
     void OnGUI()
     {
-        //broken :(
         if (flash)
         {
-            //GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), texture, ScaleMode.ScaleToFit);
-            //GUI.color = Color.white;
-            //GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-
-            GUI.Label(new Rect(50, 50, 50, 50), "bam bam time travel");
+            InitStyles();
+            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "", currentStyle);
         }
 
     }
 
 	public void setFlash () {
-		flash = true;		
+		flash = true;	
 	}
+
+    private void InitStyles()
+    {
+
+            currentStyle = new GUIStyle(GUI.skin.box);
+            currentStyle.normal.background = MakeTex(2, 2, new Color(1.0f, 1.0f, 1.0f, myCG.alpha));
+
+    }
+
+    private Texture2D MakeTex(int width, int height, Color col)
+    {
+        Color[] pix = new Color[width * height];
+        for (int i = 0; i < pix.Length; ++i)
+        {
+            pix[i] = col;
+        }
+        Texture2D result = new Texture2D(width, height);
+        result.SetPixels(pix);
+        result.Apply();
+        return result;
+    }
 }
