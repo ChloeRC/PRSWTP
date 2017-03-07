@@ -7,12 +7,15 @@ public class SwordScript : MonoBehaviour {
     //True for sword-out
     //False for sword-down
 
+    private float gameTicks;
     private Transform ts;
 
     public GameObject healthDisplayer;
 
     // Use this for initialization
     void Start () {
+        gameTicks = 0.0f;
+
         ts = GetComponent<Transform>();
 
         if (drawn) { swordUp(false); }
@@ -21,7 +24,16 @@ public class SwordScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        gameTicks += Time.deltaTime;
 
+        if (gameTicks < 1.0f)
+        {
+            Debug.Log("Don't kill me :(");
+        }
+        if (gameTicks > 1.0f)
+        {
+            Debug.Log("Look for the bare necessities // The simple bare necessities // Forget about your worries and your strife");
+        }
 	}
 
 	public void toggleSword(bool direction)
@@ -66,10 +78,11 @@ public class SwordScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Enemy" && drawn)
+        if (col.gameObject.tag == "Enemy" && drawn && gameTicks > 1.0f)
         {
             Debug.Log("Stab");
             col.gameObject.GetComponent<EnemyAI>().kill();
+            gameTicks = 0.0f;
         } else if (col.gameObject.tag == "Enemy" && !drawn) {
             //so the enemy still inflicts damage if your sword isn't drawn
 			//also the only method where health is being subtracted
