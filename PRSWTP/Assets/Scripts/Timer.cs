@@ -7,52 +7,68 @@ using UnityEngine;
 public class Timer : MonoBehaviour {
     public GameObject player;
     public GameObject timer;
-    private 
+    private double currentTime;
+    private double timeTravel;
 
 	// Use this for initialization
 	void Start () {
-		
+        currentTime = player.GetComponent<PlayerScript>().timer;
+        TrackMovement trackm = player.GetComponent<TrackMovement>();
+
+        Debug.Log(currentTime);
+        
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void FixedUpdate () {
+        PlayerScript PlayerScript = GetComponent<PlayerScript>();
+        TimeTravelIndicator TimeTravelIndicator = GetComponent<TimeTravelIndicator>();
+        TrackMovement TrackMovement = GetComponent<TrackMovement>();
+        if ()
+        currentTime +=
+               time += Time.deltaTime;
+        //despawn timer
+        if (time > .4)
+        {
+            timer.kill();
+        }
+
+    }
 }
-
-/*public class HealthBarDisplay : MonoBehaviour
+/*
+public class StartCountdown : MonoBehaviour
 {
+    int time, a;
+    float x;
+    public bool count;
+5.     public string timeDisp;
 
-    public GameObject text;
-    public GameObject player;
-    private int currHealth;
-    private int fullHealth;
-    private int fullCharges;
-
-    // Use this for initialization
     void Start()
     {
-        fullHealth = player.GetComponent<PlayerScript>().health;
-        currHealth = fullHealth;
-
-        TrackMovement tm = player.GetComponent<TrackMovement>();
-        fullCharges = tm.currLevelCharges();
-
-        Debug.Log(fullCharges);
-
-        UpdateHealth();
-    }
+        time = 3;
+        count = false;
+        10.     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
-    }
-
-    public void UpdateHealth()
-    {
-        currHealth = player.GetComponent<PlayerScript>().health;
-        text.GetComponent<TextMesh>().text = "Health: " + currHealth + " / " + fullHealth;
+        if (count)
+        {
+            15.timeDisp = time.ToString();
+            GameObject.Find("StartCounter").GetComponent<Text>().text = timeDisp;
+            x += Time.deltaTime;
+            a = (int)x;
+            print(a);
+            20.             switch (a)
+            {
+                case 0: GameObject.Find("StartCounter").GetComponent<Text>().text = "3"; break;
+                case 1: GameObject.Find("StartCounter").GetComponent<Text>().text = "2"; break;
+                case 2: GameObject.Find("StartCounter").GetComponent<Text>().text = "1"; break;
+                case 3:
+                    GameObject.Find("StartCounter").GetComponent<Text>().enabled = false;
+                    25.count = false; break;
+            }
+        }
     }
 }
 */

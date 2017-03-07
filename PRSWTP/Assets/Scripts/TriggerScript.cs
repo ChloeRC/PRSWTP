@@ -12,11 +12,9 @@ public class TriggerScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
-            //Debug.Log("augh");
             numberTimesTriggered++;
             if (type == "Bucket") //Buckets can be triggered twice
             {
-                Debug.Log("auuuugh");
                 toBeTriggered.GetComponent<BucketScript>().activate();
             }
             if (type == "Cone") //Cones can only be triggered once
