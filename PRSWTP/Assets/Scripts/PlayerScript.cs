@@ -202,7 +202,7 @@ public class PlayerScript : MonoBehaviour {
         {
             Destroy(col.gameObject);
             charges++;
-            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateCharges();
+            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
         }
 
         /*if (col.gameObject.tag == "Bucket Trigger")
@@ -232,7 +232,7 @@ public class PlayerScript : MonoBehaviour {
     {
         charges = 0;
 
-        chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateCharges();
+        chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
     }
 
     public void toggleControllable()

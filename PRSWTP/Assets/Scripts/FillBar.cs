@@ -5,7 +5,7 @@ using UnityEngine;
 public class FillBar : MonoBehaviour {
 
     public int curr;
-    int full;
+    public int full;
     float originalWidth;
 
     public GameObject text;
@@ -13,22 +13,22 @@ public class FillBar : MonoBehaviour {
     public string originalText;
 
     // Use this for initialization
-    void Start()
+    public void Start()
     {
-        full = UpdateValue();
-        curr = full;
+        originalWidth = gameObject.transform.localScale.x;
 
         UpdateText();
     }
 
-    public int UpdateValue()
-    {
-        return 0;
-    }
-
     public void UpdateText()
     {
-        full = UpdateValue();
+        Debug.Log("Updating health bar");
         text.GetComponent<TextMesh>().text = originalText + curr + " / " + full;
+
+        float currWidth = originalWidth * ((float)curr / (float)full);
+        Debug.Log(originalText + curr + " " + full + " " + (float)curr / (float)full);
+        gameObject.transform.localScale = new Vector3(currWidth, 0.27f, 0.1f);
+        float currPos = -(3.3f / 2f) + (.5f) * currWidth;
+        gameObject.transform.localPosition = new Vector3(currPos, 0, -0.1f);
     }
 }

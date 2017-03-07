@@ -7,12 +7,21 @@ public class HealthBarDisplay : FillBar {
     public GameObject player;
 
     // Use this for initialization
-    void Start () {
+    new void Start () {
+        base.full = UpdateValue();
+        base.curr = base.full;
         base.originalText = "Health: ";
+        base.Start();
     }
     
-    new void UpdateValue()
+    public int UpdateValue()
     {
-        curr = player.GetComponent<PlayerScript>().health;
+        return player.GetComponent<PlayerScript>().health;
+    }
+
+    public new void UpdateText()
+    {
+        base.curr = UpdateValue();
+        base.UpdateText();
     }
 }
