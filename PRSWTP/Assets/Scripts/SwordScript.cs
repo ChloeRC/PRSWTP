@@ -31,8 +31,12 @@ public class SwordScript : MonoBehaviour {
     {
         drawn = !drawn;
 
-        if (drawn) { swordUp(direction); }
-        else { swordDown(direction); }
+        if (drawn) { 
+			swordUp(direction); 
+		}
+        else { 
+			swordDown(direction); 
+		}
     }
 
 	public void swordUp (bool direction)
@@ -78,7 +82,6 @@ public class SwordScript : MonoBehaviour {
 			//also the only method where health is being subtracted
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
-			Debug.Log ("ouch!!!");
 			gameTicks = 0.0f;
         }
     }
