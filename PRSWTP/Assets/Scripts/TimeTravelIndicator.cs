@@ -22,13 +22,11 @@ public class TimeTravelIndicator : MonoBehaviour {
         //changes alpha (transparency) level
         if (flash)
         {
-            Debug.Log(myCG.alpha);
             myCG.alpha = myCG.alpha - Time.deltaTime;
             if (myCG.alpha <= 0)
             {
                 myCG.alpha -= 0;
                 flash = false;
-                Debug.Log("Flash 2: " + flash);
             }
         }
     }
