@@ -24,7 +24,8 @@ public class Timer : MonoBehaviour {
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
         TimeTravelIndicator TimeTravelIndicator = GetComponent<TimeTravelIndicator>();
         TrackMovement TrackMovement = GetComponent<TrackMovement>();
-        if ()
+ /*
+		if ()
         currentTime +=
                time += Time.deltaTime;
         //despawn timer
@@ -32,7 +33,7 @@ public class Timer : MonoBehaviour {
         {
             timer.kill();
         }
-
+*/
     }
 }
 /*

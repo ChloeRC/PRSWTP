@@ -25,15 +25,6 @@ public class SwordScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         gameTicks += Time.deltaTime;
-
-        if (gameTicks < 1.0f)
-        {
-            Debug.Log("Don't kill me :(");
-        }
-        if (gameTicks > 1.0f)
-        {
-            Debug.Log("Look for the bare necessities // The simple bare necessities // Forget about your worries and your strife");
-        }
 	}
 
 	public void toggleSword(bool direction)
@@ -78,16 +69,17 @@ public class SwordScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Enemy" && drawn && gameTicks > 1.0f)
+        if (col.gameObject.tag == "Enemy" && drawn)
         {
             Debug.Log("Stab");
             col.gameObject.GetComponent<EnemyAI>().kill();
-            gameTicks = 0.0f;
-        } else if (col.gameObject.tag == "Enemy" && !drawn) {
-            //so the enemy still inflicts damage if your sword isn't drawn
+		} else if (col.gameObject.tag == "Enemy" && !drawn  && gameTicks > 0.5f) {
+			//so the enemy still inflicts damage if your sword isn't drawn (this is bad code)
 			//also the only method where health is being subtracted
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
+			Debug.Log ("ouch!!!");
+			gameTicks = 0.0f;
         }
     }
 }
