@@ -7,7 +7,8 @@ public class SwordScript : MonoBehaviour {
     //True for sword-out
     //False for sword-down
 
-    private float gameTicks;
+    private float gameTicks;	//for the player collision
+	private float gameTicks2;	//for the sword collision
     private Transform ts;
 
     public GameObject healthDisplayer;
@@ -15,6 +16,7 @@ public class SwordScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gameTicks = 0.0f;
+		gameTicks2 = 0.0f;
 
         ts = GetComponent<Transform>();
 
@@ -25,6 +27,7 @@ public class SwordScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         gameTicks += Time.deltaTime;
+		gameTicks2 += Time.deltaTime;
 	}
 
 	public void toggleSword(bool direction)
@@ -73,10 +76,11 @@ public class SwordScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Enemy" && drawn)
+		if (col.gameObject.tag == "Enemy" && drawn && gameTicks2 > 0.5f)
         {
             Debug.Log("Stab");
             col.gameObject.GetComponent<EnemyAI>().kill();
+			gameTicks2 = 0.0f;
 		} else if (col.gameObject.tag == "Enemy" && !drawn  && gameTicks > 0.5f) {
 			//so the enemy still inflicts damage if your sword isn't drawn (this is bad code)
 			//also the only method where health is being subtracted
