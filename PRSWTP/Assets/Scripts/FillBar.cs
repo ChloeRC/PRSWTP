@@ -22,12 +22,12 @@ public class FillBar : MonoBehaviour {
 
     public void UpdateText()
     {
-        Debug.Log("Updating health bar");
         text.GetComponent<TextMesh>().text = originalText + curr + " / " + full;
 
         float currWidth = originalWidth * ((float)curr / (float)full);
-        Debug.Log(originalText + curr + " " + full + " " + (float)curr / (float)full);
+        //Debug.Log(originalText + curr + " " + full + " " + (float)curr / (float)full);
         gameObject.transform.localScale = new Vector3(currWidth, 0.27f, 0.1f);
+
         float currPos = -(3.3f / 2f) + (.5f) * currWidth;
         gameObject.transform.localPosition = new Vector3(currPos, 0, -0.1f);
     }

@@ -44,19 +44,16 @@ public class TrackMovement : MonoBehaviour {
             Instantiate(player);
             Debug.Log(player);
             PlayerScript.resetCharges();
+
 			TimeTravelIndicator.setFlash();
             player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
             player.GetComponent<PlayerScript>().toggleControllable();
+
             player.transform.position = new Vector3(0, 3, 0);
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
-            //gets the children that are attached to the player copy and destroys them
-            //for (var i = 0; i < transform.childCount; i++)
-                //Destroy(transform.GetChild(i).gameObject);
 
-            Transform camera = transform.Find("Camera");
-            Destroy(camera.gameObject);
-            Transform mapCamera = transform.Find("Map Camera");
-            Destroy(mapCamera.gameObject);
+            Transform destroyOnTimeTravel = transform.Find("DestroyOnTimeTravel");
+            Destroy(destroyOnTimeTravel.gameObject);
 
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>();
             resetter.reset = true;
