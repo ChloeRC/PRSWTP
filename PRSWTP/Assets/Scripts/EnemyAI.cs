@@ -62,6 +62,11 @@ public class EnemyAI : MonoBehaviour {
         {
             healthMinusOne();
         }
+
+		if (col.gameObject.tag == "Player") 
+		{
+			Debug.Log ("woof");
+		}
     }
 
 

@@ -23,7 +23,6 @@ public class PlayerCollision : MonoBehaviour {
             Debug.Log("boop");
             kill();
         }
-			
     }
 
     //Literally the most satisfying function in this entire project.
