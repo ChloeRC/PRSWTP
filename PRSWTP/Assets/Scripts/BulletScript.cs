@@ -18,12 +18,14 @@ public class BulletScript : MonoBehaviour {
         {
             kill();
         }
+        getTime();
     }
 
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Enemy")
         {
+            Debug.Log("It's the bare necessities // The simple bare necessities");
             kill();
         }
         if (col.gameObject.layer == 8) //ground layer
@@ -45,6 +47,7 @@ public class BulletScript : MonoBehaviour {
 	public int getTime() 
 	{
 		int time2 = (int)(time * 10);
-		return time2;
+        Debug.Log("Gun Time: " + (4 - time2));
+        return time2;
 	}
 }

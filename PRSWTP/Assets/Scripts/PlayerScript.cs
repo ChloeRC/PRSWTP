@@ -166,7 +166,7 @@ public class PlayerScript : MonoBehaviour {
                     force = Vector3.right;
                 }
                 Vector3 pos = new Vector3(transform.position.x + toAdd, transform.position.y, transform.position.z);
-                var newBullet = (GameObject) Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
+                var newBullet = Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
                 //FIX THIS
                 var rbBullet = newBullet.GetComponent<Rigidbody>();
                 rbBullet.velocity = newBullet.GetComponent<BulletScript>().speed * force;
@@ -204,11 +204,10 @@ public class PlayerScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
+        //Under 0.5 for gameTicks2 = player is temporarily invincible
         if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5)
         {
-            Debug.Log("Do you hear the people sing // Singing the song of angry men????");
             gameObject.GetComponentInParent<PlayerScript>().health--;
-            Debug.Log("Health: " + health);
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
             gameTicks2 = 0.0f;
         }

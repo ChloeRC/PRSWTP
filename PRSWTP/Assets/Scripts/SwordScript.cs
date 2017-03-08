@@ -7,14 +7,12 @@ public class SwordScript : MonoBehaviour {
     //True for sword-out
     //False for sword-down
 
-    private float gameTicks;	//for the player collision
     private Transform ts;
 
     public GameObject healthDisplayer;
 
     // Use this for initialization
     void Start () {
-        gameTicks = 0.0f;
 
         ts = GetComponent<Transform>();
 
@@ -24,7 +22,7 @@ public class SwordScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        gameTicks += Time.deltaTime;
+
 	}
 
 	public void toggleSword(bool direction)
@@ -74,13 +72,12 @@ public class SwordScript : MonoBehaviour {
     //this actually controls all the close-up player/enemy collisions because haha
     void OnTriggerEnter(Collider col)
     {
-		if (col.gameObject.tag == "Enemy" && drawn && gameTicks > 0.5f)
+		if (col.gameObject.tag == "Enemy" && drawn)
         {
-            Debug.Log("Stab");
             col.gameObject.GetComponent<EnemyAI>().kill();
-            gameTicks = 0.0f;
-		} else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f) {
-            Debug.Log("It's the song of the people who will not be slaves again!");
+		}
+        else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f)
+        {
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
             gameObject.GetComponentInParent<PlayerScript>().resetCollisionTime();
