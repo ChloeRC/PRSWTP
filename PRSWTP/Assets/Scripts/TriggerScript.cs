@@ -6,20 +6,21 @@ public class TriggerScript : MonoBehaviour {
     public GameObject toBeTriggered;
     public string type;
 
-    float numberTimesTriggered = 0f;
-
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            numberTimesTriggered++;
-            if (type == "Bucket") //Buckets can be triggered twice
+            if (type == "Bucket")
             {
                 toBeTriggered.GetComponent<BucketScript>().activate();
             }
-            if (type == "Cone") //Cones can only be triggered once
+            if (type == "Cone")
             {
                 toBeTriggered.GetComponent<ConeScript>().activate();
+            }
+            if (type == "Parrot")
+            {
+                toBeTriggered.GetComponent<ParrotScript>().activate();
             }
         }
     }
