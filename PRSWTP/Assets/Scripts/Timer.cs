@@ -1,75 +1,52 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
-    public GameObject player;
+  /*  public GameObject player;
     public GameObject timer;
     private double currentTime;
     private double timeTravel;
+    */
+    public double secs;
+    public double min;
+    private string timeDisp;
 
-	// Use this for initialization
 	void Start () {
-        currentTime = player.GetComponent<PlayerScript>().timer;
+     /*   currentTime = player.GetComponent<PlayerScript>().timer;
         TrackMovement trackm = player.GetComponent<TrackMovement>();
-
-        Debug.Log(currentTime);
+        */
+        secs = 56;
+        min = 0;
+        Debug.Log(timeDisp);
         
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        PlayerScript PlayerScript = GetComponent<PlayerScript>();
-        TimeTravelIndicator TimeTravelIndicator = GetComponent<TimeTravelIndicator>();
-        TrackMovement TrackMovement = GetComponent<TrackMovement>();
- /*
-		if ()
-        currentTime +=
-               time += Time.deltaTime;
-        //despawn timer
-        if (time > .4)
+
+    void Update () {
+        /*   PlayerScript PlayerScript = GetComponent<PlayerScript>();
+           TimeTravelIndicator TimeTravelIndicator = GetComponent<TimeTravelIndicator>();
+           TrackMovement TrackMovement = GetComponent<TrackMovement>();
+           */
+        int stemp = (int)secs;
+        int mtemp = (int)min;
+
+        if (secs < 10)
         {
-            timer.kill();
+            secs += Time.deltaTime;
+            timeDisp = mtemp.ToString() + ":0" + stemp.ToString();
+
         }
-*/
+
+        else if (secs > 10 && secs < 60) {
+             secs += Time.deltaTime;
+             timeDisp = mtemp.ToString() + ":" + stemp.ToString();
+        }
+        
+        else {
+            secs = 0;
+            min++;
+            timeDisp = mtemp.ToString() + ":" + stemp.ToString();
+        }
+
+        transform.Find("Text").GetComponent<TextMesh>().text = timeDisp;
     }
 }
-/*
-public class StartCountdown : MonoBehaviour
-{
-    int time, a;
-    float x;
-    public bool count;
-5.     public string timeDisp;
-
-    void Start()
-    {
-        time = 3;
-        count = false;
-        10.     }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (count)
-        {
-            15.timeDisp = time.ToString();
-            GameObject.Find("StartCounter").GetComponent<Text>().text = timeDisp;
-            x += Time.deltaTime;
-            a = (int)x;
-            print(a);
-            20.             switch (a)
-            {
-                case 0: GameObject.Find("StartCounter").GetComponent<Text>().text = "3"; break;
-                case 1: GameObject.Find("StartCounter").GetComponent<Text>().text = "2"; break;
-                case 2: GameObject.Find("StartCounter").GetComponent<Text>().text = "1"; break;
-                case 3:
-                    GameObject.Find("StartCounter").GetComponent<Text>().enabled = false;
-                    25.count = false; break;
-            }
-        }
-    }
-}
-*/
