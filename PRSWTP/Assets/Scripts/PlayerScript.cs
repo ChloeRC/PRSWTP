@@ -44,7 +44,7 @@ public class PlayerScript : MonoBehaviour {
     private bool isGrounded = false;
 
     private int charges;
-    private GameObject healthDisplayer;
+    public GameObject healthDisplayer;
 
     // Use this for initialization
     void Start () {
