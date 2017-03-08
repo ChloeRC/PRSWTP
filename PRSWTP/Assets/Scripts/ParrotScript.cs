@@ -24,6 +24,12 @@ public class ParrotScript : MonoBehaviour {
         rb = gameObject.GetComponent<Rigidbody>();
         rb.useGravity = false;
 
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        foreach (Transform child in transform)
+        {
+            child.GetComponent<MeshRenderer>().enabled = false;
+        }
+
         currMessage = 0;
         for (int i = 0; i < messages.Length; i++)
         {
@@ -54,8 +60,13 @@ public class ParrotScript : MonoBehaviour {
 
     public void activate()
     {
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
         rb.useGravity = true;
+
         activated = true;
-        //transform.Find("Text").GetComponent<TextMesh>().text = message;
+        foreach (Transform child in transform)
+        {
+            child.GetComponent<MeshRenderer>().enabled = true;
+        }
     }
 }
