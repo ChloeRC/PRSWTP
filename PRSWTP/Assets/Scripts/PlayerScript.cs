@@ -4,7 +4,8 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour {
 
     private Rigidbody rb;
-    private float gameTicks;
+    private float gameTicks; //This is for something else
+    private float gameTicks2; //This is for enemy collisions
     public float horizSpeed;
     public float jumpSpeed;
     public float gravity;
@@ -20,6 +21,7 @@ public class PlayerScript : MonoBehaviour {
     public static readonly bool DIR_LEFT = true;
 
     public int health;
+
     public int timer;
     //If hasShot is 0, you can shoot. Otherwise, you can't.
     private float hasShot;
@@ -42,11 +44,14 @@ public class PlayerScript : MonoBehaviour {
     private bool isGrounded = false;
 
     private int charges;
+    private GameObject healthDisplayer;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
+
         gameTicks = 0.0F;
+        gameTicks2 = 0.0f;
         rb.freezeRotation = true;
 
         direction = DIR_RIGHT;
@@ -62,6 +67,7 @@ public class PlayerScript : MonoBehaviour {
 	// Update is called once per frame
     void Update () {
         gameTicks += Time.deltaTime;
+        gameTicks2 += Time.deltaTime;
 
         if (controllable)
         {
@@ -196,6 +202,18 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5)
+        {
+            Debug.Log("Do you hear the people sing // Singing the song of angry men????");
+            gameObject.GetComponentInParent<PlayerScript>().health--;
+            Debug.Log("Health: " + health);
+            healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
+            gameTicks2 = 0.0f;
+        }
+    }
+
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Charge")
@@ -233,6 +251,16 @@ public class PlayerScript : MonoBehaviour {
         charges = 0;
 
         chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
+    }
+
+    public float getCollisionTime()
+    {
+        return gameTicks2;
+    }
+
+    public void resetCollisionTime()
+    {
+        gameTicks2 = 0.0f;
     }
 
     public void toggleControllable()

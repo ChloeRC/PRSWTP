@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour {
 
+
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
     void OnCollisionEnter(Collision col)
@@ -23,6 +24,7 @@ public class PlayerCollision : MonoBehaviour {
             Debug.Log("boop");
             kill();
         }
+
     }
 
     //Literally the most satisfying function in this entire project.
