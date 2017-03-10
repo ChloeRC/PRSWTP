@@ -15,7 +15,7 @@ public class Timer : MonoBehaviour {
      /*   currentTime = player.GetComponent<PlayerScript>().timer;
         TrackMovement trackm = player.GetComponent<TrackMovement>();
         */
-        secs = 56;
+        secs = 0;
         min = 0;
         Debug.Log(timeDisp);
         
