@@ -10,6 +10,7 @@ public class ParrotScript : MonoBehaviour {
 
     private bool activated;
     private bool f;
+    public double timer;
 
     private static readonly string NEXT = "next";
 
@@ -23,6 +24,8 @@ public class ParrotScript : MonoBehaviour {
 
         rb = gameObject.GetComponent<Rigidbody>();
         rb.useGravity = false;
+
+        timer = 0;
 
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         foreach (Transform child in transform)
@@ -40,15 +43,17 @@ public class ParrotScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        timer += Time.deltaTime;
         if (gameObject.GetComponent<Transform>().localPosition.y <= stop)
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
-        if (Input.GetButton(NEXT) == true && activated && currMessage < (messages.Length - 1))
+        if (Input.GetButton(NEXT) == true && activated && currMessage < (messages.Length - 1) && timer > .5)
         {
             currMessage++;
             transform.Find("Text").GetComponent<TextMesh>().text = messages[currMessage];
+            timer = 0;
         }
 
         if (currMessage == (messages.Length - 1) && f)
@@ -68,5 +73,6 @@ public class ParrotScript : MonoBehaviour {
         {
             child.GetComponent<MeshRenderer>().enabled = true;
         }
+        timer = 0;
     }
 }
