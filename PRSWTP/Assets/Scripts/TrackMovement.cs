@@ -16,6 +16,7 @@ public class TrackMovement : MonoBehaviour {
     private bool player2Exists = false;
     private int spot2 = 0;
     public static readonly Vector3 MARKER = new Vector3(0f, -21f, 0f);
+    public Vector3 spawnLocation;
 
     public GameObject player;
     public GameObject nonPlayerObjects;
@@ -41,7 +42,7 @@ public class TrackMovement : MonoBehaviour {
         //GameObject player2;
         if (charge == currLevelCharges()) //go back in time
         {
-            Instantiate(player);
+            Instantiate(player);    //creates the previous self
             Debug.Log(player);
             PlayerScript.resetCharges();
 
@@ -79,6 +80,7 @@ public class TrackMovement : MonoBehaviour {
         bool controllable = player.transform.gameObject.GetComponent<PlayerScript>().getControllable();
         if (controllable && col.gameObject.tag == "Checkpoint")
         {
+            Debug.Log("One day more to revolution we will nip it in the bud");
 
             int i = 0;
             while (locations.Count > 0)
