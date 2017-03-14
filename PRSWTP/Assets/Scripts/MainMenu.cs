@@ -7,31 +7,15 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-    public Scene FirstLevel;
+    public string goTo;
 
     void Start()
     {
     }
 
-    // Update is called once per frame
     //Starts the first level after new game starts
-    void Update()
+    void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            SceneManager.LoadScene("FirstLevel");         
-        }
+        SceneManager.LoadScene(goTo);
     }
 }
- /*
-    void StartGame()
-    {
-       /* if (Input.GetMouseButtonDown(0))
-        {
-            SceneManager.LoadScene("FirstLevel"); // LoadSceneMode.Additive);        
-            Debug.Log("First")
-        }
-
-    }
-}
-*/
