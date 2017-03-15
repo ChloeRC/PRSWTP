@@ -237,7 +237,7 @@ public class PlayerScript : MonoBehaviour {
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
-        Destroy(this.gameObject);
+        Application.LoadLevel("DeathScene");
     }
 
     public int getCharges()
