@@ -237,7 +237,10 @@ public class PlayerScript : MonoBehaviour {
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
-        Application.LoadLevel("DeathScene");
+        if (controllable)
+        {
+            Application.LoadLevel("DeathScene");
+        }
     }
 
     public int getCharges()
