@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject bucket;
     public GameObject player;
     public GameObject chargeBarDisplay;
+    public Collider Checkpoint;
 
     //False is right, true is left
     private bool direction;
@@ -232,22 +233,17 @@ public class PlayerScript : MonoBehaviour {
             PortalScript portal = col.gameObject.GetComponent<PortalScript>();
             gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
-
-        if (col.gameObject.tag == "Rum")
+        if (col.gameObject.tag == "Checkpoint")
         {
-            Destroy(col.gameObject);
-            gameObject.GetComponentInParent<PlayerScript>().health++;
-            healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
+            PortalScript checkpoint = col.gameObject.GetComponent<Checkpoint>();
+            gameObject.GetComponent<Transform>().position = new Vector 
         }
     }
 
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
-        if (controllable)
-        {
-            Application.LoadLevel("DeathScene");
-        }
+        Application.LoadLevel("DeathScene");
     }
 
     public int getCharges()
@@ -291,5 +287,9 @@ public class PlayerScript : MonoBehaviour {
             this.kill();
         }
         transform.position = vector;
+    }
+    public void loadGame()
+    {
+
     }
 }

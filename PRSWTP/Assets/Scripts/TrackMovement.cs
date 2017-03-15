@@ -52,9 +52,6 @@ public class TrackMovement : MonoBehaviour {
 
             player.transform.position = new Vector3(0, 3, 0);
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
-            Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
-            Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
-            player.GetComponent<PlayerScript>().health = this.gameObject.GetComponent<PlayerScript>().health;
 
             Transform destroyOnTimeTravel = transform.Find("DestroyOnTimeTravel");
             Destroy(destroyOnTimeTravel.gameObject);
@@ -94,9 +91,10 @@ public class TrackMovement : MonoBehaviour {
             }
             key = 0;
         }
+
     }
 
-    void parseFull()
+        void parseFull()
     {
         string[] chargesPerLevelStr = full.Split(' ');
 
