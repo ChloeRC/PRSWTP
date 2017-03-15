@@ -21,6 +21,7 @@ public class TrackMovement : MonoBehaviour {
     public GameObject player;
     public GameObject nonPlayerObjects;
     public GameObject bucket;
+    public GameObject healthBar;
 
 	// Use this for initialization
 	void Start () {
@@ -52,9 +53,11 @@ public class TrackMovement : MonoBehaviour {
 
             player.transform.position = new Vector3(0, 3, 0);
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
+
             Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
             Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
             player.GetComponent<PlayerScript>().health = this.gameObject.GetComponent<PlayerScript>().health;
+            healthBar.GetComponent<HealthBarDisplay>().UpdateText();
 
             Transform destroyOnTimeTravel = transform.Find("DestroyOnTimeTravel");
             Destroy(destroyOnTimeTravel.gameObject);
