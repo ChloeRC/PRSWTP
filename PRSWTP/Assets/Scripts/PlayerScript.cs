@@ -13,7 +13,6 @@ public class PlayerScript : MonoBehaviour {
     public GameObject bullet;
     public GameObject bucket;
     public GameObject player;
-    public GameObject chargeBarDisplay;
 
     //False is right, true is left
     private bool direction;
@@ -45,6 +44,8 @@ public class PlayerScript : MonoBehaviour {
 
     private int charges;
     public GameObject healthDisplayer;
+    public GameObject chargeBarDisplay;
+    public GameObject gunReloadDisplayer;
 
     // Use this for initialization
     void Start () {
