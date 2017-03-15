@@ -123,10 +123,10 @@ public class PlayerScript : MonoBehaviour {
 			} else {
 				SwordScript sword = GetComponentInChildren<SwordScript> ();
 				bool drawn = sword.drawn;
-				if (drawn) {
+				if (drawn) {                  
 					sword.swordUp (direction);
 				} else {
-					sword.swordDown (direction);
+                    sword.swordDown (direction);
 				}
 			}
 

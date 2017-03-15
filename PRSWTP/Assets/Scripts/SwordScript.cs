@@ -7,22 +7,33 @@ public class SwordScript : MonoBehaviour {
     //True for sword-out
     //False for sword-down
 
+    private float gameTicks;
+    private float drawTime;
+
     private Transform ts;
 
     public GameObject healthDisplayer;
 
     // Use this for initialization
     void Start () {
-
+        gameTicks = 0.0f;
+        drawTime = 0.3f; //alter this to modify how long the sword stays up
         ts = GetComponent<Transform>();
 
-        if (drawn) { swordUp(false); }
-        else { swordDown(false); }
+        if (drawn) {
+            swordUp(false);
+        }
+        else {
+            swordDown(false);
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (drawn)
+        {
+            gameTicks += Time.deltaTime;
+        }
 	}
 
 	public void toggleSword(bool direction)
@@ -31,9 +42,6 @@ public class SwordScript : MonoBehaviour {
 
         if (drawn) { 
 			swordUp(direction); 
-		}
-        else { 
-			swordDown(direction); 
 		}
     }
 
@@ -45,18 +53,33 @@ public class SwordScript : MonoBehaviour {
 			Quaternion newRot = Quaternion.Euler (-10, 270, 90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
 			ts.localScale = new Vector3 (0.055f, 0.1f, 0.1f);
+            if (gameTicks > drawTime)
+            {
+                Debug.Log("Prince Ali fabulous he!! Ali ababwa");
+                swordDown(direction);
+                gameTicks = 0.0f;
+                drawn = !drawn;
+            }
 		} else {
 			//sword out facing right
 			ts.localPosition = new Vector3 (1, 0.15f, 0);
 			Quaternion newRot = Quaternion.Euler (-10, 90, 90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
 			ts.localScale = new Vector3 (0.055f, 0.1f, 0.1f);
-		}
+            if (gameTicks > drawTime)
+            {
+                Debug.Log("How does a ragtag volunteer army in need of a shower somehow defeat a global superpower?");
+                swordDown(direction);
+                gameTicks = 0.0f;
+                drawn = !drawn;
+            }
+        }
     }
 
 	public void swordDown(bool direction)
     {
-		if (direction) {
+        Debug.Log("He's constantly confusing and confouding the British henchmen... Everyone give it up for America's favorite fighting Frenchman!!! LAFAYETTE");
+        if (direction) {
 			ts.localPosition = new Vector3 (0, 0.15f, 0.55f);
 			Quaternion newRot = Quaternion.Euler (78, 90, -90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
