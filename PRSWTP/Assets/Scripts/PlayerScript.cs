@@ -232,6 +232,13 @@ public class PlayerScript : MonoBehaviour {
             PortalScript portal = col.gameObject.GetComponent<PortalScript>();
             gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
+
+        if (col.gameObject.tag == "Rum")
+        {
+            Destroy(col.gameObject);
+            gameObject.GetComponentInParent<PlayerScript>().health++;
+            healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
+        }
     }
 
     //Literally the most satisfying function in this entire project.
