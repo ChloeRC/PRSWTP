@@ -237,8 +237,10 @@ public class PlayerScript : MonoBehaviour {
         if (col.gameObject.tag == "Rum")
         {
             Destroy(col.gameObject);
-            gameObject.GetComponentInParent<PlayerScript>().health++;
-            healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
+			if (health < 3) {
+				gameObject.GetComponentInParent<PlayerScript> ().health++;
+				healthDisplayer.GetComponent<HealthBarDisplay> ().UpdateText ();
+			}
         }
     }
 
