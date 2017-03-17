@@ -216,7 +216,7 @@ public class PlayerScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Charge")
+        if (col.gameObject.tag == "Charge" && controllable)
         {
             Destroy(col.gameObject);
             charges++;

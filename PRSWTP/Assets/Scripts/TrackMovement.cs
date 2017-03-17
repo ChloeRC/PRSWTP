@@ -46,6 +46,9 @@ public class TrackMovement : MonoBehaviour {
             Instantiate(player);    //creates the previous self
             Debug.Log(player);
             PlayerScript.resetCharges();
+            
+            //The new, controllable one is "player"
+            //The old, not-controllable, past self is "this"
 
 			TimeTravelIndicator.setFlash();
             player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
@@ -57,10 +60,11 @@ public class TrackMovement : MonoBehaviour {
             Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
             Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
             player.GetComponent<PlayerScript>().health = this.gameObject.GetComponent<PlayerScript>().health;
-            healthBar.GetComponent<HealthBarDisplay>().UpdateText();
+            this.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>().UpdateText();
+            player.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>().UpdateText();
 
             Transform destroyOnTimeTravel = transform.Find("DestroyOnTimeTravel");
-            Destroy(destroyOnTimeTravel.gameObject);
+            //Destroy(destroyOnTimeTravel.gameObject);
 
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>();
             resetter.reset = true;
