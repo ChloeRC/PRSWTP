@@ -3,7 +3,8 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
 
-    public int health = 3;
+    public int health;
+    private int startHealth;
 
     private Rigidbody rb;
     private Transform ts;
@@ -15,6 +16,9 @@ public class EnemyAI : MonoBehaviour {
     public float rightEdge;
     public float leftEdge;
 
+    //False for everything but boss
+    public bool isBoss;
+
     public Camera cam;
 
     // Use this for initialization
@@ -25,6 +29,8 @@ public class EnemyAI : MonoBehaviour {
         rb.freezeRotation = true;
 
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
+
+        startHealth = health;
     }
 	
     void Update () {
@@ -48,6 +54,12 @@ public class EnemyAI : MonoBehaviour {
             {
                 direction = true;
             }
+        }
+
+        if (isBoss && health < startHealth && gameTicks > .5)
+        {
+            gameTicks = 0;
+            healthPlusOne();
         }
 
         if (health == 0)
@@ -81,9 +93,9 @@ public class EnemyAI : MonoBehaviour {
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
     }
 
-    /*void OnGUI()
+    public void healthPlusOne()
     {
-        Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
-        GUI.Label(new Rect(screenPos.x - 50, 360 - (screenPos.y), 100, 20), "Health: " + health);
-    }*/
+        health++;
+        transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
+    }
 }

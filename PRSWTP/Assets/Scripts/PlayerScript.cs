@@ -14,6 +14,8 @@ public class PlayerScript : MonoBehaviour {
     public GameObject bucket;
     public GameObject player;
 
+    public Vector3[] checkpointLocations;
+
     //False is right, true is left
     private bool direction;
     public static readonly bool DIR_RIGHT = false;
@@ -63,6 +65,9 @@ public class PlayerScript : MonoBehaviour {
 
         hasShot = 0;
         hasSword = 0;
+
+        Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
+        this.transform.position = checkpointLocations[ValueHolder.checkpointNumber];
 	}
 	
 	// Update is called once per frame

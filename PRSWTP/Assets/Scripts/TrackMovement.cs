@@ -59,12 +59,19 @@ public class TrackMovement : MonoBehaviour {
 
             Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
             Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
-            player.GetComponent<PlayerScript>().health = this.gameObject.GetComponent<PlayerScript>().health;
-            this.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>().UpdateText();
-            player.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>().UpdateText();
+            int thisHealth = this.gameObject.GetComponent<PlayerScript>().health;
+            player.GetComponent<PlayerScript>().health = thisHealth;
 
-            Transform destroyOnTimeTravel = transform.Find("DestroyOnTimeTravel");
-            //Destroy(destroyOnTimeTravel.gameObject);
+            HealthBarDisplay thisFullBar = this.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
+            HealthBarDisplay playerFullBar = player.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
+
+            playerFullBar.startValue = thisHealth;
+
+            thisFullBar.UpdateText();
+            playerFullBar.UpdateText();
+
+            Transform destroyOnTimeTravel = this.transform.Find("DestroyOnTimeTravel");
+            Destroy(destroyOnTimeTravel.gameObject);
 
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>();
             resetter.reset = true;
