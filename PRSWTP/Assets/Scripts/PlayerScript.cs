@@ -67,7 +67,8 @@ public class PlayerScript : MonoBehaviour {
         hasSword = 0;
 
         Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
-        this.transform.position = checkpointLocations[ValueHolder.checkpointNumber];
+        //The checkpoints are indexed from 1, the locations are indexed from 0
+        this.transform.position = checkpointLocations[ValueHolder.checkpointNumber - 1];
 	}
 	
 	// Update is called once per frame
