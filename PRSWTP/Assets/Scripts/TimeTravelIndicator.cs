@@ -42,7 +42,8 @@ public class TimeTravelIndicator : MonoBehaviour {
     }
 
 	public void setFlash () {
-		flash = true;	
+		flash = true;
+        Debug.Log("kinky");
 	}
 
     private void InitStyles()

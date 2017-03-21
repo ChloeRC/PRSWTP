@@ -51,16 +51,17 @@ public class TrackMovement : MonoBehaviour {
             //The old, not-controllable, past self is "this"
 
 			TimeTravelIndicator.setFlash();
-            player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
+            //player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
             player.GetComponent<PlayerScript>().toggleControllable();
 
             player.transform.position = new Vector3(0, 3, 0);
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
+ 
             Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
             int thisHealth = this.gameObject.GetComponent<PlayerScript>().health;
             player.GetComponent<PlayerScript>().health = thisHealth;
+            Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
 
             HealthBarDisplay thisFullBar = this.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
             HealthBarDisplay playerFullBar = player.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();

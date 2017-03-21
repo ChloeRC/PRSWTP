@@ -211,7 +211,7 @@ public class PlayerScript : MonoBehaviour {
     void OnCollisionEnter(Collision col)
     {
         //Under 0.5 for gameTicks2 = player is temporarily invincible
-        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5)
+        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable)
         {
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
@@ -239,7 +239,7 @@ public class PlayerScript : MonoBehaviour {
             gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
 
-        if (col.gameObject.tag == "Rum")
+        if (col.gameObject.tag == "Rum" && controllable)
         {
             Destroy(col.gameObject);
 			if (health < 3) {
@@ -261,6 +261,11 @@ public class PlayerScript : MonoBehaviour {
     public int getCharges()
     {
         return charges;
+    }
+
+    public int getHealth()
+    {
+        return health;
     }
 
     public void resetCharges()
