@@ -6,6 +6,8 @@ public class EnemyAI : MonoBehaviour {
     public int health;
     private int startHealth;
 
+    public int bulletDamage;
+
     private Rigidbody rb;
     private Transform ts;
     private float gameTicks;
@@ -59,7 +61,7 @@ public class EnemyAI : MonoBehaviour {
         if (isBoss && health < startHealth && gameTicks > .5)
         {
             gameTicks = 0;
-            healthPlusOne();
+            adjustHealthBy(1);
         }
 
         if (health == 0)
@@ -72,7 +74,7 @@ public class EnemyAI : MonoBehaviour {
     {
         if (col.gameObject.tag == "Bullet")
         {
-            healthMinusOne();
+            adjustHealthBy(-bulletDamage);
         }
 
 		if (col.gameObject.tag == "Player") 
@@ -87,15 +89,9 @@ public class EnemyAI : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
-    public void healthMinusOne()
+    public void adjustHealthBy(int toAdd)
     {
-        health--;
-        transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
-    }
-
-    public void healthPlusOne()
-    {
-        health++;
+        health += toAdd;
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
     }
 }

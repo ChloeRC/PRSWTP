@@ -174,7 +174,6 @@ public class PlayerScript : MonoBehaviour {
                 }
                 Vector3 pos = new Vector3(transform.position.x + toAdd, transform.position.y, transform.position.z);
                 var newBullet = Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
-                //FIX THIS
                 var rbBullet = newBullet.GetComponent<Rigidbody>();
                 rbBullet.velocity = newBullet.GetComponent<BulletScript>().speed * force;
             }

@@ -7,6 +7,8 @@ public class SwordScript : MonoBehaviour {
     //True for sword-out
     //False for sword-down
 
+    public int damage;
+
     private float gameTicks;
     private float drawTime;
 
@@ -97,7 +99,7 @@ public class SwordScript : MonoBehaviour {
     {
 		if (col.gameObject.tag == "Enemy" && drawn)
         {
-            col.gameObject.GetComponent<EnemyAI>().kill();
+            col.gameObject.GetComponent<EnemyAI>().health -= damage;
 		}
         else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f)
         {
