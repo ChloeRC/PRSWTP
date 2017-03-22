@@ -3,7 +3,10 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
 
-    public int health = 3;
+    public int health;
+    private int startHealth;
+
+    public int bulletDamage;
 
     private Rigidbody rb;
     private Transform ts;
@@ -15,6 +18,9 @@ public class EnemyAI : MonoBehaviour {
     public float rightEdge;
     public float leftEdge;
 
+    //False for everything but boss
+    public bool isBoss;
+
     public Camera cam;
 
     // Use this for initialization
@@ -25,6 +31,8 @@ public class EnemyAI : MonoBehaviour {
         rb.freezeRotation = true;
 
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
+
+        startHealth = health;
     }
 	
     void Update () {
@@ -50,6 +58,12 @@ public class EnemyAI : MonoBehaviour {
             }
         }
 
+        if (isBoss && health < startHealth && gameTicks > .5)
+        {
+            gameTicks = 0;
+            adjustHealthBy(1);
+        }
+
         if (health == 0)
         {
             kill();
@@ -60,7 +74,7 @@ public class EnemyAI : MonoBehaviour {
     {
         if (col.gameObject.tag == "Bullet")
         {
-            healthMinusOne();
+            adjustHealthBy(-bulletDamage);
         }
 
 		if (col.gameObject.tag == "Player") 
@@ -75,15 +89,9 @@ public class EnemyAI : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
-    public void healthMinusOne()
+    public void adjustHealthBy(int toAdd)
     {
-        health--;
+        health += toAdd;
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
     }
-
-    /*void OnGUI()
-    {
-        Vector3 screenPos = cam.WorldToScreenPoint(transform.position);
-        GUI.Label(new Rect(screenPos.x - 50, 360 - (screenPos.y), 100, 20), "Health: " + health);
-    }*/
 }

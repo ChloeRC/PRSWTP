@@ -21,6 +21,7 @@ public class TrackMovement : MonoBehaviour {
     public GameObject player;
     public GameObject nonPlayerObjects;
     public GameObject bucket;
+    public GameObject healthBar;
 
 	// Use this for initialization
 	void Start () {
@@ -45,15 +46,31 @@ public class TrackMovement : MonoBehaviour {
             Instantiate(player);    //creates the previous self
             Debug.Log(player);
             PlayerScript.resetCharges();
+            
+            //The new, controllable one is "player"
+            //The old, not-controllable, past self is "this"
 
 			TimeTravelIndicator.setFlash();
-            player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
+            //player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
             player.GetComponent<PlayerScript>().toggleControllable();
 
             player.transform.position = new Vector3(0, 3, 0);
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            Transform destroyOnTimeTravel = transform.Find("DestroyOnTimeTravel");
+            Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
+            int thisHealth = this.gameObject.GetComponent<PlayerScript>().health;
+            player.GetComponent<PlayerScript>().health = thisHealth;
+            Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
+
+            HealthBarDisplay thisFullBar = this.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
+            HealthBarDisplay playerFullBar = player.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
+
+            playerFullBar.startValue = thisHealth;
+
+            thisFullBar.UpdateText();
+            playerFullBar.UpdateText();
+
+            Transform destroyOnTimeTravel = this.transform.Find("DestroyOnTimeTravel");
             Destroy(destroyOnTimeTravel.gameObject);
 
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>();

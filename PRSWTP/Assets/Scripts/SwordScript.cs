@@ -7,6 +7,8 @@ public class SwordScript : MonoBehaviour {
     //True for sword-out
     //False for sword-down
 
+    public int damage;
+
     private float gameTicks;
     private float drawTime;
 
@@ -55,7 +57,6 @@ public class SwordScript : MonoBehaviour {
 			ts.localScale = new Vector3 (0.055f, 0.1f, 0.1f);
             if (gameTicks > drawTime)
             {
-                Debug.Log("Prince Ali fabulous he!! Ali ababwa");
                 swordDown(direction);
                 gameTicks = 0.0f;
                 drawn = !drawn;
@@ -68,7 +69,6 @@ public class SwordScript : MonoBehaviour {
 			ts.localScale = new Vector3 (0.055f, 0.1f, 0.1f);
             if (gameTicks > drawTime)
             {
-                Debug.Log("How does a ragtag volunteer army in need of a shower somehow defeat a global superpower?");
                 swordDown(direction);
                 gameTicks = 0.0f;
                 drawn = !drawn;
@@ -78,7 +78,6 @@ public class SwordScript : MonoBehaviour {
 
 	public void swordDown(bool direction)
     {
-        Debug.Log("He's constantly confusing and confouding the British henchmen... Everyone give it up for America's favorite fighting Frenchman!!! LAFAYETTE");
         if (direction) {
 			ts.localPosition = new Vector3 (0, 0.15f, 0.55f);
 			Quaternion newRot = Quaternion.Euler (78, 90, -90);
@@ -97,9 +96,11 @@ public class SwordScript : MonoBehaviour {
     {
 		if (col.gameObject.tag == "Enemy" && drawn)
         {
-            col.gameObject.GetComponent<EnemyAI>().kill();
+            col.gameObject.GetComponent<EnemyAI>().health -= damage;
 		}
-        else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f)
+        //to lose health you also need to be your current self
+        else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f
+            && gameObject.GetComponentInParent<PlayerScript>().getControllable())
         {
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();

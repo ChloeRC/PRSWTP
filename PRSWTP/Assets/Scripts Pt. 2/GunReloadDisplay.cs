@@ -2,28 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunReloadDisplay : MonoBehaviour {
+public class GunReloadDisplay : FillBar {
     public GameObject player;
     int reloadTime;
 
 	// Use this for initialization
 	void Start () {
         reloadTime = 0;	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        getReloadTime();
+		base.full = getReloadTime();
+		base.curr = base.full;
+		base.originalText = "Gun Reload: ";
+		base.Start();
 	}
 
-    void getReloadTime()
+	public int getReloadTime()
     {
-        reloadTime = 4 - player.GetComponent<BulletScript>().getTime();
+		return (4 - player.GetComponent<BulletScript> ().getTime ());
     }
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(200, 50, 50, 50), "Gun time: " + reloadTime);
-        //sorry just gotta test things
-    }
+	public new void UpdateText()
+	{
+		base.curr = getReloadTime();
+		base.UpdateText();
+	}
 }

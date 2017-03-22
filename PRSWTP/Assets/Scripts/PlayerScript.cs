@@ -16,6 +16,8 @@ public class PlayerScript : MonoBehaviour {
     public GameObject chargeBarDisplay;
     public Collider Checkpoint;
 
+    public Vector3[] checkpointLocations;
+
     //False is right, true is left
     private bool direction;
     public static readonly bool DIR_RIGHT = false;
@@ -65,6 +67,10 @@ public class PlayerScript : MonoBehaviour {
 
         hasShot = 0;
         hasSword = 0;
+
+        Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
+        //The checkpoints are indexed from 1, the locations are indexed from 0
+        this.transform.position = checkpointLocations[ValueHolder.checkpointNumber - 1];
 	}
 	
 	// Update is called once per frame
@@ -170,7 +176,6 @@ public class PlayerScript : MonoBehaviour {
                 }
                 Vector3 pos = new Vector3(transform.position.x + toAdd, transform.position.y, transform.position.z);
                 var newBullet = Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
-                //FIX THIS
                 var rbBullet = newBullet.GetComponent<Rigidbody>();
                 rbBullet.velocity = newBullet.GetComponent<BulletScript>().speed * force;
             }
@@ -208,7 +213,7 @@ public class PlayerScript : MonoBehaviour {
     void OnCollisionEnter(Collision col)
     {
         //Under 0.5 for gameTicks2 = player is temporarily invincible
-        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5)
+        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable)
         {
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
@@ -218,11 +223,11 @@ public class PlayerScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Charge")
+        if (col.gameObject.tag == "Charge" && controllable)
         {
             Destroy(col.gameObject);
             charges++;
-            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
+            //chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
         }
 
         /*if (col.gameObject.tag == "Bucket Trigger")
@@ -235,10 +240,20 @@ public class PlayerScript : MonoBehaviour {
             PortalScript portal = col.gameObject.GetComponent<PortalScript>();
             gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
-        if (col.gameObject.tag == "Checkpoint")
+
+        /*if (col.gameObject.tag == "Checkpoint")
         {
             PortalScript checkpoint = col.gameObject.GetComponent<Checkpoint>();
-            gameObject.GetComponent<Transform>().position = new Vector 
+            gameObject.GetComponent<Transform>().position = new Vector
+        }*/
+
+        if (col.gameObject.tag == "Rum" && controllable)
+        {
+            Destroy(col.gameObject);
+			if (health < 3) {
+				gameObject.GetComponentInParent<PlayerScript> ().health++;
+				healthDisplayer.GetComponent<HealthBarDisplay> ().UpdateText ();
+			}
         }
     }
 
@@ -251,6 +266,11 @@ public class PlayerScript : MonoBehaviour {
     public int getCharges()
     {
         return charges;
+    }
+
+    public int getHealth()
+    {
+        return health;
     }
 
     public void resetCharges()
