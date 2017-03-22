@@ -242,8 +242,8 @@ public class PlayerScript : MonoBehaviour {
 
         if (col.gameObject.tag == "Checkpoint")
         {
-            PortalScript checkpoint = col.gameObject.GetComponent<Checkpoint>();
-            gameObject.GetComponent<Transform>().position = new Vector
+            Checkpoint checkpoint = col.gameObject.GetComponent<Checkpoint>();
+            gameObject.GetComponent<Transform>().position = new Vector3();
         }
 
         if (col.gameObject.tag == "Rum" && controllable)
