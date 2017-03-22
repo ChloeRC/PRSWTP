@@ -48,7 +48,6 @@ public class PlayerScript : MonoBehaviour {
 
     private int charges;
     public GameObject healthDisplayer;
-    public GameObject chargeBarDisplay;
     public GameObject gunReloadDisplayer;
 
     // Use this for initialization
@@ -227,13 +226,13 @@ public class PlayerScript : MonoBehaviour {
         {
             Destroy(col.gameObject);
             charges++;
-            //chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
+            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
         }
 
-        /*if (col.gameObject.tag == "Bucket Trigger")
+        if (col.gameObject.tag == "Bucket Trigger")
         {
             bucket.GetComponent<BucketScript>().activate();
-        }*/
+        }
 
         if (col.gameObject.tag == "Portal")
         {
@@ -241,11 +240,11 @@ public class PlayerScript : MonoBehaviour {
             gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
 
-        /*if (col.gameObject.tag == "Checkpoint")
+        if (col.gameObject.tag == "Checkpoint")
         {
             PortalScript checkpoint = col.gameObject.GetComponent<Checkpoint>();
             gameObject.GetComponent<Transform>().position = new Vector
-        }*/
+        }
 
         if (col.gameObject.tag == "Rum" && controllable)
         {
