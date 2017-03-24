@@ -301,7 +301,7 @@ public class PlayerScript : MonoBehaviour {
 
     public int getCurrentTime()
     {
-
+        return 0;
     }
 
     public void resetCollisionTime()
