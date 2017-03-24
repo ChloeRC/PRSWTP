@@ -80,6 +80,7 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update () {
+
         gameTicks += Time.deltaTime;
         gameTicks2 += Time.deltaTime;
 
@@ -265,7 +266,8 @@ public class PlayerScript : MonoBehaviour {
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
-        Application.LoadLevel("DeathScene");
+        Debug.Log("dead");
+        //Application.LoadLevel("DeathScene");
     }
 
     public int getCharges()
