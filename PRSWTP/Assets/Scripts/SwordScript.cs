@@ -96,7 +96,7 @@ public class SwordScript : MonoBehaviour {
     {
 		if (col.gameObject.tag == "Enemy" && drawn)
         {
-            col.gameObject.GetComponent<EnemyAI>().health -= damage;
+            col.gameObject.GetComponent<EnemyAI>().adjustHealthBy(-damage);
 		}
         //to lose health you also need to be your current self
         else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f
