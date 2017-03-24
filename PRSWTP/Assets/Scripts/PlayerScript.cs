@@ -225,6 +225,7 @@ public class PlayerScript : MonoBehaviour {
         //Under 0.5 for gameTicks2 = player is temporarily invincible
         if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable)
         {
+            Debug.Log("The only man I love is my daaaaaaaaaaad");
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
             gameTicks2 = 0.0f;
@@ -320,7 +321,6 @@ public class PlayerScript : MonoBehaviour {
     {
         return checkpointPos;
     }
-
     //moving the past self
     public void setPosition(Vector3 vector)
     {

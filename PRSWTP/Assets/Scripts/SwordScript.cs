@@ -96,12 +96,18 @@ public class SwordScript : MonoBehaviour {
     {
 		if (col.gameObject.tag == "Enemy" && drawn)
         {
+<<<<<<< HEAD
+            Debug.Log("Does anyone have a map?");
             col.gameObject.GetComponent<EnemyAI>().health -= damage;
+=======
+            col.gameObject.GetComponent<EnemyAI>().adjustHealthBy(-damage);
+>>>>>>> be49ed7874be229a1ba067548d1296d58e631a3e
 		}
         //to lose health you also need to be your current self
         else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f
             && gameObject.GetComponentInParent<PlayerScript>().getControllable())
         {
+            Debug.Log("I'm waving through a window");
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
             gameObject.GetComponentInParent<PlayerScript>().resetCollisionTime();
