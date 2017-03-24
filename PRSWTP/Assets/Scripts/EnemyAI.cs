@@ -61,7 +61,13 @@ public class EnemyAI : MonoBehaviour {
         if (isBoss && health < startHealth && gameTicks > .5)
         {
             gameTicks = 0;
+            transform.GetChild(0).GetComponent<TextMesh>().color = Color.green;
             adjustHealthBy(1);
+        }
+
+        if (isBoss && health == startHealth)
+        {
+            transform.GetChild(0).GetComponent<TextMesh>().color = Color.white;
         }
 
         if (health <= 0)
