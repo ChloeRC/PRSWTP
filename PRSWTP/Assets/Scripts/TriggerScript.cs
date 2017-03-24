@@ -6,6 +6,8 @@ public class TriggerScript : MonoBehaviour {
     public GameObject toBeTriggered;
     public string type;
 
+    private int coneActivatedTimes = 0;
+
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
@@ -14,9 +16,10 @@ public class TriggerScript : MonoBehaviour {
             {
                 toBeTriggered.GetComponent<BucketScript>().activate();
             }
-            if (type == "Cone")
+            if (type == "Cone" && coneActivatedTimes == 0)
             {
                 toBeTriggered.GetComponent<ConeScript>().activate();
+                coneActivatedTimes++;
             }
             if (type == "Parrot")
             {

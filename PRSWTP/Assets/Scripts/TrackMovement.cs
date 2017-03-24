@@ -61,6 +61,7 @@ public class TrackMovement : MonoBehaviour {
             int thisHealth = this.gameObject.GetComponent<PlayerScript>().health;
             player.GetComponent<PlayerScript>().health = thisHealth;
             Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
+            PlayerScript.setHealth(thisHealth);
 
             HealthBarDisplay thisFullBar = this.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
             HealthBarDisplay playerFullBar = player.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
@@ -97,7 +98,6 @@ public class TrackMovement : MonoBehaviour {
         bool controllable = player.transform.gameObject.GetComponent<PlayerScript>().getControllable();
         if (controllable && col.gameObject.tag == "Checkpoint")
         {
-            Debug.Log("One day more to revolution we will nip it in the bud");
 
             int i = 0;
             while (locations.Count > 0)

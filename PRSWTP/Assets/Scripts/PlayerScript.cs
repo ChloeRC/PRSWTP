@@ -6,6 +6,8 @@ public class PlayerScript : MonoBehaviour {
     private Rigidbody rb;
     private float gameTicks; //This is for something else
     private float gameTicks2; //This is for enemy collisions
+    private float aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys;
+
     public float horizSpeed;
     public float jumpSpeed;
     public float gravity;
@@ -43,6 +45,7 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string SHOOT = "shoot";
     private static readonly string SWORD = "sword";
     private static readonly string FILL_CHARGES = "fill charges";
+    private static readonly string INFO = "info";
 
     private bool isGrounded = false;
     private Vector3 checkpointPos;
@@ -59,6 +62,7 @@ public class PlayerScript : MonoBehaviour {
 
         gameTicks = 0.0F;
         gameTicks2 = 0.0f;
+        aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys = 0.0f;
         rb.freezeRotation = true;
 
         direction = DIR_RIGHT;
@@ -83,8 +87,10 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update () {
+
         gameTicks += Time.deltaTime;
         gameTicks2 += Time.deltaTime;
+        aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys += Time.deltaTime;
 
         if (controllable)
         {
@@ -209,6 +215,14 @@ public class PlayerScript : MonoBehaviour {
 
             //Apply gravity relative to the player's mass
             rb.AddForce(Vector2.down * gravity * rb.mass);
+
+            //GET INFORMATION (i) - contains lots of debugs
+            if (Input.GetButton(INFO) == true && aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys > 0.3f)
+            {
+                aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys = 0.0f;
+                Debug.Log("PlayerScript health: " + health);
+
+            }
         }
         
         //If you've fallen below -25 or your health is 0, you die
@@ -274,6 +288,12 @@ public class PlayerScript : MonoBehaviour {
 				healthDisplayer.GetComponent<HealthBarDisplay> ().UpdateText ();
 			}
         }
+    }
+
+    public void setHealth(int thisHealth)
+    {
+        health = thisHealth;
+        Debug.Log("bam bam");
     }
 
     //Literally the most satisfying function in this entire project.
