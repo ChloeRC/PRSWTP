@@ -69,6 +69,8 @@ public class PlayerScript : MonoBehaviour {
 
         Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
         //The checkpoints are indexed from 1, the locations are indexed from 0
+        Vector3 newPos = checkpointLocations[ValueHolder.checkpointNumber - 1];
+        Debug.Log(newPos.x + ", " + newPos.y + ", " + newPos.z);
         this.transform.position = checkpointLocations[ValueHolder.checkpointNumber - 1];
 	}
 	
