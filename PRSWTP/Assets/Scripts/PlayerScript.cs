@@ -6,6 +6,8 @@ public class PlayerScript : MonoBehaviour {
     private Rigidbody rb;
     private float gameTicks; //This is for something else
     private float gameTicks2; //This is for enemy collisions
+    private float aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys;
+
     public float horizSpeed;
     public float jumpSpeed;
     public float gravity;
@@ -60,6 +62,7 @@ public class PlayerScript : MonoBehaviour {
 
         gameTicks = 0.0F;
         gameTicks2 = 0.0f;
+        aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys = 0.0f;
         rb.freezeRotation = true;
 
         direction = DIR_RIGHT;
@@ -87,6 +90,7 @@ public class PlayerScript : MonoBehaviour {
 
         gameTicks += Time.deltaTime;
         gameTicks2 += Time.deltaTime;
+        aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys += Time.deltaTime;
 
         if (controllable)
         {
@@ -213,9 +217,11 @@ public class PlayerScript : MonoBehaviour {
             rb.AddForce(Vector2.down * gravity * rb.mass);
 
             //GET INFORMATION (i) - contains lots of debugs
-            if (Input.GetButton(INFO) == true)
+            if (Input.GetButton(INFO) == true && aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys > 0.3f)
             {
-                Debug.Log("hello");
+                aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys = 0.0f;
+                Debug.Log("PlayerScript health: " + health);
+
             }
         }
         
@@ -283,7 +289,7 @@ public class PlayerScript : MonoBehaviour {
     public void setHealth(int thisHealth)
     {
         health = thisHealth;
-        Debug.Log(health);
+        Debug.Log("bam bam");
     }
 
     //Literally the most satisfying function in this entire project.
