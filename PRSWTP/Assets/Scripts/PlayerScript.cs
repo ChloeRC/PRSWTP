@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject player;
     public GameObject chargeBarDisplay;
     public Collider Checkpoint;
+    public GameObject Timer;
 
     public Vector3[] checkpointLocations;
 
@@ -48,6 +49,7 @@ public class PlayerScript : MonoBehaviour {
     private Vector3 checkpointPos;
 
     private int charges;
+    private int currentTime;
     public GameObject healthDisplayer;
     public GameObject gunReloadDisplayer;
 
@@ -214,6 +216,7 @@ public class PlayerScript : MonoBehaviour {
         {
             Debug.Log("bop bop bop to the top");
             kill();
+
         }
     }
 
@@ -267,6 +270,7 @@ public class PlayerScript : MonoBehaviour {
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
+        ValueHolder.currentCheckpoint = checkpointPos;
         Application.LoadLevel("DeathScene");
     }
 
@@ -286,10 +290,15 @@ public class PlayerScript : MonoBehaviour {
 
         chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
     }
-
+    //records the time since you last hit an enemy
     public float getCollisionTime()
     {
         return gameTicks2;
+    }
+
+    public int getCurrentTime()
+    {
+
     }
 
     public void resetCollisionTime()
@@ -312,7 +321,7 @@ public class PlayerScript : MonoBehaviour {
         return checkpointPos;
     }
 
-
+    //moving the past self
     public void setPosition(Vector3 vector)
     {
         var marker = TrackMovement.MARKER;
