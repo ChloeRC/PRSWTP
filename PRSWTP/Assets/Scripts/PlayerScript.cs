@@ -45,6 +45,7 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string FILL_CHARGES = "fill charges";
 
     private bool isGrounded = false;
+    private Vector3 checkpointPos;
 
     private int charges;
     public GameObject healthDisplayer;
@@ -250,7 +251,7 @@ public class PlayerScript : MonoBehaviour {
         if (col.gameObject.tag == "Checkpoint")
         {
             Checkpoint checkpoint = col.gameObject.GetComponent<Checkpoint>();
-            Vector3 checkpointPos = gameObject.GetComponent<Transform>().position;
+            checkpointPos = gameObject.GetComponent<Transform>().position;
         }
 
         if (col.gameObject.tag == "Rum" && controllable)
@@ -306,7 +307,7 @@ public class PlayerScript : MonoBehaviour {
         return controllable;
     }
 
-    public bool getcheckpointPos()
+    public Vector3 getcheckpointPos()
     {
         return checkpointPos;
     }
