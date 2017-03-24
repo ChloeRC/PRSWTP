@@ -26,7 +26,6 @@ public class PlayerScript : MonoBehaviour {
 
     public int health;
 
-    public int timer;
     //If hasShot is 0, you can shoot. Otherwise, you can't.
     private float hasShot;
     public float shotCooldown;
@@ -47,11 +46,12 @@ public class PlayerScript : MonoBehaviour {
 
     private bool isGrounded = false;
     private Vector3 checkpointPos;
+    private Timer currentTime;
 
     private int charges;
-    private int currentTime;
     public GameObject healthDisplayer;
     public GameObject gunReloadDisplayer;
+    public GameObject time;
 
     // Use this for initialization
     void Start () {
@@ -64,7 +64,7 @@ public class PlayerScript : MonoBehaviour {
         direction = DIR_RIGHT;
         charges = 0;
         health = 3;
-        timer = 200;
+  //      timer = 200;
         controllable = true;
 
         hasShot = 0;
@@ -260,6 +260,10 @@ public class PlayerScript : MonoBehaviour {
         {
             Checkpoint checkpoint = col.gameObject.GetComponent<Checkpoint>();
             checkpointPos = gameObject.GetComponent<Transform>().position;
+            Timer time = col.gameObject.GetComponent<Timer>();
+            currentTime = gameObject.GetComponent<>().position;
+
+
         }
 
         if (col.gameObject.tag == "Rum" && controllable)
@@ -276,6 +280,7 @@ public class PlayerScript : MonoBehaviour {
     public void kill()
     {
         ValueHolder.currentCheckpoint = checkpointPos;
+        ValueHolder.currentTime = time;
         Application.LoadLevel("DeathScene");
     }
 
@@ -301,9 +306,11 @@ public class PlayerScript : MonoBehaviour {
         return gameTicks2;
     }
 
-    public int getCurrentTime()
+    public double getCurrentTime()
     {
-        return 0;
+        return sec;
+        return min;
+
     }
 
     public void resetCollisionTime()

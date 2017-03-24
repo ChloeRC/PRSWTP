@@ -7,25 +7,15 @@ public class Timer : MonoBehaviour {
     private double currentTime;
     private double timeTravel;
     */
-    public double secs;
-    public double min;
+    public double secs = 0;
+    public double min = 2;
     private string timeDisp;
 
-	void Start () {
-     /*   currentTime = player.GetComponent<PlayerScript>().timer;
-        TrackMovement trackm = player.GetComponent<TrackMovement>();
-        */
-        secs = 0;
-        min = 0;
-        Debug.Log(timeDisp);
-        
+	void Start ()
+    {
 	}
 
     void Update () {
-        /*   PlayerScript PlayerScript = GetComponent<PlayerScript>();
-           TimeTravelIndicator TimeTravelIndicator = GetComponent<TimeTravelIndicator>();
-           TrackMovement TrackMovement = GetComponent<TrackMovement>();
-           */
         int stemp = (int)secs;
         int mtemp = (int)min;
 

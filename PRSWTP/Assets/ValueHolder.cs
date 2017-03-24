@@ -6,6 +6,7 @@ public class ValueHolder : MonoBehaviour {
 
     public static int checkpointNumber;
     public static Vector3 currentCheckpoint = new Vector3(0, 0, 0);
+    public static Timer currentTime = new Timer();
 
 	// Use this for initialization
 	void Start () {
