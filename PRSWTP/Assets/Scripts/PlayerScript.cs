@@ -209,8 +209,9 @@ public class PlayerScript : MonoBehaviour {
         }
         
         //If you've fallen below -20 or your health is 0, you die
-        if (health <= 0 || GetComponent<Transform>().position.y <= -20)
+        if (health <= 0 || GetComponent<Transform>().position.y <= -25)
         {
+            Debug.Log("bop bop bop to the top");
             kill();
         }
     }
@@ -317,7 +318,8 @@ public class PlayerScript : MonoBehaviour {
 		//this is always true?
         if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
         {
-            this.kill();
+            Debug.Log("oopsies");
+            //this.kill();
         }
         transform.position = vector;
     }
