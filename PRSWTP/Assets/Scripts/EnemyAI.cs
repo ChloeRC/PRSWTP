@@ -64,7 +64,7 @@ public class EnemyAI : MonoBehaviour {
             adjustHealthBy(1);
         }
 
-        if (health == 0)
+        if (health <= 0)
         {
             kill();
         }
