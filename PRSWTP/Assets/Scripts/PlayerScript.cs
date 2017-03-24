@@ -218,10 +218,12 @@ public class PlayerScript : MonoBehaviour {
             kill();
 
         }
+
     }
 
     void OnCollisionEnter(Collision col)
     {
+        //SwordScript sword = GetComponentInChildren<SwordScript>();
         //Under 0.5 for gameTicks2 = player is temporarily invincible
         if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable)
         {
