@@ -211,7 +211,8 @@ public class PlayerScript : MonoBehaviour {
             rb.AddForce(Vector2.down * gravity * rb.mass);
         }
         
-        //If you've fallen below -20 or your health is 0, you die
+        //If you've fallen below -25 or your health is 0, you die
+        //When the player resets, there's this weird thing where position is -21 for a bit????
         if (health <= 0 || GetComponent<Transform>().position.y <= -25)
         {
             Debug.Log("bop bop bop to the top");
@@ -219,13 +220,14 @@ public class PlayerScript : MonoBehaviour {
 
         }
 
+
     }
 
     void OnCollisionEnter(Collision col)
     {
-        //SwordScript sword = GetComponentInChildren<SwordScript>();
+        SwordScript sword = GetComponentInChildren<SwordScript>();
         //Under 0.5 for gameTicks2 = player is temporarily invincible
-        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable)
+        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable && !sword.drawn)
         {
             Debug.Log("The only man I love is my daaaaaaaaaaad");
             gameObject.GetComponentInParent<PlayerScript>().health--;
