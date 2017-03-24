@@ -305,6 +305,12 @@ public class PlayerScript : MonoBehaviour {
         return controllable;
     }
 
+    public bool getcheckpointPos()
+    {
+        return checkpointPos;
+    }
+}
+
     public void setPosition(Vector3 vector)
     {
         var marker = TrackMovement.MARKER;
