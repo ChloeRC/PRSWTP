@@ -91,6 +91,7 @@ public class EnemyAI : MonoBehaviour {
 
     public void adjustHealthBy(int toAdd)
     {
+        Debug.Log("adding " + toAdd);
         health += toAdd;
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
     }
