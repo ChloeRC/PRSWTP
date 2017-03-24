@@ -227,14 +227,11 @@ public class PlayerScript : MonoBehaviour {
         
         //If you've fallen below -25 or your health is 0, you die
         //When the player resets, there's this weird thing where position is -21 for a bit????
-        if (health <= 0 || GetComponent<Transform>().position.y <= -25)
+        if (health <= 0 || GetComponent<Transform>().position.y <= -25f)
         {
             Debug.Log("bop bop bop to the top");
             kill();
-
         }
-
-
     }
 
     void OnCollisionEnter(Collision col)

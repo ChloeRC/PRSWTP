@@ -14,7 +14,7 @@ public class BulletScript : MonoBehaviour {
 	void Update () {
         time += Time.deltaTime;
         //despawn timer
-        if (time > .4)
+        if (time > 4f)
         {
             kill();
         }
