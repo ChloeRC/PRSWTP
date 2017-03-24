@@ -310,7 +310,6 @@ public class PlayerScript : MonoBehaviour {
     {
         return checkpointPos;
     }
-}
 
     public void setPosition(Vector3 vector)
     {
