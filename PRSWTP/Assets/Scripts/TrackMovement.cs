@@ -58,11 +58,11 @@ public class TrackMovement : MonoBehaviour {
             player.transform.position = new Vector3(0, 3, 0);
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
-            thisHealth = this.gameObject.GetComponent<PlayerScript>().health;
-            player.GetComponent<PlayerScript>().health = thisHealth;
-            Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
-            PlayerScript.setHealth(thisHealth);
+            //Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
+            //thisHealth = this.gameObject.GetComponent<PlayerScript>().health;
+            //player.GetComponent<PlayerScript>().health = thisHealth;
+            //Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
+			//player.GetComponent<PlayerScript>().setHealth(thisHealth);
 
             HealthBarDisplay thisFullBar = this.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
             HealthBarDisplay playerFullBar = player.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
@@ -84,7 +84,10 @@ public class TrackMovement : MonoBehaviour {
             key++;
             player2Exists = true;
 
-			PlayerScript.setHealth(thisHealth);
+			thisHealth = player.GetComponent<PlayerScript> ().health;
+			Debug.Log ("Player Health (end) : " + player.GetComponent<PlayerScript> ().health);
+			Debug.Log (thisHealth);
+			//player.GetComponent<PlayerScript>().setHealth(thisHealth);
         }
         if (player2Exists && test % framerate == 0)
         {

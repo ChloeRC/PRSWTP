@@ -67,7 +67,13 @@ public class PlayerScript : MonoBehaviour {
 
         direction = DIR_RIGHT;
         charges = 0;
-        health = 3;
+		if (GetComponent<TrackMovement> ().getThisHealth() > 0) {
+			health = GetComponent<TrackMovement> ().getThisHealth();
+			Debug.Log ("You'll be amazed by my forest expertise");
+		} else {
+			health = 3;
+			Debug.Log ("Cause all it takes is a little re-in-ven-tion!");
+		}
   //      timer = 200;
         controllable = true;
 
