@@ -23,6 +23,7 @@ public class TrackMovement : MonoBehaviour {
     public GameObject bucket;
     public GameObject healthBar;
 
+	public int thisHealth;
 	// Use this for initialization
 	void Start () {
         locations = new Hashtable();
@@ -58,7 +59,7 @@ public class TrackMovement : MonoBehaviour {
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
-            int thisHealth = this.gameObject.GetComponent<PlayerScript>().health;
+            thisHealth = this.gameObject.GetComponent<PlayerScript>().health;
             player.GetComponent<PlayerScript>().health = thisHealth;
             Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
             PlayerScript.setHealth(thisHealth);
@@ -82,6 +83,8 @@ public class TrackMovement : MonoBehaviour {
             locations.Add(key, MARKER);
             key++;
             player2Exists = true;
+
+			PlayerScript.setHealth(thisHealth);
         }
         if (player2Exists && test % framerate == 0)
         {
@@ -111,7 +114,7 @@ public class TrackMovement : MonoBehaviour {
 
     }
 
-        void parseFull()
+    void parseFull()
     {
         string[] chargesPerLevelStr = full.Split(' ');
 
@@ -130,4 +133,8 @@ public class TrackMovement : MonoBehaviour {
         parseFull();
         return chargesPerLevel[currLevel];
     }
+
+	public int getThisHealth() {
+		return thisHealth;
+	}
 }

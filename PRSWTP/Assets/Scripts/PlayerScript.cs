@@ -221,7 +221,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys = 0.0f;
                 Debug.Log("PlayerScript health: " + health);
-
+				Debug.Log("TrackMovement thisHealth: " + GetComponent<TrackMovement>().getThisHealth());
             }
         }
         
