@@ -272,8 +272,8 @@ public class PlayerScript : MonoBehaviour {
             Checkpoint checkpoint = col.gameObject.GetComponent<Checkpoint>();
             checkpointPos = gameObject.GetComponent<Transform>().position;
             Timer time = col.gameObject.GetComponent<Timer>();
-            currentTime = gameObject.GetComponent<>().position;
-
+            //currentTime = gameObject.GetComponent<>().position;
+		
 
         }
 
@@ -297,7 +297,7 @@ public class PlayerScript : MonoBehaviour {
     public void kill()
     {
         ValueHolder.currentCheckpoint = checkpointPos;
-        ValueHolder.currentTime = time;
+        //ValueHolder.currentTime = time;
         Application.LoadLevel("DeathScene");
     }
 
@@ -323,12 +323,14 @@ public class PlayerScript : MonoBehaviour {
         return gameTicks2;
     }
 
+	/*
     public double getCurrentTime()
     {
         return sec;
         return min;
 
     }
+    */
 
     public void resetCollisionTime()
     {
