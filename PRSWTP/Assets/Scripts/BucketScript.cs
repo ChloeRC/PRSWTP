@@ -7,8 +7,14 @@ public class BucketScript : MonoBehaviour {
 
     private bool newCharge = true;
 
+    void Start()
+    {
+        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+    }
+
     public void activate()
     {
+        Debug.Log("Burr, we studied and we fought and we killed for the notion of a nation we now get to build.");
         Rigidbody bucketRb = GetComponent<Rigidbody>();
         bucketRb.constraints = RigidbodyConstraints.None;
         bucketRb.AddForce(-transform.right * 8);

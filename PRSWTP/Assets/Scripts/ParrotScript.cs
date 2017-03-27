@@ -27,10 +27,13 @@ public class ParrotScript : MonoBehaviour {
 
         timer = 0;
 
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //gameObject.GetComponent<MeshRenderer>().enabled = false;
         foreach (Transform child in transform)
         {
-            child.GetComponent<MeshRenderer>().enabled = false;
+            if (child.GetComponent<MeshRenderer>() != null)
+            {
+                child.GetComponent<MeshRenderer>().enabled = false;
+            }
         }
 
         currMessage = 0;
@@ -65,13 +68,16 @@ public class ParrotScript : MonoBehaviour {
 
     public void activate()
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        //gameObject.GetComponent<MeshRenderer>().enabled = true;
         rb.useGravity = true;
 
         activated = true;
         foreach (Transform child in transform)
         {
-            child.GetComponent<MeshRenderer>().enabled = true;
+            if (child.GetComponent<MeshRenderer>() != null)
+            {
+                child.GetComponent<MeshRenderer>().enabled = true;
+            }
         }
         timer = 0;
     }
