@@ -87,7 +87,7 @@ public class TrackMovement : MonoBehaviour {
 			thisHealth = player.GetComponent<PlayerScript> ().health;
 			Debug.Log ("Player Health (end) : " + player.GetComponent<PlayerScript> ().health);
 			Debug.Log (thisHealth);
-			//player.GetComponent<PlayerScript>().setHealth(thisHealth);
+			player.GetComponent<PlayerScript>().setHealth(thisHealth);
         }
         if (player2Exists && test % framerate == 0)
         {
