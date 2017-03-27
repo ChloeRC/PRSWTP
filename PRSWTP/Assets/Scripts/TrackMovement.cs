@@ -22,6 +22,7 @@ public class TrackMovement : MonoBehaviour {
     public GameObject nonPlayerObjects;
     public GameObject bucket;
     public GameObject healthBar;
+    public GameObject playerinfo;
 
 	public int thisHealth;
 	// Use this for initialization
@@ -40,6 +41,8 @@ public class TrackMovement : MonoBehaviour {
         test++;
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
 		TimeTravelIndicator TimeTravelIndicator = GetComponent <TimeTravelIndicator>();
+        PlayerInfo playerinfo = nonPlayerObjects.GetComponent<PlayerInfo>();
+
         int charge = PlayerScript.getCharges();
         //GameObject player2;
         if (charge == currLevelCharges()) //go back in time
@@ -87,7 +90,10 @@ public class TrackMovement : MonoBehaviour {
 			thisHealth = player.GetComponent<PlayerScript> ().health;
 			Debug.Log ("Player Health (end) : " + player.GetComponent<PlayerScript> ().health);
 			Debug.Log (thisHealth);
-			player.GetComponent<PlayerScript>().setHealth(thisHealth);
+            
+            playerinfo.setHealth(thisHealth);
+
+
         }
         if (player2Exists && test % framerate == 0)
         {

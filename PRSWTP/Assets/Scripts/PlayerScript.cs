@@ -6,7 +6,7 @@ public class PlayerScript : MonoBehaviour {
     private Rigidbody rb;
     private float gameTicks; //This is for something else
     private float gameTicks2; //This is for enemy collisions
-    private float aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys;
+    private float thingy;
 
     public float horizSpeed;
     public float jumpSpeed;
@@ -62,18 +62,13 @@ public class PlayerScript : MonoBehaviour {
 
         gameTicks = 0.0F;
         gameTicks2 = 0.0f;
-        aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys = 0.0f;
+        thingy = 0.0f;
         rb.freezeRotation = true;
 
         direction = DIR_RIGHT;
         charges = 0;
-		if (GetComponent<TrackMovement> ().getThisHealth() > 0) {
-			health = GetComponent<TrackMovement> ().getThisHealth();
-			Debug.Log ("You'll be amazed by my forest expertise");
-		} else {
-			health = 3;
-			Debug.Log ("Cause all it takes is a little re-in-ven-tion!");
-		}
+        health = 3;
+
   //      timer = 200;
         controllable = true;
 
@@ -96,7 +91,7 @@ public class PlayerScript : MonoBehaviour {
 
         gameTicks += Time.deltaTime;
         gameTicks2 += Time.deltaTime;
-        aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys += Time.deltaTime;
+        thingy += Time.deltaTime;
 
         if (controllable)
         {
@@ -223,11 +218,10 @@ public class PlayerScript : MonoBehaviour {
             rb.AddForce(Vector2.down * gravity * rb.mass);
 
             //GET INFORMATION (i) - contains lots of debugs
-            if (Input.GetButton(INFO) == true && aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys > 0.3f)
+            if (Input.GetButton(INFO) == true && thingy > 0.3f)
             {
-                aileenIsASpoiledBratWhoWantsAFloatForHerOwnSpecialPurposesThxGuys = 0.0f;
-                Debug.Log("PlayerScript health: " + health);
-				Debug.Log("TrackMovement thisHealth: " + GetComponent<TrackMovement>().getThisHealth());
+                thingy = 0.0f;
+                Debug.Log("toot toot");
             }
         }
         
