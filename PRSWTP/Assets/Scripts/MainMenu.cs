@@ -20,6 +20,8 @@ public class MainMenu : MonoBehaviour
         if (checkpointNumber != 0)
         {
             ValueHolder.checkpointNumber = this.checkpointNumber;
+
+            Debug.Log("this checkpoint");
         }
 
         SceneManager.LoadScene(goTo);

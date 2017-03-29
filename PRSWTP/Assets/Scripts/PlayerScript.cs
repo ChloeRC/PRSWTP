@@ -20,7 +20,6 @@ public class PlayerScript : MonoBehaviour {
     public GameObject Timer;
 
     public Vector3[] checkpointLocations;
-    public Vector3 returnSpawnLocation;
 
     //False is right, true is left
     private bool direction;
@@ -49,7 +48,7 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string INFO = "info";
 
     private bool isGrounded = false;
-    private Vector3 checkpointPos;
+  //  private Vector3 spawnLocation;
     private Timer currentTime;
 
     private int charges;
@@ -58,6 +57,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject time;
     public GameObject nonPlayerObjects;
     public GameObject info; //stores information across time travel
+    private Vector3 rSpawnLocation;
 
     // Use this for initialization
     void Start ()
@@ -277,13 +277,15 @@ public class PlayerScript : MonoBehaviour {
 
         if (col.gameObject.tag == "Checkpoint")
         {
-            Checkpoint checkpoint = col.gameObject.GetComponent<Checkpoint>();
-            checkpointPos = gameObject.GetComponent<Transform>().position;
-             
+            Checkpoint rSpawnLocation = col.gameObject.GetComponent<Checkpoint>();
+            ValueHolder.returnSpawnLocation = rSpawnLocation.transform.position;
+            // spawnLocation = gameObject.GetComponent<Transform>().position; 
             Timer time = col.gameObject.GetComponent<Timer>();
-            returnSpawnLocation = checkpointPos;
             //currentTime = gameObject.GetComponent<>().position;
-		
+            /*
+             comparing vector3 to vector3[1];
+             if..
+             */
 
         }
 
@@ -332,14 +334,6 @@ public class PlayerScript : MonoBehaviour {
         return gameTicks2;
     }
 
-	/*
-    public double getCurrentTime()
-    {
-        return sec;
-        return min;
-
-    }
-    */
 
     public void resetCollisionTime()
     {
@@ -356,11 +350,13 @@ public class PlayerScript : MonoBehaviour {
         return controllable;
     }
 
-    public Vector3 getcheckpointPos()
+    public Vector3 returnSpawnLocation()
     {
-        return checkpointPos;
+        return rSpawnLocation;
     }
     //moving the past self
+  
+
     public void setPosition(Vector3 vector)
     {
         var marker = TrackMovement.MARKER;
