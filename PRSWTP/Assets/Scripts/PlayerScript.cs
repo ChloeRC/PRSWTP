@@ -59,27 +59,29 @@ public class PlayerScript : MonoBehaviour {
     public GameObject info; //stores information across time travel
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        health = 3;
+        Debug.Log("one");
         rb = GetComponent<Rigidbody>();
-        PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
-
-
+        //PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
+        Debug.Log("two");
+        
         gameTicks = 0.0F;
         gameTicks2 = 0.0f;
         thingy = 0.0f;
         rb.freezeRotation = true;
-
+        Debug.Log("three");
         direction = DIR_RIGHT;
         charges = 0;
-        //health = 3;
-        health = info.getHealth();
+        //health = info.getHealth();
 
   //      timer = 200;
         controllable = true;
 
         hasShot = 0;
         hasSword = 0;
-
+        Debug.Log("send help pls");
         Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
         //The checkpoints are indexed from 1, the locations are indexed from 0
         if (ValueHolder.checkpointNumber != 0)
@@ -103,7 +105,7 @@ public class PlayerScript : MonoBehaviour {
             //If you push the button which is mapped to RIGHT (d), you go right
             if (Input.GetButton(RIGHT) == true)
             {
-                //Debug.Log("D key pressed.");
+                Debug.Log("D key pressed.");
                 transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
                 player.GetComponent<PlayerRotate>().Rotate(DIR_RIGHT);
                 direction = DIR_RIGHT;

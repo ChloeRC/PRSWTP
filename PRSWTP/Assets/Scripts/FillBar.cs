@@ -24,7 +24,7 @@ public class FillBar : MonoBehaviour {
     {
        
 		text.GetComponent<TextMesh>().text = originalText + curr + " / " + full;
-
+        Debug.Log("Curr: " + curr + " Full: " + full);
         float currWidth = originalWidth * ((float)curr / (float)full);
         gameObject.transform.localScale = new Vector3(currWidth, 0.27f, 0.1f);
 
