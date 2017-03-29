@@ -255,7 +255,7 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
-    float OnTriggerEnter(Collider col)
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Charge" && controllable)
         {
@@ -355,10 +355,7 @@ public class PlayerScript : MonoBehaviour {
         return rSpawnLocation;
     }
     //moving the past self
-   /* public Timer returntime()
-    {
-
-    }*/
+  
 
     public void setPosition(Vector3 vector)
     {
