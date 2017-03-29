@@ -55,10 +55,14 @@ public class PlayerScript : MonoBehaviour {
     public GameObject healthDisplayer;
     public GameObject gunReloadDisplayer;
     public GameObject time;
+    public GameObject nonPlayerObjects;
+    public GameObject info; //stores information across time travel
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
+        PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
+
 
         gameTicks = 0.0F;
         gameTicks2 = 0.0f;
@@ -67,7 +71,8 @@ public class PlayerScript : MonoBehaviour {
 
         direction = DIR_RIGHT;
         charges = 0;
-        health = 3;
+        //health = 3;
+        health = info.getHealth();
 
   //      timer = 200;
         controllable = true;

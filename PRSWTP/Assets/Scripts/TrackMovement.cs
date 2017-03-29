@@ -92,8 +92,6 @@ public class TrackMovement : MonoBehaviour {
 			Debug.Log (thisHealth);
             
             playerinfo.setHealth(thisHealth);
-
-
         }
         if (player2Exists && test % framerate == 0)
         {

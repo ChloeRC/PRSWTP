@@ -8,7 +8,7 @@ public class PlayerInfo : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        health = 3;
 	}
 	
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class PlayerInfo : MonoBehaviour {
         Debug.Log("Do you ever really crash or even make a sound?");
     }
 
-    public int getHealth(int i)
+    public int getHealth()
     {
         return health;
     }
