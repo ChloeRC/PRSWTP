@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject Timer;
 
     public Vector3[] checkpointLocations;
+    public Vector3 returnSpawnLocation;
 
     //False is right, true is left
     private bool direction;
@@ -271,7 +272,9 @@ public class PlayerScript : MonoBehaviour {
         {
             Checkpoint checkpoint = col.gameObject.GetComponent<Checkpoint>();
             checkpointPos = gameObject.GetComponent<Transform>().position;
+             
             Timer time = col.gameObject.GetComponent<Timer>();
+            returnSpawnLocation = checkpointPos;
             //currentTime = gameObject.GetComponent<>().position;
 		
 
@@ -295,8 +298,7 @@ public class PlayerScript : MonoBehaviour {
 
     //Literally the most satisfying function in this entire project.
     public void kill()
-    {
-        ValueHolder.currentCheckpoint = checkpointPos;
+    {  
         //ValueHolder.currentTime = time;
         Application.LoadLevel("DeathScene");
     }
