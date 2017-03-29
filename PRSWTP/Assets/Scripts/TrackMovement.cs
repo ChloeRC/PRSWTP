@@ -22,7 +22,7 @@ public class TrackMovement : MonoBehaviour {
     public GameObject nonPlayerObjects;
     public GameObject bucket;
     public GameObject healthBar;
-    public GameObject playerinfo;
+    //public GameObject playerinfo;
 
 	public int thisHealth;
 	// Use this for initialization
@@ -41,7 +41,7 @@ public class TrackMovement : MonoBehaviour {
         test++;
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
 		TimeTravelIndicator TimeTravelIndicator = GetComponent <TimeTravelIndicator>();
-        PlayerInfo playerinfo = nonPlayerObjects.GetComponent<PlayerInfo>();
+       //PlayerInfo playerinfo = nonPlayerObjects.GetComponent<PlayerInfo>();
 
         int charge = PlayerScript.getCharges();
         //GameObject player2;
@@ -91,9 +91,7 @@ public class TrackMovement : MonoBehaviour {
 			Debug.Log ("Player Health (end) : " + player.GetComponent<PlayerScript> ().health);
 			Debug.Log (thisHealth);
             
-            playerinfo.setHealth(thisHealth);
-
-
+            //playerinfo.setHealth(thisHealth);
         }
         if (player2Exists && test % framerate == 0)
         {
