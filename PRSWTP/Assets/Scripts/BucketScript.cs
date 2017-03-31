@@ -14,7 +14,7 @@ public class BucketScript : MonoBehaviour {
 
     public void activate()
     {
-        Debug.Log("Burr, we studied and we fought and we killed for the notion of a nation we now get to build.");
+        // temp Debug.Log("Burr, we studied and we fought and we killed for the notion of a nation we now get to build.");
         Rigidbody bucketRb = GetComponent<Rigidbody>();
         bucketRb.constraints = RigidbodyConstraints.None;
         bucketRb.AddForce(-transform.right * 8);

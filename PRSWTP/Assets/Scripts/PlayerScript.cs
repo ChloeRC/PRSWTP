@@ -71,7 +71,6 @@ public class PlayerScript : MonoBehaviour {
         gameTicks2 = 0.0f;
         thingy = 0.0f;
         rb.freezeRotation = true;
-        Debug.Log("three");
         direction = DIR_RIGHT;
         charges = 0;
 

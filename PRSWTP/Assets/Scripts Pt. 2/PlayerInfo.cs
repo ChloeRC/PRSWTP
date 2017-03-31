@@ -4,11 +4,18 @@ using UnityEngine;
 
 //Using this script to store information about the player across time travel
 public class PlayerInfo : MonoBehaviour {
-    public int health;
+    //for player
+	public int health;
+
+	//for health bar display
+	public float currWidth;
+	public float currPos;
 
 	// Use this for initialization
 	void Start () {
-        health = 3;
+        health = 3;	//beginning health value
+		currWidth = 0.0f;
+		currPos = 0.0f;
 	}
 	
 	// Update is called once per frame
@@ -19,12 +26,39 @@ public class PlayerInfo : MonoBehaviour {
     public void setHealth(int i)
     {
         health = i;
-        Debug.Log("Do you ever really crash or even make a sound?");
     }
 
     public int getHealth()
     {
-		Debug.Log ("NEVER KNOW YOUR LUCK WHEN THERE'S A FREE FOR ALL!!");
         return health;
     }
+
+	public void setCurrWidth(float f)
+	{
+		if (currWidth == 0.0f) 
+		{
+			currWidth = f;
+			Debug.Log ("info currWidth: " + currWidth);
+		}
+	}
+
+	public float getCurrWidth()
+	{
+		Debug.Log ("Hey guys!!!");
+		return currWidth;
+	}
+
+	public void setCurrPos(float f)
+	{
+		if (currPos == 0.0f) 
+		{
+			currPos = f;
+			Debug.Log ("info currPos: " + currPos);
+		}
+	}
+
+	public float getCurrPos() {
+		Debug.Log ("falafel");
+		return currPos;
+	}
 }

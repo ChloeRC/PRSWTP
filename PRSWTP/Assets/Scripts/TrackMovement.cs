@@ -88,8 +88,8 @@ public class TrackMovement : MonoBehaviour {
             player2Exists = true;
 
 			thisHealth = player.GetComponent<PlayerScript> ().health;
-			Debug.Log ("Player Health (end) : " + player.GetComponent<PlayerScript> ().health);
-			Debug.Log (thisHealth);
+			//Debug.Log ("Player Health (end) : " + player.GetComponent<PlayerScript> ().health);
+			//Debug.Log (thisHealth);
             
             playerinfo.setHealth(thisHealth);
         }
