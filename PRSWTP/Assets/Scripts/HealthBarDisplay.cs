@@ -9,11 +9,14 @@ public class HealthBarDisplay : FillBar {
 
     // Use this for initialization
     new void Start () {
-        base.full = UpdateValue();
+        //base.full = UpdateValue();
+		base.full = 3;
         //Sometimes (when the first player exists), I want curr to be equal to full.
         //Other times (when the player travels back in time), I want curr to be left unchanged. How?
         //base.curr = base.full;
-        base.curr = startValue;
+        //ORIG: base.curr = startValue;
+
+		base.curr = UpdateValue ();
         base.originalText = "Health: ";
         base.Start();
 

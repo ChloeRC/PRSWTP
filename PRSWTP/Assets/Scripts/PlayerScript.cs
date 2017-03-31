@@ -62,27 +62,25 @@ public class PlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        health = 3;
-        Debug.Log("one");
+        //health = 3;
+		PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
+		health = info.getHealth();
         rb = GetComponent<Rigidbody>();
-        //PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
-        Debug.Log("two");
         
-        gameTicks = 0.0F;
+        gameTicks = 0.0f;
         gameTicks2 = 0.0f;
         thingy = 0.0f;
         rb.freezeRotation = true;
         Debug.Log("three");
         direction = DIR_RIGHT;
         charges = 0;
-        //health = info.getHealth();
+
 
   //      timer = 200;
         controllable = true;
 
         hasShot = 0;
         hasSword = 0;
-        Debug.Log("send help pls");
         Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
         //The checkpoints are indexed from 1, the locations are indexed from 0
         if (ValueHolder.checkpointNumber != 0)
@@ -106,7 +104,6 @@ public class PlayerScript : MonoBehaviour {
             //If you push the button which is mapped to RIGHT (d), you go right
             if (Input.GetButton(RIGHT) == true)
             {
-                Debug.Log("D key pressed.");
                 transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
                 player.GetComponent<PlayerRotate>().Rotate(DIR_RIGHT);
                 direction = DIR_RIGHT;
@@ -229,7 +226,9 @@ public class PlayerScript : MonoBehaviour {
             if (Input.GetButton(INFO) == true && thingy > 0.3f)
             {
                 thingy = 0.0f;
-                Debug.Log("toot toot");
+				PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
+				Debug.Log("Stored health: " + info.getHealth());
+
             }
         }
         

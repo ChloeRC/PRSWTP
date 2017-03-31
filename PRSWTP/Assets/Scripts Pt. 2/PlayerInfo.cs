@@ -4,11 +4,11 @@ using UnityEngine;
 
 //Using this script to store information about the player across time travel
 public class PlayerInfo : MonoBehaviour {
-    int health;
+    public int health;
 
 	// Use this for initialization
 	void Start () {
-        //health = 3;
+        health = 3;
 	}
 	
 	// Update is called once per frame
@@ -18,12 +18,13 @@ public class PlayerInfo : MonoBehaviour {
 
     public void setHealth(int i)
     {
-        //health = i;
-        //Debug.Log("Do you ever really crash or even make a sound?");
+        health = i;
+        Debug.Log("Do you ever really crash or even make a sound?");
     }
 
     public int getHealth()
     {
-        return 3;
+		Debug.Log ("NEVER KNOW YOUR LUCK WHEN THERE'S A FREE FOR ALL!!");
+        return health;
     }
 }
