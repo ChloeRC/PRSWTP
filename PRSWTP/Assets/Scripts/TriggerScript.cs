@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TriggerScript : MonoBehaviour {
 
@@ -24,6 +25,10 @@ public class TriggerScript : MonoBehaviour {
             if (type == "Parrot")
             {
                 toBeTriggered.GetComponent<ParrotScript>().activate();
+            }
+            if (type == "EndGame")
+            {
+                SceneManager.LoadScene("EndGame");
             }
         }
     }

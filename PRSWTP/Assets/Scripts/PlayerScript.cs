@@ -19,6 +19,8 @@ public class PlayerScript : MonoBehaviour {
     public Collider Checkpoint;
     public GameObject Timer;
 
+    public GameObject gameLight;
+
     public Vector3[] checkpointLocations;
 
     //False is right, true is left
@@ -27,6 +29,8 @@ public class PlayerScript : MonoBehaviour {
     public static readonly bool DIR_LEFT = true;
 
     public int health;
+
+    private IEnumerator coroutine;
 
     //If hasShot is 0, you can shoot. Otherwise, you can't.
     private float hasShot;
@@ -305,8 +309,43 @@ public class PlayerScript : MonoBehaviour {
 
     //Literally the most satisfying function in this entire project.
     public void kill()
-    {  
+    {
         //ValueHolder.currentTime = time;
+        coroutine = LightChange();
+        StartCoroutine(coroutine);
+        controllable = false;
+    }
+
+    private IEnumerator LightChange()
+    {
+        int numberOfIterations = 10;
+        //Five times...
+        for (int i = 0; i < numberOfIterations; i++) {
+            yield return new WaitForSeconds(.25f); //wait a quarter a second
+            //Then, for every light...
+            foreach (Transform child in gameLight.transform)
+            {
+                Light childL = child.GetComponent<Light>();
+                if (childL == null)
+                {
+                    //...and every sublight...
+                    foreach (Transform childOfChild in child.transform)
+                    {
+                        Light childOfChildL = childOfChild.GetComponent<Light>();
+                        if (childL != null && childL.intensity > 0f)
+                        {
+                            //...drop the intensity.
+                            childL.intensity -= .25f;
+                        }
+                    }
+                }
+                else if (childL.intensity > 0f)
+                {
+                    childL.intensity -= .25f;
+                }
+            }
+        }
+        //And when all the lights are gone, switch the scene.
         Application.LoadLevel("DeathScene");
     }
 

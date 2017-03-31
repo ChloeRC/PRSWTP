@@ -7,6 +7,8 @@ public class BucketScript : MonoBehaviour {
 
     private bool newCharge = true;
 
+    private bool isActivated = false;
+
     void Start()
     {
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
@@ -14,7 +16,8 @@ public class BucketScript : MonoBehaviour {
 
     public void activate()
     {
-        // temp Debug.Log("Burr, we studied and we fought and we killed for the notion of a nation we now get to build.");
+        Debug.Log("Pardon me, are you Aaron Burr, sir?");
+        isActivated = true;
         Rigidbody bucketRb = GetComponent<Rigidbody>();
         bucketRb.constraints = RigidbodyConstraints.None;
         bucketRb.AddForce(-transform.right * 8);
@@ -39,5 +42,13 @@ public class BucketScript : MonoBehaviour {
     public void reset()
     {
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+    }
+
+    void Update()
+    {
+        if (!isActivated)
+        {
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 }
