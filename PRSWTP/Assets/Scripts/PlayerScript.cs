@@ -398,10 +398,10 @@ public class PlayerScript : MonoBehaviour {
     {
         var marker = TrackMovement.MARKER;
 		//this is always true?
-        if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
+        if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon && !controllable)
         {
             Debug.Log("oopsies");
-            //this.kill();
+            //kill();
         }
         transform.position = vector;
     }
