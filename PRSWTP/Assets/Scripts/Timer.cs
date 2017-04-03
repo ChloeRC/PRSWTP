@@ -2,11 +2,6 @@
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
-  /*  public GameObject player;
-    public GameObject timer;
-    private double currentTime;
-    private double timeTravel;
-    */
     public double secs = 0;
     public double min = 2;
     private string timeDisp;
