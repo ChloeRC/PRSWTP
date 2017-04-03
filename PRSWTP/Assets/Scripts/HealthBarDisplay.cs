@@ -17,7 +17,7 @@ public class HealthBarDisplay : FillBar {
 		//setCurrWidth();
 			
         //base.full = UpdateValue();
-		//base.originalWidth = 1.5f;
+
 		base.full = startValue;
         //Sometimes (when the first player exists), I want curr to be equal to full.
         //Other times (when the player travels back in time), I want curr to be left unchanged. How?
@@ -27,6 +27,8 @@ public class HealthBarDisplay : FillBar {
 		base.curr = UpdateValue ();
         base.originalText = "Health: ";
         base.Start();
+
+        originalWidth = 3.3f;
 
         //Debug.Log("START " + base.text.GetComponent<TextMesh>().text);
     }
@@ -48,10 +50,10 @@ public class HealthBarDisplay : FillBar {
 //		Debug.Log ("Full: " + base.full);
 //
 //
-		Debug.Log ("currWidth " + base.currWidth);
-		Debug.Log ("currPos " + base.currPos);
+//		Debug.Log ("currWidth " + base.currWidth);
+//		Debug.Log ("currPos " + base.currPos);
 //		Debug.Log ("originalWidth: " + base.originalWidth);
-		Debug.Log ("---------------------------");
+//		Debug.Log ("---------------------------");
     }
 
 	public void storeCurrWidth() 

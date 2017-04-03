@@ -17,8 +17,8 @@ public class FillBar : MonoBehaviour {
     // Use this for initialization
     public void Start()
     {
-        originalWidth = gameObject.transform.localScale.x;
-
+        //originalWidth = gameObject.transform.localScale.x;
+        originalWidth = 3.3f;
         UpdateText();
     }
 
