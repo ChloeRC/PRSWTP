@@ -92,6 +92,7 @@ public class PlayerScript : MonoBehaviour {
             Debug.Log(newPos.x + ", " + newPos.y + ", " + newPos.z);
             this.transform.position = checkpointLocations[ValueHolder.checkpointNumber - 1];
             Debug.Log(this.transform.position.x + ", " + this.transform.position.y + ", " + this.transform.position.z);
+            //Add code for checkpoint
         }
 	}
 	
