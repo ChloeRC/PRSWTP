@@ -67,8 +67,21 @@ public class PlayerScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        if (ValueHolder.isPastSelfSpawning == false)
+        {
+            Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
+            //The checkpoints are indexed from 1, the locations are indexed from 0
+            Vector3 newPos = checkpointLocations[ValueHolder.checkpointNumber];
+            Debug.Log("Pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
+            this.transform.position = checkpointLocations[ValueHolder.checkpointNumber];
+        }
+        else
+        {
+            ValueHolder.isPastSelfSpawning = false;
+        }
+
         //health = 3;
-		PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
+        PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
 		health = info.getHealth();
         rb = GetComponent<Rigidbody>();
         
@@ -78,23 +91,16 @@ public class PlayerScript : MonoBehaviour {
         rb.freezeRotation = true;
         direction = DIR_RIGHT;
         charges = 0;
-
-
-  //      timer = 200;
+        
         controllable = true;
 
         hasShot = 0;
         hasSword = 0;
-        Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
-        //The checkpoints are indexed from 1, the locations are indexed from 0
-        Vector3 newPos = checkpointLocations[ValueHolder.checkpointNumber];
-        Debug.Log(newPos.x + ", " + newPos.y + ", " + newPos.z);
-        this.transform.position = checkpointLocations[ValueHolder.checkpointNumber];
-        Debug.Log(this.transform.position.x + ", " + this.transform.position.y + ", " + this.transform.position.z);
 	}
 	
 	// Update is called once per frame
     void Update () {
+        Debug.Log(ValueHolder.isPastSelfSpawning);
 
         gameTicks += Time.deltaTime;
         gameTicks2 += Time.deltaTime;

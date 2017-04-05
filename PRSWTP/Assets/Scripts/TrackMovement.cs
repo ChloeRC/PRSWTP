@@ -47,6 +47,8 @@ public class TrackMovement : MonoBehaviour {
         //GameObject player2;
         if (charge == currLevelCharges()) //go back in time
         {
+            ValueHolder.isPastSelfSpawning = true;
+            //Vector3 currPos = this.transform.position;
             Instantiate(player);    //creates the previous self
             Debug.Log(player);
             PlayerScript.resetCharges();
@@ -58,8 +60,7 @@ public class TrackMovement : MonoBehaviour {
             //player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
             player.GetComponent<PlayerScript>().toggleControllable();
 
-            player.transform.position = new Vector3(0, 3, 0);
-            player.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             //Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
             //thisHealth = this.gameObject.GetComponent<PlayerScript>().health;
@@ -92,6 +93,10 @@ public class TrackMovement : MonoBehaviour {
 			//Debug.Log (thisHealth);
             
             playerinfo.setHealth(thisHealth);
+
+            //player.transform.position = currPos;
+            //this.transform.position = currPos;
+            Debug.Log(player.transform.position);
         }
         if (player2Exists && test % framerate == 0)
         {
