@@ -22,6 +22,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject gameLight;
 
     public Vector3[] checkpointLocations;
+    public Vector3 currentCheckPoint;
 
     //False is right, true is left
     private bool direction;
@@ -86,14 +87,10 @@ public class PlayerScript : MonoBehaviour {
         hasSword = 0;
         Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
         //The checkpoints are indexed from 1, the locations are indexed from 0
-        if (ValueHolder.checkpointNumber != 0)
-        {
-            Vector3 newPos = checkpointLocations[ValueHolder.checkpointNumber - 1];
-            Debug.Log(newPos.x + ", " + newPos.y + ", " + newPos.z);
-            this.transform.position = checkpointLocations[ValueHolder.checkpointNumber - 1];
-            Debug.Log(this.transform.position.x + ", " + this.transform.position.y + ", " + this.transform.position.z);
-            //Add code for checkpoint
-        }
+        Vector3 newPos = checkpointLocations[ValueHolder.checkpointNumber];
+        Debug.Log(newPos.x + ", " + newPos.y + ", " + newPos.z);
+        this.transform.position = checkpointLocations[ValueHolder.checkpointNumber];
+        Debug.Log(this.transform.position.x + ", " + this.transform.position.y + ", " + this.transform.position.z);
 	}
 	
 	// Update is called once per frame
@@ -280,7 +277,7 @@ public class PlayerScript : MonoBehaviour {
 
         if (col.gameObject.tag == "Checkpoint")
         {
-            Checkpoint rSpawnLocation = col.gameObject.GetComponent<Checkpoint>();
+            /*Checkpoint rSpawnLocation = col.gameObject.GetComponent<Checkpoint>();
             ValueHolder.returnSpawnLocation = rSpawnLocation.transform.position;
             // spawnLocation = gameObject.GetComponent<Transform>().position; 
             Timer time = col.gameObject.GetComponent<Timer>();
@@ -289,6 +286,14 @@ public class PlayerScript : MonoBehaviour {
              comparing vector3 to vector3[1];
              if..
              */
+
+            Checkpoint ch = col.gameObject.GetComponent<Checkpoint>();
+
+            if (ch.isActivated == false)
+            {
+                ValueHolder.checkpointNumber++;
+            }
+            ch.isActivated = true;
 
         }
 
