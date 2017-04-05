@@ -7,7 +7,7 @@ public class GunReloadDisplay : FillBar {
     int reloadTime;
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
         reloadTime = 0;	
 		base.full = getReloadTime();
 		base.curr = base.full;

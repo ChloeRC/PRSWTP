@@ -333,10 +333,10 @@ public class PlayerScript : MonoBehaviour {
                     foreach (Transform childOfChild in child.transform)
                     {
                         Light childOfChildL = childOfChild.GetComponent<Light>();
-                        if (childL != null && childL.intensity > 0f)
+                        if (childOfChildL != null && childOfChildL.intensity > 0f)
                         {
                             //...drop the intensity.
-                            childL.intensity -= .25f;
+                            childOfChildL.intensity -= .25f;
                         }
                     }
                 }
@@ -399,10 +399,10 @@ public class PlayerScript : MonoBehaviour {
     {
         var marker = TrackMovement.MARKER;
 		//this is always true?
-        if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
+        if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon && !controllable)
         {
             Debug.Log("oopsies");
-            //this.kill();
+            //kill();
         }
         transform.position = vector;
     }
