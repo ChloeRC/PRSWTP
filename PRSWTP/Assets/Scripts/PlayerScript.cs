@@ -51,8 +51,10 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string SWORD = "sword";
     private static readonly string FILL_CHARGES = "fill charges";
     private static readonly string INFO = "info";
+	private static readonly string INVINCIBLE = "invincible";
 
     private bool isGrounded = false;
+	private bool inv = false;
   //  private Vector3 spawnLocation;
     private Timer currentTime;
 
@@ -206,6 +208,7 @@ public class PlayerScript : MonoBehaviour {
                 var rbBullet = newBullet.GetComponent<Rigidbody>();
                 rbBullet.velocity = newBullet.GetComponent<BulletScript>().speed * force;
             }
+				
 
             //Tell if there is anything in a sphere shape below the player
             RaycastHit hitInfo;
@@ -233,8 +236,14 @@ public class PlayerScript : MonoBehaviour {
             if (Input.GetButton(INFO) == true && thingy > 0.3f)
             {
 				Debug.Log ("isGrounded: " + isGrounded);
+				Debug.Log ("inv: " + inv);
 
             }
+
+			if (Input.GetButton (INVINCIBLE) == true) {
+				inv = !inv;
+				gameObject.GetComponentInParent<PlayerScript>().health = 3;
+			}
         }
         
         //If you've fallen below -25 or your health is 0, you die
@@ -250,9 +259,9 @@ public class PlayerScript : MonoBehaviour {
     {
         SwordScript sword = GetComponentInChildren<SwordScript>();
         //Under 0.5 for gameTicks2 = player is temporarily invincible
-        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable && !sword.drawn)
+        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable && !sword.drawn && !inv)
         {
-            Debug.Log("The only man I love is my daaaaaaaaaaad");
+            //Debug.Log("The only man I love is my daaaaaaaaaaad");
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
             gameTicks2 = 0.0f;
@@ -310,11 +319,11 @@ public class PlayerScript : MonoBehaviour {
 			}
         }
     }
-
+		
     public void setHealth(int thisHealth)
     {
         health = thisHealth;
-        Debug.Log("bam bam");
+        //Debug.Log("bam bam");
     }
 
     //Literally the most satisfying function in this entire project.
@@ -396,6 +405,10 @@ public class PlayerScript : MonoBehaviour {
     {
         return controllable;
     }
+
+	public bool getInv() {
+		return inv;
+	}
 
     public Vector3 returnSpawnLocation()
     {
