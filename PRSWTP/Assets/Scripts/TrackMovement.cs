@@ -84,6 +84,7 @@ public class TrackMovement : MonoBehaviour {
             bucket.GetComponent<BucketScript>().reset();
 
             //Debug.Log("Count before marker: " + locations.Count);
+			Debug.Log ("Key: " + key);
             locations.Add(key, MARKER);
             key++;
             player2Exists = true;
@@ -100,7 +101,7 @@ public class TrackMovement : MonoBehaviour {
         }
         if (player2Exists && test % framerate == 0)
         {
-            Debug.Log("Spot2:" + spot2);
+            //Debug.Log("Spot2:" + spot2);
             player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
             spot2++;
         }

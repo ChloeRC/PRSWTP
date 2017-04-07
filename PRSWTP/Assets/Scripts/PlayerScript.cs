@@ -100,7 +100,7 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update () {
-        Debug.Log(ValueHolder.isPastSelfSpawning);
+        //Debug.Log(ValueHolder.isPastSelfSpawning);
 
         gameTicks += Time.deltaTime;
         gameTicks2 += Time.deltaTime;
@@ -232,9 +232,7 @@ public class PlayerScript : MonoBehaviour {
             //GET INFORMATION (i) - contains lots of debugs
             if (Input.GetButton(INFO) == true && thingy > 0.3f)
             {
-                thingy = 0.0f;
-				PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
-				Debug.Log("Stored health: " + info.getHealth());
+				Debug.Log ("isGrounded: " + isGrounded);
 
             }
         }
