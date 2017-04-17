@@ -277,21 +277,12 @@ public class PlayerScript : MonoBehaviour {
 
         if (col.gameObject.tag == "Checkpoint")
         {
-            /*Checkpoint rSpawnLocation = col.gameObject.GetComponent<Checkpoint>();
-            ValueHolder.returnSpawnLocation = rSpawnLocation.transform.position;
-            // spawnLocation = gameObject.GetComponent<Transform>().position; 
-            Timer time = col.gameObject.GetComponent<Timer>();
-            //currentTime = gameObject.GetComponent<>().position;
-            /*
-             comparing vector3 to vector3[1];
-             if..
-             */
-
             Checkpoint ch = col.gameObject.GetComponent<Checkpoint>();
 
             if (ch.isActivated == false)
             {
                 ValueHolder.checkpointNumber++;
+                Debug.Log("adding");
             }
             ch.isActivated = true;
 
