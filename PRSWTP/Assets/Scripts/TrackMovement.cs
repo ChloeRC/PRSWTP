@@ -95,7 +95,7 @@ public class TrackMovement : MonoBehaviour {
         }
         if (player2Exists && test % framerate == 0)
         {
-            Debug.Log("Spot2:" + spot2);
+            //Debug.Log("Spot2:" + spot2);
             player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
             spot2++;
         }
@@ -112,6 +112,7 @@ public class TrackMovement : MonoBehaviour {
             int i = 0;
             while (locations.Count > 0)
             {
+                Debug.Log("Locations:" + locations.
                 locations.Remove(i);
                 i++;
                 //Debug.Log("Count when removing: " + locations.Count);
