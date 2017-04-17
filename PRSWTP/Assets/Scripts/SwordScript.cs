@@ -101,7 +101,7 @@ public class SwordScript : MonoBehaviour {
 		}
         //to lose health you also need to be your current self
         else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f
-            && gameObject.GetComponentInParent<PlayerScript>().getControllable())
+			&& gameObject.GetComponentInParent<PlayerScript>().getControllable() && !gameObject.GetComponentInParent<PlayerScript>().getInv())
         {
             Debug.Log("I'm waving through a window");
             gameObject.GetComponentInParent<PlayerScript>().health--;

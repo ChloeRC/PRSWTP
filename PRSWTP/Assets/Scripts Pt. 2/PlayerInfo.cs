@@ -32,33 +32,4 @@ public class PlayerInfo : MonoBehaviour {
     {
         return health;
     }
-
-	public void setCurrWidth(float f)
-	{
-		if (currWidth == 0.0f) 
-		{
-			currWidth = f;
-			Debug.Log ("info currWidth: " + currWidth);
-		}
-	}
-
-	public float getCurrWidth()
-	{
-		Debug.Log ("Hey guys!!!");
-		return currWidth;
-	}
-
-	public void setCurrPos(float f)
-	{
-		if (currPos == 0.0f) 
-		{
-			currPos = f;
-			Debug.Log ("info currPos: " + currPos);
-		}
-	}
-
-	public float getCurrPos() {
-		Debug.Log ("falafel");
-		return currPos;
-	}
 }
