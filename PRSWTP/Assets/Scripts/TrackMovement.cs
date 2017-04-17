@@ -118,7 +118,7 @@ public class TrackMovement : MonoBehaviour {
             int i = 0;
             while (locations.Count > 0)
             {
-                Debug.Log("Locations:" + locations.
+                Debug.Log("Locations:" + locations);
                 locations.Remove(i);
                 i++;
                 //Debug.Log("Count when removing: " + locations.Count);
