@@ -62,12 +62,6 @@ public class TrackMovement : MonoBehaviour {
 
             //player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            //Debug.Log("this health: " + this.gameObject.GetComponent<PlayerScript>().health);
-            //thisHealth = this.gameObject.GetComponent<PlayerScript>().health;
-            //player.GetComponent<PlayerScript>().health = thisHealth;
-            //Debug.Log("player health: " + player.GetComponent<PlayerScript>().health);
-			//player.GetComponent<PlayerScript>().setHealth(thisHealth);
-
             HealthBarDisplay thisFullBar = this.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
             HealthBarDisplay playerFullBar = player.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
 
@@ -84,15 +78,12 @@ public class TrackMovement : MonoBehaviour {
             bucket.GetComponent<BucketScript>().reset();
 
             //Debug.Log("Count before marker: " + locations.Count);
-			Debug.Log ("Key: " + key);
+			//Debug.Log ("Key: " + key);
             locations.Add(key, MARKER);
             key++;
             player2Exists = true;
 
-			thisHealth = player.GetComponent<PlayerScript> ().health;
-			//Debug.Log ("Player Health (end) : " + player.GetComponent<PlayerScript> ().health);
-			//Debug.Log (thisHealth);
-            
+			thisHealth = player.GetComponent<PlayerScript>().health;            
             playerinfo.setHealth(thisHealth);
 
             //player.transform.position = currPos;

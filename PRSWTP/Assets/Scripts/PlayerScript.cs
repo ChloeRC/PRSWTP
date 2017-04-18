@@ -419,10 +419,15 @@ public class PlayerScript : MonoBehaviour {
     {
         var marker = TrackMovement.MARKER;
 		//this is always true?
-        if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon && !controllable)
+        if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
+            //&& !controllable && gameObject.tag == "Parent for Player(Clone)")
         {
             Debug.Log("oopsies");
-            //kill();
+            if (gameObject.tag == "Parent for Player(Clone)") {
+                Debug.Log("WORRRRRRDDSSSS fail");
+                kill();
+            //Destroy(GameObject.Find("Parent for Player (Clone)"));
+            }
         }
         transform.position = vector;
     }
