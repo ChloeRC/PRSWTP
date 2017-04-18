@@ -32,6 +32,11 @@ public class Resetter : MonoBehaviour {
                 //Debug.Log(positions[child.name]);
                 child.position = (Vector3) positions[child.name];
                 child.rotation = (Quaternion) rotations[child.name];
+                BucketScript childBucket = child.GetComponent<BucketScript>();
+                if (childBucket != null)
+                {
+                    childBucket.reset();
+                }
             }
         }
 	}

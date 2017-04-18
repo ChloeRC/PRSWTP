@@ -7,7 +7,7 @@ public class BucketScript : MonoBehaviour {
 
     private bool newCharge = true;
 
-    private bool isActivated = false;
+    public bool isActivated = false;
 
     void Start()
     {
@@ -35,6 +35,8 @@ public class BucketScript : MonoBehaviour {
             Vector3 pos = new Vector3(thisPos.x + 3.23f, thisPos.y - 1, thisPos.z);
             Quaternion rot = Quaternion.Euler(0, 0, 0);
 
+            this.GetComponent<Collider>().isTrigger = false;
+
             //this.GetComponent<Collider>().isTrigger = false;
 
             if (newCharge)
@@ -47,7 +49,9 @@ public class BucketScript : MonoBehaviour {
 
     public void reset()
     {
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        this.GetComponent<Collider>().isTrigger = true;
+        isActivated = false;
+        newCharge = true;
     }
 
     void Update()
