@@ -299,6 +299,8 @@ public class PlayerScript : MonoBehaviour {
             }
             ch.isActivated = true;
 
+            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
+
         }
 
         if (col.gameObject.tag == "Rum" && controllable)

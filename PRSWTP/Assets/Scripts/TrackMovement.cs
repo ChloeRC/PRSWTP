@@ -114,13 +114,15 @@ public class TrackMovement : MonoBehaviour {
         bool controllable = player.transform.gameObject.GetComponent<PlayerScript>().getControllable();
         if (controllable && col.gameObject.tag == "Checkpoint")
         {
+            currLevel++;
+
+
 
             int i = 0;
             while (locations.Count > 0)
             {
-                Debug.Log("Locations:" + locations);
                 locations.Remove(i);
-                i++;
+                //i++;
                 //Debug.Log("Count when removing: " + locations.Count);
             }
             key = 0;

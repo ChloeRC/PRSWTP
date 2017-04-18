@@ -19,18 +19,24 @@ public class BucketScript : MonoBehaviour {
         Debug.Log("Pardon me, are you Aaron Burr, sir?");
         isActivated = true;
         Rigidbody bucketRb = GetComponent<Rigidbody>();
-        bucketRb.constraints = RigidbodyConstraints.None;
-        bucketRb.AddForce(-transform.right * 8);
+        if (newCharge)
+        {
+            bucketRb.constraints = RigidbodyConstraints.None;
+            bucketRb.AddForce(-transform.right * 8);
+        }
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.name == "L1 P1")
+        if (col.gameObject.name == "L1 G3")
         {
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             Vector3 thisPos = this.gameObject.GetComponent<Transform>().position;
             Vector3 pos = new Vector3(thisPos.x + 3.23f, thisPos.y - 1, thisPos.z);
             Quaternion rot = Quaternion.Euler(0, 0, 0);
+
+            //this.GetComponent<Collider>().isTrigger = false;
+
             if (newCharge)
             {
                 Instantiate(charge, pos, rot);
