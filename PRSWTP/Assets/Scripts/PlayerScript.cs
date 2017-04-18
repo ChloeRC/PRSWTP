@@ -272,9 +272,14 @@ public class PlayerScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Charge" && controllable)
         {
-            Destroy(col.gameObject);
-            charges++;
-            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
+            ChargeScript chargeScript = col.GetComponent<ChargeScript>();
+            if (chargeScript.isCollected == false)
+            {
+                chargeScript.isCollected = true;
+                Destroy(col.gameObject);
+                charges++;
+                chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
+            }
         }
 
         if (col.gameObject.tag == "Bucket Trigger")

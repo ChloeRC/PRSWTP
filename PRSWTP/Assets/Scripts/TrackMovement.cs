@@ -122,7 +122,7 @@ public class TrackMovement : MonoBehaviour {
             while (locations.Count > 0)
             {
                 locations.Remove(i);
-                //i++;
+                i++;
                 //Debug.Log("Count when removing: " + locations.Count);
             }
             key = 0;
