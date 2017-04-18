@@ -13,6 +13,8 @@ public class TriggerScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
+            Debug.Log("crash bang boom");
+
             if (type == "Bucket")
             {
                 toBeTriggered.GetComponent<BucketScript>().activate();
