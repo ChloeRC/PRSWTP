@@ -11,10 +11,13 @@ using UnityEngine;
 */
 
 public class CloneScript : MonoBehaviour {
+    private float gameTicks;
 
-	// Use this for initialization
-	void Start () {
-		
+    public GameObject PlayerScript;
+    // Use this for initialization
+    void Start () {
+
+
 	}
 	
 	// Update is called once per frame
@@ -22,7 +25,13 @@ public class CloneScript : MonoBehaviour {
 		
 	}
 
-    //taken from PlayerScript
+    public void setRotation()
+    {
+        //insert math here that calculates differences
+        //in x values from setPosition :)
+    }
+
+    //taken from PlayerScript - sets position of the clone
     public void setPosition(Vector3 vector)
     {
         var marker = TrackMovement.MARKER;
@@ -30,9 +39,24 @@ public class CloneScript : MonoBehaviour {
         if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
         {
             Debug.Log("oh no!");
-            //insert something to destroy
+            kill();
         }
         transform.position = vector;
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            PlayerScript.GetComponent<PlayerScript>().health--;
+            Debug.Log("You colllided with your past self!!");
+            Debug.Log("the man loved trees");
+        }
+    }
+
+    public void kill()
+    {
+        Destroy(this.gameObject);
     }
 
 }

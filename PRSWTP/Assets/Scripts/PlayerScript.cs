@@ -19,6 +19,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject chargeBarDisplay;
     public Collider Checkpoint;
     public GameObject Timer;
+    public GameObject Clone;
 
     public GameObject gameLight;
 
@@ -316,8 +317,8 @@ public class PlayerScript : MonoBehaviour {
         {
             Destroy(col.gameObject);
 			if (health < 3) {
-				gameObject.GetComponentInParent<PlayerScript> ().health++;
-				healthDisplayer.GetComponent<HealthBarDisplay> ().UpdateText ();
+				gameObject.GetComponentInParent<PlayerScript>().health++;
+				healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
 			}
         }
     }
