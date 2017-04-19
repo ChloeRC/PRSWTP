@@ -6,6 +6,7 @@ public class BossAI : MonoBehaviour {
 
     public int health;
     private int startHealth;
+    private int damageDealt = 0;
 
     public int bulletDamage;
 
@@ -32,6 +33,7 @@ public class BossAI : MonoBehaviour {
         rb.freezeRotation = true;
 
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
+        transform.GetChild(1).GetComponent<TextMesh>().text = "Damage Dealt: " + damageDealt;
 
         startHealth = health;
     }
@@ -105,5 +107,11 @@ public class BossAI : MonoBehaviour {
 
         gameTicks = 0f;
         transform.GetChild(0).GetComponent<TextMesh>().color = Color.green;
+
+        if (toAdd < 0)
+        {
+            damageDealt -= toAdd;
+            transform.GetChild(1).GetComponent<TextMesh>().text = "Damage Dealt: " + damageDealt;
+        }
     }
 }
