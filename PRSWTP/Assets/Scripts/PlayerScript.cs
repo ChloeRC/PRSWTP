@@ -6,7 +6,8 @@ public class PlayerScript : MonoBehaviour {
     private Rigidbody rb;
     private float gameTicks; //This is for something else
     private float gameTicks2; //This is for enemy collisions
-    private float thingy;
+    private float flibbityfish; //This is for invincibility
+    private float thingy; //This if for info
 
     public float horizSpeed;
     public float jumpSpeed;
@@ -90,6 +91,7 @@ public class PlayerScript : MonoBehaviour {
         gameTicks = 0.0f;
         gameTicks2 = 0.0f;
         thingy = 0.0f;
+        flibbityfish = 0.0f;
         rb.freezeRotation = true;
         direction = DIR_RIGHT;
         charges = 0;
@@ -107,6 +109,7 @@ public class PlayerScript : MonoBehaviour {
         gameTicks += Time.deltaTime;
         gameTicks2 += Time.deltaTime;
         thingy += Time.deltaTime;
+        flibbityfish += Time.deltaTime;
 
         if (controllable)
         {
@@ -233,16 +236,17 @@ public class PlayerScript : MonoBehaviour {
             rb.AddForce(Vector2.down * gravity * rb.mass);
 
             //GET INFORMATION (i) - contains lots of debugs
-            if (Input.GetButton(INFO) == true && thingy > 0.3f)
+            if (Input.GetButton(INFO) == true && thingy > 0.2f)
             {
 				Debug.Log ("isGrounded: " + isGrounded);
 				Debug.Log ("inv: " + inv);
-
+                thingy = 0.0f;
             }
 
-			if (Input.GetButton (INVINCIBLE) == true) {
+			if (Input.GetButton (INVINCIBLE) == true && flibbityfish > 0.3f) {
 				inv = !inv;
 				gameObject.GetComponentInParent<PlayerScript>().health = 3;
+                flibbityfish = 0.0f;
 			}
         }
         
