@@ -63,7 +63,6 @@ public class BossAI : MonoBehaviour {
         if (health < startHealth && gameTicks > .5)
         {
             gameTicks = 0;
-            transform.GetChild(0).GetComponent<TextMesh>().color = Color.green;
             adjustHealthBy(1);
         }
 
@@ -103,5 +102,8 @@ public class BossAI : MonoBehaviour {
         health += toAdd;
         Debug.Log("health: " + health + " startHealth: " + startHealth);
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
+
+        gameTicks = 0f;
+        transform.GetChild(0).GetComponent<TextMesh>().color = Color.green;
     }
 }
