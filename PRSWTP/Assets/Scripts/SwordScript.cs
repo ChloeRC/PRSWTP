@@ -97,7 +97,10 @@ public class SwordScript : MonoBehaviour {
 		if (col.gameObject.tag == "Enemy" && drawn)
         {
             Debug.Log("Does anyone have a map?");
-            col.gameObject.GetComponent<EnemyAI>().adjustHealthBy(-damage);
+            EnemyAI enemyAI = col.gameObject.GetComponent<EnemyAI>();
+            BossAI bossAI = col.gameObject.GetComponent<BossAI>();
+            if (enemyAI != null) { enemyAI.adjustHealthBy(-damage); }
+            else if (bossAI != null) { bossAI.adjustHealthBy(-damage); }
 		}
         //to lose health you also need to be your current self
         else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f

@@ -1,9 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class EnemyAI : MonoBehaviour {
+public class BossAI : MonoBehaviour {
 
     public int health;
+    private int startHealth;
 
     public int bulletDamage;
 
@@ -19,17 +21,23 @@ public class EnemyAI : MonoBehaviour {
 
     public Camera cam;
 
+    public GameObject rock;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         rb = GetComponent<Rigidbody>();
         ts = GetComponent<Transform>();
         gameTicks = 0.0f;
         rb.freezeRotation = true;
 
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
+
+        startHealth = health;
     }
-	
-    void Update () {
+
+    void Update()
+    {
         gameTicks += Time.deltaTime;
         //Go right if you are not at the right edge yet, and you are headed right
         if (this.ts.position.x < rightEdge && direction)
@@ -52,11 +60,23 @@ public class EnemyAI : MonoBehaviour {
             }
         }
 
+        if (health < startHealth && gameTicks > .5)
+        {
+            gameTicks = 0;
+            transform.GetChild(0).GetComponent<TextMesh>().color = Color.green;
+            adjustHealthBy(1);
+        }
+
+        if (health == startHealth)
+        {
+            transform.GetChild(0).GetComponent<TextMesh>().color = Color.white;
+        }
+
         if (health <= 0)
         {
             kill();
         }
-	}
+    }
 
     void OnTriggerEnter(Collider col)
     {
@@ -65,22 +85,23 @@ public class EnemyAI : MonoBehaviour {
             adjustHealthBy(-bulletDamage);
         }
 
-		if (col.gameObject.tag == "Player") 
-		{
-			Debug.Log ("woof");
-		}
+        if (col.gameObject.tag == "Player")
+        {
+            Debug.Log("woof");
+        }
     }
 
 
     public void kill()
     {
+        Destroy(this.rock);
         Destroy(this.gameObject);
     }
 
     public void adjustHealthBy(int toAdd)
     {
-        Debug.Log("adding " + toAdd);
         health += toAdd;
+        Debug.Log("health: " + health + " startHealth: " + startHealth);
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
     }
 }
