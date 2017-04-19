@@ -28,9 +28,9 @@ public class CloneScript : MonoBehaviour {
         var marker = TrackMovement.MARKER;
         //this is always true?
         if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
-        //&& !controllable && gameObject.tag == "Parent for Player(Clone)")
         {
             Debug.Log("oh no!");
+            //insert something to destroy
         }
         transform.position = vector;
     }
