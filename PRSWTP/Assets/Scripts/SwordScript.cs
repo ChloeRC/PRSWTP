@@ -10,6 +10,7 @@ public class SwordScript : MonoBehaviour {
     public int damage;
 
     private float gameTicks;
+    private float ouchies;
     private float drawTime;
 
     private Transform ts;
@@ -19,6 +20,7 @@ public class SwordScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gameTicks = 0.0f;
+        ouchies = 0.0f; //keeps track of time between ouching the enemy
         drawTime = 0.3f; //alter this to modify how long the sword stays up
         ts = GetComponent<Transform>();
 
@@ -32,6 +34,7 @@ public class SwordScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        ouchies += Time.deltaTime;
         if (drawn)
         {
             gameTicks += Time.deltaTime;
@@ -94,13 +97,16 @@ public class SwordScript : MonoBehaviour {
     //this actually controls all the close-up player/enemy collisions because haha
     void OnTriggerEnter(Collider col)
     {
-		if (col.gameObject.tag == "Enemy" && drawn)
+		if (col.gameObject.tag == "Enemy" && drawn && ouchies > 0.1f)
         {
             Debug.Log("Does anyone have a map?");
+
             EnemyAI enemyAI = col.gameObject.GetComponent<EnemyAI>();
             BossAI bossAI = col.gameObject.GetComponent<BossAI>();
             if (enemyAI != null) { enemyAI.adjustHealthBy(-damage); }
             else if (bossAI != null) { bossAI.adjustHealthBy(-damage); }
+
+            ouchies = 0.0f;
 		}
         //to lose health you also need to be your current self
         else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f
