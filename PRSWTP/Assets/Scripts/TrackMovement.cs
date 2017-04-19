@@ -18,6 +18,7 @@ public class TrackMovement : MonoBehaviour {
     public static readonly Vector3 MARKER = new Vector3(0f, -21f, 0f);
     public Vector3 spawnLocation;
 
+    public GameObject clone;
     public GameObject player;
     public GameObject nonPlayerObjects;
     public GameObject bucket;
@@ -50,6 +51,8 @@ public class TrackMovement : MonoBehaviour {
             ValueHolder.isPastSelfSpawning = true;
             //Vector3 currPos = this.transform.position;
             Instantiate(player);    //creates the previous self
+
+            //Instantiate(clone);
             Debug.Log(player);
             PlayerScript.resetCharges();
             
