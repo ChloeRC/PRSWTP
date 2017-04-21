@@ -430,7 +430,7 @@ public class PlayerScript : MonoBehaviour {
             Debug.Log("oopsies");
             if (gameObject.tag == "Parent for Player(Clone)") {
                 Debug.Log("WORRRRRRDDSSSS fail");
-                kill();
+                //kill();
             //Destroy(GameObject.Find("Parent for Player (Clone)"));
             }
         }
