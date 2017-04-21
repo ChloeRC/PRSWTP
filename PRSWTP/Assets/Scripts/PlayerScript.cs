@@ -302,12 +302,12 @@ public class PlayerScript : MonoBehaviour {
         {
             Checkpoint ch = col.gameObject.GetComponent<Checkpoint>();
 
-            if (ch.isActivated == false)
+            if (ch.activated() == false)
             {
                 ValueHolder.checkpointNumber++;
-                Debug.Log("adding");
+                Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             }
-            ch.isActivated = true;
+            ch.activate();
 
             chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
 
