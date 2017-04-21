@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour {
 
-    public float targetX;
-    public float targetY;
-    public float targetZ;
+    public int number;
 
-    public bool isActivated;
+    private bool isActivated;
 
     void Start()
     {
         isActivated = false;
+    }
+
+    public void activate()
+    {
+        isActivated = true;
+    }
+
+    public bool activated()
+    {
+        return isActivated;
     }
 }
