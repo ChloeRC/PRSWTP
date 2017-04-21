@@ -13,9 +13,25 @@ using UnityEngine;
 public class CloneScript : MonoBehaviour {
     private float gameTicks;
 
+    public Vector3[] checkpointLocations;
+
     public GameObject PlayerScript;
+
     // Use this for initialization
     void Start () {
+        //copied from playerscript also
+        if (ValueHolder.isPastSelfSpawning == false)
+        {
+            Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
+            //The checkpoints are indexed from 1, the locations are indexed from 0
+            Vector3 newPos = checkpointLocations[ValueHolder.checkpointNumber];
+            Debug.Log("Pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
+            this.transform.position = checkpointLocations[ValueHolder.checkpointNumber];
+        }
+        else
+        {
+            ValueHolder.isPastSelfSpawning = false;
+        }
 
 
 	}
@@ -48,7 +64,7 @@ public class CloneScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
-            PlayerScript.GetComponent<PlayerScript>().health--;
+            //PlayerScript.GetComponent<PlayerScript>().health--;
             Debug.Log("You colllided with your past self!!");
             Debug.Log("the man loved trees");
         }

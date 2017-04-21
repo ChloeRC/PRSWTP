@@ -53,6 +53,7 @@ public class TrackMovement : MonoBehaviour {
             Instantiate(player);    //creates the previous self
 
             Instantiate(clone);  //creates clone (sep object)
+            Debug.Log(clone);
             Debug.Log(player);
             PlayerScript.resetCharges();
             
@@ -61,6 +62,8 @@ public class TrackMovement : MonoBehaviour {
 
 			TimeTravelIndicator.setFlash();
             //player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
+
+
             player.GetComponent<PlayerScript>().toggleControllable();
 
             //player.transform.rotation = Quaternion.Euler(0, 0, 0);

@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
+    //640 x 480 aspect ratio to start the game!!!
 
     private Rigidbody rb;
     private float gameTicks; //This is for something else

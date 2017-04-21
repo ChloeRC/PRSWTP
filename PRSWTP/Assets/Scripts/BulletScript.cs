@@ -48,7 +48,7 @@ public class BulletScript : MonoBehaviour {
 	public int getTime() 
 	{
 		int time2 = (int)(time * 10);
-        Debug.Log("Gun Time: " + (4 - time2));
+        //Debug.Log("Gun Time: " + (4 - time2));
         return time2;
 	}
 }
