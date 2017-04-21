@@ -52,7 +52,7 @@ public class TrackMovement : MonoBehaviour {
             //Vector3 currPos = this.transform.position;
             Instantiate(player);    //creates the previous self
 
-            Instantiate(clone);  //creates clone (sep object)
+            //Instantiate(clone);  //creates clone (sep object)
             Debug.Log(clone);
             Debug.Log(player);
             PlayerScript.resetCharges();
