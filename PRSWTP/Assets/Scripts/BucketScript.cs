@@ -37,8 +37,6 @@ public class BucketScript : MonoBehaviour {
 
             this.GetComponent<Collider>().isTrigger = false;
 
-            //this.GetComponent<Collider>().isTrigger = false;
-
             if (newCharge)
             {
                 Instantiate(charge, pos, rot);
