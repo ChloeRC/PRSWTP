@@ -50,11 +50,10 @@ public class TrackMovement : MonoBehaviour {
         {
             ValueHolder.isPastSelfSpawning = true;
             //Vector3 currPos = this.transform.position;
-            Instantiate(player);    //creates the previous self
+            
+            //Instantiate(player);    //creates the previous self
+            Instantiate(clone);  //creates clone (sep object)
 
-            //Instantiate(clone);  //creates clone (sep object)
-            Debug.Log(clone);
-            Debug.Log(player);
             PlayerScript.resetCharges();
             
             //The new, controllable one is "player"
@@ -64,7 +63,7 @@ public class TrackMovement : MonoBehaviour {
             //player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
 
 
-            player.GetComponent<PlayerScript>().toggleControllable();
+            //player.GetComponent<PlayerScript>().toggleControllable(); //UNCOMMENT THIS
 
             //player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
@@ -77,7 +76,7 @@ public class TrackMovement : MonoBehaviour {
             playerFullBar.UpdateText();
 
             Transform destroyOnTimeTravel = this.transform.Find("DestroyOnTimeTravel");
-            Destroy(destroyOnTimeTravel.gameObject);
+            //Destroy(destroyOnTimeTravel.gameObject);    //UNCOMMENT THIS
 
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>();
             resetter.reset = true;
@@ -87,7 +86,7 @@ public class TrackMovement : MonoBehaviour {
 			//Debug.Log ("Key: " + key);
             locations.Add(key, MARKER);
             key++;
-            player2Exists = true;
+            player2Exists = true;     //UNCOMMENT THIS
 
 			thisHealth = player.GetComponent<PlayerScript>().health;            
             playerinfo.setHealth(thisHealth);
@@ -99,7 +98,9 @@ public class TrackMovement : MonoBehaviour {
         if (player2Exists && test % framerate == 0)
         {
             //Debug.Log("Spot2:" + spot2);
-            player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
+            //player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
+            clone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]);
+
             spot2++;
         }
 
