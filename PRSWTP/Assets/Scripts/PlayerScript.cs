@@ -309,6 +309,12 @@ public class PlayerScript : MonoBehaviour {
                 Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             }
 
+            /*for (int i = 0; i < ch.number; i++) //for every checkpoint less than or equal to the checkpoint just passed through
+            {
+                GameObject check = checkpoints[i];
+                check.GetComponent<Checkpoint>().lightOn();
+            }*/
+
             chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
 
         }
@@ -332,6 +338,7 @@ public class PlayerScript : MonoBehaviour {
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
+        Debug.Log("deathhhhh");
         //ValueHolder.currentTime = time;
         coroutine = LightChange();
         StartCoroutine(coroutine);
