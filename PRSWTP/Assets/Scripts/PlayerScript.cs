@@ -24,7 +24,7 @@ public class PlayerScript : MonoBehaviour {
 
     public GameObject gameLight;
 
-    public Vector3[] checkpointLocations;
+    public GameObject[] checkpoints;
     public Vector3 currentCheckPoint;
 
     //False is right, true is left
@@ -76,9 +76,9 @@ public class PlayerScript : MonoBehaviour {
         {
             Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             //The checkpoints are indexed from 1, the locations are indexed from 0
-            Vector3 newPos = checkpointLocations[ValueHolder.checkpointNumber];
+            Vector3 newPos = checkpoints[ValueHolder.checkpointNumber].transform.position;
             Debug.Log("Pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
-            this.transform.position = checkpointLocations[ValueHolder.checkpointNumber];
+            this.transform.position = checkpoints[ValueHolder.checkpointNumber].transform.position;
         }
         else
         {
