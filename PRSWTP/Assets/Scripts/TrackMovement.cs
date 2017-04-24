@@ -28,8 +28,8 @@ public class TrackMovement : MonoBehaviour {
 	public int thisHealth;
 	// Use this for initialization
 	void Start () {
-        locations = new Hashtable();
         parseFull();
+        locations = new Hashtable();
 	}
 	
 	// Update is called once per frame
@@ -113,9 +113,6 @@ public class TrackMovement : MonoBehaviour {
         if (controllable && col.gameObject.tag == "Checkpoint")
         {
             currLevel++;
-
-
-
             int i = 0;
             while (locations.Count > 0)
             {
@@ -131,6 +128,8 @@ public class TrackMovement : MonoBehaviour {
 
     void parseFull()
     {
+        chargesPerLevel = new List<Int32>();
+
         string[] chargesPerLevelStr = full.Split(' ');
 
         foreach (string num in chargesPerLevelStr)
@@ -145,6 +144,7 @@ public class TrackMovement : MonoBehaviour {
      */
     public int currLevelCharges()
     {
+        Debug.Log(currLevel + " level");
         parseFull();
         return chargesPerLevel[currLevel];
     }
