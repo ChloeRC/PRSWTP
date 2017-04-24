@@ -242,6 +242,7 @@ public class PlayerScript : MonoBehaviour {
             {
 				Debug.Log ("isGrounded: " + isGrounded);
 				Debug.Log ("inv: " + inv);
+                Debug.Log(controllable);
                 thingy = 0.0f;
             }
 
@@ -256,6 +257,8 @@ public class PlayerScript : MonoBehaviour {
         //When the player resets, there's this weird thing where position is -21 for a bit????
         if (health <= 0 || GetComponent<Transform>().position.y <= -25f)
         {
+            Debug.Log("Health: " + health);
+            Debug.Log("Position" + GetComponent<Transform>().position.y);
             Debug.Log("bop bop bop to the top");
             kill();
         }
