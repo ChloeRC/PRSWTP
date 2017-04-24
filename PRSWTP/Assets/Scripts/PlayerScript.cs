@@ -242,6 +242,7 @@ public class PlayerScript : MonoBehaviour {
             {
 				Debug.Log ("isGrounded: " + isGrounded);
 				Debug.Log ("inv: " + inv);
+                Debug.Log(controllable);
                 thingy = 0.0f;
             }
 

@@ -62,7 +62,6 @@ public class TrackMovement : MonoBehaviour {
 			TimeTravelIndicator.setFlash();
             //player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
 
-
             player.GetComponent<PlayerScript>().toggleControllable(); //UNCOMMENT THIS
 
             //player.transform.rotation = Quaternion.Euler(0, 0, 0);
