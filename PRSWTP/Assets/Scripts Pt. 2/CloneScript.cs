@@ -55,9 +55,9 @@ public class CloneScript : MonoBehaviour {
         }
     }
 
-    public void kill()
+    void kill()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 
 }
