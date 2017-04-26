@@ -111,7 +111,7 @@ public class TrackMovement : MonoBehaviour {
         bool controllable = player.transform.gameObject.GetComponent<PlayerScript>().getControllable();
         if (controllable && col.gameObject.tag == "Checkpoint")
         {
-            currLevel++;
+            currLevel = col.GetComponent<Checkpoint>().number;
             int i = 0;
             while (locations.Count > 0)
             {

@@ -76,6 +76,7 @@ public class PlayerScript : MonoBehaviour {
         {
             Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             //The checkpoints are indexed from 1, the locations are indexed from 0
+            Debug.Log("Check: " + checkpoints);
             Vector3 newPos = checkpoints[ValueHolder.checkpointNumber].transform.position;
             Debug.Log("Pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
             this.transform.position = checkpoints[ValueHolder.checkpointNumber].transform.position;
@@ -106,7 +107,8 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update () {
-        //Debug.Log(ValueHolder.isPastSelfSpawning);
+        //controllable = true;
+        Debug.Log("control: " + controllable);
 
         gameTicks += Time.deltaTime;
         gameTicks2 += Time.deltaTime;
@@ -217,6 +219,7 @@ public class PlayerScript : MonoBehaviour {
 
             //Tell if there is anything in a sphere shape below the player
             RaycastHit hitInfo;
+            Debug.Log("rb: " + rb);
             isGrounded = Physics.SphereCast(rb.position, 0.75f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
             //ORIGINAL: isGrounded = Physics.SphereCast(rb.position, 0.2f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
 			Debug.Log("isGrounded: " + isGrounded);
@@ -411,6 +414,7 @@ public class PlayerScript : MonoBehaviour {
 
     public void toggleControllable()
     {
+        Debug.Log("toggle toggle toggle");
         controllable = !controllable;
     }
 
