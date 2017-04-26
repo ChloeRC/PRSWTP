@@ -23,8 +23,7 @@ public class TrackMovement : MonoBehaviour {
     public GameObject nonPlayerObjects;
     public GameObject bucket;
     public GameObject healthBar;
-
-    private GameObject playerinfo;
+    public GameObject playerinfo;
 
 	public int thisHealth;
 	// Use this for initialization
@@ -52,8 +51,8 @@ public class TrackMovement : MonoBehaviour {
             ValueHolder.isPastSelfSpawning = true;
             //Vector3 currPos = this.transform.position;
             
-            Instantiate(player);    //creates the previous self
-            //Instantiate(clone);  //creates clone (sep object)
+            //Instantiate(player);    //creates the previous self
+            Instantiate(clone);  //creates clone (sep object)
 
             PlayerScript.resetCharges();
             
@@ -63,7 +62,7 @@ public class TrackMovement : MonoBehaviour {
 			TimeTravelIndicator.setFlash();
             //player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
 
-            player.GetComponent<PlayerScript>().toggleControllable(); //UNCOMMENT THIS
+            //player.GetComponent<PlayerScript>().toggleControllable(); //UNCOMMENT THIS
 
             //player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
@@ -76,7 +75,7 @@ public class TrackMovement : MonoBehaviour {
             playerFullBar.UpdateText();
 
             Transform destroyOnTimeTravel = this.transform.Find("DestroyOnTimeTravel");
-            Destroy(destroyOnTimeTravel.gameObject);    //UNCOMMENT THIS
+            //Destroy(destroyOnTimeTravel.gameObject);    //UNCOMMENT THIS
 
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>();
             resetter.reset = true;
@@ -98,8 +97,8 @@ public class TrackMovement : MonoBehaviour {
         if (player2Exists && test % framerate == 0)
         {
             //Debug.Log("Spot2:" + spot2);
-            player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
-            //clone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); //COMMENT THIS
+            //player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
+            clone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); //COMMENT THIS
 
             spot2++;
         }
@@ -121,7 +120,6 @@ public class TrackMovement : MonoBehaviour {
                 //Debug.Log("Count when removing: " + locations.Count);
             }
             key = 0;
-            player2Exists = false;
         }
 
     }
