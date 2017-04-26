@@ -113,8 +113,8 @@ public class PlayerScript : MonoBehaviour {
         thingy += Time.deltaTime;
         flibbityfish += Time.deltaTime;
 
-        if (controllable)
-        {
+        //if (controllable) 	//MODIFIED
+        //{						//MODIFIED
             //If you push the button which is mapped to RIGHT (d), you go right
             if (Input.GetButton(RIGHT) == true)
             {
@@ -219,7 +219,7 @@ public class PlayerScript : MonoBehaviour {
             RaycastHit hitInfo;
             isGrounded = Physics.SphereCast(rb.position, 0.75f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
             //ORIGINAL: isGrounded = Physics.SphereCast(rb.position, 0.2f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
-            //Debug.Log("isGrounded: " + isGrounded)
+			Debug.Log("isGrounded: " + isGrounded);
 
             //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
             if (Input.GetButtonDown(JUMP) == true && isGrounded)
@@ -251,7 +251,7 @@ public class PlayerScript : MonoBehaviour {
 				gameObject.GetComponentInParent<PlayerScript>().health = 3;
                 flibbityfish = 0.0f;
 			}
-        }
+        //}		//MODIFIED
         
         //If you've fallen below -25 or your health is 0, you die
         //When the player resets, there's this weird thing where position is -21 for a bit????
@@ -262,7 +262,7 @@ public class PlayerScript : MonoBehaviour {
             Debug.Log("bop bop bop to the top");
             kill();
         }
-    }
+	}	
 
     void OnCollisionEnter(Collision col)
     {
