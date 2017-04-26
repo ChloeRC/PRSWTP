@@ -107,8 +107,6 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update () {
-        //controllable = true;
-        Debug.Log("control: " + controllable);
 
         gameTicks += Time.deltaTime;
         gameTicks2 += Time.deltaTime;
@@ -127,7 +125,6 @@ public class PlayerScript : MonoBehaviour {
             //If you push the button which is mapped to LEFT (a), you go left
             if (Input.GetButton(LEFT) == true)
             {
-                //Debug.Log("A key pressed.");
                 transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
                 player.GetComponent<PlayerRotate>().Rotate(DIR_LEFT);
                 direction = DIR_LEFT;
@@ -219,15 +216,12 @@ public class PlayerScript : MonoBehaviour {
 
             //Tell if there is anything in a sphere shape below the player
             RaycastHit hitInfo;
-            Debug.Log("rb: " + rb);
             isGrounded = Physics.SphereCast(rb.position, 0.75f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
             //ORIGINAL: isGrounded = Physics.SphereCast(rb.position, 0.2f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
-			Debug.Log("isGrounded: " + isGrounded);
 
             //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
             if (Input.GetButtonDown(JUMP) == true && isGrounded)
             {
-                //Debug.Log("W key pressed.");
                 rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
 
@@ -258,12 +252,12 @@ public class PlayerScript : MonoBehaviour {
         
         //If you've fallen below -25 or your health is 0, you die
         //When the player resets, there's this weird thing where position is -21 for a bit????
-        if (health <= 0 || GetComponent<Transform>().position.y <= -25f)
+        if (health <= 0 || GetComponent<Transform>().position.y <= -15f)
         {
             Debug.Log("Health: " + health);
             Debug.Log("Position" + GetComponent<Transform>().position.y);
             Debug.Log("bop bop bop to the top");
-            kill();
+            instaKill();
         }
 	}	
 
@@ -273,7 +267,6 @@ public class PlayerScript : MonoBehaviour {
         //Under 0.5 for gameTicks2 = player is temporarily invincible
         if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable && !sword.drawn && !inv)
         {
-            //Debug.Log("The only man I love is my daaaaaaaaaaad");
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
             gameTicks2 = 0.0f;
@@ -338,7 +331,12 @@ public class PlayerScript : MonoBehaviour {
     public void setHealth(int thisHealth)
     {
         health = thisHealth;
-        //Debug.Log("bam bam");
+    }
+
+    public void instaKill()
+    {
+        controllable = false;
+        Application.LoadLevel("DeathScene");
     }
 
     //Literally the most satisfying function in this entire project.
@@ -414,7 +412,6 @@ public class PlayerScript : MonoBehaviour {
 
     public void toggleControllable()
     {
-        Debug.Log("toggle toggle toggle");
         controllable = !controllable;
     }
 
