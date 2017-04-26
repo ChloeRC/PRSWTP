@@ -21,8 +21,8 @@ public class TriggerScript : MonoBehaviour {
             }
             if (type == "Cone" && coneActivatedTimes == 0)
             {
-                toBeTriggered.GetComponent<ConeScript>().activate();
                 coneActivatedTimes++;
+                toBeTriggered.GetComponent<ConeScript>().activate();
             }
             if (type == "Parrot")
             {

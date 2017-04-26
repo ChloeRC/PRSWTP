@@ -18,8 +18,6 @@ public class PlayerScript : MonoBehaviour {
     public GameObject bucket;
     public GameObject player;
     public GameObject chargeBarDisplay;
-    public Collider Checkpoint;
-    public GameObject Timer;
     public GameObject Clone;
 
     public GameObject gameLight;
@@ -63,10 +61,11 @@ public class PlayerScript : MonoBehaviour {
 
     private int charges;
     public GameObject healthDisplayer;
-    public GameObject gunReloadDisplayer;
-    public GameObject time;
+    //public GameObject gunReloadDisplayer;
+    //public GameObject time;
     public GameObject nonPlayerObjects;
-    public GameObject info; //stores information across time travel
+
+    private GameObject info; //stores information across time travel
     private Vector3 rSpawnLocation;
 
     // Use this for initialization
@@ -252,7 +251,7 @@ public class PlayerScript : MonoBehaviour {
         
         //If you've fallen below -25 or your health is 0, you die
         //When the player resets, there's this weird thing where position is -21 for a bit????
-        if (health <= 0 || GetComponent<Transform>().position.y <= -15f)
+        if (health <= 0 || GetComponent<Transform>().position.y <= -21.1f)
         {
             Debug.Log("Health: " + health);
             Debug.Log("Position" + GetComponent<Transform>().position.y);
@@ -308,11 +307,11 @@ public class PlayerScript : MonoBehaviour {
                 Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             }
 
-            /*for (int i = 0; i < ch.number; i++) //for every checkpoint less than or equal to the checkpoint just passed through
+            for (int i = 0; i <= ch.number; i++) //for every checkpoint less than or equal to the checkpoint just passed through
             {
                 GameObject check = checkpoints[i];
                 check.GetComponent<Checkpoint>().lightOn();
-            }*/
+            }
 
             chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
 
@@ -344,6 +343,7 @@ public class PlayerScript : MonoBehaviour {
     {
         Debug.Log("deathhhhh");
         //ValueHolder.currentTime = time;
+        //CREATE THIS FUNCTION
         coroutine = LightChange();
         StartCoroutine(coroutine);
         controllable = false;

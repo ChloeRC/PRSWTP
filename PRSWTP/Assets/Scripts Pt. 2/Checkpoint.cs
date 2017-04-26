@@ -6,7 +6,7 @@ public class Checkpoint : MonoBehaviour {
 
     public int number;
 
-    /*public void lightOn()
+    public void lightOn()
     {
         transform.GetChild(1).GetComponent<Light>().intensity = 8;
     }
@@ -14,5 +14,5 @@ public class Checkpoint : MonoBehaviour {
     public void lightOff()
     {
         transform.GetChild(1).GetComponent<Light>().intensity = 0;
-    }*/
+    }
 }

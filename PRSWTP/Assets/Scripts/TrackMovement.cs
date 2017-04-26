@@ -23,7 +23,8 @@ public class TrackMovement : MonoBehaviour {
     public GameObject nonPlayerObjects;
     public GameObject bucket;
     public GameObject healthBar;
-    public GameObject playerinfo;
+
+    private GameObject playerinfo;
 
 	public int thisHealth;
 	// Use this for initialization

@@ -7,13 +7,14 @@ public class ConeScript : MonoBehaviour {
 
 	public void activate()
     {
+        Debug.Log("*quiet crunch*");
 		StartCoroutine (Drop ());
     }
 
 	IEnumerator Drop() {
         falling = true;
 		yield return new WaitForSeconds (.25f);
-		GetComponent<Rigidbody>().AddForce(-transform.up * 1000);
+        GetComponent<Rigidbody>().useGravity = true;
 	}
 
     void OnCollisionEnter(Collision col)
@@ -24,6 +25,7 @@ public class ConeScript : MonoBehaviour {
         }
         if (col.gameObject.layer == 8 && falling) //ground
         {
+            Debug.Log("crunch - BOOM");
             falling = false;
             freeze();
         }
