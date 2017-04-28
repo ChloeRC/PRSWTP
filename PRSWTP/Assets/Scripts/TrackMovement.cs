@@ -62,8 +62,8 @@ public class TrackMovement : MonoBehaviour {
             //Instantiate(player);    //creates the previous self
             //Instantiate(clone);  //creates clone (sep object)
 
-            Vector3 pos = new Vector3(-70, 3, 0);   //should be at the last checkpoint
-            var newClone = Instantiate(clone, pos, Quaternion.Euler(0, 0, 0));
+            //Vector3 pos = new Vector3(-80, 3, 0);   //should be at the last checkpoint
+            var newClone = Instantiate(clone);  //I think this is causing problems
             Destroy(newClone, SORRY);   //this is a really terrible workaround sorry
 
             PlayerScript.resetCharges();
@@ -113,7 +113,7 @@ public class TrackMovement : MonoBehaviour {
             //player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
             clone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); //COMMENT THIS
             spot2++;
-            Debug.Log(locations[spot2]);
+            Debug.Log("TrackMovement's location: " + locations[spot2]);
         }
         
     }

@@ -11,10 +11,10 @@ using UnityEngine;
 */
 
 public class CloneScript : MonoBehaviour {
+    GameObject clone;
     private float gameTicks;
     public bool isDead;
-
-    public GameObject PlayerScript;
+    private Vector3 cloneLoc;
 
     // Use this for initialization
     void Start () {
@@ -24,7 +24,7 @@ public class CloneScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        getPosition();
 	}
 
     public void setRotation()
@@ -36,14 +36,25 @@ public class CloneScript : MonoBehaviour {
     //taken from PlayerScript - sets position of the clone
     public void setPosition(Vector3 vector)
     {
+        cloneLoc = vector;
+        Debug.Log("cloneLoc: " + cloneLoc);
+        CloneScript clone = GetComponent<CloneScript>();
         var marker = TrackMovement.MARKER;
         if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
         {
             Debug.Log("oh no!");
             kill();
         }
-        transform.position = vector;
-        Debug.Log("CloneScript's position: " + transform.position);
+
+        clone.GetComponent<CloneScript>().transform.position = vector;
+        //transform.position = vector;
+        //Debug.Log("Clone's position: " + transform.position);
+    }
+
+    void getPosition()
+    {
+        transform.position = cloneLoc;
+        Debug.Log("Clone position: " + transform.position);
     }
 
     void OnTriggerEnter(Collider col)

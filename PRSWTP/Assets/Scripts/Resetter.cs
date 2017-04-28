@@ -29,7 +29,7 @@ public class Resetter : MonoBehaviour {
             reset = false;
             foreach (Transform child in transform)
             {
-                Debug.Log(positions[child.name]);
+                //Debug.Log(positions[child.name]);
                 child.position = (Vector3) positions[child.name];
                 child.rotation = (Quaternion) rotations[child.name];
                 BucketScript childBucket = child.GetComponent<BucketScript>();
