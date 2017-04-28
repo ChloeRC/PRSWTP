@@ -66,10 +66,14 @@ public class ParrotScript : MonoBehaviour {
         }
     }
 
+    /**
+     * Called when the player walks through the ParrotTrigger
+     */
     public void activate()
     {
         //gameObject.GetComponent<MeshRenderer>().enabled = true;
         rb.useGravity = true;
+        //rb.AddForce(-Vector3.up * 5);
 
         activated = true;
         foreach (Transform child in transform)
