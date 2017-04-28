@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour {
     public GameObject bucket;
     public GameObject player;
     public GameObject chargeBarDisplay;
+    public GameObject gunBarDisplay;
     public GameObject Clone;
 
     public GameObject gameLight;
@@ -34,9 +35,9 @@ public class PlayerScript : MonoBehaviour {
 
     private IEnumerator coroutine;
 
-    //If hasShot is 0, you can shoot. Otherwise, you can't.
-    private float hasShot;
-    public float shotCooldown;
+    //If hasShot is shotCooldown, you can shoot. Otherwise, you can't.
+    public float hasShot;
+    public int shotCooldown;
 
     //If hasSword is 0, you can toggle the sword. Otherwise, you can't.
     private float hasSword;
@@ -100,7 +101,7 @@ public class PlayerScript : MonoBehaviour {
         
         controllable = true;
 
-        hasShot = 0;
+        hasShot = shotCooldown;
         hasSword = 0;
 	}
 	
@@ -144,16 +145,17 @@ public class PlayerScript : MonoBehaviour {
                     hasSword = 0;
                 }
             }
-            if (hasShot != 0)
+            if (hasShot != shotCooldown)
             {
                 hasShot += Time.deltaTime;
                 if (hasShot > shotCooldown)
                 {
-                    hasShot = 0;
+                    hasShot = shotCooldown;
                 }
-            }
+                gunBarDisplay.GetComponent<GunBarDisplay>().UpdateText();
+        }
 
-			if (direction == DIR_LEFT) {
+        if (direction == DIR_LEFT) {
 				SwordScript sword = GetComponentInChildren<SwordScript> ();
 				bool drawn = sword.drawn;
 				if (drawn) {
@@ -181,9 +183,9 @@ public class PlayerScript : MonoBehaviour {
             }
 
             //SHOOT (L shift)
-            if (Input.GetButton(SHOOT) == true && hasShot == 0)
+            if (Input.GetButton(SHOOT) == true && hasShot == shotCooldown)
             {
-                hasShot = 1;
+                hasShot = .1f;
 
                 //This value will be added to the position on the Y axis so the bullet starts to the side of the player
                 float toAdd = 0;

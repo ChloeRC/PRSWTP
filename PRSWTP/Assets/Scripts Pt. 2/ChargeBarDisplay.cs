@@ -18,6 +18,8 @@ public class ChargeBarDisplay : FillBar {
         base.curr = 0;
 
         base.originalText = "Charges: ";
+        base.originalWidth = 3.3f;
+        base.useDivide = true;
         base.Start();
     }
 
