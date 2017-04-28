@@ -18,6 +18,9 @@ public class TrackMovement : MonoBehaviour {
     public static readonly Vector3 MARKER = new Vector3(0f, -21f, 0f);
     public Vector3 spawnLocation;
 
+    private float gameTicks; //this keeps track of time since time travel
+    private float SORRY; //stores time used since time travel
+
     public GameObject clone;
     public GameObject player;
     public GameObject nonPlayerObjects;
@@ -30,10 +33,12 @@ public class TrackMovement : MonoBehaviour {
 	void Start () {
         parseFull();
         locations = new Hashtable();
+        gameTicks = 0.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        gameTicks += Time.deltaTime;
         if (test % framerate == 0)
         {
             locations.Add(key, transform.position);
@@ -42,17 +47,24 @@ public class TrackMovement : MonoBehaviour {
         test++;
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
 		TimeTravelIndicator TimeTravelIndicator = GetComponent <TimeTravelIndicator>();
-       PlayerInfo playerinfo = nonPlayerObjects.GetComponent<PlayerInfo>();
+        PlayerInfo playerinfo = nonPlayerObjects.GetComponent<PlayerInfo>();
 
         int charge = PlayerScript.getCharges();
         //GameObject player2;
         if (charge == currLevelCharges()) //go back in time
         {
+            SORRY = gameTicks;
+            gameTicks = 0.0f;
+
             ValueHolder.isPastSelfSpawning = true;
             //Vector3 currPos = this.transform.position;
-            
+
             //Instantiate(player);    //creates the previous self
-            Instantiate(clone);  //creates clone (sep object)
+            //Instantiate(clone);  //creates clone (sep object)
+
+            Vector3 pos = new Vector3(-70, 3, 0);   //should be at the last checkpoint
+            var newClone = Instantiate(clone, pos, Quaternion.Euler(0, 0, 0));
+            Destroy(newClone, SORRY);   //this is a really terrible workaround sorry
 
             PlayerScript.resetCharges();
             
@@ -94,15 +106,15 @@ public class TrackMovement : MonoBehaviour {
             //this.transform.position = currPos;
             Debug.Log(player.transform.position);
         }
+
         if (player2Exists && test % framerate == 0)
         {
             //Debug.Log("Spot2:" + spot2);
             //player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
             clone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); //COMMENT THIS
-
             spot2++;
+            Debug.Log(locations[spot2]);
         }
-
         
     }
 
@@ -142,7 +154,7 @@ public class TrackMovement : MonoBehaviour {
      */
     public int currLevelCharges()
     {
-        Debug.Log(currLevel + " level");
+        //Debug.Log(currLevel + " level");
         parseFull();
         return chargesPerLevel[currLevel];
     }

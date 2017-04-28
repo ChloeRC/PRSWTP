@@ -4,20 +4,21 @@ using UnityEngine;
 
 /* This script is intended to represent all the past selves
  * in order to differentiate current/past selves from each
- * other. 
+ * other. More betterer.
  * 
  * It might not work. Sorry :(
- * 
+ * It definitely doesn't work.s
 */
 
 public class CloneScript : MonoBehaviour {
     private float gameTicks;
+    public bool isDead;
 
     public GameObject PlayerScript;
 
     // Use this for initialization
     void Start () {
-
+        isDead = false;
 
 	}
 	
@@ -36,13 +37,13 @@ public class CloneScript : MonoBehaviour {
     public void setPosition(Vector3 vector)
     {
         var marker = TrackMovement.MARKER;
-        //this is always true?
         if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
         {
             Debug.Log("oh no!");
             kill();
         }
         transform.position = vector;
+        Debug.Log("CloneScript's position: " + transform.position);
     }
 
     void OnTriggerEnter(Collider col)
@@ -57,7 +58,8 @@ public class CloneScript : MonoBehaviour {
 
     void kill()
     {
-        Destroy(this.gameObject);
+        Debug.Log("k");
+        //Destroy(this.gameObject);
     }
 
 }
