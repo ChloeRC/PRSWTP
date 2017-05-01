@@ -70,6 +70,12 @@ public class PlayerScript : MonoBehaviour {
     private Vector3 rSpawnLocation;
 
     // Use this for initialization
+    void OnLevelWasLoaded()
+    {
+        Debug.Log("Alexander Hamilton!");
+        Start();
+    }
+
     void Start ()
     {
         if (ValueHolder.isPastSelfSpawning == false)
@@ -103,7 +109,9 @@ public class PlayerScript : MonoBehaviour {
 
         hasShot = shotCooldown;
         hasSword = 0;
-	}
+        
+        gunBarDisplay.GetComponent<GunBarDisplay>().UpdateText();
+    }
 	
 	// Update is called once per frame
     void Update () {

@@ -37,7 +37,7 @@ public class CloneScript : MonoBehaviour {
     public void setPosition(Vector3 vector)
     {
         cloneLoc = vector;
-        Debug.Log("cloneLoc: " + cloneLoc);
+        Debug.Log("Goal Position: " + cloneLoc);
         CloneScript clone = GetComponent<CloneScript>();
         var marker = TrackMovement.MARKER;
         if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
@@ -46,7 +46,8 @@ public class CloneScript : MonoBehaviour {
             kill();
         }
 
-        clone.GetComponent<CloneScript>().transform.position = vector;
+        transform.position = vector;
+        Debug.Log("Actual Position: " + transform.position);
         //transform.position = vector;
         //Debug.Log("Clone's position: " + transform.position);
     }

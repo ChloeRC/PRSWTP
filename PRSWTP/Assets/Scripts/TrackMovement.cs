@@ -26,6 +26,7 @@ public class TrackMovement : MonoBehaviour {
     public GameObject nonPlayerObjects;
     public GameObject bucket;
     public GameObject healthBar;
+    public GameObject chargeBarDisplay;
     public GameObject playerinfo;
 
 	public int thisHealth;
@@ -113,7 +114,6 @@ public class TrackMovement : MonoBehaviour {
             //player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
             clone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); //COMMENT THIS
             spot2++;
-            Debug.Log("TrackMovement's location: " + locations[spot2]);
         }
         
     }
@@ -124,6 +124,7 @@ public class TrackMovement : MonoBehaviour {
         if (controllable && col.gameObject.tag == "Checkpoint")
         {
             currLevel = col.GetComponent<Checkpoint>().number;
+            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateFull();
             int i = 0;
             while (locations.Count > 0)
             {

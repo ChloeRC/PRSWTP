@@ -9,11 +9,12 @@ public class ChargeBarDisplay : FillBar {
     //x = -(3.3)/2+(1/2)*width
 
     public GameObject player;
+    TrackMovement tm;
 
     // Use this for initialization
     new void Start()
     {
-        TrackMovement tm = player.GetComponent<TrackMovement>();
+        tm = player.GetComponent<TrackMovement>();
         base.full = tm.currLevelCharges();
         base.curr = 0;
 
@@ -32,5 +33,10 @@ public class ChargeBarDisplay : FillBar {
     {
         base.curr = UpdateValue();
         base.UpdateText();
+    }
+
+    public void UpdateFull()
+    {
+        base.full = tm.currLevelCharges();
     }
 }
