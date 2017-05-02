@@ -30,6 +30,8 @@ public class TrackMovement : MonoBehaviour {
     public GameObject playerinfo;
 
 	public int thisHealth;
+
+    private GameObject newClone;
 	// Use this for initialization
 	void Start () {
         parseFull();
@@ -64,8 +66,8 @@ public class TrackMovement : MonoBehaviour {
             //Instantiate(clone);  //creates clone (sep object)
 
             //Vector3 pos = new Vector3(-80, 3, 0);   //should be at the last checkpoint
-            var newClone = Instantiate(clone);  //I think this is causing problems
-            Destroy(newClone, SORRY);   //this is a really terrible workaround sorry
+            newClone = Instantiate(clone);  //I think this is causing problems
+            Destroy(newClone, SORRY);  //this is a really terrible workaround sorry
 
             PlayerScript.resetCharges();
             
@@ -102,9 +104,6 @@ public class TrackMovement : MonoBehaviour {
 
 			thisHealth = player.GetComponent<PlayerScript>().health;            
             playerinfo.setHealth(thisHealth);
-
-            //player.transform.position = currPos;
-            //this.transform.position = currPos;
             Debug.Log(player.transform.position);
         }
 
@@ -112,7 +111,7 @@ public class TrackMovement : MonoBehaviour {
         {
             //Debug.Log("Spot2:" + spot2);
             //player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
-            clone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); //COMMENT THIS
+            newClone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); //COMMENT THIS
             spot2++;
         }
         

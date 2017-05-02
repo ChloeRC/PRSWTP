@@ -11,7 +11,6 @@ using UnityEngine;
 */
 
 public class CloneScript : MonoBehaviour {
-    GameObject clone;
     private float gameTicks;
     public bool isDead;
     private Vector3 cloneLoc;
@@ -37,25 +36,20 @@ public class CloneScript : MonoBehaviour {
     public void setPosition(Vector3 vector)
     {
         cloneLoc = vector;
-        Debug.Log("Goal Position: " + cloneLoc);
-        CloneScript clone = GetComponent<CloneScript>();
+        Debug.Log("Goal Position (cloneLoc): " + cloneLoc);
         var marker = TrackMovement.MARKER;
         if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
         {
-            Debug.Log("oh no!");
             kill();
         }
 
         transform.position = vector;
-        Debug.Log("Actual Position: " + transform.position);
-        //transform.position = vector;
-        //Debug.Log("Clone's position: " + transform.position);
     }
 
     void getPosition()
     {
-        transform.position = cloneLoc;
-        Debug.Log("Clone position: " + transform.position);
+        //transform.position = cloneLoc;
+        Debug.Log("Actual Position: " + transform.position + " cloneLoc: " + cloneLoc);
     }
 
     void OnTriggerEnter(Collider col)
@@ -71,7 +65,6 @@ public class CloneScript : MonoBehaviour {
     void kill()
     {
         Debug.Log("k");
-        //Destroy(this.gameObject);
     }
 
 }
