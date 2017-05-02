@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class GunReloadDisplay : FillBar {
     public GameObject player;
-    int reloadTime;
 
 	// Use this for initialization
 	new void Start () {
-        reloadTime = 0;	
 		base.full = getReloadTime();
 		base.curr = base.full;
 		base.originalText = "Gun Reload: ";

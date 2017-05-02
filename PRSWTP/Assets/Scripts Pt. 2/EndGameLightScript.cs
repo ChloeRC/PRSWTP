@@ -9,7 +9,6 @@ public class EndGameLightScript : MonoBehaviour {
     public float timer;
     private float currIntensity;
     private Light l;
-    private bool increment;
     private bool isFading;
     private bool inTransition;
 
@@ -25,7 +24,6 @@ public class EndGameLightScript : MonoBehaviour {
         currIntensity = 0f;
         l = GetComponent<Light>();
         l.intensity = minIntensity;
-        increment = false;
         inTransition = true;
     }
 

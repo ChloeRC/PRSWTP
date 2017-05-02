@@ -60,26 +60,13 @@ public class TrackMovement : MonoBehaviour {
             gameTicks = 0.0f;
 
             ValueHolder.isPastSelfSpawning = true;
-            //Vector3 currPos = this.transform.position;
 
-            //Instantiate(player);    //creates the previous self
-            //Instantiate(clone);  //creates clone (sep object)
-
-            //Vector3 pos = new Vector3(-80, 3, 0);   //should be at the last checkpoint
-            newClone = Instantiate(clone);  //I think this is causing problems
-            Destroy(newClone, SORRY);  //this is a really terrible workaround sorry
+            newClone = Instantiate(clone);
+            Destroy(newClone, SORRY);
 
             PlayerScript.resetCharges();
-            
-            //The new, controllable one is "player"
-            //The old, not-controllable, past self is "this"
 
 			TimeTravelIndicator.setFlash();
-            //player.GetComponent<TimeTravelIndicator>().setFlash(); //hahaha
-
-            //player.GetComponent<PlayerScript>().toggleControllable(); //UNCOMMENT THIS
-
-            //player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             HealthBarDisplay thisFullBar = this.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
             HealthBarDisplay playerFullBar = player.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
@@ -89,15 +76,10 @@ public class TrackMovement : MonoBehaviour {
             thisFullBar.UpdateText();
             playerFullBar.UpdateText();
 
-            Transform destroyOnTimeTravel = this.transform.Find("DestroyOnTimeTravel");
-            //Destroy(destroyOnTimeTravel.gameObject);    //UNCOMMENT THIS
-
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>();
             resetter.reset = true;
             bucket.GetComponent<BucketScript>().reset();
 
-            //Debug.Log("Count before marker: " + locations.Count);
-			//Debug.Log ("Key: " + key);
             locations.Add(key, MARKER);
             key++;
             player2Exists = true;     //UNCOMMENT THIS

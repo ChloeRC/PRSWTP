@@ -38,7 +38,7 @@ public class CloneScript : MonoBehaviour {
         cloneLoc = vector;
         Debug.Log("Goal Position (cloneLoc): " + cloneLoc);
         var marker = TrackMovement.MARKER;
-        if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
+        if (Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
         {
             kill();
         }

@@ -67,7 +67,6 @@ public class PlayerScript : MonoBehaviour {
     public GameObject nonPlayerObjects;
 
     private GameObject info; //stores information across time travel
-    private Vector3 rSpawnLocation;
 
     // Use this for initialization
     void OnLevelWasLoaded()
@@ -434,18 +433,11 @@ public class PlayerScript : MonoBehaviour {
 		return inv;
 	}
 
-    public Vector3 returnSpawnLocation()
-    {
-        return rSpawnLocation;
-    }
-    //moving the past self
-  
-
     public void setPosition(Vector3 vector)
     {
         var marker = TrackMovement.MARKER;
 		//this is always true?
-        if (marker != null && Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
+        if (Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
             //&& !controllable && gameObject.tag == "Parent for Player(Clone)")
         {
             Debug.Log("oopsies");
