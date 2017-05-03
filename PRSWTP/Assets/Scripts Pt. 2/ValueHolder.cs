@@ -7,7 +7,6 @@ public class ValueHolder : MonoBehaviour {
     public static int checkpointNumber;
     public static Vector3 returnSpawnLocation;
     public static Timer currentTime = new Timer();
-    public static bool isPastSelfSpawning = false;
     public static bool music = true;
 
 	// Use this for initialization

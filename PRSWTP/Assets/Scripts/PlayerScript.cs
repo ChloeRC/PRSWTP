@@ -73,31 +73,22 @@ public class PlayerScript : MonoBehaviour {
     // Use this for initialization
     void OnLevelWasLoaded()
     {
-        Debug.Log("Alexander Hamilton!");
         Start();
     }
 
     void Start ()
     {
-        if (ValueHolder.isPastSelfSpawning == false)
-        {
-            //The checkpoints are indexed from 1, the locations are indexed from 0
-            //Debug.Log("Check: " + checkpoints);
-            //Debug.Log("Pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
-            Vector3 newPos = checkpoints[ValueHolder.checkpointNumber].transform.position;
-            //Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber + " Pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
-            this.transform.position = checkpoints[ValueHolder.checkpointNumber].transform.position;
-        }
-        else
-        {
-            ValueHolder.isPastSelfSpawning = false;
-        }
+        //SPAWNS YOU AT THE CORRECT CHECKPOINT
+        //The checkpoints are indexed from 1, the locations are indexed from 0
+        Vector3 newPos = checkpoints[ValueHolder.checkpointNumber].transform.position;
+        this.transform.position = checkpoints[ValueHolder.checkpointNumber].transform.position;
 
-        //health = 3;
+        //INITIALIZES REFERENCES
         PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
 		health = info.getHealth();
         rb = GetComponent<Rigidbody>();
         
+        //INITIALIZES ALL THE GAMETICKS TIMERS
         gameTicks = 0.0f;
         gameTicks2 = 0.0f;
         thingy = 0.0f;
@@ -108,6 +99,7 @@ public class PlayerScript : MonoBehaviour {
         
         controllable = true;
 
+        //INITIALIZES THE COOLDOWN TIMERS
         hasShot = shotCooldown;
         hasSword = 0;
         
@@ -117,10 +109,12 @@ public class PlayerScript : MonoBehaviour {
 	// Update is called once per frame
     void Update () {
 
+        //UPDATES ALL THE GAMETICKS TIMERS
         gameTicks += Time.deltaTime;
         gameTicks2 += Time.deltaTime;
         thingy += Time.deltaTime;
         flibbityfish += Time.deltaTime;
+
 
         //freezes the game
         if (Input.GetButton(PAUSE) == true && flibbityfish > 0.1f)
@@ -131,15 +125,19 @@ public class PlayerScript : MonoBehaviour {
         }
 
         if (!pause)
-        {						
-            //If you push the button which is mapped to RIGHT (d), you go right
+        {
+
+            //RIGHT (d)
             if (Input.GetButton(RIGHT) == true)
+
             {
+                //Move you right at the correct speed, accounting for different lengths of frames
                 transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
                 player.GetComponent<PlayerRotate>().Rotate(DIR_RIGHT);
                 direction = DIR_RIGHT;
             }
-            //If you push the button which is mapped to LEFT (a), you go left
+
+            //LEFT (a)
             if (Input.GetButton(LEFT) == true)
             {
                 transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
@@ -147,21 +145,26 @@ public class PlayerScript : MonoBehaviour {
                 direction = DIR_LEFT;
             }
 
+
             //SUICIDE (x)
             if (Input.GetButton(SUICIDE) == true)
             {
                 kill();
             }
 
-            //Cooldowns
+            //UPDATE COOLDOWN TIMERS
+            //0 indicates that the sword is usable. So while the cooldown isn't reloaded, increment it upwards.
+            SwordScript sword = GetComponentInChildren<SwordScript>();
             if (hasSword != 0)
             {
                 hasSword += Time.deltaTime;
                 if (hasSword > swordCooldown)
                 {
                     hasSword = 0;
+                    sword.toggleSword(direction);
                 }
             }
+            //ShotCoolDown indicates that the gun is usable. While the cooldown isn't reloaded, increment.
             if (hasShot != shotCooldown)
             {
                 hasShot += Time.deltaTime;
@@ -169,39 +172,33 @@ public class PlayerScript : MonoBehaviour {
                 {
                     hasShot = shotCooldown;
                 }
+                //Update the gun display.
                 gunBarDisplay.GetComponent<GunBarDisplay>().UpdateText();
-        }
+            }
 
-        if (direction == DIR_LEFT) {
-				SwordScript sword = GetComponentInChildren<SwordScript> ();
-				bool drawn = sword.drawn;
-				if (drawn) {
-					sword.swordUp (direction);
-				} else {
-					sword.swordDown (direction);
-				}
-			} else {
-				SwordScript sword = GetComponentInChildren<SwordScript> ();
-				bool drawn = sword.drawn;
-				if (drawn) {                  
-					sword.swordUp (direction);
-				} else {
-                    sword.swordDown (direction);
-				}
-			}
+            //REDRAW THE SWORD TO ACCOUNT FOR RECENT CHANGES
+            bool drawn = sword.drawn;
+            if (drawn)
+            {
+                sword.swordUp(direction);
+            }
+            else
+            {
+                sword.swordDown(direction);
+            }
 
             //SWORD (Space)
             if (Input.GetButton(SWORD) == true && hasSword == 0)
             {
+                //The sword increments upwards from 1 to swordCooldown, then gets set to 0. 0 is usable.
                 hasSword = 1;
-
-                SwordScript sword = GetComponentInChildren<SwordScript>();
                 sword.toggleSword(direction);
             }
 
             //SHOOT (L shift)
             if (Input.GetButton(SHOOT) == true && hasShot == shotCooldown)
             {
+                //The gun increments from .1 to shotCooldown, then stops. ShotCooldown is usable.
                 hasShot = .1f;
 
                 //This value will be added to the position on the Y axis so the bullet starts to the side of the player
@@ -225,17 +222,16 @@ public class PlayerScript : MonoBehaviour {
                     rotation = -90;
                     force = Vector3.right;
                 }
+                //Make the bullet face the correct direction, appear on the correct side of the player, and move in the correct direction.
                 Vector3 pos = new Vector3(transform.position.x + toAdd, transform.position.y, transform.position.z);
                 var newBullet = Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
                 var rbBullet = newBullet.GetComponent<Rigidbody>();
                 rbBullet.velocity = newBullet.GetComponent<BulletScript>().speed * force;
             }
-				
 
             //Tell if there is anything in a sphere shape below the player
             RaycastHit hitInfo;
             isGrounded = Physics.SphereCast(rb.position, 0.75f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
-            //ORIGINAL: isGrounded = Physics.SphereCast(rb.position, 0.2f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
 
             //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
             if (Input.GetButtonDown(JUMP) == true && isGrounded)
@@ -255,27 +251,30 @@ public class PlayerScript : MonoBehaviour {
             //GET INFORMATION (i) - contains lots of debugs
             if (Input.GetButton(INFO) == true && thingy > 0.2f)
             {
-				Debug.Log ("isGrounded: " + isGrounded);
-				Debug.Log ("inv: " + inv);
+                Debug.Log("isGrounded: " + isGrounded);
+                Debug.Log("inv: " + inv);
                 Debug.Log(controllable);
                 thingy = 0.0f;
             }
 
-			if (Input.GetButton (INVINCIBLE) == true && flibbityfish > 0.3f) {
-				inv = !inv;
-				gameObject.GetComponentInParent<PlayerScript>().health = 3;
+            //If you're invincible, toggle invincibility. 
+            //FlibbityFish is there so that the invincibility doesn't toggle super fast when you press and hold a key.
+            if (Input.GetButton(INVINCIBLE) == true && flibbityfish > 0.3f)
+            {
+                inv = !inv;
+                gameObject.GetComponentInParent<PlayerScript>().health = 3;
                 flibbityfish = 0.0f;
-			}
-        }	
-        
-        //If you've fallen below -25 or your health is 0, you die
-        //When the player resets, there's this weird thing where position is -21 for a bit????
-        if (health <= 0 || GetComponent<Transform>().position.y <= -21.1f)
-        {
-            Debug.Log("Health: " + health);
-            Debug.Log("Position" + GetComponent<Transform>().position.y);
-            Debug.Log("bop bop bop to the top");
-            instaKill();
+            }
+
+            //If you've fallen below -21.1 or your health is 0, you die
+            //When the player resets, there's this weird thing where position is -21 for a bit? Hence the use of -21.1
+            if (health <= 0 || GetComponent<Transform>().position.y <= -21.1f)
+            {
+                Debug.Log("Health: " + health);
+                Debug.Log("Position" + GetComponent<Transform>().position.y);
+                Debug.Log("bop bop bop to the top");
+                instaKill();
+            }
         }
 	}
 
@@ -290,7 +289,9 @@ public class PlayerScript : MonoBehaviour {
     void OnCollisionEnter(Collision col)
     {
         SwordScript sword = GetComponentInChildren<SwordScript>();
+        //ENEMY HURTS PLAYER
         //Under 0.5 for gameTicks2 = player is temporarily invincible
+        //This way the enemy doesn't instantly remove all the player's health.
         if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable && !sword.drawn && !inv)
         {
             gameObject.GetComponentInParent<PlayerScript>().health--;
@@ -301,29 +302,35 @@ public class PlayerScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
+        //COLLECT CHARGES
         if (col.gameObject.tag == "Charge" && controllable)
         {
             ChargeScript chargeScript = col.GetComponent<ChargeScript>();
+            //Makes sure that the charge isn't collected twice on accident
             if (chargeScript.isCollected == false)
             {
                 chargeScript.isCollected = true;
                 Destroy(col.gameObject);
                 charges++;
+                //Update the charge bar to reflect the new charge.
                 chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
             }
         }
 
+        //KNOCK THE BUCKET OFF
         if (col.gameObject.tag == "Bucket Trigger")
         {
             bucket.GetComponent<BucketScript>().activate();
         }
 
+        //TELEPORT VIA THE PORTALS
         if (col.gameObject.tag == "Portal")
         {
             PortalScript portal = col.gameObject.GetComponent<PortalScript>();
             gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
 
+        //ACTIVATE A CHECKPOINT
         if (col.gameObject.tag == "Checkpoint")
         {
             Checkpoint ch = col.gameObject.GetComponent<Checkpoint>();
@@ -334,13 +341,15 @@ public class PlayerScript : MonoBehaviour {
                 Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             }
 
-            for (int i = 0; i <= ch.number; i++) //for every checkpoint less than or equal to the checkpoint just passed through
+            for (int i = 0; i <= ch.number; i++) 
+            //for every checkpoint less than or equal to the checkpoint just passed through, light it up
             {
                 GameObject check = checkpoints[i];
                 check.GetComponent<Checkpoint>().lightOn();
             }
 
-            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
+            //Update the charge bar to reflect the new number of charges?
+            //chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
 
         }
 
