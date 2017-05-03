@@ -93,8 +93,12 @@ public class TrackMovement : MonoBehaviour {
         {
             //Debug.Log("Spot2:" + spot2);
             //player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
-            newClone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); //COMMENT THIS
+            newClone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); 
             spot2++;
+//            if (locations.Count == 0) uhhhhh do this later
+//           {
+//                player2Exists = false;
+//            }
         }
         
     }

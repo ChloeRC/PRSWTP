@@ -36,7 +36,7 @@ public class CloneScript : MonoBehaviour {
     public void setPosition(Vector3 vector)
     {
         cloneLoc = vector;
-        Debug.Log("Goal Position (cloneLoc): " + cloneLoc);
+        //Debug.Log("Goal Position (cloneLoc): " + cloneLoc);
         var marker = TrackMovement.MARKER;
         if (Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
         {
@@ -49,14 +49,14 @@ public class CloneScript : MonoBehaviour {
     void getPosition()
     {
         //transform.position = cloneLoc;
-        Debug.Log("Actual Position: " + transform.position + " cloneLoc: " + cloneLoc);
+        //Debug.Log("Actual Position: " + transform.position + " cloneLoc: " + cloneLoc);
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            //PlayerScript.GetComponent<PlayerScript>().health--;
+            //PlayerScript.GetComponent<PlayerScript>().kill--; //COMMENT THIS OUT WHEN YOU'RE READY TO FAIL
             Debug.Log("You colllided with your past self!!");
             Debug.Log("the man loved trees");
         }
@@ -64,7 +64,7 @@ public class CloneScript : MonoBehaviour {
 
     void kill()
     {
-        Debug.Log("k");
+        //Debug.Log("k");
     }
 
 }

@@ -54,6 +54,7 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string FILL_CHARGES = "fill charges";
     private static readonly string INFO = "info";
 	private static readonly string INVINCIBLE = "invincible";
+    public static readonly string PAUSE = "pause";
 
     private bool isGrounded = false;
 	private bool inv = false;
@@ -81,9 +82,9 @@ public class PlayerScript : MonoBehaviour {
         {
             Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             //The checkpoints are indexed from 1, the locations are indexed from 0
-            Debug.Log("Check: " + checkpoints);
+            //Debug.Log("Check: " + checkpoints);
             Vector3 newPos = checkpoints[ValueHolder.checkpointNumber].transform.position;
-            Debug.Log("Pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
+            //Debug.Log("Pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
             this.transform.position = checkpoints[ValueHolder.checkpointNumber].transform.position;
         }
         else
@@ -256,6 +257,12 @@ public class PlayerScript : MonoBehaviour {
 				gameObject.GetComponentInParent<PlayerScript>().health = 3;
                 flibbityfish = 0.0f;
 			}
+
+            if (Input.GetButton (PAUSE) == true)
+            {
+                Debug.Log("Burr, you're a better lawyer than me");
+                Debug.Log("okay");
+            }
         //}		//MODIFIED
         
         //If you've fallen below -25 or your health is 0, you die
