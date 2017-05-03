@@ -25,8 +25,6 @@ public class BulletScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Enemy")
         {
-            Debug.Log("It's the bare necessities // The simple bare necessities");
-            Debug.Log("Silence! // A message from the king!");
             kill();
         }
         if (col.gameObject.layer == 8) //ground layer

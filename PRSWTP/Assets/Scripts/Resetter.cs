@@ -25,7 +25,6 @@ public class Resetter : MonoBehaviour {
 	void Update () {
 	    if (reset)
         {
-            Debug.Log("reset");
             reset = false;
             foreach (Transform child in transform)
             {
