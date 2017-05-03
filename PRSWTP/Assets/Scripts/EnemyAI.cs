@@ -31,7 +31,6 @@ public class EnemyAI : MonoBehaviour {
     }
 	
     void Update () {
-        //pause = PlayerScript.GetComponent<PlayerScript>().getPause();
         gameTicks += Time.deltaTime;
         //Go right if you are not at the right edge yet, and you are headed right
         if (this.ts.position.x < rightEdge && direction)
