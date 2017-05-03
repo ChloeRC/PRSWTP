@@ -58,6 +58,7 @@ public class PlayerScript : MonoBehaviour {
 
     private bool isGrounded = false;
 	private bool inv = false;
+    private bool pause = false;
   //  private Vector3 spawnLocation;
     private Timer currentTime;
 
@@ -121,8 +122,16 @@ public class PlayerScript : MonoBehaviour {
         thingy += Time.deltaTime;
         flibbityfish += Time.deltaTime;
 
-        //if (controllable) 	//MODIFIED
-        //{						//MODIFIED
+        //freezes the game
+        if (Input.GetButton(PAUSE) == true && flibbityfish > 0.1f)
+        {
+            Debug.Log("Burr, you're a better lawyer than me");
+            flibbityfish = 0.0f;    //i am repurposing flibbityfish because i don't want to use another variable
+            pause = !pause;
+        }
+
+        if (!pause)
+        {						
             //If you push the button which is mapped to RIGHT (d), you go right
             if (Input.GetButton(RIGHT) == true)
             {
@@ -257,13 +266,7 @@ public class PlayerScript : MonoBehaviour {
 				gameObject.GetComponentInParent<PlayerScript>().health = 3;
                 flibbityfish = 0.0f;
 			}
-
-            if (Input.GetButton (PAUSE) == true && flibbityfish > 0.1f)
-            {
-                Debug.Log("Burr, you're a better lawyer than me");
-                flibbityfish = 0.0f;
-            }
-        //}		//MODIFIED
+        }	
         
         //If you've fallen below -25 or your health is 0, you die
         //When the player resets, there's this weird thing where position is -21 for a bit????
@@ -274,7 +277,15 @@ public class PlayerScript : MonoBehaviour {
             Debug.Log("bop bop bop to the top");
             instaKill();
         }
-	}	
+	}
+
+    void OnGUI()
+    {
+        if (pause)
+        {
+            GUI.Label(new Rect(10, 10, 100, 20), "Pause");
+        }
+    }
 
     void OnCollisionEnter(Collision col)
     {
@@ -439,6 +450,11 @@ public class PlayerScript : MonoBehaviour {
 	public bool getInv() {
 		return inv;
 	}
+
+    public bool getPause()
+    {
+        return pause;
+    }
 
     public void setPosition(Vector3 vector)
     {

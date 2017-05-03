@@ -15,6 +15,8 @@ public class SwordScript : MonoBehaviour {
 
     private Transform ts;
 
+    private bool pause;
+
     public GameObject healthDisplayer;
 
     // Use this for initialization
@@ -23,6 +25,7 @@ public class SwordScript : MonoBehaviour {
         ouchies = 0.0f; //keeps track of time between ouching the enemy
         drawTime = 0.3f; //alter this to modify how long the sword stays up
         ts = GetComponent<Transform>();
+        pause = false;
 
         if (drawn) {
             swordUp(false);
@@ -39,6 +42,8 @@ public class SwordScript : MonoBehaviour {
         {
             gameTicks += Time.deltaTime;
         }
+
+        pause = gameObject.GetComponentInParent<PlayerScript>().getPause();
 	}
 
 	public void toggleSword(bool direction)
@@ -97,7 +102,7 @@ public class SwordScript : MonoBehaviour {
     //this actually controls all the close-up player/enemy collisions because haha
     void OnTriggerEnter(Collider col)
     {
-		if (col.gameObject.tag == "Enemy" && drawn && ouchies > 0.1f)
+		if (col.gameObject.tag == "Enemy" && drawn && ouchies > 0.1f && !pause)
         {
             EnemyAI enemyAI = col.gameObject.GetComponent<EnemyAI>();
             BossAI bossAI = col.gameObject.GetComponent<BossAI>();
@@ -108,7 +113,8 @@ public class SwordScript : MonoBehaviour {
 		}
         //to lose health you also need to be your current self
         else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f
-			&& gameObject.GetComponentInParent<PlayerScript>().getControllable() && !gameObject.GetComponentInParent<PlayerScript>().getInv())
+			&& gameObject.GetComponentInParent<PlayerScript>().getControllable() && !gameObject.GetComponentInParent<PlayerScript>().getInv()
+            && !pause)
         {
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
