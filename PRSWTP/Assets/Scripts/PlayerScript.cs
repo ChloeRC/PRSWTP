@@ -258,10 +258,10 @@ public class PlayerScript : MonoBehaviour {
                 flibbityfish = 0.0f;
 			}
 
-            if (Input.GetButton (PAUSE) == true)
+            if (Input.GetButton (PAUSE) == true && flibbityfish > 0.1f)
             {
                 Debug.Log("Burr, you're a better lawyer than me");
-                Debug.Log("okay");
+                flibbityfish = 0.0f;
             }
         //}		//MODIFIED
         
@@ -320,6 +320,7 @@ public class PlayerScript : MonoBehaviour {
             if (ch.number > ValueHolder.checkpointNumber)
             {
                 ValueHolder.checkpointNumber = ch.number;
+                Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             }
 
             for (int i = 0; i <= ch.number; i++) //for every checkpoint less than or equal to the checkpoint just passed through
