@@ -244,24 +244,13 @@ public class PlayerScript : MonoBehaviour {
             //Apply gravity relative to the player's mass
             rb.AddForce(Vector2.down * gravity * rb.mass);
 
-<<<<<<< HEAD
-        //GET INFORMATION (i) - contains lots of debugs
-        if (Input.GetButton(INFO) == true && thingy > 0.2f)
-        {
-		    Debug.Log ("isGrounded: " + isGrounded);
-			Debug.Log ("inv: " + inv);
-            thingy = 0.0f;
-        }
-=======
             //GET INFORMATION (i) - contains lots of debugs
             if (Input.GetButton(INFO) == true && thingy > 0.2f)
             {
-                Debug.Log("isGrounded: " + isGrounded);
-                Debug.Log("inv: " + inv);
-                Debug.Log(controllable);
+		        Debug.Log ("isGrounded: " + isGrounded);
+		    	Debug.Log ("inv: " + inv);
                 thingy = 0.0f;
             }
->>>>>>> aa8807d33957b0076ac9da9933c3003ab2731b8d
 
             //If you're invincible, toggle invincibility. 
             //FlibbityFish is there so that the invincibility doesn't toggle super fast when you press and hold a key.
