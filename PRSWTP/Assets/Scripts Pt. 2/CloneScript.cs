@@ -36,16 +36,23 @@ public class CloneScript : MonoBehaviour {
     public void setPosition(Vector3 vector)
     {
         cloneLoc = vector;
+        //Debug.Log("Goal Position (cloneLoc): " + cloneLoc);
         var marker = TrackMovement.MARKER;
 
         transform.position = vector;
+    }
+
+    void getPosition()
+    {
+        //transform.position = cloneLoc;
+        //Debug.Log("Actual Position: " + transform.position + " cloneLoc: " + cloneLoc);
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            //PlayerScript.GetComponent<PlayerScript>().health--;
+            //PlayerScript.GetComponent<PlayerScript>().kill--; //COMMENT THIS OUT WHEN YOU'RE READY TO FAIL
             Debug.Log("You colllided with your past self!!");
         }
     }
