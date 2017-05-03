@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
+
     public double secs = 0;
     public double min = 2;
     private string timeDisp;
@@ -13,12 +14,11 @@ public class Timer : MonoBehaviour {
     }
 
     void Update () {
-        PlayerScript PlayerScript = GetComponent<PlayerScript>();
-        pause = PlayerScript.GetComponent<PlayerScript>().getPause();
+        pause = GetComponentInParent<PlayerScript>().getPause();
         int stemp = (int)secs;
         int mtemp = (int)min;
-        if (!pause)
-        {
+       if (!pause)
+       {
             if (secs < 10)
             {
                 secs += Time.deltaTime;

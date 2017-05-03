@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
-
+    public GameObject PlayerScript;
     public int health;
 
     public int bulletDamage;
@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour {
     public float horizSpeed;
     //True is heading right, false is heading left
     private bool direction = true;
+    private bool pause;
 
     public float rightEdge;
     public float leftEdge;
@@ -30,6 +31,7 @@ public class EnemyAI : MonoBehaviour {
     }
 	
     void Update () {
+        //pause = PlayerScript.GetComponent<PlayerScript>().getPause();
         gameTicks += Time.deltaTime;
         //Go right if you are not at the right edge yet, and you are headed right
         if (this.ts.position.x < rightEdge && direction)
@@ -79,7 +81,7 @@ public class EnemyAI : MonoBehaviour {
 
     public void adjustHealthBy(int toAdd)
     {
-        Debug.Log("adding " + toAdd);
+        //Debug.Log("adding " + toAdd);
         health += toAdd;
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
     }

@@ -18,6 +18,7 @@ public class SwordScript : MonoBehaviour {
     private bool pause;
 
     public GameObject healthDisplayer;
+    public GameObject PlayerScript;
 
     // Use this for initialization
     void Start () {

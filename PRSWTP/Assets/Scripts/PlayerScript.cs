@@ -115,7 +115,6 @@ public class PlayerScript : MonoBehaviour {
         //freezes the game
         if (Input.GetButton(PAUSE) == true && flibbityfish > 0.1f)
         {
-            Debug.Log("Burr, you're a better lawyer than me");
             flibbityfish = 0.0f;    //i am repurposing flibbityfish because i don't want to use another variable
             pause = !pause;
         }
