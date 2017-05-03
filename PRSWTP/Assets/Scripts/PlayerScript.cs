@@ -79,11 +79,9 @@ public class PlayerScript : MonoBehaviour {
     {
         if (ValueHolder.isPastSelfSpawning == false)
         {
-            Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             //The checkpoints are indexed from 1, the locations are indexed from 0
-            Debug.Log("Check: " + checkpoints);
             Vector3 newPos = checkpoints[ValueHolder.checkpointNumber].transform.position;
-            Debug.Log("Pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
+            Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber + " Pos: " + newPos.x + ", " + newPos.y + ", " + newPos.z);
             this.transform.position = checkpoints[ValueHolder.checkpointNumber].transform.position;
         }
         else

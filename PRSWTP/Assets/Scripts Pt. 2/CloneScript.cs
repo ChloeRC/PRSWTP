@@ -23,7 +23,7 @@ public class CloneScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        getPosition();
+
 	}
 
     public void setRotation()
@@ -36,20 +36,9 @@ public class CloneScript : MonoBehaviour {
     public void setPosition(Vector3 vector)
     {
         cloneLoc = vector;
-        Debug.Log("Goal Position (cloneLoc): " + cloneLoc);
         var marker = TrackMovement.MARKER;
-        if (Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
-        {
-            kill();
-        }
 
         transform.position = vector;
-    }
-
-    void getPosition()
-    {
-        //transform.position = cloneLoc;
-        Debug.Log("Actual Position: " + transform.position + " cloneLoc: " + cloneLoc);
     }
 
     void OnTriggerEnter(Collider col)
@@ -58,13 +47,7 @@ public class CloneScript : MonoBehaviour {
         {
             //PlayerScript.GetComponent<PlayerScript>().health--;
             Debug.Log("You colllided with your past self!!");
-            Debug.Log("the man loved trees");
         }
-    }
-
-    void kill()
-    {
-        Debug.Log("k");
     }
 
 }

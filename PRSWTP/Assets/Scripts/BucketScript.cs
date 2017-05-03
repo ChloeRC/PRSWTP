@@ -16,7 +16,6 @@ public class BucketScript : MonoBehaviour {
 
     public void activate()
     {
-        Debug.Log("Pardon me, are you Aaron Burr, sir?");
         isActivated = true;
         Rigidbody bucketRb = GetComponent<Rigidbody>();
         if (newCharge)
