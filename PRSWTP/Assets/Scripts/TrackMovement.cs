@@ -59,8 +59,6 @@ public class TrackMovement : MonoBehaviour {
             SORRY = gameTicks;
             gameTicks = 0.0f;
 
-            ValueHolder.isPastSelfSpawning = true;
-
             newClone = Instantiate(clone);
             Destroy(newClone, SORRY);
 
