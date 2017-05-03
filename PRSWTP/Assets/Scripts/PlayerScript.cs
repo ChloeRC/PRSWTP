@@ -311,7 +311,6 @@ public class PlayerScript : MonoBehaviour {
             if (ch.number > ValueHolder.checkpointNumber)
             {
                 ValueHolder.checkpointNumber = ch.number;
-                Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             }
 
             for (int i = 0; i <= ch.number; i++) //for every checkpoint less than or equal to the checkpoint just passed through

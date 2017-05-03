@@ -7,7 +7,6 @@ public class ConeScript : MonoBehaviour {
 
 	public void activate()
     {
-        Debug.Log("*quiet crunch*");
 		StartCoroutine (Drop ());
     }
 
@@ -25,7 +24,6 @@ public class ConeScript : MonoBehaviour {
         }
         if (col.gameObject.layer == 8 && falling) //ground
         {
-            Debug.Log("crunch - BOOM");
             falling = false;
             freeze();
         }

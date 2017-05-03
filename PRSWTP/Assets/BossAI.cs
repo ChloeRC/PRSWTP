@@ -102,7 +102,6 @@ public class BossAI : MonoBehaviour {
     public void adjustHealthBy(int toAdd)
     {
         health += toAdd;
-        Debug.Log("health: " + health + " startHealth: " + startHealth);
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
 
         gameTicks = 0f;

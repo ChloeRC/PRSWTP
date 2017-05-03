@@ -99,8 +99,6 @@ public class SwordScript : MonoBehaviour {
     {
 		if (col.gameObject.tag == "Enemy" && drawn && ouchies > 0.1f)
         {
-            Debug.Log("Does anyone have a map?");
-
             EnemyAI enemyAI = col.gameObject.GetComponent<EnemyAI>();
             BossAI bossAI = col.gameObject.GetComponent<BossAI>();
             if (enemyAI != null) { enemyAI.adjustHealthBy(-damage); }
@@ -112,7 +110,6 @@ public class SwordScript : MonoBehaviour {
         else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f
 			&& gameObject.GetComponentInParent<PlayerScript>().getControllable() && !gameObject.GetComponentInParent<PlayerScript>().getInv())
         {
-            Debug.Log("I'm waving through a window");
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
             gameObject.GetComponentInParent<PlayerScript>().resetCollisionTime();
