@@ -56,6 +56,7 @@ public class PlayerScript : MonoBehaviour {
 
     private bool isGrounded = false;
 	private bool inv = false;
+    private bool pause = false;
   //  private Vector3 spawnLocation;
     private Timer currentTime;
 
@@ -110,122 +111,140 @@ public class PlayerScript : MonoBehaviour {
         thingy += Time.deltaTime;
         flibbityfish += Time.deltaTime;
 
-        //RIGHT (d)
-        if (Input.GetButton(RIGHT) == true)
+
+        //freezes the game
+        if (Input.GetButton(PAUSE) == true && flibbityfish > 0.1f)
         {
-           //Move you right at the correct speed, accounting for different lengths of frames
-           transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
-            player.GetComponent<PlayerRotate>().Rotate(DIR_RIGHT);
-            direction = DIR_RIGHT;
-        }
-        
-        //LEFT (a)
-        if (Input.GetButton(LEFT) == true)
-        {
-            transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
-            player.GetComponent<PlayerRotate>().Rotate(DIR_LEFT);
-            direction = DIR_LEFT;
+            Debug.Log("Burr, you're a better lawyer than me");
+            flibbityfish = 0.0f;    //i am repurposing flibbityfish because i don't want to use another variable
+            pause = !pause;
         }
 
-        //SUICIDE (x)
-        if (Input.GetButton(SUICIDE) == true)
+        if (!pause)
         {
-            kill();
-        }
 
-        //UPDATE COOLDOWN TIMERS
-        //0 indicates that the sword is usable. So while the cooldown isn't reloaded, increment it upwards.
-        SwordScript sword = GetComponentInChildren<SwordScript>();
-        if (hasSword != 0)
-        {
-            hasSword += Time.deltaTime;
-            if (hasSword > swordCooldown)
+            //RIGHT (d)
+            if (Input.GetButton(RIGHT) == true)
+
             {
-                hasSword = 0;
+                //Move you right at the correct speed, accounting for different lengths of frames
+                transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
+                player.GetComponent<PlayerRotate>().Rotate(DIR_RIGHT);
+                direction = DIR_RIGHT;
+            }
+
+            //LEFT (a)
+            if (Input.GetButton(LEFT) == true)
+            {
+                transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
+                player.GetComponent<PlayerRotate>().Rotate(DIR_LEFT);
+                direction = DIR_LEFT;
+            }
+
+
+            //SUICIDE (x)
+            if (Input.GetButton(SUICIDE) == true)
+            {
+                kill();
+            }
+
+            //UPDATE COOLDOWN TIMERS
+            //0 indicates that the sword is usable. So while the cooldown isn't reloaded, increment it upwards.
+            SwordScript sword = GetComponentInChildren<SwordScript>();
+            if (hasSword != 0)
+            {
+                hasSword += Time.deltaTime;
+                if (hasSword > swordCooldown)
+                {
+                    hasSword = 0;
+                    sword.toggleSword(direction);
+                }
+            }
+            //ShotCoolDown indicates that the gun is usable. While the cooldown isn't reloaded, increment.
+            if (hasShot != shotCooldown)
+            {
+                hasShot += Time.deltaTime;
+                if (hasShot > shotCooldown)
+                {
+                    hasShot = shotCooldown;
+                }
+                //Update the gun display.
+                gunBarDisplay.GetComponent<GunBarDisplay>().UpdateText();
+            }
+
+            //REDRAW THE SWORD TO ACCOUNT FOR RECENT CHANGES
+            bool drawn = sword.drawn;
+            if (drawn)
+            {
+                sword.swordUp(direction);
+            }
+            else
+            {
+                sword.swordDown(direction);
+            }
+
+            //SWORD (Space)
+            if (Input.GetButton(SWORD) == true && hasSword == 0)
+            {
+                //The sword increments upwards from 1 to swordCooldown, then gets set to 0. 0 is usable.
+                hasSword = 1;
                 sword.toggleSword(direction);
             }
-        }
-        //ShotCoolDown indicates that the gun is usable. While the cooldown isn't reloaded, increment.
-        if (hasShot != shotCooldown)
-        {
-            hasShot += Time.deltaTime;
-            if (hasShot > shotCooldown)
+
+            //SHOOT (L shift)
+            if (Input.GetButton(SHOOT) == true && hasShot == shotCooldown)
             {
-                hasShot = shotCooldown;
+                //The gun increments from .1 to shotCooldown, then stops. ShotCooldown is usable.
+                hasShot = .1f;
+
+                //This value will be added to the position on the Y axis so the bullet starts to the side of the player
+                float toAdd = 0;
+
+                //The amount that the bullet will be rotated on the Z axis (so it's facing the correct direction)
+                float rotation = 0;
+
+                //The direction the bullet will go in
+                Vector3 force;
+
+                if (direction == DIR_LEFT)
+                {
+                    toAdd = -.5f;
+                    rotation = 90;
+                    force = Vector3.left;
+                }
+                else //direction is right
+                {
+                    toAdd = .5f;
+                    rotation = -90;
+                    force = Vector3.right;
+                }
+                //Make the bullet face the correct direction, appear on the correct side of the player, and move in the correct direction.
+                Vector3 pos = new Vector3(transform.position.x + toAdd, transform.position.y, transform.position.z);
+                var newBullet = Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
+                var rbBullet = newBullet.GetComponent<Rigidbody>();
+                rbBullet.velocity = newBullet.GetComponent<BulletScript>().speed * force;
             }
-            //Update the gun display.
-            gunBarDisplay.GetComponent<GunBarDisplay>().UpdateText();
-        }
 
-        //REDRAW THE SWORD TO ACCOUNT FOR RECENT CHANGES
-		bool drawn = sword.drawn;
-		if (drawn) {
-			sword.swordUp (direction);
-		} else {
-			sword.swordDown (direction);
-		}
+            //Tell if there is anything in a sphere shape below the player
+            RaycastHit hitInfo;
+            isGrounded = Physics.SphereCast(rb.position, 0.75f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
 
-        //SWORD (Space)
-        if (Input.GetButton(SWORD) == true && hasSword == 0)
-        {
-            //The sword increments upwards from 1 to swordCooldown, then gets set to 0. 0 is usable.
-            hasSword = 1;
-            sword.toggleSword(direction);
-        }
-
-        //SHOOT (L shift)
-        if (Input.GetButton(SHOOT) == true && hasShot == shotCooldown)
-        {
-            //The gun increments from .1 to shotCooldown, then stops. ShotCooldown is usable.
-            hasShot = .1f;
-
-            //This value will be added to the position on the Y axis so the bullet starts to the side of the player
-            float toAdd = 0;
-
-            //The amount that the bullet will be rotated on the Z axis (so it's facing the correct direction)
-            float rotation = 0;
-
-            //The direction the bullet will go in
-            Vector3 force;
-
-            if (direction == DIR_LEFT)
+            //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
+            if (Input.GetButtonDown(JUMP) == true && isGrounded)
             {
-                toAdd = -.5f;
-                rotation = 90;
-                force = Vector3.left;
+                rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             }
-            else //direction is right
+
+            //FILL_CHARGES (t)
+            if (Input.GetButton(FILL_CHARGES) == true && charges > 0)
             {
-                toAdd = .5f;
-                rotation = -90;
-                force = Vector3.right;
+                charges = GetComponent<TrackMovement>().currLevelCharges();
             }
-            //Make the bullet face the correct direction, appear on the correct side of the player, and move in the correct direction.
-            Vector3 pos = new Vector3(transform.position.x + toAdd, transform.position.y, transform.position.z);
-            var newBullet = Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
-            var rbBullet = newBullet.GetComponent<Rigidbody>();
-            rbBullet.velocity = newBullet.GetComponent<BulletScript>().speed * force;
-        }	
 
-        //Tell if there is anything in a sphere shape below the player
-        RaycastHit hitInfo;
-        isGrounded = Physics.SphereCast(rb.position, 0.75f, Vector3.down, out hitInfo, GetComponent<Collider>().bounds.size.y / 2, groundLayers);
-        
-        //If there's something beneath you that you can jump from and you push the JUMP key (w), you jump
-        if (Input.GetButtonDown(JUMP) == true && isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
-        }
+            //Apply gravity relative to the player's mass
+            rb.AddForce(Vector2.down * gravity * rb.mass);
 
-        //FILL_CHARGES (t)
-        if (Input.GetButton(FILL_CHARGES) == true && charges > 0)
-        {
-            charges = GetComponent<TrackMovement>().currLevelCharges();
-        }
-
-        //Apply gravity relative to the player's mass
-        rb.AddForce(Vector2.down * gravity * rb.mass);
-
+<<<<<<< HEAD
         //GET INFORMATION (i) - contains lots of debugs
         if (Input.GetButton(INFO) == true && thingy > 0.2f)
         {
@@ -233,31 +252,45 @@ public class PlayerScript : MonoBehaviour {
 			Debug.Log ("inv: " + inv);
             thingy = 0.0f;
         }
+=======
+            //GET INFORMATION (i) - contains lots of debugs
+            if (Input.GetButton(INFO) == true && thingy > 0.2f)
+            {
+                Debug.Log("isGrounded: " + isGrounded);
+                Debug.Log("inv: " + inv);
+                Debug.Log(controllable);
+                thingy = 0.0f;
+            }
+>>>>>>> aa8807d33957b0076ac9da9933c3003ab2731b8d
 
-        //If you're invincible, toggle invincibility. 
-        //FlibbityFish is there so that the invincibility doesn't toggle super fast when you press and hold a key.
-		if (Input.GetButton (INVINCIBLE) == true && flibbityfish > 0.3f) {
-			inv = !inv;
-			gameObject.GetComponentInParent<PlayerScript>().health = 3;
-            flibbityfish = 0.0f;
-		}
+            //If you're invincible, toggle invincibility. 
+            //FlibbityFish is there so that the invincibility doesn't toggle super fast when you press and hold a key.
+            if (Input.GetButton(INVINCIBLE) == true && flibbityfish > 0.3f)
+            {
+                inv = !inv;
+                gameObject.GetComponentInParent<PlayerScript>().health = 3;
+                flibbityfish = 0.0f;
+            }
 
-        if (Input.GetButton (PAUSE) == true)
-        {
-            Debug.Log("Burr, you're a better lawyer than me");
-            Debug.Log("okay");
+            //If you've fallen below -21.1 or your health is 0, you die
+            //When the player resets, there's this weird thing where position is -21 for a bit? Hence the use of -21.1
+            if (health <= 0 || GetComponent<Transform>().position.y <= -21.1f)
+            {
+                Debug.Log("Health: " + health);
+                Debug.Log("Position" + GetComponent<Transform>().position.y);
+                Debug.Log("bop bop bop to the top");
+                instaKill();
+            }
         }
+	}
 
-        //If you've fallen below -21.1 or your health is 0, you die
-        //When the player resets, there's this weird thing where position is -21 for a bit? Hence the use of -21.1
-        if (health <= 0 || GetComponent<Transform>().position.y <= -21.1f)
+    void OnGUI()
+    {
+        if (pause)
         {
-            Debug.Log("Health: " + health);
-            Debug.Log("Position" + GetComponent<Transform>().position.y);
-            Debug.Log("bop bop bop to the top");
-            instaKill();
+            GUI.Label(new Rect(10, 10, 100, 20), "Pause");
         }
-	}	
+    }
 
     void OnCollisionEnter(Collision col)
     {
@@ -311,6 +344,7 @@ public class PlayerScript : MonoBehaviour {
             if (ch.number > ValueHolder.checkpointNumber)
             {
                 ValueHolder.checkpointNumber = ch.number;
+                Debug.Log("CHECKPOINT " + ValueHolder.checkpointNumber);
             }
 
             for (int i = 0; i <= ch.number; i++) 
@@ -426,4 +460,9 @@ public class PlayerScript : MonoBehaviour {
 	public bool getInv() {
 		return inv;
 	}
+
+    public bool getPause()
+    {
+        return pause;
+    }
 }

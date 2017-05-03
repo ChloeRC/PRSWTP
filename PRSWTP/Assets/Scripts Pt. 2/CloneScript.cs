@@ -23,8 +23,7 @@ public class CloneScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-	}
+    }
 
     public void setRotation()
     {
@@ -52,6 +51,7 @@ public class CloneScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
+            //PlayerScript PlayerScript = GetComponent<PlayerScript>();
             //PlayerScript.GetComponent<PlayerScript>().kill--; //COMMENT THIS OUT WHEN YOU'RE READY TO FAIL
             Debug.Log("You colllided with your past self!!");
         }
