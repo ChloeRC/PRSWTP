@@ -17,9 +17,7 @@ public class PlayerCollision : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        bool controllable = gameObject.GetComponent<PlayerScript>().getControllable();
-
-        if (controllable && col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player")
         {
             Debug.Log("boop");
             kill();

@@ -43,8 +43,6 @@ public class PlayerScript : MonoBehaviour {
     private float hasSword;
     public float swordCooldown;
 
-    private bool controllable;
-
     private static readonly string RIGHT = "right";
     private static readonly string LEFT = "left";
     private static readonly string JUMP = "jump";
@@ -95,8 +93,6 @@ public class PlayerScript : MonoBehaviour {
         rb.freezeRotation = true;
         direction = DIR_RIGHT;
         charges = 0;
-        
-        controllable = true;
 
         //INITIALIZES THE COOLDOWN TIMERS
         hasShot = shotCooldown;
@@ -235,7 +231,6 @@ public class PlayerScript : MonoBehaviour {
         {
 		    Debug.Log ("isGrounded: " + isGrounded);
 			Debug.Log ("inv: " + inv);
-            Debug.Log(controllable);
             thingy = 0.0f;
         }
 
@@ -270,7 +265,7 @@ public class PlayerScript : MonoBehaviour {
         //ENEMY HURTS PLAYER
         //Under 0.5 for gameTicks2 = player is temporarily invincible
         //This way the enemy doesn't instantly remove all the player's health.
-        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && controllable && !sword.drawn && !inv)
+        if (col.gameObject.tag == "Enemy" && gameTicks2 > 0.5 && !sword.drawn && !inv)
         {
             gameObject.GetComponentInParent<PlayerScript>().health--;
             healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
@@ -281,7 +276,7 @@ public class PlayerScript : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         //COLLECT CHARGES
-        if (col.gameObject.tag == "Charge" && controllable)
+        if (col.gameObject.tag == "Charge")
         {
             ChargeScript chargeScript = col.GetComponent<ChargeScript>();
             //Makes sure that the charge isn't collected twice on accident
@@ -325,12 +320,13 @@ public class PlayerScript : MonoBehaviour {
                 check.GetComponent<Checkpoint>().lightOn();
             }
 
-            //Update the charge bar to reflect the new number of charges?
-            //chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
+            //Update the charge bar to reflect the new level - a different number of charges is required to time travel
+            chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
 
         }
 
-        if (col.gameObject.tag == "Rum" && controllable)
+        //COLLECT RUM
+        if (col.gameObject.tag == "Rum")
         {
             Destroy(col.gameObject);
 			if (health < 3) {
@@ -339,33 +335,36 @@ public class PlayerScript : MonoBehaviour {
 			}
         }
     }
-		
+	
+    //SET HEALTH TO NEW VALUE
     public void setHealth(int thisHealth)
     {
         health = thisHealth;
     }
 
+    //KILL THE PLAYER WITHOUT THE DRAMATIC LIGHT DIMMING
     public void instaKill()
     {
-        controllable = false;
         Application.LoadLevel("DeathScene");
     }
 
+    //KILL THE PLAYER WITH DRAMA
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
         Debug.Log("deathhhhh");
         //ValueHolder.currentTime = time;
-        //CREATE THIS FUNCTION
+
+        //Dim the lights dramatically
         coroutine = LightChange();
         StartCoroutine(coroutine);
-        controllable = false;
     }
 
+    //DIMS THE LIGHTS DRAMATICALLY
     private IEnumerator LightChange()
     {
         int numberOfIterations = 10;
-        //Five times...
+        //Ten times...
         for (int i = 0; i < numberOfIterations; i++) {
             yield return new WaitForSeconds(.25f); //wait a quarter a second
             //Then, for every light...
@@ -380,7 +379,7 @@ public class PlayerScript : MonoBehaviour {
                         Light childOfChildL = childOfChild.GetComponent<Light>();
                         if (childOfChildL != null && childOfChildL.intensity > 0f)
                         {
-                            //...drop the intensity.
+                            //...drop the intensity by a quarter.
                             childOfChildL.intensity -= .25f;
                         }
                     }
@@ -411,50 +410,20 @@ public class PlayerScript : MonoBehaviour {
 
         chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateText();
     }
+
     //records the time since you last hit an enemy
     public float getCollisionTime()
     {
         return gameTicks2;
     }
-
-
+    
+    //resets the time since you were last hit by an enemy
     public void resetCollisionTime()
     {
         gameTicks2 = 0.0f;
     }
 
-    public void toggleControllable()
-    {
-        controllable = !controllable;
-    }
-
-    public bool getControllable()
-    {
-        return controllable;
-    }
-
 	public bool getInv() {
 		return inv;
 	}
-
-    public void setPosition(Vector3 vector)
-    {
-        var marker = TrackMovement.MARKER;
-		//this is always true?
-        if (Mathf.Abs((vector - marker).magnitude) < float.Epsilon)
-            //&& !controllable && gameObject.tag == "Parent for Player(Clone)")
-        {
-            Debug.Log("oopsies");
-            if (gameObject.tag == "Parent for Player(Clone)") {
-                Debug.Log("WORRRRRRDDSSSS fail");
-                //kill();
-            //Destroy(GameObject.Find("Parent for Player (Clone)"));
-            }
-        }
-        transform.position = vector;
-    }
-    public void loadGame()
-    {
-
-    }
 }

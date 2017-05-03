@@ -102,8 +102,7 @@ public class TrackMovement : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        bool controllable = player.transform.gameObject.GetComponent<PlayerScript>().getControllable();
-        if (controllable && col.gameObject.tag == "Checkpoint")
+        if (col.gameObject.tag == "Checkpoint")
         {
             currLevel = col.GetComponent<Checkpoint>().number;
             chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateFull();
