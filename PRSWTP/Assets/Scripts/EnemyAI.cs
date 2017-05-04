@@ -2,9 +2,7 @@
 using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
-    public GameObject PlayerScript;
     public int health;
-
     public int bulletDamage;
 
     private Rigidbody rb;
@@ -24,6 +22,7 @@ public class EnemyAI : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody>();
         ts = GetComponent<Transform>();
+		//PlayerInfo playerinfo = nonPlayerObjects.GetComponent<PlayerInfo>();
         gameTicks = 0.0f;
         rb.freezeRotation = true;
 

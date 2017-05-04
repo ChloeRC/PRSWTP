@@ -13,6 +13,8 @@ public class PlayerScript : MonoBehaviour {
     public float horizSpeed;
     public float jumpSpeed;
     public float gravity;
+	private Vector3 freezePos;
+
     public LayerMask groundLayers;
     public GameObject bullet;
     public GameObject bucket;
@@ -65,7 +67,6 @@ public class PlayerScript : MonoBehaviour {
     //public GameObject gunReloadDisplayer;
     //public GameObject time;
     public GameObject nonPlayerObjects;
-
     private GameObject info; //stores information across time travel
 
     // Use this for initialization
@@ -104,23 +105,28 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update () {
-
-        //UPDATES ALL THE GAMETICKS TIMERS
-        gameTicks += Time.deltaTime;
-        gameTicks2 += Time.deltaTime;
-        thingy += Time.deltaTime;
-        flibbityfish += Time.deltaTime;
-
+		PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
+		flibbityfish += Time.deltaTime;	//please keep me as flibbityfish
 
         //freezes the game
         if (Input.GetButton(PAUSE) == true && flibbityfish > 0.1f)
         {
             flibbityfish = 0.0f;    //i am repurposing flibbityfish because i don't want to use another variable
             pause = !pause;
+			freezePos = transform.position;
+			info.setPause(pause);
         }
 
+		if (pause) {
+			transform.position = freezePos;
+		}
         if (!pause)
         {
+			//UPDATES ALL THE GAMETICKS TIMERS
+			gameTicks += Time.deltaTime;
+			gameTicks2 += Time.deltaTime;
+			thingy += Time.deltaTime;
+
 
             //RIGHT (d)
             if (Input.GetButton(RIGHT) == true)

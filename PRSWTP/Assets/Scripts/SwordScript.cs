@@ -44,6 +44,7 @@ public class SwordScript : MonoBehaviour {
             gameTicks += Time.deltaTime;
         }
 
+		//fix this line vvvvv
         pause = gameObject.GetComponentInParent<PlayerScript>().getPause();
 	}
 

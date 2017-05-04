@@ -20,6 +20,7 @@ public class TrackMovement : MonoBehaviour {
 
     private float gameTicks; //this keeps track of time since time travel
     private float SORRY; //stores time used since time travel
+	//really problematic ^
 
     public GameObject clone;
     public GameObject player;

@@ -11,6 +11,9 @@ public class PlayerInfo : MonoBehaviour {
 	public float currWidth;
 	public float currPos;
 
+	//for pause function
+	private bool pause;
+
 	// Use this for initialization
 	void Start () {
         health = 3;	//beginning health value
@@ -32,4 +35,14 @@ public class PlayerInfo : MonoBehaviour {
     {
         return health;
     }
+
+	public void setPause(bool p)
+	{
+		pause = p;
+	}
+
+	public bool getPause() 
+	{
+		return pause;
+	} 
 }
