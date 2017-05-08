@@ -12,7 +12,7 @@ public class PlayerInfo : MonoBehaviour {
 	public float currPos;
 
 	//for pause function
-	private bool pause;
+	public bool pause;
 
 	// Use this for initialization
 	void Start () {
