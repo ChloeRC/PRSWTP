@@ -7,28 +7,22 @@ using System;
 public class TrackMovement : MonoBehaviour {
 
     private Hashtable locations;
-    public int framerate;
+    public int framerate; //the length of a big frame
     public string full;
     public List<Int32> chargesPerLevel = new List<Int32>();
     public int currLevel = 0;
-    private int test = 0;
+    private int frameNum = 0;
     private int key = 0;
-    private bool player2Exists = false;
-    private int spot2 = 0;
+    private int key2 = 0;
     public static readonly Vector3 MARKER = new Vector3(0f, -21f, 0f);
     public Vector3 spawnLocation;
 
-    private float gameTicks; //this keeps track of time since time travel
-    private float SORRY; //stores time used since time travel
-	//really problematic ^
-
     public GameObject clone;
-    public GameObject player;
     public GameObject nonPlayerObjects;
     public GameObject bucket;
     public GameObject healthBar;
     public GameObject chargeBarDisplay;
-    public GameObject playerinfo;
+    public GameObject timer;
 
 	public int thisHealth;
 
@@ -37,59 +31,50 @@ public class TrackMovement : MonoBehaviour {
 	void Start () {
         parseFull();
         locations = new Hashtable();
-        gameTicks = 0.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        gameTicks += Time.deltaTime;
-        if (test % framerate == 0)
+        if (frameNum % framerate == 0) //every big frame
         {
-            locations.Add(key, transform.position);
-            key++;
+            locations.Add(key, transform.position); //Add the player's current location to the locations map
+            key++; //The location's number
         }
-        test++;
+        frameNum++;
+
         PlayerScript PlayerScript = GetComponent<PlayerScript>();
 		TimeTravelIndicator TimeTravelIndicator = GetComponent <TimeTravelIndicator>();
-        PlayerInfo playerinfo = nonPlayerObjects.GetComponent<PlayerInfo>();
 
         int charge = PlayerScript.getCharges();
         if (charge == currLevelCharges()) //go back in time
         {
-            SORRY = gameTicks;
-            gameTicks = 0.0f;
-
             newClone = Instantiate(clone);
-            Destroy(newClone, SORRY);
 
             PlayerScript.resetCharges();
 
 			TimeTravelIndicator.setFlash();
 
-            HealthBarDisplay thisFullBar = this.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
-            HealthBarDisplay playerFullBar = player.transform.Find("DestroyOnTimeTravel").Find("HealthDisplay").Find("FullBar").GetComponent<HealthBarDisplay>();
-
-            playerFullBar.startValue = thisHealth;
-
-            thisFullBar.UpdateText();
-            playerFullBar.UpdateText();
-
-            Resetter resetter = nonPlayerObjects.GetComponent<Resetter>();
+            Resetter resetter = nonPlayerObjects.GetComponent<Resetter>(); //resets the location of everything
             resetter.reset = true;
-            bucket.GetComponent<BucketScript>().reset();
+            bucket.GetComponent<BucketScript>().reset(); //resets the bucket's status
 
-            locations.Add(key, MARKER);
+            locations.Add(key, MARKER); //Adds a marker which indicates that the past self should be destroyed
             key++;
-            player2Exists = true;
 
-			thisHealth = player.GetComponent<PlayerScript>().health;            
-            playerinfo.setHealth(thisHealth);
+			thisHealth = this.GetComponent<PlayerScript>().health;
         }
 
-        if ((newClone != null) && (test % framerate == 0))
+        if ((newClone != null) && (frameNum % framerate == 0)) //every big frame
         {
-            newClone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); 
-            spot2++;
+            if (((Vector3)locations[key2] != MARKER))
+            {
+                newClone.GetComponent<CloneScript>().setPosition((Vector3)locations[key2]); //set the clone's location
+                key2++;
+            }
+            else
+            {
+                Destroy(newClone);
+            }
         }
     }
 
