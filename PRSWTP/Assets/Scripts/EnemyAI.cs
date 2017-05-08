@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
+    public GameObject nonPlayerObjects;
+    public PlayerInfo playerinfo;
     public int health;
     public int bulletDamage;
 
@@ -22,7 +24,6 @@ public class EnemyAI : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody>();
         ts = GetComponent<Transform>();
-		//PlayerInfo playerinfo = nonPlayerObjects.GetComponent<PlayerInfo>();
         gameTicks = 0.0f;
         rb.freezeRotation = true;
 
@@ -31,6 +32,8 @@ public class EnemyAI : MonoBehaviour {
 	
     void Update () {
         gameTicks += Time.deltaTime;
+        pause = gameObject.GetComponent<PlayerScript>().getPause();
+        Debug.Log(pause);
         //Go right if you are not at the right edge yet, and you are headed right
         if (this.ts.position.x < rightEdge && direction)
         {

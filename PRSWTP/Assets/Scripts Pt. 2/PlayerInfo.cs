@@ -12,7 +12,7 @@ public class PlayerInfo : MonoBehaviour {
 	public float currPos;
 
 	//for pause function
-	private bool pause;
+	public bool pause;
 
 	// Use this for initialization
 	void Start () {
@@ -39,6 +39,7 @@ public class PlayerInfo : MonoBehaviour {
 	public void setPause(bool p)
 	{
 		pause = p;
+        Debug.Log("I'll send you a fully armed battalion to remind you of my love");
 	}
 
 	public bool getPause() 
