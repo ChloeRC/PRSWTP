@@ -19,6 +19,7 @@ public class SwordScript : MonoBehaviour {
 
     public GameObject healthDisplayer;
     public GameObject PlayerScript;
+    
 
     // Use this for initialization
     void Start () {
@@ -53,7 +54,7 @@ public class SwordScript : MonoBehaviour {
         drawn = !drawn;
 
         if (drawn) { 
-			swordUp(direction); 
+			swordUp(direction);
 		}
     }
 

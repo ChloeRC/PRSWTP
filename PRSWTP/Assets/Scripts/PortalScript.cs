@@ -7,4 +7,13 @@ public class PortalScript : MonoBehaviour {
     public float targetY;
     public float targetZ;
 
-}
+  /*  void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.GetComponent<PlayerScript>() && !col.gameObject.GetComponent<PortalScript>())
+        {
+           
+            audioSource.PlayOneShot(Kachikg sword);
+        }
+
+    */
+    }
