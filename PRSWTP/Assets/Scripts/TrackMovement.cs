@@ -86,7 +86,7 @@ public class TrackMovement : MonoBehaviour {
             playerinfo.setHealth(thisHealth);
         }
 
-        if (player2Exists && test % framerate == 0)
+        if ((newClone != null) && (test % framerate == 0))
         {
             newClone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); 
             spot2++;
