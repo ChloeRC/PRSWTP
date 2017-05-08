@@ -58,7 +58,7 @@ public class PlayerScript : MonoBehaviour {
 
     private bool isGrounded = false;
 	private bool inv = false;
-    private bool pause = false;
+    public bool pause = false;
   //  private Vector3 spawnLocation;
     private Timer currentTime;
 
@@ -109,7 +109,7 @@ public class PlayerScript : MonoBehaviour {
 		flibbityfish += Time.deltaTime;	//please keep me as flibbityfish
 
         //freezes the game
-        if (Input.GetButton(PAUSE) == true && flibbityfish > 0.1f)
+        if (Input.GetButton(PAUSE) == true && flibbityfish > 0.3f)
         {
             flibbityfish = 0.0f;    //i am repurposing flibbityfish because i don't want to use another variable
             pause = !pause;
