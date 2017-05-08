@@ -53,7 +53,6 @@ public class TrackMovement : MonoBehaviour {
         PlayerInfo playerinfo = nonPlayerObjects.GetComponent<PlayerInfo>();
 
         int charge = PlayerScript.getCharges();
-        //GameObject player2;
         if (charge == currLevelCharges()) //go back in time
         {
             SORRY = gameTicks;
@@ -80,7 +79,7 @@ public class TrackMovement : MonoBehaviour {
 
             locations.Add(key, MARKER);
             key++;
-            player2Exists = true;     //UNCOMMENT THIS
+            player2Exists = true;
 
 			thisHealth = player.GetComponent<PlayerScript>().health;            
             playerinfo.setHealth(thisHealth);
@@ -88,16 +87,9 @@ public class TrackMovement : MonoBehaviour {
 
         if (player2Exists && test % framerate == 0)
         {
-            //Debug.Log("Spot2:" + spot2);
-            //player.GetComponent<PlayerScript>().setPosition((Vector3)locations[spot2]);
             newClone.GetComponent<CloneScript>().setPosition((Vector3)locations[spot2]); 
             spot2++;
-//            if (locations.Count == 0) uhhhhh do this later
-//           {
-//                player2Exists = false;
-//            }
         }
-        
     }
 
     void OnTriggerEnter(Collider col)
@@ -111,7 +103,6 @@ public class TrackMovement : MonoBehaviour {
             {
                 locations.Remove(i);
                 i++;
-                //Debug.Log("Count when removing: " + locations.Count);
             }
             key = 0;
         }
@@ -136,7 +127,6 @@ public class TrackMovement : MonoBehaviour {
      */
     public int currLevelCharges()
     {
-        //Debug.Log(currLevel + " level");
         parseFull();
         return chargesPerLevel[currLevel];
     }
