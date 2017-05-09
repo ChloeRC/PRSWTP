@@ -39,7 +39,7 @@ public class PlayerInfo : MonoBehaviour {
 	public void setPause(bool p)
 	{
 		pause = p;
-        Debug.Log("I'll send you a fully armed battalion to remind you of my love");
+        Debug.Log("I will send a fully armed battalion to remind you of my love");
 	}
 
 	public bool getPause() 

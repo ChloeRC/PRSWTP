@@ -266,9 +266,8 @@ public class PlayerScript : MonoBehaviour {
                 flibbityfish = 0.0f;
             }
 
-            //If you've fallen below -21.1 or your health is 0, you die
-            //When the player resets, there's this weird thing where position is -21 for a bit? Hence the use of -21.1
-            if (health <= 0 || GetComponent<Transform>().position.y <= -21.1f)
+            //If you've fallen below -25 or your health is 0, you die
+            if (health <= 0 || GetComponent<Transform>().position.y <= -25f)
             {
                 Debug.Log("Health: " + health);
                 Debug.Log("Position" + GetComponent<Transform>().position.y);
