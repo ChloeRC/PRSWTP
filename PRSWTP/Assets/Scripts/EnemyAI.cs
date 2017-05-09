@@ -18,6 +18,8 @@ public class EnemyAI : MonoBehaviour {
     public float rightEdge;
     public float leftEdge;
 
+    public GameObject player;
+
     public Camera cam;
 
     // Use this for initialization
@@ -32,7 +34,7 @@ public class EnemyAI : MonoBehaviour {
 	
     void Update () {
         gameTicks += Time.deltaTime;
-        pause = gameObject.GetComponent<PlayerScript>().getPause();
+        pause = player.GetComponent<PlayerScript>().getPause();
         Debug.Log(pause);
         //Go right if you are not at the right edge yet, and you are headed right
         if (this.ts.position.x < rightEdge && direction)
