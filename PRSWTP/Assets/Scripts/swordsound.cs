@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class swordsound : MonoBehaviour {
     public SwordScript other;
-    void Kaching()
+    public void Kaching()
     {
         other.GetComponent<AudioSource>().Play();
     }
