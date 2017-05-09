@@ -14,7 +14,7 @@ public class TrackMovement : MonoBehaviour {
     private int frameNum = 0;
     private int key = 0;
     private int key2 = 0;
-    public static readonly Vector3 MARKER = new Vector3(0f, -21f, 0f);
+    public static readonly Vector3 DESTROY_CLONE = new Vector3(0f, -21f, 0f);
     public Vector3 spawnLocation;
 
     public GameObject clone;
@@ -48,17 +48,17 @@ public class TrackMovement : MonoBehaviour {
         int charge = PlayerScript.getCharges();
         if (charge == currLevelCharges()) //go back in time
         {
-            newClone = Instantiate(clone);
+            newClone = Instantiate(clone); //create the clone
 
-            PlayerScript.resetCharges();
+            PlayerScript.resetCharges(); //set charges to 0
 
-			TimeTravelIndicator.setFlash();
+			TimeTravelIndicator.setFlash(); //flash the screen
 
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>(); //resets the location of everything
             resetter.reset = true;
             bucket.GetComponent<BucketScript>().reset(); //resets the bucket's status
 
-            locations.Add(key, MARKER); //Adds a marker which indicates that the past self should be destroyed
+            locations.Add(key, DESTROY_CLONE); //Adds a marker - the past self should be destroyed here
             key++;
 
 			thisHealth = this.GetComponent<PlayerScript>().health;
@@ -66,12 +66,12 @@ public class TrackMovement : MonoBehaviour {
 
         if ((newClone != null) && (frameNum % framerate == 0)) //every big frame
         {
-            if (((Vector3)locations[key2] != MARKER))
+            if (((Vector3)locations[key2] != DESTROY_CLONE))
             {
                 newClone.GetComponent<CloneScript>().setPosition((Vector3)locations[key2]); //set the clone's location
                 key2++;
             }
-            else
+            else //Clone has reached the marker location (the end) and should be destroyed
             {
                 Destroy(newClone);
             }

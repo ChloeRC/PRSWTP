@@ -13,7 +13,6 @@ using UnityEngine;
 public class CloneScript : MonoBehaviour {
     private float gameTicks;
     public bool isDead;
-    private Vector3 cloneLoc;
 
     // Use this for initialization
     void Start () {
@@ -34,27 +33,27 @@ public class CloneScript : MonoBehaviour {
     //taken from PlayerScript - sets position of the clone
     public void setPosition(Vector3 vector)
     {
-        cloneLoc = vector;
-        //Debug.Log("Goal Position (cloneLoc): " + cloneLoc);
-        var marker = TrackMovement.MARKER;
-
-        transform.position = vector;
-    }
-
-    void getPosition()
-    {
-        //transform.position = cloneLoc;
-        //Debug.Log("Actual Position: " + transform.position + " cloneLoc: " + cloneLoc);
+        if (vector != TrackMovement.DESTROY_CLONE)
+        {
+            transform.position = vector;
+        }
+        else
+        {
+            this.kill();
+        }
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Clone")
         {
-            //PlayerScript PlayerScript = GetComponent<PlayerScript>();
-            //PlayerScript.GetComponent<PlayerScript>().kill--; //COMMENT THIS OUT WHEN YOU'RE READY TO FAIL
+            GetComponent<PlayerScript>().kill(); //COMMENT THIS OUT WHEN YOU'RE READY TO FAIL
             Debug.Log("You colllided with your past self!!");
         }
     }
 
+    public void kill()
+    {
+        Destroy(this.gameObject);
+    }
 }
