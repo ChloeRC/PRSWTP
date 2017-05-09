@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class swordsound : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class swordsound : MonoBehaviour {
+    public SwordScript other;
+    void Kaching()
+    {
+        other.GetComponent<AudioSource>().Play();
+    }
 }
