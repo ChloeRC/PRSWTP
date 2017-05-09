@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[RequireComponent (typeof(AudioSource))]
 public class SwordScript : MonoBehaviour {
 
     public bool drawn;
@@ -55,6 +55,9 @@ public class SwordScript : MonoBehaviour {
 
         if (drawn) { 
 			swordUp(direction);
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
+            //gameObject.GetComponent<swordsound>().Kaching(); 
 		}
     }
 
