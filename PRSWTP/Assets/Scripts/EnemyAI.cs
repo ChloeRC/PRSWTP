@@ -35,31 +35,36 @@ public class EnemyAI : MonoBehaviour {
     void Update () {
         gameTicks += Time.deltaTime;
         pause = player.GetComponent<PlayerScript>().getPause();
-        Debug.Log(pause);
-        //Go right if you are not at the right edge yet, and you are headed right
-        if (this.ts.position.x < rightEdge && direction)
-        {
-            transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
-        }
-        //If you're at the right edge, or you're headed left, go left.
-        else
-        {
-            transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
-            //You're headed left until you hit the edge, 
-            //then direction becomes true again and you go back right.
-            if (direction)
-            {
-                direction = false;
-            }
-            if (this.ts.position.x < leftEdge)
-            {
-                direction = true;
-            }
-        }
+        //Debug.Log(pause);
 
-        if (health <= 0)
+        //Go right if you are not at the right edge yet, and you are headed right
+        if (!pause)
         {
-            kill();
+
+            if (this.ts.position.x < rightEdge && direction)
+            {
+                transform.Translate(Vector2.right * horizSpeed * Time.deltaTime);
+            }
+            //If you're at the right edge, or you're headed left, go left.
+            else
+            {
+                transform.Translate(Vector2.left * horizSpeed * Time.deltaTime);
+                //You're headed left until you hit the edge, 
+                //then direction becomes true again and you go back right.
+                if (direction)
+                {
+                    direction = false;
+                }
+                if (this.ts.position.x < leftEdge)
+                {
+                    direction = true;
+                }
+            }
+
+            if (health <= 0)
+            {
+                kill();
+            }
         }
 	}
 

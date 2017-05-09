@@ -61,6 +61,8 @@ public class PlayerScript : MonoBehaviour {
     public bool pause = false;
   //  private Vector3 spawnLocation;
     private Timer currentTime;
+    private static Texture2D pauseRectTexture;
+    private static GUIStyle pauseRectStyle;
 
     private int charges;
     public GameObject healthDisplayer;
@@ -281,8 +283,22 @@ public class PlayerScript : MonoBehaviour {
     {
         if (pause)
         {
-            GUI.Label(new Rect(10, 10, 100, 20), "Pause");
+            //Color box = new Color(50, 0, 0, 100);
+            //GUI.Box(new Rect(0, 0, Screen.width, Screen.height), GUIContent.none, pauseRectStyle);
+            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+            GUI.Label(new Rect(- 80 + Screen.width / 2, Screen.height / 2, 300, 60), "Pause (I will make this look nicer later)");
         }
+    }
+
+    public static void GUIDrawRect()
+    {
+        pauseRectTexture = new Texture2D(1, 1);
+        pauseRectStyle = new GUIStyle();
+        pauseRectTexture.SetPixel(0, 0, Color.black);
+        pauseRectTexture.Apply();
+        pauseRectStyle.normal.background = pauseRectTexture;
     }
 
     void OnCollisionEnter(Collision col)
