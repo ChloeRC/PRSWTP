@@ -283,22 +283,12 @@ public class PlayerScript : MonoBehaviour {
     {
         if (pause)
         {
-            //Color box = new Color(50, 0, 0, 100);
-            //GUI.Box(new Rect(0, 0, Screen.width, Screen.height), GUIContent.none, pauseRectStyle);
+            //darkens the screen
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Label(new Rect(- 80 + Screen.width / 2, Screen.height / 2, 300, 60), "Pause (I will make this look nicer later)");
         }
-    }
-
-    public static void GUIDrawRect()
-    {
-        pauseRectTexture = new Texture2D(1, 1);
-        pauseRectStyle = new GUIStyle();
-        pauseRectTexture.SetPixel(0, 0, Color.black);
-        pauseRectTexture.Apply();
-        pauseRectStyle.normal.background = pauseRectTexture;
     }
 
     void OnCollisionEnter(Collision col)

@@ -70,10 +70,11 @@ public class TrackMovement : MonoBehaviour {
         {
             CloneLocation toSet = (CloneLocation)locations[key2];
             CloneScript cloneScript = newClone.GetComponent<CloneScript>();
+            //if (!PlayerScript.getPause()) {  //Pauses the clone
+                cloneScript.setLocation(toSet); //set the clone's location
 
-            cloneScript.setLocation(toSet); //set the clone's location
-
-            key2++;
+                key2++;
+            //}
         }
     }
 
