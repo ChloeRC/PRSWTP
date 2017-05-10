@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class PlayerRotate : MonoBehaviour {
 
-    //private bool direction;
-    private Quaternion rightRot = Quaternion.Euler(0, 270, 0);
-    private Quaternion leftRot = Quaternion.Euler(0, 90, 0);
-
 	// Use this for initialization
 	void Start () {
-        //direction = playerScript.DIR_RIGHT;
+
 	}
 	
 	// Update is called once per frame
@@ -18,15 +14,8 @@ public class PlayerRotate : MonoBehaviour {
 		
 	}
 
-    public void Rotate(bool rotation)
+    public void Rotate(Vector3 rotation)
     {
-        if (rotation == PlayerScript.DIR_RIGHT)
-        {
-            transform.rotation = leftRot;
-        }
-        else if (rotation == PlayerScript.DIR_LEFT)
-        {
-            transform.rotation = rightRot;
-        }
+        transform.rotation = Quaternion.Euler(rotation);
     }
 }
