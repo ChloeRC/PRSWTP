@@ -29,9 +29,9 @@ public class PlayerScript : MonoBehaviour {
     public Vector3 currentCheckPoint;
 
     //False is right, true is left
-    private bool direction;
-    public static readonly bool DIR_RIGHT = false;
-    public static readonly bool DIR_LEFT = true;
+    private Vector3 direction;
+    public static readonly Vector3 DIR_RIGHT = new Vector3(0, 90, 0);
+    public static readonly Vector3 DIR_LEFT = new Vector3(0, 270, 0);
 
     public int health;
 
@@ -148,7 +148,6 @@ public class PlayerScript : MonoBehaviour {
                 direction = DIR_LEFT;
             }
 
-
             //SUICIDE (x)
             if (Input.GetButton(SUICIDE) == true)
             {
@@ -164,7 +163,7 @@ public class PlayerScript : MonoBehaviour {
                 if (hasSword > swordCooldown)
                 {
                     hasSword = 0;
-                    sword.toggleSword(direction);
+                    sword.drawn = false;
                 }
             }
             //ShotCoolDown indicates that the gun is usable. While the cooldown isn't reloaded, increment.
@@ -179,8 +178,17 @@ public class PlayerScript : MonoBehaviour {
                 gunBarDisplay.GetComponent<GunBarDisplay>().UpdateText();
             }
 
+            //SWORD (Space)
+            if (Input.GetButton(SWORD) == true && hasSword == 0)
+            {
+                //The sword increments upwards from 1 to swordCooldown, then gets set to 0. 0 is usable.
+                hasSword = 1;
+                sword.drawn = true;
+            }
+
             //REDRAW THE SWORD TO ACCOUNT FOR RECENT CHANGES
             bool drawn = sword.drawn;
+            Debug.Log(drawn);
             if (drawn)
             {
                 sword.swordUp(direction);
@@ -188,14 +196,6 @@ public class PlayerScript : MonoBehaviour {
             else
             {
                 sword.swordDown(direction);
-            }
-
-            //SWORD (Space)
-            if (Input.GetButton(SWORD) == true && hasSword == 0)
-            {
-                //The sword increments upwards from 1 to swordCooldown, then gets set to 0. 0 is usable.
-                hasSword = 1;
-                sword.toggleSword(direction);
             }
 
             //SHOOT (L shift)
