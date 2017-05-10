@@ -71,7 +71,7 @@ public class ParrotScript : MonoBehaviour {
      */
     public void activate()
     {
-        if (this.gameObject != null)
+        if (rb != null)
         {
             //gameObject.GetComponent<MeshRenderer>().enabled = true;
             rb.useGravity = true;
