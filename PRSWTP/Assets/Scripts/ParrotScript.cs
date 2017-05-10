@@ -71,18 +71,21 @@ public class ParrotScript : MonoBehaviour {
      */
     public void activate()
     {
-        //gameObject.GetComponent<MeshRenderer>().enabled = true;
-        rb.useGravity = true;
-        //rb.AddForce(-Vector3.up * 5);
-
-        activated = true;
-        foreach (Transform child in transform)
+        if (this.gameObject != null)
         {
-            if (child.GetComponent<MeshRenderer>() != null)
+            //gameObject.GetComponent<MeshRenderer>().enabled = true;
+            rb.useGravity = true;
+            //rb.AddForce(-Vector3.up * 5);
+
+            activated = true;
+            foreach (Transform child in transform)
             {
-                child.GetComponent<MeshRenderer>().enabled = true;
+                if (child.GetComponent<MeshRenderer>() != null)
+                {
+                    child.GetComponent<MeshRenderer>().enabled = true;
+                }
             }
+            timer = 0;
         }
-        timer = 0;
     }
 }

@@ -36,7 +36,6 @@ public class CloneScript : MonoBehaviour {
         if (!cloneLocation.Equals(TrackMovement.DESTROY_CLONE))
         {
             transform.position = cloneLocation.getLocation();
-            Debug.Log("Clone current rotation: " + transform.rotation.eulerAngles);
             transform.rotation = Quaternion.Euler(cloneLocation.getRotation());
         }
         else
