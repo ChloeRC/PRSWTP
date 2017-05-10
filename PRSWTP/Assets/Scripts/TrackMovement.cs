@@ -39,7 +39,7 @@ public class TrackMovement : MonoBehaviour {
 	void Update () {
         if (frameNum % framerate == 0) //every big frame
         {
-            Debug.Log("Player current rotation: " + transform.rotation);
+            Debug.Log("Player current rotation: " + playerRotation.transform.rotation.eulerAngles);
             CloneLocation toAdd = new CloneLocation(transform.position, playerRotation.transform.rotation.eulerAngles);
             locations.Add(key, toAdd); //Add the player's current location to the locations map
             key++; //The location's number

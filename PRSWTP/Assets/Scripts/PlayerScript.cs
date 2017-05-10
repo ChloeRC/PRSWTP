@@ -188,7 +188,6 @@ public class PlayerScript : MonoBehaviour {
 
             //REDRAW THE SWORD TO ACCOUNT FOR RECENT CHANGES
             bool drawn = sword.drawn;
-            Debug.Log(drawn);
             if (drawn)
             {
                 sword.swordUp(direction);
