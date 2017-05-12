@@ -14,7 +14,7 @@ public class CloneScript : MonoBehaviour {
 
     public bool isDead;
 
-    private SwordScript sword;
+    private CloneSwordScript sword;
     
     private Vector3 currDirection;
 
@@ -22,7 +22,7 @@ public class CloneScript : MonoBehaviour {
     void Start () {
         isDead = false;
 
-        sword = GetComponentInChildren<SwordScript>();
+        sword = GetComponentInChildren<CloneSwordScript>();
     }
 
     // Update is called once per frame
@@ -52,7 +52,9 @@ public class CloneScript : MonoBehaviour {
         {
             transform.position = cloneLocation.getLocation();
 
-            transform.rotation = Quaternion.Euler(cloneLocation.getRotation());
+            Vector3 newRot = cloneLocation.getRotation();
+
+            transform.rotation = Quaternion.Euler(new Vector3(newRot.x, newRot.y-90, newRot.z));
             currDirection = cloneLocation.getRotation();
 
             if (cloneLocation.getDidSword())

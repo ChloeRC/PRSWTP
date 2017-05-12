@@ -10,16 +10,17 @@ public class CloneSwordScript : MonoBehaviour {
 
     private Transform ts;
 
-    private bool pause;
-
-    public GameObject healthDisplayer;
-    public GameObject PlayerScript;
+    public bool pause;
 
     private Vector3 rightRot = new Vector3(0, 90, 0);
     private Vector3 leftRot = new Vector3(0, 270, 0);
 
+    public bool drawn;
+
+    public int damage;
+
     // Use this for initialization
-    void Start()
+    public void Start()
     {
         gameTicks = 0.0f;
         ouchies = 0.0f; //keeps track of time between ouching the enemy
@@ -38,7 +39,7 @@ public class CloneSwordScript : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         ouchies += Time.deltaTime;
         if (drawn)
@@ -47,7 +48,7 @@ public class CloneSwordScript : MonoBehaviour {
         }
 
         //fix this line vvvvv
-        pause = gameObject.GetComponentInParent<PlayerScript>().getPause();
+        //pause = gameObject.GetComponentInParent<PlayerScript>().getPause();
     }
 
     public void toggleSword(Vector3 direction)
@@ -124,7 +125,7 @@ public class CloneSwordScript : MonoBehaviour {
     }
 
     //this actually controls all the close-up player/enemy collisions because haha
-    void OnTriggerEnter(Collider col)
+    public void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Enemy" && drawn && ouchies > 0.1f && !pause)
         {
@@ -134,14 +135,6 @@ public class CloneSwordScript : MonoBehaviour {
             else if (bossAI != null) { bossAI.adjustHealthBy(-damage); }
 
             ouchies = 0.0f;
-        }
-        //to lose health you also need to be your current self
-        else if (col.gameObject.tag == "Enemy" && !drawn && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f
-            && !gameObject.GetComponentInParent<PlayerScript>().getInv() && !pause)
-        {
-            gameObject.GetComponentInParent<PlayerScript>().health--;
-            healthDisplayer.GetComponent<HealthBarDisplay>().UpdateText();
-            gameObject.GetComponentInParent<PlayerScript>().resetCollisionTime();
         }
     }
 }
