@@ -11,16 +11,32 @@ using UnityEngine;
 */
 
 public class CloneScript : MonoBehaviour {
+
     public bool isDead;
+
+    private CloneSwordScript sword;
+    
+    private Vector3 currDirection;
 
     // Use this for initialization
     void Start () {
         isDead = false;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        sword = GetComponentInChildren<CloneSwordScript>();
+    }
+
+    // Update is called once per frame
+    void Update () {
+        bool drawn = sword.drawn;
+
+        if (drawn)
+        {
+            sword.swordUp(currDirection);
+        }
+        else
+        {
+            sword.swordDown(currDirection);
+        }
     }
 
     public void setRotation()
@@ -35,11 +51,16 @@ public class CloneScript : MonoBehaviour {
         if (!cloneLocation.Equals(TrackMovement.DESTROY_CLONE))
         {
             transform.position = cloneLocation.getLocation();
-            transform.rotation = Quaternion.Euler(cloneLocation.getRotation());
-            
+
+            Vector3 newRot = cloneLocation.getRotation();
+
+            transform.rotation = Quaternion.Euler(new Vector3(newRot.x, newRot.y-90, newRot.z));
+            currDirection = cloneLocation.getRotation();
+
             if (cloneLocation.getDidSword())
             {
                 Debug.Log("STABBY STAB STAB");
+                sword.drawn = true;
             }
             else if (cloneLocation.getDidShoot())
             {
@@ -61,8 +82,13 @@ public class CloneScript : MonoBehaviour {
         }
     }
 
-    public void kill()
+    void useSword()
     {
-        Destroy(this.gameObject);
+        sword.drawn = true;
     }
-}
+
+    public void kill()
+        {
+            Destroy(this.gameObject);
+        }
+    }

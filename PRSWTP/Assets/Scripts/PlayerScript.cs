@@ -28,7 +28,6 @@ public class PlayerScript : MonoBehaviour {
     public GameObject[] checkpoints;
     public Vector3 currentCheckPoint;
 
-    //False is right, true is left
     private Vector3 direction;
     public static readonly Vector3 DIR_RIGHT = new Vector3(0, 90, 0);
     public static readonly Vector3 DIR_LEFT = new Vector3(0, 270, 0);
