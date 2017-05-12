@@ -71,6 +71,10 @@ public class PlayerScript : MonoBehaviour {
     public GameObject nonPlayerObjects;
     private GameObject info; //stores information across time travel
 
+    //These two store when you shoot/stab something so it can be replicated by the past self
+    public bool didSword;
+    public bool didShoot;
+
     // Use this for initialization
     void OnLevelWasLoaded()
     {
@@ -102,6 +106,10 @@ public class PlayerScript : MonoBehaviour {
         //INITIALIZES THE COOLDOWN TIMERS
         hasShot = shotCooldown;
         hasSword = 0;
+
+        //INITIALIZES THE SWORD/GUN MONITORS
+        didSword = false;
+        didShoot = false;
         
         gunBarDisplay.GetComponent<GunBarDisplay>().UpdateText();
     }
@@ -185,6 +193,9 @@ public class PlayerScript : MonoBehaviour {
                 //The sword increments upwards from 1 to swordCooldown, then gets set to 0. 0 is usable.
                 hasSword = 1;
                 sword.drawn = true;
+
+                //Marks the monitor as used
+                didSword = true;
             }
 
             //REDRAW THE SWORD TO ACCOUNT FOR RECENT CHANGES
@@ -230,6 +241,9 @@ public class PlayerScript : MonoBehaviour {
                 var newBullet = Instantiate(bullet, pos, Quaternion.Euler(0, 0, rotation));
                 var rbBullet = newBullet.GetComponent<Rigidbody>();
                 rbBullet.velocity = newBullet.GetComponent<BulletScript>().speed * force;
+
+                //Marks the monitor as used
+                didShoot = true;
             }
 
             //Tell if there is anything in a sphere shape below the player

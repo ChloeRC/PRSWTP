@@ -7,12 +7,16 @@ public class CloneLocation {
 
     private Vector3 location;
     private Vector3 rotation;
-
+    private bool didSword;
+    private bool didShoot;
+    
     //Constructor
-    public CloneLocation(Vector3 loc, Vector3 rot)
+    public CloneLocation(Vector3 loc, Vector3 rot, bool sword, bool shoot)
     {
         location = loc;
         rotation = rot;
+        didSword = sword;
+        didShoot = shoot;
     }
 
     public Vector3 getLocation()
@@ -25,18 +29,18 @@ public class CloneLocation {
         return rotation;
     }
 
-    public string toString()
+    public bool getDidSword()
     {
-        string toReturn = "";
+        return didSword;
+    }
 
-        if (location != null) { toReturn += location.ToString(); }
-        else { toReturn += "null"; }
+    public bool getDidShoot()
+    {
+        return didShoot;
+    }
 
-        toReturn += " ";
-
-        if (rotation != null) { toReturn += rotation.ToString(); }
-        else { toReturn += "null"; }
-
-        return toReturn;
+    public override string ToString()
+    {
+        return location.ToString() + " " + rotation.ToString();
     }
 }

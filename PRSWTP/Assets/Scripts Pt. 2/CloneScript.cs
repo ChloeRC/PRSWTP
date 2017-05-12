@@ -36,6 +36,15 @@ public class CloneScript : MonoBehaviour {
         {
             transform.position = cloneLocation.getLocation();
             transform.rotation = Quaternion.Euler(cloneLocation.getRotation());
+            
+            if (cloneLocation.getDidSword())
+            {
+                Debug.Log("STABBY STAB STAB");
+            }
+            else if (cloneLocation.getDidShoot())
+            {
+                Debug.Log("One two three four five six seven--");
+            }
         }
         else
         {
