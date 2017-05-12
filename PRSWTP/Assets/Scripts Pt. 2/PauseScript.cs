@@ -16,6 +16,7 @@ public class PauseScript : MonoBehaviour {
 	void Update () {
         pause = player.GetComponent<PlayerScript>().getPause();
         Debug.Log(pause);
+        Debug.Log("hello");
 
         if (pause)
         {

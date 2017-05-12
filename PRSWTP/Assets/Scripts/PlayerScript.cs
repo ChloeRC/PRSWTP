@@ -85,8 +85,9 @@ public class PlayerScript : MonoBehaviour {
         this.transform.position = checkpoints[ValueHolder.checkpointNumber].transform.position;
 
         //INITIALIZES REFERENCES
-        PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
-		health = info.getHealth();
+        //PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
+        //health = info.getHealth();
+        health = 3;
         rb = GetComponent<Rigidbody>();
         
         //INITIALIZES ALL THE GAMETICKS TIMERS
@@ -107,7 +108,7 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update () {
-		PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
+		//PlayerInfo info = nonPlayerObjects.GetComponent<PlayerInfo>();
 		flibbityfish += Time.deltaTime;	//please keep me as flibbityfish
 
         //freezes the game
@@ -116,7 +117,7 @@ public class PlayerScript : MonoBehaviour {
             flibbityfish = 0.0f;    //i am repurposing flibbityfish because i don't want to use another variable
             pause = !pause;
 			freezePos = transform.position;
-			info.setPause(pause);
+			//info.setPause(pause);
         }
 
 		if (pause) {
@@ -282,11 +283,14 @@ public class PlayerScript : MonoBehaviour {
     {
         if (pause)
         {
+
             //darkens the screen
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Label(new Rect(- 80 + Screen.width / 2, Screen.height / 2, 300, 60), "Pause (I will make this look nicer later)");
+            if (GUI.Button(new Rect(10, 70, 50, 30), "Click"))
+                Debug.Log("Clicked the button with text");
         }
     }
 
