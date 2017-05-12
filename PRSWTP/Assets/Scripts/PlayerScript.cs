@@ -293,22 +293,44 @@ public class PlayerScript : MonoBehaviour {
         }
 	}
 
+    //Draws pause menu and darkens screen
     void OnGUI()
     {
+
+        //640 x 480)
+        //creates pause window coordinates
+        Rect pauseWindow = new Rect(260, 20, 120, 50);
+                                  //20, 20, 120, 50);
         if (pause)
         {
-
             //darkens the screen
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-            GUI.Label(new Rect(- 80 + Screen.width / 2, Screen.height / 2, 300, 60), "Pause (I will make this look nicer later)");
-            if (GUI.Button(new Rect(10, 70, 50, 30), "Click"))
-                Debug.Log("Clicked the button with text");
+            //GUI.Label(new Rect(- 80 + Screen.width / 2, Screen.height / 2, 300, 60), "Pause (I will make this look nicer later)");
+            pauseWindow = GUI.Window(0, pauseWindow, pauseContent, "Pause");
         }
     }
+    //creates buttons within the window rectangle
+    void pauseContent(int windowID)
+    {
+        //mutes sound
+        if (GUI.Button(new Rect(260, 20, 100, 20), "Toggle sound"))
+                             //(265, 20, 100, 20)
+        {
+            print("Toggle sound");
+        }
 
-    void OnCollisionEnter(Collision col)
+        //exits game
+        if (GUI.Button(new Rect(10, 50, 100, 20), "Quit"))
+                             //(265, 50, 100, 20)
+        {
+            print("Quit");
+        }
+
+    }
+
+void OnCollisionEnter(Collision col)
     {
         SwordScript sword = GetComponentInChildren<SwordScript>();
         //ENEMY HURTS PLAYER
