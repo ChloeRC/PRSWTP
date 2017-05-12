@@ -1,13 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 [RequireComponent (typeof(AudioSource))]
-public class SwordScript : MonoBehaviour {
-
-    public bool drawn;
-    //True for sword-out
-    //False for sword-down
-
-    public int damage;
+public class SwordScript : CloneSwordSript {
 
     private float gameTicks;
     private float ouchies;
@@ -120,15 +114,7 @@ public class SwordScript : MonoBehaviour {
     //this actually controls all the close-up player/enemy collisions because haha
     void OnTriggerEnter(Collider col)
     {
-		if (col.gameObject.tag == "Enemy" && drawn && ouchies > 0.1f && !pause)
-        {
-            EnemyAI enemyAI = col.gameObject.GetComponent<EnemyAI>();
-            BossAI bossAI = col.gameObject.GetComponent<BossAI>();
-            if (enemyAI != null) { enemyAI.adjustHealthBy(-damage); }
-            else if (bossAI != null) { bossAI.adjustHealthBy(-damage); }
-
-            ouchies = 0.0f;
-		}
+        base.OnTriggerEnter();
         //to lose health you also need to be your current self
         else if (col.gameObject.tag == "Enemy" && !drawn  && gameObject.GetComponentInParent<PlayerScript>().getCollisionTime() > 0.5f
 			&& !gameObject.GetComponentInParent<PlayerScript>().getInv() && !pause)
