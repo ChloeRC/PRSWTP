@@ -11,7 +11,6 @@ using UnityEngine;
 */
 
 public class CloneScript : MonoBehaviour {
-    private float gameTicks;
     public bool isDead;
 
     // Use this for initialization

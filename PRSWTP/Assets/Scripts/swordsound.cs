@@ -7,6 +7,8 @@ public class swordsound : MonoBehaviour {
     public SwordScript other;
     public void Kaching()
     {
+        bool swordUp; 
+
         other.GetComponent<AudioSource>().Play();
     }
 }
