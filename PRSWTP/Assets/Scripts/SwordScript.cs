@@ -19,7 +19,9 @@ public class SwordScript : MonoBehaviour {
 
     public GameObject healthDisplayer;
     public GameObject PlayerScript;
-    
+
+    private Vector3 rightRot = new Vector3(0, 90, 0);
+    private Vector3 leftRot = new Vector3(0, 270, 0);
 
     // Use this for initialization
     void Start () {
@@ -30,10 +32,10 @@ public class SwordScript : MonoBehaviour {
         pause = false;
 
         if (drawn) {
-            swordUp(false);
+            swordUp(rightRot);
         }
         else {
-            swordDown(false);
+            swordDown(rightRot);
         }
     }
 	
@@ -49,7 +51,7 @@ public class SwordScript : MonoBehaviour {
         pause = gameObject.GetComponentInParent<PlayerScript>().getPause();
 	}
 
-	public void toggleSword(bool direction)
+	public void toggleSword(Vector3 direction)
     {
         drawn = !drawn;
 
@@ -61,10 +63,10 @@ public class SwordScript : MonoBehaviour {
 		}
     }
 
-	public void swordUp (bool direction)
+	public void swordUp (Vector3 direction)
     {
 		//sword out facing left
-		if (direction) {
+		if (direction == leftRot) {
             GetComponent<AudioSource>().Play();
             ts.localPosition = new Vector3 (-1, 0.15f, 0);
 			Quaternion newRot = Quaternion.Euler (-10, 270, 90);
@@ -76,9 +78,10 @@ public class SwordScript : MonoBehaviour {
                 gameTicks = 0.0f;
                 drawn = !drawn;
             }
-		} else {
-			//sword out facing right
-			ts.localPosition = new Vector3 (1, 0.15f, 0);
+		} else if (direction == rightRot) {
+            //sword out facing right
+            GetComponent<AudioSource>().Play();
+            ts.localPosition = new Vector3 (1, 0.15f, 0);
 			Quaternion newRot = Quaternion.Euler (-10, 90, 90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
 			ts.localScale = new Vector3 (0.055f, 0.1f, 0.1f);
@@ -89,20 +92,28 @@ public class SwordScript : MonoBehaviour {
                 drawn = !drawn;
             }
         }
+        else
+        {
+            Debug.Log("WARNING: THE PLAYER'S DIRECTION IS NOT AN ACCEPTED DIRECTION");
+        }
     }
 
-	public void swordDown(bool direction)
+	public void swordDown(Vector3 direction)
     {
-        if (direction) {
+        if (direction == leftRot) {
 			ts.localPosition = new Vector3 (0, 0.15f, 0.55f);
 			Quaternion newRot = Quaternion.Euler (78, 90, -90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
             ts.localScale = new Vector3 (0.09f, 0.1f, 0.08f);
-		} else {
+		} else if (direction == rightRot) {
 			ts.localPosition = new Vector3 (0, 0.15f, -0.55f);
 			Quaternion newRot = Quaternion.Euler (78, 90, -90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
             ts.localScale = new Vector3(0.04f, 0.1f, 0.08f);
+        }
+        else
+        {
+            Debug.Log("WARNING: THE PLAYER'S DIRECTION IS NOT AN ACCEPTED DIRECTION");
         }
     }
 

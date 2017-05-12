@@ -29,9 +29,9 @@ public class PlayerScript : MonoBehaviour {
     public Vector3 currentCheckPoint;
 
     //False is right, true is left
-    private bool direction;
-    public static readonly bool DIR_RIGHT = false;
-    public static readonly bool DIR_LEFT = true;
+    private Vector3 direction;
+    public static readonly Vector3 DIR_RIGHT = new Vector3(0, 90, 0);
+    public static readonly Vector3 DIR_LEFT = new Vector3(0, 270, 0);
 
     public int health;
 
@@ -148,7 +148,6 @@ public class PlayerScript : MonoBehaviour {
                 direction = DIR_LEFT;
             }
 
-
             //SUICIDE (x)
             if (Input.GetButton(SUICIDE) == true)
             {
@@ -164,7 +163,7 @@ public class PlayerScript : MonoBehaviour {
                 if (hasSword > swordCooldown)
                 {
                     hasSword = 0;
-                    sword.toggleSword(direction);
+                    sword.drawn = false;
                 }
             }
             //ShotCoolDown indicates that the gun is usable. While the cooldown isn't reloaded, increment.
@@ -179,6 +178,14 @@ public class PlayerScript : MonoBehaviour {
                 gunBarDisplay.GetComponent<GunBarDisplay>().UpdateText();
             }
 
+            //SWORD (Space)
+            if (Input.GetButton(SWORD) == true && hasSword == 0)
+            {
+                //The sword increments upwards from 1 to swordCooldown, then gets set to 0. 0 is usable.
+                hasSword = 1;
+                sword.drawn = true;
+            }
+
             //REDRAW THE SWORD TO ACCOUNT FOR RECENT CHANGES
             bool drawn = sword.drawn;
             if (drawn)
@@ -188,14 +195,6 @@ public class PlayerScript : MonoBehaviour {
             else
             {
                 sword.swordDown(direction);
-            }
-
-            //SWORD (Space)
-            if (Input.GetButton(SWORD) == true && hasSword == 0)
-            {
-                //The sword increments upwards from 1 to swordCooldown, then gets set to 0. 0 is usable.
-                hasSword = 1;
-                sword.toggleSword(direction);
             }
 
             //SHOOT (L shift)
@@ -268,9 +267,8 @@ public class PlayerScript : MonoBehaviour {
                 flibbityfish = 0.0f;
             }
 
-            //If you've fallen below -21.1 or your health is 0, you die
-            //When the player resets, there's this weird thing where position is -21 for a bit? Hence the use of -21.1
-            if (health <= 0 || GetComponent<Transform>().position.y <= -21.1f)
+            //If you've fallen below -25 or your health is 0, you die
+            if (health <= 0 || GetComponent<Transform>().position.y <= -25f)
             {
                 Debug.Log("Health: " + health);
                 Debug.Log("Position" + GetComponent<Transform>().position.y);
@@ -284,22 +282,12 @@ public class PlayerScript : MonoBehaviour {
     {
         if (pause)
         {
-            //Color box = new Color(50, 0, 0, 100);
-            //GUI.Box(new Rect(0, 0, Screen.width, Screen.height), GUIContent.none, pauseRectStyle);
+            //darkens the screen
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Label(new Rect(- 80 + Screen.width / 2, Screen.height / 2, 300, 60), "Pause (I will make this look nicer later)");
         }
-    }
-
-    public static void GUIDrawRect()
-    {
-        pauseRectTexture = new Texture2D(1, 1);
-        pauseRectStyle = new GUIStyle();
-        pauseRectTexture.SetPixel(0, 0, Color.black);
-        pauseRectTexture.Apply();
-        pauseRectStyle.normal.background = pauseRectTexture;
     }
 
     void OnCollisionEnter(Collision col)

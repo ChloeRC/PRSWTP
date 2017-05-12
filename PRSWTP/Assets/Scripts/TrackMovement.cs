@@ -14,8 +14,10 @@ public class TrackMovement : MonoBehaviour {
     private int frameNum = 0;
     private int key = 0;
     private int key2 = 0;
-    public static readonly Vector3 DESTROY_CLONE = new Vector3(0f, -21f, 0f);
-    public Vector3 spawnLocation;
+    public static readonly CloneLocation DESTROY_CLONE = new CloneLocation(
+        new Vector3(0, -200, 0),
+        new Vector3(0, 0, 0)
+        );
 
     public GameObject clone;
     public GameObject nonPlayerObjects;
@@ -23,10 +25,10 @@ public class TrackMovement : MonoBehaviour {
     public GameObject healthBar;
     public GameObject chargeBarDisplay;
     public GameObject timer;
-
-	public int thisHealth;
+    public GameObject playerRotation;
 
     private GameObject newClone;
+
 	// Use this for initialization
 	void Start () {
         parseFull();
@@ -37,7 +39,8 @@ public class TrackMovement : MonoBehaviour {
 	void Update () {
         if (frameNum % framerate == 0) //every big frame
         {
-            locations.Add(key, transform.position); //Add the player's current location to the locations map
+            CloneLocation toAdd = new CloneLocation(transform.position, playerRotation.transform.rotation.eulerAngles);
+            locations.Add(key, toAdd); //Add the player's current location to the locations map
             key++; //The location's number
         }
         frameNum++;
@@ -60,21 +63,16 @@ public class TrackMovement : MonoBehaviour {
 
             locations.Add(key, DESTROY_CLONE); //Adds a marker - the past self should be destroyed here
             key++;
-
-			thisHealth = this.GetComponent<PlayerScript>().health;
         }
 
         if ((newClone != null) && (frameNum % framerate == 0)) //every big frame
         {
-            if (((Vector3)locations[key2] != DESTROY_CLONE))
-            {
-                newClone.GetComponent<CloneScript>().setPosition((Vector3)locations[key2]); //set the clone's location
+            CloneLocation toSet = (CloneLocation)locations[key2];
+            CloneScript cloneScript = newClone.GetComponent<CloneScript>();
+            //if (!PlayerScript.getPause()) {  //Pauses the clone
+                cloneScript.setLocation(toSet); //set the clone's location
                 key2++;
-            }
-            else //Clone has reached the marker location (the end) and should be destroyed
-            {
-                Destroy(newClone);
-            }
+            //}
         }
     }
 
@@ -84,13 +82,9 @@ public class TrackMovement : MonoBehaviour {
         {
             currLevel = col.GetComponent<Checkpoint>().number;
             chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateFull();
-            int i = 0;
-            while (locations.Count > 0)
-            {
-                locations.Remove(i);
-                i++;
-            }
+            locations = new Hashtable();
             key = 0;
+            key2 = 0;
         }
 
     }
@@ -116,8 +110,4 @@ public class TrackMovement : MonoBehaviour {
         parseFull();
         return chargesPerLevel[currLevel];
     }
-
-	public int getThisHealth() {
-		return thisHealth;
-	}
 }

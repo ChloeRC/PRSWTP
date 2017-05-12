@@ -11,7 +11,6 @@ using UnityEngine;
 */
 
 public class CloneScript : MonoBehaviour {
-    private float gameTicks;
     public bool isDead;
 
     // Use this for initialization
@@ -31,11 +30,12 @@ public class CloneScript : MonoBehaviour {
     }
 
     //taken from PlayerScript - sets position of the clone
-    public void setPosition(Vector3 vector)
+    public void setLocation(CloneLocation cloneLocation)
     {
-        if (vector != TrackMovement.DESTROY_CLONE)
+        if (!cloneLocation.Equals(TrackMovement.DESTROY_CLONE))
         {
-            transform.position = vector;
+            transform.position = cloneLocation.getLocation();
+            transform.rotation = Quaternion.Euler(cloneLocation.getRotation());
         }
         else
         {
@@ -43,11 +43,11 @@ public class CloneScript : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Clone")
+        if (col.gameObject.tag == "Player")
         {
-            GetComponent<PlayerScript>().kill(); //COMMENT THIS OUT WHEN YOU'RE READY TO FAIL
+            col.gameObject.GetComponent<PlayerScript>().kill();
             Debug.Log("You colllided with your past self!!");
         }
     }
