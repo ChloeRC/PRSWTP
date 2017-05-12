@@ -71,7 +71,6 @@ public class TrackMovement : MonoBehaviour {
             CloneScript cloneScript = newClone.GetComponent<CloneScript>();
             //if (!PlayerScript.getPause()) {  //Pauses the clone
                 cloneScript.setLocation(toSet); //set the clone's location
-
                 key2++;
             //}
         }
@@ -83,13 +82,9 @@ public class TrackMovement : MonoBehaviour {
         {
             currLevel = col.GetComponent<Checkpoint>().number;
             chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateFull();
-            int i = 0;
-            while (locations.Count > 0)
-            {
-                locations.Remove(i);
-                i++;
-            }
+            locations = new Hashtable();
             key = 0;
+            key2 = 0;
         }
 
     }

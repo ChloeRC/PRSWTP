@@ -24,4 +24,19 @@ public class CloneLocation {
     {
         return rotation;
     }
+
+    public string toString()
+    {
+        string toReturn = "";
+
+        if (location != null) { toReturn += location.ToString(); }
+        else { toReturn += "null"; }
+
+        toReturn += " ";
+
+        if (rotation != null) { toReturn += rotation.ToString(); }
+        else { toReturn += "null"; }
+
+        return toReturn;
+    }
 }
