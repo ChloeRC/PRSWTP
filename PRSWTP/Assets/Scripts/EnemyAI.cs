@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
-    public GameObject nonPlayerObjects;
-    public PlayerInfo playerinfo;
     public int health;
     public int bulletDamage;
 
