@@ -65,7 +65,8 @@ public class SwordScript : MonoBehaviour {
     {
 		//sword out facing left
 		if (direction) {
-			ts.localPosition = new Vector3 (-1, 0.15f, 0);
+            GetComponent<AudioSource>().Play();
+            ts.localPosition = new Vector3 (-1, 0.15f, 0);
 			Quaternion newRot = Quaternion.Euler (-10, 270, 90);
 			ts.localRotation = new Quaternion (newRot.x, newRot.y, newRot.z, newRot.w);
 			ts.localScale = new Vector3 (0.055f, 0.1f, 0.1f);
