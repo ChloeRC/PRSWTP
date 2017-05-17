@@ -12,8 +12,8 @@ public class CloneSwordScript : MonoBehaviour {
 
     public bool pause;
 
-    private Vector3 rightRot = new Vector3(0, 90, 0);
-    private Vector3 leftRot = new Vector3(0, 270, 0);
+    public Vector3 rightRot;
+    public Vector3 leftRot;
 
     public bool drawn;
 
@@ -36,6 +36,9 @@ public class CloneSwordScript : MonoBehaviour {
         {
             swordDown(rightRot);
         }
+
+        rightRot = new Vector3(0, 0, 0);
+        leftRot = new Vector3(0, 180, 0);
     }
 
     // Update is called once per frame
@@ -98,7 +101,7 @@ public class CloneSwordScript : MonoBehaviour {
         }
         else
         {
-            Debug.Log("WARNING: THE PLAYER'S DIRECTION IS NOT AN ACCEPTED DIRECTION");
+            Debug.Log("WARNING: THE PLAYER'S DIRECTION IS NOT AN ACCEPTED DIRECTION, DIRECTION IS: " + direction);
         }
     }
 
@@ -120,7 +123,7 @@ public class CloneSwordScript : MonoBehaviour {
         }
         else
         {
-            Debug.Log("WARNING: THE PLAYER'S DIRECTION IS NOT AN ACCEPTED DIRECTION");
+            Debug.Log("WARNING: THE PLAYER'S DIRECTION IS NOT AN ACCEPTED DIRECTION, DIRECTION IS: " + direction);
         }
     }
 
