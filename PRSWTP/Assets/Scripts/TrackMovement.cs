@@ -91,6 +91,7 @@ public class TrackMovement : MonoBehaviour {
     {
         if (col.gameObject.tag == "Checkpoint")
         {
+            GetComponent<AudioSource>().Play();
             currLevel = col.GetComponent<Checkpoint>().number;
             chargeBarDisplay.GetComponent<ChargeBarDisplay>().UpdateFull();
             locations = new Hashtable();
