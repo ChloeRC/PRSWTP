@@ -55,7 +55,7 @@ public class CloneScript : MonoBehaviour {
             Vector3 newRot = cloneLocation.getRotation();
 
             transform.rotation = Quaternion.Euler(new Vector3(newRot.x, newRot.y-90, newRot.z));
-            currDirection = cloneLocation.getRotation();
+            currDirection = transform.rotation.eulerAngles;
 
             if (cloneLocation.getDidSword())
             {
