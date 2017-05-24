@@ -9,6 +9,8 @@ public class BucketScript : MonoBehaviour {
 
     public bool isActivated = false;
 
+    public bool createCharge;
+
     void Start()
     {
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
@@ -37,7 +39,7 @@ public class BucketScript : MonoBehaviour {
 
             this.GetComponent<Collider>().isTrigger = false;
 
-            if (newCharge)
+            if (newCharge && createCharge)
             {
                 Instantiate(charge, pos, rot);
                 newCharge = false;
@@ -50,6 +52,7 @@ public class BucketScript : MonoBehaviour {
         this.GetComponent<Collider>().isTrigger = true;
         isActivated = false;
         newCharge = true;
+        this.GetComponent<Rigidbody>().isKinematic = false;
     }
 
     void Update()
