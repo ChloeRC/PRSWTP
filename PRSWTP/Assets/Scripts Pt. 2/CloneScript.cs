@@ -12,7 +12,7 @@ using UnityEngine;
 
 public class CloneScript : MonoBehaviour {
 
-    public bool isDead;
+    private bool isDead;
 
     private CloneSwordScript sword;
     

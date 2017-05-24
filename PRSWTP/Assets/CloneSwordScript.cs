@@ -123,7 +123,7 @@ public class CloneSwordScript : MonoBehaviour {
         }
         else
         {
-            Debug.Log("WARNING: THE PLAYER'S DIRECTION IS NOT AN ACCEPTED DIRECTION, DIRECTION IS: " + direction);
+            //Debug.Log("WARNING: THE PLAYER'S DIRECTION IS NOT AN ACCEPTED DIRECTION, DIRECTION IS: " + direction);
         }
     }
 
