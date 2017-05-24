@@ -17,6 +17,7 @@ public class CloneScript : MonoBehaviour {
     private CloneSwordScript sword;
     
     private Vector3 currDirection;
+    private Vector3 currRotation;
 
     // Use this for initialization
     void Start () {
@@ -32,17 +33,12 @@ public class CloneScript : MonoBehaviour {
         if (drawn)
         {
             sword.swordUp(currDirection);
+            Debug.Log(currDirection);
         }
         else
         {
             sword.swordDown(currDirection);
         }
-    }
-
-    public void setRotation()
-    {
-        //insert math here that calculates differences
-        //in x values from setPosition :)
     }
 
     //taken from PlayerScript - sets position of the clone
@@ -52,9 +48,9 @@ public class CloneScript : MonoBehaviour {
         {
             transform.position = cloneLocation.getLocation();
 
-            Vector3 newRot = cloneLocation.getRotation();
+            Vector3 currRotation = cloneLocation.getRotation();
 
-            transform.rotation = Quaternion.Euler(new Vector3(newRot.x, newRot.y-90, newRot.z));
+            transform.rotation = Quaternion.Euler(new Vector3(currRotation.x, currRotation.y-90, currRotation.z));
             currDirection = transform.rotation.eulerAngles;
 
             if (cloneLocation.getDidSword())
@@ -88,7 +84,12 @@ public class CloneScript : MonoBehaviour {
     }
 
     public void kill()
-        {
-            Destroy(this.gameObject);
-        }
+    {
+        Destroy(this.gameObject);
     }
+
+    public Vector3 getRotation()
+    {
+        return currRotation;
+    }
+}

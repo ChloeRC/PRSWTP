@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CloneSwordScript : MonoBehaviour {
+    private CloneScript clone;
 
     private float gameTicks;
     private float ouchies;
@@ -22,6 +23,7 @@ public class CloneSwordScript : MonoBehaviour {
     // Use this for initialization
     public void Start()
     {
+        clone = GetComponentInParent<CloneScript>();
         gameTicks = 0.0f;
         ouchies = 0.0f; //keeps track of time between ouching the enemy
         drawTime = 0.3f; //alter this to modify how long the sword stays up
@@ -37,13 +39,14 @@ public class CloneSwordScript : MonoBehaviour {
             swordDown(rightRot);
         }
 
-        rightRot = new Vector3(0, 0, 0);
-        leftRot = new Vector3(0, 180, 0);
+        rightRot = new Vector3(0.0f, 0.0f, 0.0f);
+        leftRot = new Vector3(0.0f, 180.0f, 0.0f);
     }
 
     // Update is called once per frame
     public void Update()
     {
+        
         ouchies += Time.deltaTime;
         if (drawn)
         {
@@ -72,6 +75,7 @@ public class CloneSwordScript : MonoBehaviour {
         //sword out facing left
         if (direction == leftRot)
         {
+            Debug.Log("sword is facing left");
             GetComponent<AudioSource>().Play();
             ts.localPosition = new Vector3(-1, 0.15f, 0);
             Quaternion newRot = Quaternion.Euler(-10, 270, 90);

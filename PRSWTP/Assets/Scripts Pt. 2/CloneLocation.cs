@@ -9,7 +9,7 @@ public class CloneLocation {
     private Vector3 rotation;
     private bool didSword;
     private bool didShoot;
-    
+
     //Constructor
     public CloneLocation(Vector3 loc, Vector3 rot, bool sword, bool shoot)
     {
@@ -38,7 +38,7 @@ public class CloneLocation {
     {
         return didShoot;
     }
-
+        
     public override string ToString()
     {
         return location.ToString() + " " + rotation.ToString();
