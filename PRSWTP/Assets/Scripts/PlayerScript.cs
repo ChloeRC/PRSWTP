@@ -272,7 +272,7 @@ public class PlayerScript : MonoBehaviour {
                 thingy = 0.0f;
             }
 
-            //If you're invincible, toggle invincibility. 
+            //If you're invincible, toggle invincibility. (KEY: C)
             //FlibbityFish is there so that the invincibility doesn't toggle super fast when you press and hold a key.
             if (Input.GetButton(INVINCIBLE) == true && flibbityfish > 0.3f)
             {
@@ -302,7 +302,7 @@ public class PlayerScript : MonoBehaviour {
                                   //20, 20, 120, 50);
         if (pause)
         {
-            //darkens the screen
+            //darkens the screen - need 3 because transparencies add up
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
