@@ -417,6 +417,9 @@ void OnCollisionEnter(Collision col)
     //KILL THE PLAYER WITHOUT THE DRAMATIC LIGHT DIMMING
     public void instaKill()
     {
+        TimeTravelIndicator TimeTravelIndicator = GetComponent<TimeTravelIndicator>();
+        TimeTravelIndicator.setFlash("black");
+
         Application.LoadLevel("DeathScene");
     }
 
