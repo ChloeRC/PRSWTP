@@ -25,7 +25,7 @@ public class TimeTravelIndicator : MonoBehaviour {
             myCG.alpha = myCG.alpha - Time.deltaTime;
             if (myCG.alpha <= 0)
             {
-                myCG.alpha -= 0;
+                myCG.alpha = 1;
                 flash = false;
             }
         }
