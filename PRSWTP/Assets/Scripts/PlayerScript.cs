@@ -211,6 +211,7 @@ public class PlayerScript : MonoBehaviour {
             //SHOOT (L shift)
             if (Input.GetButton(SHOOT) == true && hasShot == shotCooldown)
             {
+
                 //The gun increments from .1 to shotCooldown, then stops. ShotCooldown is usable.
                 hasShot = .1f;
 

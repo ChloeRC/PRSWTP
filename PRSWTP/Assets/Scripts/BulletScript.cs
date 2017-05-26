@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+[RequireComponent(typeof(AudioSource))]
 
 public class BulletScript : MonoBehaviour {
+
 
     public float speed;
     private double time;

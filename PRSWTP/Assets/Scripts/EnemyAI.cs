@@ -61,7 +61,8 @@ public class EnemyAI : MonoBehaviour {
 
             if (health <= 0)
             {
-                kill();
+                GetComponent<AudioSource>().Play();
+                kill();  
             }
         }
 	}
