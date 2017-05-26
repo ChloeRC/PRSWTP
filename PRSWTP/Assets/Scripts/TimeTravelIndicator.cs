@@ -7,10 +7,11 @@ using UnityEngine;
 //Unity UI fade
 
 public class TimeTravelIndicator : MonoBehaviour {
-
     public CanvasGroup myCG;
     private bool flash = false;
     private GUIStyle currentStyle = null;
+
+    private string thisColor;
 
     void Start() {
 
@@ -35,21 +36,42 @@ public class TimeTravelIndicator : MonoBehaviour {
     {
         if (flash)
         {
-            InitStyles();
+            if (thisColor == "white")
+            {
+                InitStylesWhite();
+            }
+
+            if (thisColor == "black")
+            {
+                InitStylesBlack();
+            }
+
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "", currentStyle);
         }
 
     }
 
-	public void setFlash () {
+	public void setFlash (string color) {
 		flash = true;
+        thisColor = color;
+
 	}
 
-    private void InitStyles()
+
+
+    private void InitStylesWhite()
     {
 
             currentStyle = new GUIStyle(GUI.skin.box);
             currentStyle.normal.background = MakeTex(2, 2, new Color(1.0f, 1.0f, 1.0f, myCG.alpha));
+
+    }
+
+    private void InitStylesBlack()
+    {
+
+        currentStyle = new GUIStyle(GUI.skin.box);
+        currentStyle.normal.background = MakeTex(2, 2, new Color(0.0f, 0.0f, 0.0f, myCG.alpha));
 
     }
 

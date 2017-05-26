@@ -66,7 +66,7 @@ public class TrackMovement : MonoBehaviour {
 
             PlayerScript.resetCharges(); //set charges to 0
 
-			TimeTravelIndicator.setFlash(); //flash the screen
+			TimeTravelIndicator.setFlash("white"); //flash the screen
 
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>(); //resets the location of everything
             resetter.reset = true;
