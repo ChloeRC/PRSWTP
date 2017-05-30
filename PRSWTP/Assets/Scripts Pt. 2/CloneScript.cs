@@ -33,11 +33,12 @@ public class CloneScript : MonoBehaviour {
         if (drawn)
         {
             sword.swordUp(currDirection);
-            Debug.Log(currDirection);
+            //Debug.Log(currDirection);
         }
         else
         {
             sword.swordDown(currDirection);
+            //Debug.Log(currDirection);
         }
     }
 
