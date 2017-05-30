@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+[RequireComponent(typeof(AudioSource))]
 
 public class EnemyAI : MonoBehaviour {
     public int health;
@@ -61,7 +62,6 @@ public class EnemyAI : MonoBehaviour {
 
             if (health <= 0)
             {
-                GetComponent<AudioSource>().Play();
                 kill();  
             }
         }
@@ -83,6 +83,7 @@ public class EnemyAI : MonoBehaviour {
 
     public void kill()
     {
+        GetComponent<AudioSource>().Play();
         Destroy(this.gameObject);
     }
 
