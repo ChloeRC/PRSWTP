@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-[RequireComponent(typeof(AudioSource))]
 
 public class BulletScript : MonoBehaviour {
 
@@ -14,6 +13,7 @@ public class BulletScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        GetComponent<AudioSource>().Play();
         time += Time.deltaTime;
         //despawn timer
         if (time > 4f)
