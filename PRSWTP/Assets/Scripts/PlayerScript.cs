@@ -77,6 +77,8 @@ public class PlayerScript : MonoBehaviour {
     public bool didSword;
     public bool didShoot;
 
+    private AudioSource[] soundEffects;
+
     // Use this for initialization
     void OnLevelWasLoaded()
     {
@@ -85,9 +87,9 @@ public class PlayerScript : MonoBehaviour {
 
     void Start ()
     {
-        AudioSource[] soundEffects = GetComponents<AudioSource>();
-        var gunShot = soundEffects[0];
-        var chargeSound = soundEffects[1];
+        soundEffects = GetComponents<AudioSource>();
+        //var gunShot = soundEffects[0];
+        //var chargeSound = soundEffects[1];
         //SPAWNS YOU AT THE CORRECT CHECKPOINT
         //The checkpoints are indexed from 1, the locations are indexed from 0
         Vector3 newPos = checkpoints[ValueHolder.checkpointNumber].transform.position;
@@ -349,7 +351,7 @@ void OnCollisionEnter(Collision col)
             if (chargeScript.isCollected == false)
             {
                 chargeScript.isCollected = true;
-                chargeSound.Play();
+                soundEffects[1].Play();
       
                 Destroy(col.gameObject);
                 charges++;
