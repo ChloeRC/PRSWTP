@@ -12,6 +12,7 @@ public class SwordScript : CloneSwordScript {
         base.Start();
         base.rightRot = new Vector3(0, 90, 0);
         base.leftRot = new Vector3(0, 270, 0);
+        base.isNotClone = true;
     }
     
     // Update is called once per frame
