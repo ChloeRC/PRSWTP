@@ -15,8 +15,8 @@ public class PauseScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         pause = player.GetComponent<PlayerScript>().getPause();
-        Debug.Log(pause);
-        Debug.Log("hello");
+        //Debug.Log(pause);
+        //Debug.Log("hello");
 
         if (pause)
         {
@@ -32,7 +32,7 @@ public class PauseScript : MonoBehaviour {
     {
         foreach (GameObject g in pauseObjects)
         {
-            g.SetActive(true);
+            g.GetComponent<Renderer>().enabled = true;
         }
     }
 
@@ -41,7 +41,7 @@ public class PauseScript : MonoBehaviour {
     {
         foreach (GameObject g in pauseObjects)
         {
-            g.SetActive(false);
+            g.GetComponent<Renderer>().enabled = false;
         }
     }
 
