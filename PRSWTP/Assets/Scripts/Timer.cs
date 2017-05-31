@@ -3,14 +3,16 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
 
-    public double secs = 0;
-    public double min = 2;
+    public double secs;
+    public double min;
     private string timeDisp;
     private bool pause;
 
 	void Start ()
     {
         pause = false;
+        secs = 0;
+        min = 2;
     }
 
     void Update () {
