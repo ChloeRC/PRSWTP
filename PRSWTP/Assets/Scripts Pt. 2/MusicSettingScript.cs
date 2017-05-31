@@ -10,6 +10,7 @@ public class MusicSettingScript : MonoBehaviour {
     {
         ValueHolder.music = toggleTo;
         //set music to the bool passed in
+        Debug.Log("AaAAAHAhhh");
     }
 
     void Update()
