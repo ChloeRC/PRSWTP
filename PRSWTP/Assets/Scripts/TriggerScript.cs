@@ -39,7 +39,10 @@ public class TriggerScript : MonoBehaviour {
         {
             if (type == "Bucket")
             {
-                toBeTriggered[1].GetComponent<BucketScript>().activate();
+                foreach (GameObject toBeTrig in toBeTriggered)
+                {
+                    toBeTrig.GetComponent<BucketScript>().activate();
+                }
             }
         }
     }

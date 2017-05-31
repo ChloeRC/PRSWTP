@@ -71,6 +71,8 @@ public class TrackMovement : MonoBehaviour {
             Resetter resetter = nonPlayerObjects.GetComponent<Resetter>(); //resets the location of everything
             resetter.reset = true;
             bucket.GetComponent<BucketScript>().reset(); //resets the bucket's status
+            
+            timer.GetComponent<Timer>().reset(); //resets the timer
 
             locations.Add(key, DESTROY_CLONE); //Adds a marker - the past self should be destroyed here
             key++;
