@@ -4,9 +4,7 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
     //640 x 480 aspect ratio to start the game!!!
-    AudioSource correctAudio;
-    AudioSource errorAudio;
-
+ 
     private Rigidbody rb;
     private float gameTicks; //This is for something else
     private float gameTicks2; //This is for enemy collisions
@@ -90,6 +88,8 @@ public class PlayerScript : MonoBehaviour {
         soundEffects = GetComponents<AudioSource>();
         //var gunShot = soundEffects[0];
         //var chargeSound = soundEffects[1];
+        //3 checkpoint = soundEffects[2];
+        //enemy death = soundEffects[3]
         //SPAWNS YOU AT THE CORRECT CHECKPOINT
         //The checkpoints are indexed from 1, the locations are indexed from 0
         Vector3 newPos = checkpoints[ValueHolder.checkpointNumber].transform.position;
@@ -352,7 +352,7 @@ void OnCollisionEnter(Collision col)
             {
                 chargeScript.isCollected = true;
 
-                soundEffects[1].Play();
+                soundEffects[0].Play();
       
                 Destroy(col.gameObject);
                 charges++;
@@ -377,7 +377,8 @@ void OnCollisionEnter(Collision col)
         //ACTIVATE A CHECKPOINT
         if (col.gameObject.tag == "Checkpoint")
         {
-            GetComponent<AudioSource>().Play();
+            soundEffects[1].Play();
+
             Checkpoint ch = col.gameObject.GetComponent<Checkpoint>();
 
             if (ch.number > ValueHolder.checkpointNumber)
@@ -420,7 +421,7 @@ void OnCollisionEnter(Collision col)
     {
         TimeTravelIndicator TimeTravelIndicator = GetComponent<TimeTravelIndicator>();
         TimeTravelIndicator.setFlash("black");
-
+        soundEffects[2].Play();
         Application.LoadLevel("DeathScene");
     }
 
@@ -428,6 +429,7 @@ void OnCollisionEnter(Collision col)
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
+        soundEffects[2].Play();
         Debug.Log("deathhhhh");
         //ValueHolder.currentTime = time;
 
