@@ -13,6 +13,8 @@ public class CloneSwordScript : MonoBehaviour {
 
     public bool pause;
 
+    public bool isNotClone;
+
     public Vector3 rightRot;
     public Vector3 leftRot;
 
@@ -32,6 +34,8 @@ public class CloneSwordScript : MonoBehaviour {
 
         rightRot = new Vector3(0.0f, 0.0f, 0.0f);
         leftRot = new Vector3(0.0f, 180.0f, 0.0f);
+
+        isNotClone = false;
         /*
         if (drawn)
         {
@@ -76,16 +80,18 @@ public class CloneSwordScript : MonoBehaviour {
     public void swordUp(Vector3 direction)
     {
         //sword out facing left
-        if (direction == leftRot)
+        if (direction == leftRot && isNotClone)
         {
             Debug.Log("sword is facing left");
             GetComponent<AudioSource>().Play();
+
             ts.localPosition = new Vector3(-1, 0.15f, 0);
             Quaternion newRot = Quaternion.Euler(-10, -90, 90);
             ts.localRotation = new Quaternion(newRot.x, newRot.y, newRot.z, newRot.w);
             Debug.Log("Local position: " + ts.localPosition.ToString());
             Debug.Log("Local rotation: " + ts.localRotation.ToString());
             ts.localScale = new Vector3(0.055f, 0.1f, 0.1f);
+
             if (gameTicks > drawTime)
             {
                 swordDown(direction);
@@ -93,7 +99,7 @@ public class CloneSwordScript : MonoBehaviour {
                 drawn = !drawn;
             }
         }
-        else if (direction == rightRot)
+        else if (direction == rightRot || (direction == leftRot && !isNotClone))
         {
             //sword out facing right
             Debug.Log("sword is facing right");

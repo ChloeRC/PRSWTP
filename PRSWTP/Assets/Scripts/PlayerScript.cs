@@ -297,6 +297,7 @@ public class PlayerScript : MonoBehaviour {
     //Draws pause menu and darkens screen
     void OnGUI()
     {
+        /*
 
         //640 x 480)
         //creates pause window coordinates
@@ -308,9 +309,10 @@ public class PlayerScript : MonoBehaviour {
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-            //GUI.Label(new Rect(- 80 + Screen.width / 2, Screen.height / 2, 300, 60), "Pause (I will make this look nicer later)");
-            pauseWindow = GUI.Window(0, pauseWindow, pauseContent, "Pause");
+            GUI.Label(new Rect(- 80 + Screen.width / 2, Screen.height / 2, 300, 60), "Pause (I will make this look nicer later)");
+            //pauseWindow = GUI.Window(0, pauseWindow, pauseContent, "Pause");
         }
+        */
     }
     //creates buttons within the window rectangle
     void pauseContent(int windowID)
