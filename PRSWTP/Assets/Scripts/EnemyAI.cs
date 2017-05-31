@@ -84,7 +84,7 @@ public class EnemyAI : MonoBehaviour {
     public void kill()
     {
         gameTicks = 0.0f;
-        Debug.Log("reset")
+        Debug.Log("reset");
         GetComponent<AudioSource>().Play();
         if (gameTicks >= 3.0f)
         {

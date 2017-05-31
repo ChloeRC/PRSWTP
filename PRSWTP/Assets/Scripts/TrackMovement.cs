@@ -122,4 +122,12 @@ public class TrackMovement : MonoBehaviour {
         parseFull();
         return chargesPerLevel[currLevel];
     }
+
+    public void destroyClone()
+    {
+        if (newClone != null)
+        {
+            Destroy(newClone);
+        }
+    }
 }
