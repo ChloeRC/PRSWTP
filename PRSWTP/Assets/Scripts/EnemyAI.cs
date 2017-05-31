@@ -83,16 +83,17 @@ public class EnemyAI : MonoBehaviour {
 
     public void kill()
     {
-        gameTicks = 0.0f;
         Debug.Log("reset");
         GetComponent<AudioSource>().Play();
+        gameTicks = 0.0f;
         if (gameTicks >= 3.0f)
         {
             Debug.Log("work dammit");
 
             Destroy(this.gameObject);
-            
+            Debug.Log("Dead");
         }
+        
         
     }
 
