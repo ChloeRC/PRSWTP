@@ -17,7 +17,10 @@ public class Checkpoint : MonoBehaviour {
     public void lightOn()
     {
         transform.GetChild(1).GetComponent<Light>().intensity = 8;
-        timer.GetComponent<Timer>().reset();
-        player.GetComponent<TrackMovement>().destroyClone();
+        if (number != 0)
+        {
+            timer.GetComponent<Timer>().reset();
+            player.GetComponent<TrackMovement>().destroyClone();
+        }
     }
 }
