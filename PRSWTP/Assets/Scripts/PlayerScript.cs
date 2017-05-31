@@ -4,6 +4,8 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
     //640 x 480 aspect ratio to start the game!!!
+    AudioSource correctAudio;
+    AudioSource errorAudio;
 
     private Rigidbody rb;
     private float gameTicks; //This is for something else
@@ -83,6 +85,9 @@ public class PlayerScript : MonoBehaviour {
 
     void Start ()
     {
+        AudioSource[] soundEffects = GetComponents<AudioSource>();
+        var gunShot = soundEffects[0];
+        var chargeSound = soundEffects[1];
         //SPAWNS YOU AT THE CORRECT CHECKPOINT
         //The checkpoints are indexed from 1, the locations are indexed from 0
         Vector3 newPos = checkpoints[ValueHolder.checkpointNumber].transform.position;
@@ -297,23 +302,10 @@ public class PlayerScript : MonoBehaviour {
     //Draws pause menu and darkens screen
     void OnGUI()
     {
-        /*
-
-        //640 x 480)
-        //creates pause window coordinates
-        Rect pauseWindow = new Rect(260, 20, 120, 50);
-                                  //20, 20, 120, 50);
-        if (pause)
-        {
-            //darkens the screen - need 3 because transparencies add up
-            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
-            GUI.Label(new Rect(- 80 + Screen.width / 2, Screen.height / 2, 300, 60), "Pause (I will make this look nicer later)");
-            //pauseWindow = GUI.Window(0, pauseWindow, pauseContent, "Pause");
-        }
-        */
+      
     }
+      
+    
     //creates buttons within the window rectangle
     void pauseContent(int windowID)
     {
@@ -357,6 +349,8 @@ void OnCollisionEnter(Collision col)
             if (chargeScript.isCollected == false)
             {
                 chargeScript.isCollected = true;
+                chargeSound.Play();
+      
                 Destroy(col.gameObject);
                 charges++;
                 //Update the charge bar to reflect the new charge.
