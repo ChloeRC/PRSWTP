@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+[RequireComponent(typeof(AudioSource))]
 
 public class PlayerScript : MonoBehaviour {
     //640 x 480 aspect ratio to start the game!!!
@@ -377,6 +378,7 @@ void OnCollisionEnter(Collision col)
         //ACTIVATE A CHECKPOINT
         if (col.gameObject.tag == "Checkpoint")
         {
+            GetComponent<AudioSource>().Play();
             Checkpoint ch = col.gameObject.GetComponent<Checkpoint>();
 
             if (ch.number > ValueHolder.checkpointNumber)
