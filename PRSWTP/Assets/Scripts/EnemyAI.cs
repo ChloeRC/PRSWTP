@@ -83,7 +83,6 @@ public class EnemyAI : MonoBehaviour {
 
     public void kill()
     {
-       
         Debug.Log("reset");
         GetComponent<AudioSource>().Play();
         gameTicks = 0.0f;

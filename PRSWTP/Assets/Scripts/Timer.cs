@@ -41,4 +41,10 @@ public class Timer : MonoBehaviour {
         }
         transform.Find("Text").GetComponent<TextMesh>().text = timeDisp;
     }
+
+    public void reset()
+    {
+        secs = 0;
+        min = 2;
+    }
 }

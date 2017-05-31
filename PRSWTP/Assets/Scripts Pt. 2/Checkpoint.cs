@@ -6,6 +6,9 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour {
 
     public int number;
+    public GameObject timer;
+    public GameObject player;
+
     void Start()
     {
         
@@ -14,11 +17,7 @@ public class Checkpoint : MonoBehaviour {
     public void lightOn()
     {
         transform.GetChild(1).GetComponent<Light>().intensity = 8;
-    }
-
-    public void update()
-    {
-        GetComponent<AudioSource>().Play();
-        transform.GetChild(1).GetComponent<Light>().intensity = 0;
+        timer.GetComponent<Timer>().reset();
+        player.GetComponent<TrackMovement>().destroyClone();
     }
 }
