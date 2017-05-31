@@ -349,7 +349,7 @@ void OnCollisionEnter(Collision col)
             if (chargeScript.isCollected == false)
             {
                 chargeScript.isCollected = true;
-                chargeSound.Play();
+                //chargeSound.Play();
       
                 Destroy(col.gameObject);
                 charges++;
