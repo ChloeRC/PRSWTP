@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseScript : MonoBehaviour {
-    GameObject[] pauseObjects;
-    GameObject player;
+    private GameObject[] pauseObjects;
+    public GameObject player;
     private bool pause;
 
 	// Use this for initialization
