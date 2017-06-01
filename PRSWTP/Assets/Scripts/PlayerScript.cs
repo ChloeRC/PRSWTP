@@ -353,7 +353,7 @@ void OnCollisionEnter(Collision col)
                 chargeScript.isCollected = true;
 
                 soundEffects[0].Play();
-      
+              
                 Destroy(col.gameObject);
                 charges++;
                 //Update the charge bar to reflect the new charge.
