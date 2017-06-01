@@ -14,7 +14,7 @@ public class BadMusicSettingScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButton (MUSIC) = true) {
+		if (Input.GetButton (MUSIC) == true) {
 			ValueHolder.music = toggleTo;
 			//toggleTo != toggleTo;
 		}
