@@ -28,12 +28,13 @@ public class BadMusicSettingScript : MonoBehaviour {
 
 		}
 
-		Debug.Log ("toggleTo: " + toggleTo + " " + "ValueHolder: " + ValueHolder.music);
+		//Debug.Log ("toggleTo: " + toggleTo + " " + "ValueHolder: " + ValueHolder.music);
 		//if the music is set to this button, turn this button green
 		if (toggleTo == ValueHolder.music)
 		{
-			GetComponent<TextMesh>().color = Color.green;
-		}
+			GetComponent<TextMesh>().color = Color.white;
+            //GetComponent<TextMesh>().color = Color.green;
+        }
 		else //else turn it white
 		{
 			GetComponent<TextMesh>().color = Color.white;
