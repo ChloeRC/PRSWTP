@@ -45,7 +45,7 @@ public class EndGameLightScript : MonoBehaviour {
             timer = 0f;
         }
 
-        if (timer > 12f)
+        if (timer > 19f)
         {
             mainMenuText.GetComponent<MeshRenderer>().enabled = true;
         }
