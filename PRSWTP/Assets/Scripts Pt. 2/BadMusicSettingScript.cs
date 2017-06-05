@@ -21,19 +21,19 @@ public class BadMusicSettingScript : MonoBehaviour {
 		//press the m button
 		if (Input.GetButton (MUSIC) == true && gameTicks > 0.3f) 
 		{
-			toggleTo = !toggleTo;
+			//toggleTo = !toggleTo;
 			gameTicks = 0.0f;
-			ValueHolder.music = toggleTo;
+			ValueHolder.music = !ValueHolder.music;
 			Debug.Log ("toggled!!");
+            Debug.Log("toggleTo: " + toggleTo + " ValueHolder: " + ValueHolder.music);
 
 		}
 
-		//Debug.Log ("toggleTo: " + toggleTo + " " + "ValueHolder: " + ValueHolder.music);
 		//if the music is set to this button, turn this button green
 		if (toggleTo == ValueHolder.music)
 		{
-			GetComponent<TextMesh>().color = Color.white;
-            //GetComponent<TextMesh>().color = Color.green;
+			//GetComponent<TextMesh>().color = Color.white;
+            GetComponent<TextMesh>().color = Color.green;
         }
 		else //else turn it white
 		{
