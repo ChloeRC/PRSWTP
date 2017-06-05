@@ -429,6 +429,9 @@ void OnCollisionEnter(Collision col)
     //Literally the most satisfying function in this entire project.
     public void kill()
     {
+		TimeTravelIndicator TimeTravelIndicator = GetComponent<TimeTravelIndicator>();
+		TimeTravelIndicator.setFlash("black");
+
         soundEffects[2].Play();
         Debug.Log("deathhhhh");
         //ValueHolder.currentTime = time;

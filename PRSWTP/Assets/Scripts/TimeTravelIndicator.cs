@@ -21,15 +21,29 @@ public class TimeTravelIndicator : MonoBehaviour {
     void Update()
     {
         //changes alpha (transparency) level
-        if (flash)
+		if (flash && thisColor == "white")
         {
-            myCG.alpha = myCG.alpha - Time.deltaTime;
+            myCG.alpha -= Time.deltaTime;
             if (myCG.alpha <= 0)
             {
                 myCG.alpha = 1;
                 flash = false;
             }
         }
+
+		if (flash && thisColor == "black") 
+		{
+			myCG.alpha = 0;
+			myCG.alpha += Time.deltaTime;
+
+			if (myCG.alpha >= 1) 
+			{
+				myCG.alpha = 1;
+				flash = false;
+			}
+
+
+		}
     }
 
     void OnGUI()
