@@ -35,12 +35,15 @@ public class BossAI : MonoBehaviour {
         transform.GetChild(0).GetComponent<TextMesh>().text = "Health: " + health;
         transform.GetChild(1).GetComponent<TextMesh>().text = "Damage Dealt: " + damageDealt;
 
+        horizSpeed = damageDealt + 1;
+
         startHealth = health;
     }
 
     void Update()
     {
         gameTicks += Time.deltaTime;
+
         //Go right if you are not at the right edge yet, and you are headed right
         if (this.ts.position.x < rightEdge && direction)
         {
@@ -112,5 +115,7 @@ public class BossAI : MonoBehaviour {
             damageDealt -= toAdd;
             transform.GetChild(1).GetComponent<TextMesh>().text = "Damage Dealt: " + damageDealt;
         }
+
+        horizSpeed = damageDealt + 1;
     }
 }

@@ -16,7 +16,7 @@ public class RisingText : MonoBehaviour {
 		if (isRising)
         {
             Vector3 pos = transform.position; 
-            transform.position = new Vector3(pos.x, pos.y + Time.deltaTime, pos.z);
+            transform.position = new Vector3(pos.x, pos.y + Time.deltaTime * 1.5f, pos.z);
         }
 	}
 }
