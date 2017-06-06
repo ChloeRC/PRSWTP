@@ -54,7 +54,8 @@ public class PlayerScript : MonoBehaviour {
     private static readonly string FILL_CHARGES = "fill charges";
     private static readonly string INFO = "info";
 	private static readonly string INVINCIBLE = "invincible";
-    public static readonly string PAUSE = "pause";
+    private static readonly string PAUSE = "pause";
+    private static readonly string MUSIC = "music";
 
     private bool isGrounded = false;
 	private bool inv = false;
@@ -299,35 +300,19 @@ public class PlayerScript : MonoBehaviour {
                 instaKill();
             }
         }
-	}
+ 
 
-    //Draws pause menu and darkens screen
-    void OnGUI()
-    {
-      
-    }
-      
+
     
-    //creates buttons within the window rectangle
-    void pauseContent(int windowID)
-    {
-        //mutes sound
-        if (GUI.Button(new Rect(260, 20, 100, 20), "Toggle sound"))
-                             //(265, 20, 100, 20)
-        {
-            print("Toggle sound");
-        }
-
-        //exits game
-        if (GUI.Button(new Rect(10, 50, 100, 20), "Quit"))
-                             //(265, 50, 100, 20)
-        {
-            print("Quit");
-        }
-
+		//press the m button
+		if (Input.GetButton (MUSIC) == true && flibbityfish > 0.3f) 
+		{
+			ValueHolder.music = !ValueHolder.music;;
+            flibbityfish = 0.0f;
+		}
     }
 
-void OnCollisionEnter(Collision col)
+    void OnCollisionEnter(Collision col)
     {
         SwordScript sword = GetComponentInChildren<SwordScript>();
         //ENEMY HURTS PLAYER
