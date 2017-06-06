@@ -22,10 +22,10 @@ public class BadMusicSettingScript : MonoBehaviour {
 		if (Input.GetButton (MUSIC) == true && gameTicks > 0.3f) 
 		{
 			//toggleTo = !toggleTo;
-			gameTicks = 0.0f;
-			ValueHolder.music = !ValueHolder.music;
-			Debug.Log ("toggled!!");
-            Debug.Log("toggleTo: " + toggleTo + " ValueHolder: " + ValueHolder.music);
+			//gameTicks = 0.0f;
+			//ValueHolder.music = !ValueHolder.music;
+			//Debug.Log ("toggled!!");
+            //Debug.Log("toggleTo: " + toggleTo + " ValueHolder: " + ValueHolder.music);
 
 		}
 

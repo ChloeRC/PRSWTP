@@ -60,7 +60,7 @@ public class TrackMovement : MonoBehaviour {
         frameNum++;
 
         int charge = PlayerScript.getCharges();
-        if (charge == currLevelCharges()) //go back in time
+        if (charge >= currLevelCharges()) //go back in time
         {
             newClone = Instantiate(clone); //create the clone
 
