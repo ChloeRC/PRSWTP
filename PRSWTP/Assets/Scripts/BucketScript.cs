@@ -31,7 +31,7 @@ public class BucketScript : MonoBehaviour {
     {
         if (col.gameObject.name == "L1 G3") //when the boulder hits the ground
         {
-            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            //this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             this.GetComponent<Rigidbody>().isKinematic = true;
             Vector3 thisPos = this.gameObject.GetComponent<Transform>().position;
             Vector3 pos = new Vector3(thisPos.x + 3.23f, thisPos.y - 1, thisPos.z);
