@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour {
     {
         pause = false;
         secs = 0;
-        min = 0;
+        min = 2;
     }
 
     void Update () {
