@@ -336,8 +336,8 @@ public class PlayerScript : MonoBehaviour {
             if (chargeScript.isCollected == false)
             {
                 chargeScript.isCollected = true;
-
-                soundEffects[0].Play();
+                if (ValueHolder.music)
+                    soundEffects[0].Play();
               
                 Destroy(col.gameObject);
                 charges++;

@@ -10,25 +10,11 @@ public class BadMusicSettingScript : MonoBehaviour {
 		
 	// Use this for initialization
 	void Start () {
-		gameTicks = 0.0f;
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		gameTicks += Time.deltaTime;
 
-		//press the m button
-		if (Input.GetButton (MUSIC) == true && gameTicks > 0.3f) 
-		{
-			//toggleTo = !toggleTo;
-			//gameTicks = 0.0f;
-			//ValueHolder.music = !ValueHolder.music;
-			//Debug.Log ("toggled!!");
-            //Debug.Log("toggleTo: " + toggleTo + " ValueHolder: " + ValueHolder.music);
-
-		}
-
+    // Update is called once per frame
+    void Update() {
 		//if the music is set to this button, turn this button green
 		if (toggleTo == ValueHolder.music)
 		{
