@@ -8,7 +8,6 @@ public class MusicSettingScript : MonoBehaviour {
 
     void OnMouseDown()
     {
-        Debug.Log("ughhh");
         ValueHolder.music = toggleTo;
         //set music to the bool passed in
     }
