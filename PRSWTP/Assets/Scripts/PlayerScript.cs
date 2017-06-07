@@ -304,9 +304,20 @@ public class PlayerScript : MonoBehaviour {
 		//press the m button
 		if (Input.GetButton (MUSIC) == true && flibbityfish > 0.3f) 
 		{
-			ValueHolder.music = !ValueHolder.music;;
+			ValueHolder.music = !ValueHolder.music;
             flibbityfish = 0.0f;
 		}
+    }
+
+    void OnMouseDown()
+    {
+        if (flibbityfish > 0.3f)
+        {
+            ValueHolder.music = !ValueHolder.music;
+            flibbityfish = 0.0f;
+        }
+
+
     }
 
     void OnCollisionEnter(Collision col)
