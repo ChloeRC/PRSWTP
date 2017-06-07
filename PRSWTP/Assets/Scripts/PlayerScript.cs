@@ -301,9 +301,6 @@ public class PlayerScript : MonoBehaviour {
             }
         }
  
-
-
-    
 		//press the m button
 		if (Input.GetButton (MUSIC) == true && flibbityfish > 0.3f) 
 		{
