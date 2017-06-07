@@ -309,17 +309,6 @@ public class PlayerScript : MonoBehaviour {
 		}
     }
 
-    void OnMouseDown()
-    {
-        if (flibbityfish > 0.3f)
-        {
-            ValueHolder.music = !ValueHolder.music;
-            flibbityfish = 0.0f;
-        }
-
-
-    }
-
     void OnCollisionEnter(Collision col)
     {
         SwordScript sword = GetComponentInChildren<SwordScript>();
