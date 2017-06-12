@@ -352,6 +352,7 @@ public class PlayerScript : MonoBehaviour {
         //TELEPORT VIA THE PORTALS
         if (col.gameObject.tag == "Portal")
         {
+            soundEffects[1].Play();
             PortalScript portal = col.gameObject.GetComponent<PortalScript>();
             gameObject.GetComponent<Transform>().position = new Vector3(portal.targetX, portal.targetY, portal.targetZ);
         }
@@ -384,6 +385,7 @@ public class PlayerScript : MonoBehaviour {
         //COLLECT RUM
         if (col.gameObject.tag == "Rum")
         {
+            soundEffects[3].Play();
             Destroy(col.gameObject);
 			if (health < 3) {
 				gameObject.GetComponentInParent<PlayerScript>().health++;
@@ -403,7 +405,7 @@ public class PlayerScript : MonoBehaviour {
     {
         TimeTravelIndicator TimeTravelIndicator = GetComponent<TimeTravelIndicator>();
         TimeTravelIndicator.setFlash("black");
-        soundEffects[2].Play();
+        
         Application.LoadLevel("DeathScene");
     }
 
@@ -414,7 +416,7 @@ public class PlayerScript : MonoBehaviour {
 		TimeTravelIndicator TimeTravelIndicator = GetComponent<TimeTravelIndicator>();
 		TimeTravelIndicator.setFlash("black");
 
-        soundEffects[2].Play();
+        
         Debug.Log("deathhhhh");
         //ValueHolder.currentTime = time;
 
