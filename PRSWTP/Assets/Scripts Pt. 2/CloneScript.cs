@@ -74,7 +74,7 @@ public class CloneScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
-            //col.gameObject.GetComponent<PlayerScript>().kill();
+            col.gameObject.GetComponent<PlayerScript>().kill();
             Debug.Log("You colllided with your past self!!");
         }
     }
